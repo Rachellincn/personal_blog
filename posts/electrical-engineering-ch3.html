@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电工学 第3章 电路暂态分析 // NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo"><span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span></a>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">~/index</a>
+          <a href="../notes.html" class="nav-link">~/notes</a>
+          <a href="../about.html" class="nav-link">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← cd ../notes</a></div>
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-26</span>
+          <span class="post-tag">电工学</span>
+          <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">暂态分析</span>
+        </div>
+        <h1>电工学 第3章 · 电路的暂态分析</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 储能元件 · 换路定则 · 三要素法 · RC/RL电路 · 微分积分电路</p>
+      </header>
+
+      <nav class="toc">
+        <div class="toc-title">// 目录</div>
+        <ol>
+          <li><a href="#steady-trans">3.1 稳态与暂态</a></li>
+          <li><a href="#switching">3.2 换路定则与初始值</a></li>
+          <li><a href="#rc">3.3 RC 电路响应</a></li>
+          <li><a href="#three-elements">3.4 三要素法</a></li>
+          <li><a href="#rl">3.5 RL 电路响应</a></li>
+          <li><a href="#diff-int">3.6 微分电路与积分电路</a></li>
+          <li><a href="#compare">RC vs RL 对比总表</a></li>
+        </ol>
+      </nav>
+
+      <article class="article-body">
+
+        <h2 id="steady-trans">3.1 稳态与暂态</h2>
+        <div class="note-box">
+          <span class="note-label">// 概念区分</span>
+          <strong>稳态</strong>：各电压、电流已达到稳定值，不再变化。<br/>
+          <strong>暂态</strong>：从一种稳态变化到另一种稳态的<em>过渡过程</em>。
+        </div>
+        <p>产生暂态的条件（内因 + 外因缺一不可）：</p>
+        <ul>
+          <li><strong>内因</strong>：电路中含储能元件（$L$ 或 $C$）—— $W_L = \tfrac{1}{2}Li^2$，$W_C = \tfrac{1}{2}Cu^2$，能量不能跃变</li>
+          <li><strong>外因</strong>：发生<strong>换路</strong>（开关动作、电源变化、参数突变等）</li>
+        </ul>
+        <div class="tip-box">
+          <span class="tip-label">// 实际意义</span>
+          <strong>积极利用</strong>：产生锯齿波、三角波、尖脉冲等特定波形。<br/>
+          <strong>危害预防</strong>：换路瞬间可能出现过电压/过电流，需保护措施。
+        </div>
+
+        <hr/>
+        <h2 id="switching">3.2 换路定则与初始值</h2>
+
+        <div class="note-box">
+          <span class="note-label">// 换路定则（核心）</span>
+          $$u_C(0^-) = u_C(0^+) \quad \text{（电容电压不能突变）}$$
+          $$i_L(0^-) = i_L(0^+) \quad \text{（电感电流不能突变）}$$
+          <strong>仅用于确定 $u_C$ 和 $i_L$ 的初始值</strong>，其余量（$u_R$、$i_C$、$u_L$ 等）均可突变。
+        </div>
+
+        <h4>初始值求法 — 四步流程</h4>
+        <pre style="background:#111;border:1px solid #222;border-left:3px solid var(--green);padding:1rem;font-size:0.83rem;color:#d4d4d4">
+Step 1  由 t = 0⁻ 电路（换路前稳态）
+        电容 → 开路，电感 → 短路
+        求 u_C(0⁻) 和 i_L(0⁻)
+         ↓
+Step 2  用换路定则
+        u_C(0⁺) = u_C(0⁻)
+        i_L(0⁺) = i_L(0⁻)
+         ↓
+Step 3  画 t = 0⁺ 等效电路
+        电容 → 恒压源 u_C(0⁺)
+        电感 → 恒流源 i_L(0⁺)
+         ↓
+Step 4  由 t = 0⁺ 电路，用直流电路方法求其余初始值</pre>
+
+        <div class="tip-box">
+          <span class="tip-label">// 稳态值（t → ∞）</span>
+          电容 → 开路（$i_C(\infty) = 0$）；电感 → 短路（$u_L(\infty) = 0$）。用纯电阻直流分析即可。
+        </div>
+
+        <hr/>
+        <h2 id="rc">3.3 RC 电路的响应</h2>
+
+        <h3>零输入响应（放电）</h3>
+        <p>无外部激励，电容初始电压 $U_0$，通过 $R$ 放电：</p>
+        $$\boxed{u_C(t) = U_0 e^{-t/\tau}} \quad (t \geqslant 0), \quad \tau = RC$$
+        $$i(t) = -\frac{U_0}{R}e^{-t/\tau}$$
+
+        <h3>零状态响应（充电）</h3>
+        <p>$u_C(0^+)=0$，接入直流 $U_S$：</p>
+        $$\boxed{u_C(t) = U_S\!\left(1 - e^{-t/\tau}\right)}, \quad i(t) = \frac{U_S}{R}e^{-t/\tau}$$
+
+        <h3>时间常数 $\tau = RC$</h3>
+        <p>$t = \tau$ 时电容电压衰减至 $36.8\%U_0$（或充电至 $63.2\%U_S$）。</p>
+        <div class="note-box">
+          <span class="note-label">// τ 的衰减对照</span>
+          <table style="width:100%;font-size:0.8rem;border-collapse:collapse">
+            <tr style="color:var(--text-dim)">
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222;text-align:left">$t$</th>
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222">$0$</th>
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222">$\tau$</th>
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222">$2\tau$</th>
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222">$3\tau$</th>
+              <th style="padding:0.3rem 0.5rem;border-bottom:1px solid #222">$5\tau$</th>
+            </tr>
+            <tr style="color:var(--green)">
+              <td style="padding:0.3rem 0.5rem">$u_C/U_0$</td>
+              <td style="padding:0.3rem 0.5rem;text-align:center">100%</td>
+              <td style="padding:0.3rem 0.5rem;text-align:center">36.8%</td>
+              <td style="padding:0.3rem 0.5rem;text-align:center">13.5%</td>
+              <td style="padding:0.3rem 0.5rem;text-align:center">5.0%</td>
+              <td style="padding:0.3rem 0.5rem;text-align:center">0.7%</td>
+            </tr>
+          </table>
+          工程上通常取 $5\tau$ 认为暂态结束。
+        </div>
+
+        <hr/>
+        <h2 id="three-elements">3.4 三要素法（通用公式）</h2>
+
+        <div class="note-box">
+          <span class="note-label">// 三要素公式</span>
+          $$\boxed{f(t) = f(\infty) + \bigl[f(0^+) - f(\infty)\bigr]e^{-t/\tau}}$$
+          三要素：$f(0^+)$（初始值）、$f(\infty)$（稳态值）、$\tau$（时间常数）。
+        </div>
+
+        <h4>三要素法 Pipeline</h4>
+        <pre style="background:#111;border:1px solid #222;border-left:3px solid var(--yellow);padding:1rem;font-size:0.83rem;color:#d4d4d4">
+Step 1  求初始值 f(0⁺)
+        · 换路前电路求 u_C(0⁻) 或 i_L(0⁻)
+        · 换路定则得 u_C(0⁺) 或 i_L(0⁺)
+        · t = 0⁺ 等效电路求其他初始值
+         ↓
+Step 2  求稳态值 f(∞)
+        · 换路后新稳态：C → 开路，L → 短路
+         ↓
+Step 3  求时间常数 τ
+        · RC 电路：τ = R_eq · C（R_eq 为 C 端口等效电阻）
+        · RL 电路：τ = L / R_eq（R_eq 为 L 端口等效电阻）
+        · 求 R_eq 时独立源除去（电压源短路，电流源开路）
+         ↓
+Step 4  代入三要素公式写出结果</pre>
+
+        <hr/>
+        <h2 id="rl">3.5 RL 电路的响应</h2>
+
+        <h3>零输入响应（储能释放）</h3>
+        $$\boxed{i_L(t) = I_0 e^{-t/\tau}}, \quad \tau = \frac{L}{R}$$
+        $$u_L(t) = -RI_0 e^{-t/\tau}$$
+        <div class="tip-box">
+          <span class="tip-label">// 注意</span>
+          切断含电感的电路时，$i_L$ 不能突变，但 $u_L$ 可以突变，可能产生远大于电源的<strong>过电压</strong>。
+        </div>
+
+        <h3>零状态响应（建立电流）</h3>
+        $$i_L(t) = \frac{U_S}{R}\!\left(1 - e^{-t/\tau}\right)$$
+
+        <hr/>
+        <h2 id="diff-int">3.6 微分电路与积分电路</h2>
+        <div class="note-box">
+          <span class="note-label">// 微分电路（输出 $u_R$，时间常数小）</span>
+          条件：$\tau \ll T_{\text{脉冲}}$，输出从电阻取。输出 $u_R \approx RC \cdot \dfrac{du_i}{dt}$（尖脉冲）。
+        </div>
+        <div class="note-box">
+          <span class="note-label">// 积分电路（输出 $u_C$，时间常数大）</span>
+          条件：$\tau \gg T_{\text{脉冲}}$，输出从电容取。输出 $u_C \approx \dfrac{1}{RC}\int u_i\,dt$（三角波/锯齿波）。
+        </div>
+
+        <hr/>
+        <h2 id="compare">RC vs RL 暂态对比</h2>
+        <div class="note-box">
+          <span class="note-label">// 对比总表</span>
+          <table style="width:100%;font-size:0.82rem;border-collapse:collapse">
+            <tr style="border-bottom:1px solid #333;color:var(--yellow)">
+              <td style="padding:0.4rem 0.6rem;width:30%"></td>
+              <td style="padding:0.4rem 0.6rem;width:35%">RC 电路</td>
+              <td style="padding:0.4rem 0.6rem;width:35%">RL 电路</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">储能元件</td>
+              <td style="padding:0.4rem 0.6rem">电容 $C$</td>
+              <td style="padding:0.4rem 0.6rem">电感 $L$</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">不突变量</td>
+              <td style="padding:0.4rem 0.6rem">$u_C$</td>
+              <td style="padding:0.4rem 0.6rem">$i_L$</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">时间常数</td>
+              <td style="padding:0.4rem 0.6rem">$\tau = RC$</td>
+              <td style="padding:0.4rem 0.6rem">$\tau = L/R$</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">稳态等效</td>
+              <td style="padding:0.4rem 0.6rem">开路</td>
+              <td style="padding:0.4rem 0.6rem">短路</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">零输入响应</td>
+              <td style="padding:0.4rem 0.6rem">$u_C = U_0 e^{-t/\tau}$</td>
+              <td style="padding:0.4rem 0.6rem">$i_L = I_0 e^{-t/\tau}$</td>
+            </tr>
+          </table>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+</body>
+</html>

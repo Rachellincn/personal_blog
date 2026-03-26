@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>原子物理 第二章 // NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">~/index</a>
+          <a href="../notes.html" class="nav-link">~/notes</a>
+          <a href="../about.html" class="nav-link">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← cd ../notes</a></div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-26</span>
+          <span class="post-tag">原子物理</span>
+          <span class="post-tag" style="border-color:rgba(156,220,254,0.3);color:#9cdcfe;background:rgba(156,220,254,0.05)">量子力学基础</span>
+        </div>
+        <h1>原子物理 第二章 · 玻尔模型与量子力学导论</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 原子物理 · Chapter 2–3</p>
+      </header>
+
+      <nav class="toc">
+        <div class="toc-title">// 目录</div>
+        <ol>
+          <li><a href="#orbits">轨道类型与能量分类</a></li>
+          <li><a href="#hspectrum">2.3.1 氢光谱与折合质量修正</a></li>
+          <li><a href="#likeH">2.3.2 类氢光谱</a></li>
+          <li><a href="#fh">2.4 原子能级的实验验证 — Franck-Hertz</a></li>
+          <li><a href="#sommerfeld">玻尔-索末菲模型与相对论修正</a></li>
+          <li><a href="#waveparticle">3.2 波粒二象性</a></li>
+          <li><a href="#debroglie">3.3 德布罗意物质波 · 戴维森-革末实验</a></li>
+          <li><a href="#boxparticle">一维刚性盒中的粒子</a></li>
+        </ol>
+      </nav>
+
+      <article class="article-body">
+
+        <h2 id="orbits">轨道类型与能量分类</h2>
+        <p>电子在原子核外受库仑引力（有心力），势能为</p>
+        $$V(r) = -\frac{kZe^2}{r}$$
+        <p>总能量 $E = T + V = \frac{1}{2}mv^2 - \frac{kZe^2}{r}$，依 $E$ 的符号分三类：</p>
+
+        <div class="note-box">
+          <span class="note-label">// $E < 0$：束缚态</span>
+          <strong>椭圆轨道</strong>（普遍）：近核时动能大、远核时动能小，动能与势能不断转化。索末菲由此完善玻尔模型。<br/>
+          <strong>圆轨道</strong>（特例）：当 $E$ 恰等于有效势能极小值时，径向动能为零，电子在固定半径上匀速圆周运动。
+        </div>
+        <div class="note-box" style="border-left-color:var(--yellow);background:rgba(220,220,170,0.04)">
+          <span class="note-label" style="color:var(--yellow)">// $E = 0$：临界逃逸</span>
+          <strong>抛物线轨道</strong>：动能刚好耗尽于逃向无穷远，到达无穷远时速度归零。
+        </div>
+        <div class="note-box" style="border-left-color:#9cdcfe;background:rgba(156,220,254,0.04)">
+          <span class="note-label" style="color:#9cdcfe">// $E > 0$：散射态</span>
+          <strong>双曲线轨道</strong>：逃至无穷远后仍有剩余动能。卢瑟福 $\alpha$ 散射和轫致辐射均属此类。
+        </div>
+
+        <h4>有效势能</h4>
+        <p>极坐标下引入离心势能，有效势能为：</p>
+        $$V_{\text{eff}}(r) = \frac{L^2}{2mr^2} - \frac{kZe^2}{r}$$
+        <ul>
+          <li>$E = V_{\text{eff,min}}$：圆轨道</li>
+          <li>$V_{\text{eff,min}} < E < 0$：椭圆轨道（在两转折点间振荡）</li>
+          <li>$E \geqslant 0$：只有内转折点，趋向无穷远，抛物线/双曲线</li>
+        </ul>
+
+        <hr/>
+        <h2 id="hspectrum">2.3.1 氢光谱与折合质量修正</h2>
+        <p>玻尔理论给出里德堡常量理论值 $R = 109737.316\ \text{cm}^{-1}$，实验值为 $109677.58$。</p>
+        <p>原因：氢核质量有限，电子与核绕共同质心旋转。修正方法：以<strong>折合质量</strong>代替电子质量：</p>
+        $$\mu = \frac{m_e m_a}{m_e + m_a}$$
+        <p>对应里德堡常量：</p>
+        $$R_a = R\frac{\mu}{m_e}$$
+        <div class="tip-box">
+          <span class="tip-label">// 考点提醒</span>
+          对氢原子计算后 $R_H = 109677.58\ \text{cm}^{-1}$，与实验值完全吻合。<strong>此推导考试必考。</strong>
+        </div>
+
+        <h2 id="likeH">2.3.2 类氢光谱</h2>
+        <p>核外只有一个电子但核电荷 $Z > 1$ 的体系（如 $\text{He}^+$、$\text{Li}^{++}$）。里德堡公式：</p>
+        $$\frac{1}{\lambda} = RZ^2\left(\frac{1}{n_1^2} - \frac{1}{n_2^2}\right)$$
+        <p>1897年 Pickering 发现一类似巴尔末系的光谱（$\text{He}^+$）：</p>
+        <ul>
+          <li>每隔一条与巴尔末系<em>基本重合</em>（波长稍有差异，因 $R_{He^+} \neq R_H$）</li>
+          <li>另一条夹在巴尔末相邻谱线之间</li>
+        </ul>
+        <p>当 $n_2/Z$ 取整数时与巴尔末重合，取半整数时夹在中间。因 $R$ 不相等，每两条巴尔末线之间实有两根 Pickering 线。</p>
+
+        <hr/>
+        <h2 id="fh">2.4 原子能级的实验验证 — Franck-Hertz 实验</h2>
+        <p>光谱实验通过<em>吸收/发射</em>验证量子态，Franck-Hertz 实验从<strong>碰撞</strong>角度验证分立能量状态。</p>
+        <div class="note-box">
+          <span class="note-label">// 实验装置原理</span>
+          KG 并联可调滑动电阻器以改变加速电压，电子加速后穿过栅极 G，进入 $-0.5\text{V}$ 反向电场区。若电子在腔内轰击汞蒸气并损失能量，则无法克服反向电压到达 A，电流计示数小；否则电流大。
+        </div>
+        <p><strong>实验结果：</strong>仅当 $V_{KG} = n \times 4.9\ \text{V}$（$n = 1,2,3,\ldots$）时电流显著减小，说明 Hg 存在 $4.9\ \text{eV}$ 的量子化激发态。</p>
+        <div class="tip-box">
+          <span class="tip-label">// 实验局限</span>
+          电子加速是连续过程——一旦到达 $4.9\ \text{eV}$ 立刻被吸收，只能反复验证同一能级，无法探测更高激发态。<br/>
+          <strong>改进方案：</strong>先加速至指定能量，再通过蒸汽室，最后进入反向电场区，可得到更多谱线（4.67 eV 亚稳态除外——亚稳态无法通过单光子跃迁回基态，不会引起电流下降）。
+        </div>
+
+        <hr/>
+        <h2 id="sommerfeld">玻尔-索末菲模型与相对论修正</h2>
+        <h3>索末菲椭圆轨道</h3>
+        <p>索末菲将圆轨道推广为椭圆，引入角量子化和径向量子化：</p>
+        $$\oint p_\varphi\,d\varphi = n_\varphi h, \quad \oint p_r\,dr = n_r h$$
+        <p>主量子数 $n = n_\varphi + n_r$，$n_\varphi \geqslant 1$（经典力学不允许角动量为零）。</p>
+
+        <div class="note-box">
+          <span class="note-label">// 轨道几何</span>
+          <strong>长半轴 $a$</strong>：完全由 $n$ 决定，$a = n^2 a_0/Z$。<br/>
+          <strong>短半轴 $b$</strong>：由 $n$ 和 $n_\varphi$ 共同决定，$b/a = n_\varphi/n$。<br/>
+          $n_\varphi = n$ 时退化为正圆（即玻尔轨道）；$n_\varphi = 1$ 时轨道最扁。
+        </div>
+
+        <p>能量公式（与玻尔一致）：</p>
+        $$E_n = -\frac{m_e e^4 Z^2}{2(4\pi\varepsilon_0)^2 n^2\hbar^2}$$
+
+        <h3>相对论修正</h3>
+        <p>精细结构常数 $\alpha = e^2/(4\pi\varepsilon_0\hbar c) \approx 1/137$，修正后能量：</p>
+        $$E_{n,n_\varphi} = E_n\left[1 + \frac{(Z\alpha)^2}{n}\!\left(\frac{1}{n_\varphi}-\frac{3}{4n}\right)\right]$$
+        <div class="note-box">
+          <span class="note-label">// 三个物理效应</span>
+          1. <strong>能级分裂</strong>：相同 $n$ 不同 $n_\varphi$ 的简并被打破，一个主能级 $n$ 分裂成 $n$ 个子能级。<br/>
+          2. <strong>轨道进动</strong>：椭圆轨道不再闭合，形成"玫瑰花瓣"型轨迹（类似水星近日点进动）。<br/>
+          3. <strong>精细结构</strong>：$H_\alpha$ 线等实际由多条靠近谱线组成。
+        </div>
+
+        <hr/>
+        <h2 id="waveparticle">3.2 波粒二象性</h2>
+        <p>
+          光满足 Maxwell 方程（波动性），同时具有光电效应（粒子性）：
+          $\varepsilon = h\nu = \hbar\omega$，光子动量 $p = h/\lambda$。
+          在任一特定时刻，只表现出其中一种特性。
+        </p>
+
+        <hr/>
+        <h2 id="debroglie">3.3 德布罗意物质波与戴维森-革末实验</h2>
+        <p>一切实物粒子都具有波粒二象性：</p>
+        $$\lambda = \frac{h}{p}, \quad \varepsilon = h\nu$$
+
+        <h4>戴维森-革末实验（1927）</h4>
+        <p>用 $54\ \text{V}$ 加速电子打在 Ni 单晶上，在 $50°$ 方向观测到强衍射极大。</p>
+        <div class="tip-box">
+          <span class="tip-label">// 数值验证</span>
+          德布罗意波长（理论）：
+          $$\lambda = \frac{h}{\sqrt{2m_e E_k}} = \frac{1.226\ \text{nm}}{\sqrt{E_k(\text{eV})}} \approx 0.167\ \text{nm}$$
+          表面光栅方程（实验）：
+          $$D\sin\phi = n\lambda \implies \lambda = 0.215\times\sin 50° \approx 0.165\ \text{nm}$$
+          两者在误差范围内完全吻合，无可辩驳地证明了电子的波动性。
+        </div>
+
+        <h4>布拉格面与衍射条件</h4>
+        <p>晶体中存在多组平行原子面（布拉格面），相邻原子面反射波的光程差为 $a\sin\theta$，相长干涉条件：</p>
+        $$a\sin\theta = n\lambda$$
+        <p>结合德布罗意关系得到衍射条件：</p>
+        $$\sin\theta = \frac{n}{a}\cdot\frac{1.226\ \text{nm}}{\sqrt{E_k(\text{eV})}}$$
+
+        <h4>物质波与玻尔量子化的联系</h4>
+        <p>电子绕核稳定存在要求对应的德布罗意波是<strong>驻波</strong>，即圆轨道一圈恰好是整数个波长：</p>
+        $$2\pi r = n\lambda = n\frac{h}{mv}$$
+        <p>这直接导出玻尔角动量量子化 $L = n\hbar$。<strong>禁闭的波必然导出量子化条件。</strong></p>
+
+        <hr/>
+        <h2 id="boxparticle">一维刚性盒中的粒子</h2>
+        <p>宽度为 $d$ 的势阱，两端为波节，驻波条件：</p>
+        $$n\frac{\lambda}{2} = d \implies p = \frac{nh}{2d}, \quad E_k = \frac{n^2h^2}{8md^2}$$
+
+        <h4>与玻尔模型的类比</h4>
+        <p>令 $d = \pi r$（往返路程等于圆周长），代入基态动能：</p>
+        $$E_k = \frac{\hbar^2}{2mr^2}$$
+        <p>这是<strong>量子排斥能</strong>（局域化动能），来自海森堡不确定原理：电子被限制的空间越小，动量不确定度越大，动能越高。</p>
+        <p>总能量极小值对应的 $r$ 正好是玻尔半径 $a_0 \approx 0.053\ \text{nm}$，对应能量 $-13.6\ \text{eV}$。</p>
+
+        <div class="note-box">
+          <span class="note-label">// 径向概率密度</span>
+          波函数 $|\psi(r)|^2$ 在 $r=0$ 最大（单位体积概率最大），但径向概率密度
+          $$P(r) = 4\pi r^2|\psi(r)|^2$$
+          的最大值出现在 $r = a_0$（玻尔半径）。
+          原因：$r=0$ 时球壳面积 $r^2=0$，$|\psi|^2$ 与 $r^2$ 的博弈使极大值移至 $a_0$。
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+</body>
+</html>

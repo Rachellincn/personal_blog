@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电工学 第4章 正弦交流电路 // NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo"><span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span></a>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">~/index</a>
+          <a href="../notes.html" class="nav-link">~/notes</a>
+          <a href="../about.html" class="nav-link">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← cd ../notes</a></div>
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-26</span>
+          <span class="post-tag">电工学</span>
+          <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">交流电路</span>
+        </div>
+        <h1>电工学 第4章 · 正弦交流电路</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 正弦三要素 · 相量法 · RLC · 功率三角形 · 谐振 · 功率因数</p>
+      </header>
+
+      <nav class="toc">
+        <div class="toc-title">// 目录</div>
+        <ol>
+          <li><a href="#sinusoidal">4.1 正弦量三要素与有效值</a></li>
+          <li><a href="#phasor">4.2 相量法与复数运算</a></li>
+          <li><a href="#rlc-single">4.3 单一参数元件（R、L、C）</a></li>
+          <li><a href="#rlc-series">4.4 RLC 串联电路</a></li>
+          <li><a href="#impedance">4.5 阻抗的串联与并联</a></li>
+          <li><a href="#power">4.6–4.8 功率、功率因数提高</a></li>
+          <li><a href="#resonance">谐振</a></li>
+          <li><a href="#nonsinusoidal">4.9 非正弦周期电流电路</a></li>
+        </ol>
+      </nav>
+
+      <article class="article-body">
+
+        <h2 id="sinusoidal">4.1 正弦量三要素与有效值</h2>
+        <p>正弦量一般式：$i(t) = I_m\sin(\omega t + \psi_i)$</p>
+        <div class="note-box">
+          <span class="note-label">// 三要素</span>
+          ① <strong>幅值 $I_m$</strong>：决定大小<br/>
+          ② <strong>角频率 $\omega = 2\pi f = 2\pi/T$</strong>（rad/s）：决定变化快慢；工频 $f=50\text{Hz}$，$\omega = 314\ \text{rad/s}$<br/>
+          ③ <strong>初相角 $\psi$</strong>：决定起始位置
+        </div>
+        <p><strong>有效值（RMS）</strong>：$I = I_m/\sqrt{2}$，$U = U_m/\sqrt{2}$。仪表测量值均为有效值（220 V 市电 $\Rightarrow U_m \approx 311\ \text{V}$）。</p>
+        <p><strong>相位差</strong>：$\varphi = \psi_u - \psi_i$。只有同频率正弦量的相位差有意义（常数）。</p>
+        <div class="tip-box">
+          <span class="tip-label">// 超前/滞后</span>
+          $\varphi > 0$：$u$ 超前 $i$；$\varphi < 0$：$u$ 滞后 $i$；$\varphi = 0$：同相；$\varphi = \pm\pi$：反相。
+        </div>
+
+        <hr/>
+        <h2 id="phasor">4.2 相量法与复数运算</h2>
+        <p>正弦量 $\leftrightarrow$ 相量：$i(t) = I_m\sin(\omega t+\psi) \leftrightarrow \dot{I} = I\angle\psi$（模 = 有效值，辐角 = 初相角）。</p>
+        <div class="note-box">
+          <span class="note-label">// 相量运算规则</span>
+          <strong>加减</strong>：用代数式 $A = a + jb$<br/>
+          <strong>乘除</strong>：用极坐标式 $A = r\angle\psi$<br/>
+          $j$ 的性质：乘 $j$ → 逆时针旋转 $90°$；$j^2 = -1$<br/>
+          微分关系：$\dfrac{di}{dt} \leftrightarrow j\omega\dot{I}$；积分关系：$\int i\,dt \leftrightarrow \dfrac{\dot{I}}{j\omega}$
+        </div>
+
+        <hr/>
+        <h2 id="rlc-single">4.3 单一参数元件（R、L、C）</h2>
+        <div class="note-box">
+          <span class="note-label">// 三元件对比</span>
+          <table style="width:100%;font-size:0.82rem;border-collapse:collapse">
+            <tr style="color:var(--yellow);border-bottom:1px solid #333">
+              <td style="padding:0.4rem 0.5rem;width:12%">元件</td>
+              <td style="padding:0.4rem 0.5rem;width:28%">阻抗（VCR）</td>
+              <td style="padding:0.4rem 0.5rem;width:25%">相位关系</td>
+              <td style="padding:0.4rem 0.5rem;width:35%">功率特征</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.5rem">R</td>
+              <td style="padding:0.4rem 0.5rem">$\dot{U} = R\dot{I}$</td>
+              <td style="padding:0.4rem 0.5rem">$u$、$i$ <strong>同相</strong></td>
+              <td style="padding:0.4rem 0.5rem">$P = UI = I^2R$（纯耗能）</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.5rem">L</td>
+              <td style="padding:0.4rem 0.5rem">$\dot{U} = j\omega L\dot{I} = jX_L\dot{I}$</td>
+              <td style="padding:0.4rem 0.5rem">$u$ <strong>超前</strong> $i$ 90°</td>
+              <td style="padding:0.4rem 0.5rem">$P=0$，$Q = UI$（储磁能）</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.5rem">C</td>
+              <td style="padding:0.4rem 0.5rem">$\dot{U} = \dfrac{1}{j\omega C}\dot{I} = -jX_C\dot{I}$</td>
+              <td style="padding:0.4rem 0.5rem">$u$ <strong>滞后</strong> $i$ 90°</td>
+              <td style="padding:0.4rem 0.5rem">$P=0$，$Q = -UI$（储电能）</td>
+            </tr>
+          </table>
+          感抗 $X_L = \omega L$（频率↑，$X_L$↑）；容抗 $X_C = 1/(\omega C)$（频率↑，$X_C$↓）。
+        </div>
+
+        <hr/>
+        <h2 id="rlc-series">4.4 RLC 串联电路</h2>
+        <h3>核心公式</h3>
+        $$Z = R + j(X_L - X_C) = |Z|\angle\varphi$$
+        $$|Z| = \sqrt{R^2 + X^2}, \quad \varphi = \arctan\!\frac{X}{R}$$
+        $$\dot{U} = \dot{I}\cdot Z = \dot{U}_R + \dot{U}_L + \dot{U}_C$$
+
+        <div class="note-box">
+          <span class="note-label">// 三种工作状态</span>
+          $X_L > X_C$（$X > 0$）→ 感性（$u$ 超前 $i$）<br/>
+          $X_L < X_C$（$X < 0$）→ 容性（$u$ 滞后 $i$）<br/>
+          $X_L = X_C$（$X = 0$）→ 纯阻性（<strong>串联谐振</strong>）
+        </div>
+
+        <h3>功率三角形</h3>
+        $$P = UI\cos\varphi = I^2R \quad \text{（有功功率，W）}$$
+        $$Q = UI\sin\varphi = I^2X \quad \text{（无功功率，var）}$$
+        $$S = UI = I^2|Z| \quad \text{（视在功率，VA）}$$
+        $$\boxed{S^2 = P^2 + Q^2}, \quad \cos\varphi = \frac{P}{S} = \frac{R}{|Z|}$$
+
+        <h4>RLC 串联 5 步 Pipeline</h4>
+        <pre style="background:#111;border:1px solid #222;border-left:3px solid var(--green);padding:1rem;font-size:0.83rem;color:#d4d4d4">
+Step 1  X_L = ωL，X_C = 1/(ωC)
+Step 2  Z = R + j(X_L−X_C)；求 |Z| 和 φ = arctan(X/R)
+Step 3  I = U/|Z|；ψ_i = ψ_u − φ
+Step 4  U_R = IR，U_L = IX_L，U_C = IX_C；画相量图
+Step 5  P = UIcosφ，Q = UIsinφ，S = UI；验证 S²=P²+Q²</pre>
+
+        <hr/>
+        <h2 id="impedance">4.5 阻抗的串联与并联</h2>
+        <p><strong>串联</strong>：$Z = Z_1 + Z_2 + \cdots$（复数代数和）</p>
+        <p><strong>并联</strong>：$\dfrac{1}{Z} = \dfrac{1}{Z_1} + \dfrac{1}{Z_2} + \cdots$（等效导纳 $Y = G + jB$）</p>
+        <div class="tip-box">
+          <span class="tip-label">// 复杂电路</span>
+          原直流电路中的所有分析方法（KCL/KVL、支路电流法、结点法、叠加、戴维宁等）均可推广到交流电路，只需将实数电阻改为复数阻抗，将实数量改为相量。
+        </div>
+
+        <hr/>
+        <h2 id="power">4.6–4.8 功率与功率因数</h2>
+        <h3>提高功率因数的意义</h3>
+        <p>在 $P$ 和 $U$ 不变的条件下，$\cos\varphi$ 越高则 $I = P/(U\cos\varphi)$ 越小，线路损耗越小，电源利用率越高。</p>
+        <h3>补偿方法：并联电容</h3>
+        $$C = \frac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega U^2}$$
+        <div class="note-box">
+          <span class="note-label">// 注意</span>
+          并联电容后：$P$ 不变（$R$ 消耗），$I_L$ 不变，$I$ 减小，$\cos\varphi$ 提高。<br/>
+          过补偿（容性）：$Q_C > Q_L$，$\varphi < 0$，电流反而可能增大，一般补偿至 $\cos\varphi = 0.9$ 即可。
+        </div>
+
+        <hr/>
+        <h2 id="resonance">谐振</h2>
+        <h3>串联谐振</h3>
+        <p>条件：$X_L = X_C$，即 $\omega_0 = 1/\sqrt{LC}$，$f_0 = 1/(2\pi\sqrt{LC})$。</p>
+        <div class="note-box">
+          <span class="note-label">// 串联谐振特征</span>
+          $|Z| = R$（最小）→ $I$ 最大；$\dot{U}_L + \dot{U}_C = 0$，$U = U_R$；<br/>
+          品质因数 $Q_s = \omega_0 L/R = 1/(\omega_0 CR)$，谐振时 $U_L = U_C = Q_s U$（可远大于电源电压！）。
+        </div>
+        <h3>并联谐振</h3>
+        <p>条件：$B_L = B_C$，即 $\omega_0 \approx 1/\sqrt{LC}$。</p>
+        <div class="note-box">
+          <span class="note-label">// 并联谐振特征</span>
+          导纳 $|Y|$ 最小 → 阻抗最大 → 谐振时总电流 $I$ 最小；<br/>
+          $I_L \approx I_C \approx Q_p I$（支路电流可远大于总电流）。
+        </div>
+
+        <hr/>
+        <h2 id="nonsinusoidal">4.9 非正弦周期电流电路</h2>
+        <p>非正弦周期量可展开为傅里叶级数：$f(t) = A_0 + \sum_{k=1}^{\infty}A_{km}\sin(k\omega t + \psi_k)$</p>
+        <div class="note-box">
+          <span class="note-label">// 有效值与功率计算</span>
+          有效值：$I = \sqrt{I_0^2 + I_1^2 + I_2^2 + \cdots}$（各次谐波有效值的平方和开方）<br/>
+          平均功率：只有同次谐波之间才能产生平均功率，不同次谐波之间平均功率为零：
+          $$P = U_0 I_0 + \sum_{k=1}^\infty U_k I_k \cos\varphi_k$$
+        </div>
+        <div class="tip-box">
+          <span class="tip-label">// 叠加原理（频域）</span>
+          对非正弦电源，将各次谐波分量分别单独作用于电路，求各自响应，最后叠加（<strong>时域叠加，不能用相量直接叠加</strong>，因各次谐波频率不同）。
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+</body>
+</html>

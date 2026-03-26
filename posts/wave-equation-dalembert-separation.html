@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>达朗贝尔公式 &amp; 分离变数法 // NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left:'$$', right:'$$', display:true},
+        {left:'$', right:'$', display:false}
+      ],
+      throwOnError: false
+    });"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span>
+          <span class="logo-text">NOTEBOOK</span>
+          <span class="logo-bracket">]</span>
+        </a>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">~/index</a>
+          <a href="../notes.html" class="nav-link">~/notes</a>
+          <a href="../about.html" class="nav-link">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+
+      <div class="back-nav">
+        <a href="../notes.html" class="back-link">← cd ../notes</a>
+      </div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-26</span>
+          <span class="post-tag">数学物理方程</span>
+          <span class="post-tag" style="border-color:rgba(156,220,254,0.3);color:#9cdcfe;background:rgba(156,220,254,0.05)">波动力学</span>
+          <span class="post-tag" style="border-color:rgba(156,220,254,0.3);color:#9cdcfe;background:rgba(156,220,254,0.05)">热传导</span>
+        </div>
+        <h1>达朗贝尔公式 &amp; 分离变数法（直角坐标系）</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">
+          // 数学物理方程 &nbsp;·&nbsp; Chapter 1 &amp; 2
+        </p>
+      </header>
+
+      <!-- Table of Contents -->
+      <nav class="toc">
+        <div class="toc-title">// 目录</div>
+        <ol>
+          <li><a href="#dalembert">1. 达朗贝尔公式</a>
+            <ul>
+              <li><a href="#unbounded">1.1 无界情况 — 行波解</a></li>
+              <li><a href="#semi-fixed">1.2 半无界 — 固定端（奇延拓）</a></li>
+              <li><a href="#semi-free">1.3 半无界 — 自由端（偶延拓）</a></li>
+            </ul>
+          </li>
+          <li><a href="#separation">2. 分离变数法</a>
+            <ul>
+              <li><a href="#ex1-wave">2.1 例1：两端固定弦振动（第一类边条件）</a></li>
+              <li><a href="#ex2-rod">2.2 例2：两端自由杆纵振动（第二类边条件）</a></li>
+              <li><a href="#why-homogeneous">2.3 为什么齐次边条件是前提</a></li>
+              <li><a href="#ex3-heat">2.4 例3：混合边条件热传导</a></li>
+              <li><a href="#ex4-laplace">2.5 例4：矩形区域拉普拉斯方程</a></li>
+              <li><a href="#polar">2.6 拓展：极坐标系 — 导体圆柱对匀强电场的扰动</a></li>
+            </ul>
+          </li>
+        </ol>
+      </nav>
+
+      <article class="article-body">
+
+        <!-- ============================
+             CHAPTER 1: DALEMBERT
+             ============================ -->
+        <h2 id="dalembert">1. 达朗贝尔公式</h2>
+
+        <h3 id="unbounded">1.1 无界情况 — 行波解</h3>
+
+        <p>
+          出发点是一维波动方程（一维轻质弦）。若我们能把
+          $\dfrac{\partial}{\partial t}$ 和 $\dfrac{\partial}{\partial (x/a)}$ 合并，
+          问题就大大简化。令
+        </p>
+
+        $$\xi = \tfrac{1}{2}\!\left(\tfrac{x}{a}+t\right), \quad \eta = \tfrac{1}{2}\!\left(\tfrac{x}{a}-t\right)$$
+
+        <p>则有</p>
+
+        $$\frac{\partial}{\partial \xi} = \frac{\partial}{\partial t} + a\frac{\partial}{\partial x}$$
+
+        <p>波动方程化为</p>
+
+        $$\frac{\partial}{\partial \xi}\!\left(\frac{\partial u}{\partial \eta}\right) = 0$$
+
+        <p>
+          内层对 $\xi$ 无关，积分两次得通解：
+        </p>
+
+        $$u = f_2\!\left(\tfrac{x}{a}-t\right) + f_1\!\left(\tfrac{x}{a}+t\right)$$
+
+        <p>代入初始条件</p>
+
+        $$\begin{cases} f_1(x)+f_2(x)=\varphi(x) \\[4pt] f_1(x)-f_2(x)=\dfrac{1}{a}\displaystyle\int_{x_0}^{x}\psi(\xi)\,\mathrm{d}\xi + C \end{cases}$$
+
+        <p>解出并将 $\xi, \eta$ 回代，得<strong>达朗贝尔公式</strong>：</p>
+
+        $$\boxed{u(x,t) = \frac{1}{2}\bigl[\varphi(x+at)+\varphi(x-at)\bigr] + \frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)\,\mathrm{d}\xi}$$
+
+        <div class="tip-box">
+          <span class="tip-label">// 物理直觉</span>
+          前两项是向左/向右传播的行波。
+          积分项的物理含义：给弦一段区间 $(x_1,x_2)$ 内的初速 $\psi_0$，
+          波前是以速度 $a$ 向外奔跑的"斜坡"。斜坡处 $u_{xx}\neq 0$，
+          弦的张力对前方静止部分产生向上拉力，将其加速到与平台同高后停下来加入"悬停"队伍，
+          这个过程不断向外蔓延。
+        </div>
+
+        <h3 id="semi-fixed">1.2 半无界 — 固定端（奇延拓）</h3>
+
+        <p>
+          区域 $0 &lt; x &lt; \infty$，端点条件 $u|_{x=0}=0$。
+          不能直接用达朗贝尔公式，但可以通过<strong>奇延拓</strong>保持 $x=0$ 处 $u=0$：
+        </p>
+
+        $$\Phi(x)=\begin{cases}\varphi(x)&x\geqslant 0\\-\varphi(-x)&x<0\end{cases},\quad \Psi(x)=\begin{cases}\psi(x)&x\geqslant 0\\-\psi(-x)&x<0\end{cases}$$
+
+        <p>代入达朗贝尔公式后，利用奇函数性质化简：</p>
+
+        $$u(x,t)=\begin{cases} \displaystyle\frac{1}{2}[\varphi(x+at)+\varphi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)\,\mathrm{d}\xi, & t\leqslant\dfrac{x}{a} \\[12pt] \displaystyle\frac{1}{2}[\varphi(x+at)-\varphi(at-x)]+\frac{1}{2a}\int_{at-x}^{x+at}\psi(\xi)\,\mathrm{d}\xi, & t\geqslant\dfrac{x}{a} \end{cases}$$
+
+        <div class="note-box">
+          <span class="note-label">// 物理图像</span>
+          $x+at$ 向右传播不受影响；$x-at$ 向左的波碰到固定端后<strong>取反反射</strong>。
+          类比：光波从光疏介质射向光密介质（玻璃），电场强度描写下玻璃界面表现为固定端，
+          产生半波损失（相位变化 $\pi$）。
+        </div>
+
+        <h3 id="semi-free">1.3 半无界 — 自由端（偶延拓）</h3>
+
+        <p>端点条件改为 $u_x|_{x=0}=0$，做<strong>偶延拓</strong>：</p>
+
+        $$\Phi(x)=\begin{cases}\varphi(x)&x\geqslant 0\\\varphi(-x)&x<0\end{cases},\quad \Psi(x)=\begin{cases}\psi(x)&x\geqslant 0\\\psi(-x)&x<0\end{cases}$$
+
+        $$u(x,t)=\begin{cases} \displaystyle\frac{1}{2}[\varphi(x+at)+\varphi(x-at)]+\frac{1}{2a}\int_{x-at}^{x+at}\psi(\xi)\,\mathrm{d}\xi, & t\leqslant\dfrac{x}{a} \\[12pt] \displaystyle\frac{1}{2}[\varphi(x+at)+\varphi(at-x)]+\frac{1}{2a}\!\left[\int_0^{x+at}\!+\!\int_0^{at-x}\right]\!\psi(\xi)\,\mathrm{d}\xi, & t>\dfrac{x}{a} \end{cases}$$
+
+        <div class="note-box">
+          <span class="note-label">// 固定端 vs 自由端</span>
+          <strong>固定端</strong>：等效于一个质量极大的物体压住绳端，反作用力向下，反射波<em>反相</em>（波节）。<br/>
+          <strong>自由端</strong>：等效于绳端套在无摩擦轻环上，端点斜率始终为 0，
+          "甩尾"效应激发同相反射波（波腹），边界点位移为入射波振幅的 $2A$。
+        </div>
+
+        <hr/>
+
+        <!-- ============================
+             CHAPTER 2: SEPARATION
+             ============================ -->
+        <h2 id="separation">2. 分离变数法</h2>
+
+        <p>
+          达朗贝尔公式只适用于无界 / 半无界。两端固定时，做两次奇延拓数学上不方便，
+          改用<strong>分离变数法</strong>。
+        </p>
+
+        <div class="note-box">
+          <span class="note-label">// 求解流程（5步）</span>
+          1. PDE → 一组 ODE（引入分离常数 $\lambda$）<br/>
+          2. 空间 ODE + 齐次边条件 → <strong>本征值问题</strong><br/>
+          3. 求本征值 $\lambda_n$ 与本征函数 $X_n(x)$<br/>
+          4. 代入时间 ODE，求 $T_n(t)$，组合本征解 $u_n = X_n T_n$<br/>
+          5. 线性叠加 $u = \sum C_n X_n T_n$，由初条件定系数（傅里叶展开）
+        </div>
+
+        <h3 id="ex1-wave">2.1 例1：两端固定弦振动（第一类边条件）</h3>
+
+        <p>
+          方程：$u_{tt} - a^2 u_{xx} = 0$，边条件：$u|_{x=0}=u|_{x=l}=0$，
+          初条件：$u|_{t=0}=\varphi(x)$，$u_t|_{t=0}=\psi(x)$。
+        </p>
+
+        <p>设 $u = X(x)T(t)$，代入方程后分离：</p>
+
+        $$\frac{T''}{a^2 T} = \frac{X''}{X} = -\lambda$$
+
+        <p>边条件给出 $X(0)=X(l)=0$。分析三种情况：</p>
+
+        <ul>
+          <li>$\lambda &lt; 0$：只有零解，舍去。</li>
+          <li>$\lambda = 0$：只有零解，舍去。</li>
+          <li>$\lambda &gt; 0$：$X = C_1\cos\sqrt\lambda x + C_2\sin\sqrt\lambda x$，
+            由 $X(0)=0$ 得 $C_1=0$；由 $X(l)=0$ 要求 $\sin\sqrt\lambda l = 0$。</li>
+        </ul>
+
+        <div class="tip-box">
+          <span class="tip-label">// 物理图像</span>
+          $x=0$ 与 $x=l$ 只能是波节，故半波长整数倍必须等于 $l$，即
+          $\sqrt\lambda \cdot l = n\pi$。
+        </div>
+
+        <p><strong>本征值</strong>与<strong>本征函数</strong>：</p>
+
+        $$\lambda_n = \frac{n^2\pi^2}{l^2},\quad X_n(x) = \sin\frac{n\pi x}{l} \quad (n=1,2,3,\ldots)$$
+
+        <p>时间部分：</p>
+
+        $$T_n(t) = A_n\cos\frac{n\pi at}{l} + B_n\sin\frac{n\pi at}{l}$$
+
+        <p>通解：</p>
+
+        $$u(x,t) = \sum_{n=1}^{\infty}\left(A_n\cos\frac{n\pi at}{l}+B_n\sin\frac{n\pi at}{l}\right)\sin\frac{n\pi x}{l}$$
+
+        <p>由初条件（正弦傅里叶展开）定系数：</p>
+
+        $$A_n = \frac{2}{l}\int_0^l \varphi(\xi)\sin\frac{n\pi\xi}{l}\,\mathrm{d}\xi, \quad B_n = \frac{2}{n\pi a}\int_0^l \psi(\xi)\sin\frac{n\pi\xi}{l}\,\mathrm{d}\xi$$
+
+        <h3 id="ex2-rod">2.2 例2：两端自由杆纵振动（第二类边条件）</h3>
+
+        <p>
+          边条件：$u_x|_{x=0}=u_x|_{x=l}=0$。本征问题变为 $X'(0)=X'(l)=0$。
+        </p>
+
+        <p>
+          与例1关键区别：$\lambda=0$ 时 $X = C_1$（常数），<strong>不是零解</strong>，保留！
+          合并 $\lambda=0$ 和 $\lambda>0$ 两种情况：
+        </p>
+
+        $$\lambda_n = \frac{n^2\pi^2}{l^2} \quad (n=0,1,2,\ldots),\quad X_n(x)=\cos\frac{n\pi x}{l}$$
+
+        <p>$n=0$ 时时间方程为 $T''=0$，解为 $T_0 = A_0 + B_0 t$。</p>
+
+        <p>通解：</p>
+
+        $$u(x,t) = A_0 + B_0 t + \sum_{n=1}^{\infty}\left(A_n\cos\frac{n\pi at}{l}+B_n\sin\frac{n\pi at}{l}\right)\cos\frac{n\pi x}{l}$$
+
+        <div class="note-box">
+          <span class="note-label">// 物理图像</span>
+          $n=0$ 的本征模式：$u_0 = A_0 + B_0 t$，代表杆整体的质心匀速平移，
+          不描述振动。后面的余弦级数才是真正的振动模式。
+        </div>
+
+        <p>由初条件（余弦傅里叶展开）定系数：</p>
+
+        $$A_0 = \frac{1}{l}\int_0^l\varphi(\xi)\,\mathrm{d}\xi,\quad B_0 = \frac{1}{l}\int_0^l\psi(\xi)\,\mathrm{d}\xi$$
+
+        $$A_n = \frac{2}{l}\int_0^l\varphi(\xi)\cos\frac{n\pi\xi}{l}\,\mathrm{d}\xi,\quad B_n = \frac{2}{n\pi a}\int_0^l\psi(\xi)\cos\frac{n\pi\xi}{l}\,\mathrm{d}\xi$$
+
+        <h3 id="why-homogeneous">2.3 为什么齐次边条件是前提</h3>
+
+        <div class="note-box">
+          <span class="note-label">// 核心原因</span>
+          <strong>线性叠加原理的适用性。</strong><br/>
+          若边条件为 0，则本征解之和在边界处仍为 $0+0=0$，边条件不被破坏。<br/>
+          若边条件不为 0（如等于 10），叠加后边界值变成 20，解直接失效。<br/>
+          <br/>
+          <strong>结论</strong>：齐次边条件是使用线性叠加（傅里叶展开）构造完整解的绝对前提。
+          遇到非齐次边条件，先做坐标/函数变换转化为齐次，再用分离变数。
+        </div>
+
+        <h3 id="ex3-heat">2.4 例3：混合边条件热传导（第一类 + 第二类）</h3>
+
+        <p>
+          热传导方程：$u_t - a^2 u_{xx} = 0$，$a^2 = k/c\rho$。<br/>
+          边条件：$u|_{x=0}=0$，$u_x|_{x=l}=0$。<br/>
+          初条件：$u|_{t=0} = u_0 x / l$。
+        </p>
+
+        <p>本征问题：</p>
+
+        $$\begin{cases}X''+\lambda X=0\\X(0)=0,\quad X'(l)=0\end{cases}$$
+
+        <p>
+          由于含有第一类边条件 $X(0)=0$，$\lambda=0$ 时只有零解，舍去。
+          $\lambda &gt; 0$ 时 $C_1=0$，要求 $\cos\sqrt\lambda l = 0$，即
+        </p>
+
+        $$\sqrt\lambda\, l = \left(k+\tfrac{1}{2}\right)\pi, \quad k=0,1,2,\ldots$$
+
+        <p>本征值与本征函数：</p>
+
+        $$\lambda_k = \frac{(2k+1)^2\pi^2}{4l^2},\quad X_k(x)=\sin\frac{(2k+1)\pi x}{2l}$$
+
+        <p>时间部分（指数衰减）：</p>
+
+        $$T_k(t) = e^{-\lambda_k a^2 t}$$
+
+        <p>通解：</p>
+
+        $$u(x,t)=\sum_{k=0}^{\infty}C_k\,e^{-\frac{(2k+1)^2\pi^2 a^2}{4l^2}t}\sin\frac{(2k+1)\pi x}{2l}$$
+
+        <p>代入初条件并利用正交性：</p>
+
+        $$C_k = (-1)^k\frac{2u_0 l}{\left(k+\frac{1}{2}\right)^2\pi^2}$$
+
+        <p>最终解（完整级数）：</p>
+
+        $$u(x,t)=\frac{2u_0}{\pi^2}\sum_{k=0}^{\infty}\frac{(-1)^k}{\left(k+\frac{1}{2}\right)^2}\,e^{-\frac{(2k+1)^2\pi^2 a^2}{4l^2}t}\sin\frac{(2k+1)\pi x}{2l}$$
+
+        <div class="tip-box">
+          <span class="tip-label">// 级数截断估计</span>
+          各项以指数速率衰减，经过 $n$ 个特征时间后第二项与第一项之比：
+          $$\frac{|C_1|T_1}{|C_0|T_0} = \frac{1}{9}e^{-2\pi^2 n} &lt; \frac{1}{100}$$
+          只需 $n &gt; 0.12$，即稍过一个特征时间后，保留 $k=0$ 项即足够：
+          $$u(x,t) \approx \frac{8u_0}{\pi^2}\,e^{-\frac{\pi^2 a^2}{4l^2}t}\sin\frac{\pi x}{2l}$$
+        </div>
+
+        <h3 id="ex4-laplace">2.5 例4：矩形区域拉普拉斯方程（稳定温度场）</h3>
+
+        <p>
+          矩形区域 $[0,a]\times[0,b]$。$y=b$ 面温度为 $U$，其余三面温度为 $u_0$。
+          令 $v = u - u_0$，边条件齐次化：
+        </p>
+
+        $$v_{xx}+v_{yy}=0;\quad v|_{x=0}=v|_{x=a}=0;\quad v|_{y=0}=0,\; v|_{y=b}=U-u_0$$
+
+        <p>
+          $x$ 方向两端齐次第一类边条件，本征值 $\lambda_n = n^2\pi^2/a^2$，
+          本征函数 $X_n = \sin(n\pi x/a)$。$Y$ 方向方程为
+        </p>
+
+        $$Y'' - \lambda_n Y = 0 \implies Y_n = A_n e^{n\pi y/a} + B_n e^{-n\pi y/a}$$
+
+        <p>由 $v|_{y=0}=0$ 得 $A_n+B_n=0$，即 $Y_n \propto \sinh(n\pi y/a)$。
+          最终解：</p>
+
+        $$u(x,y) = u_0 + \frac{4(U-u_0)}{\pi}\sum_{k=0}^{\infty}\frac{1}{2k+1}\cdot\frac{\sinh\!\dfrac{(2k+1)\pi y}{a}}{\sinh\!\dfrac{(2k+1)\pi b}{a}}\cdot\sin\frac{(2k+1)\pi x}{a}$$
+
+        <h3 id="polar">2.6 拓展：极坐标系 — 导体圆柱对匀强电场的扰动</h3>
+
+        <h4>场景</h4>
+        <p>
+          无限长导体圆柱（半径 $a$，线电荷密度 $q_0$）置于外部匀强静电场 $E_0$ 中。
+          问题约化为 $xy$ 平面上圆柱外的二维问题。
+        </p>
+
+        <h4>为什么不用直角坐标系</h4>
+        <p>
+          在直角坐标系尝试 $u = X(x)Y(y)$，代入圆形边界 $x^2+y^2=a^2$ 后得到
+          $X(x)Y(\sqrt{a^2-x^2})=0$，<strong>无法分解为单变量的独立条件</strong>。
+          边界为圆，必须用平面极坐标。
+        </p>
+
+        <h4>极坐标下定解问题</h4>
+
+        <p>拉普拉斯方程（极坐标形式）：</p>
+
+        $$\frac{\partial^2 u}{\partial\rho^2}+\frac{1}{\rho}\frac{\partial u}{\partial\rho}+\frac{1}{\rho^2}\frac{\partial^2 u}{\partial\varphi^2}=0 \quad (\rho>a)$$
+
+        <p>边条件：</p>
+        <ul>
+          <li><strong>圆柱表面</strong>（齐次）：$u|_{\rho=a}=0$</li>
+          <li><strong>无穷远</strong>（非齐次渐近条件）：
+            $$u|_{\rho\to\infty}\sim u_0 + \frac{q_0}{2\pi\varepsilon_0}\ln\frac{1}{\rho} - E_0\rho\cos\varphi$$
+          </li>
+        </ul>
+
+        <h4>分离变数与本征值</h4>
+
+        <p>
+          令 $u = R(\rho)\Phi(\varphi)$，由<strong>自然周期条件</strong>
+          $\Phi(\varphi+2\pi)=\Phi(\varphi)$ 得本征值 $\lambda=m^2$（$m=0,1,2,\ldots$），
+          本征函数 $\Phi = A\cos m\varphi + B\sin m\varphi$。
+        </p>
+
+        <p>$R$ 的方程（欧拉型）：</p>
+
+        $$\rho^2 R''+\rho R'-m^2 R=0$$
+
+        <ul>
+          <li>$m\neq 0$：$R = C\rho^m + D\rho^{-m}$</li>
+          <li>$m=0$：$R = C_0 + D_0\ln\rho$</li>
+        </ul>
+
+        <h4>确定系数</h4>
+
+        <p>
+          一般解代入 $u|_{\rho=a}=0$，得
+          $C_0=-D_0\ln a$，$C_m=-A_m a^{2m}$，$D_m=-B_m a^{2m}$，解化简为：
+        </p>
+
+        $$u = D_0\ln\frac{\rho}{a} + \sum_{m=1}^\infty\left[\rho^m - a^{2m}\rho^{-m}\right](A_m\cos m\varphi + B_m\sin m\varphi)$$
+
+        <p>再代入无穷远渐近条件：</p>
+        <ul>
+          <li>$m&gt;1$ 时 $\rho^m$ 项发散，故 $A_m=B_m=0$（$m&gt;1$）</li>
+          <li>$m=1$：$A_1=-E_0$，$B_1=0$</li>
+          <li>对数项：$D_0 = -q_0/(2\pi\varepsilon_0)$</li>
+        </ul>
+
+        <h4>最终解</h4>
+
+        $$\boxed{u(\rho,\varphi) = \frac{q_0}{2\pi\varepsilon_0}\ln\frac{a}{\rho} - E_0\rho\cos\varphi + E_0\frac{a^2}{\rho}\cos\varphi}$$
+
+        <div class="note-box">
+          <span class="note-label">// 三项物理含义</span>
+          <strong>第一项</strong> $\dfrac{q_0}{2\pi\varepsilon_0}\ln\dfrac{a}{\rho}$：
+          圆柱自身净电荷产生的线电荷势（对数型长程场）。<br/><br/>
+          <strong>第二项</strong> $-E_0\rho\cos\varphi = -E_0 x$：
+          原始匀强电场的电势分布，在无穷远处占主导。<br/><br/>
+          <strong>第三项</strong> $E_0 a^2\rho^{-1}\cos\varphi$：
+          感应电荷对匀强场的修正，形式为<em>偶极子势</em>，
+          随 $\rho$ 增大迅速衰减（局部扰动）。<br/><br/>
+          渐近条件用 $\sim$ 而非 $=$，是因为圆柱感应出的偶极子项在有限 $\rho$ 处仍有贡献，
+          只有 $\rho\to\infty$ 时才严格趋零。
+        </div>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+
+</body>
+</html>

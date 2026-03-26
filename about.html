@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About // NOTEBOOK</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-bracket">[</span>
+          <span class="logo-text">NOTEBOOK</span>
+          <span class="logo-bracket">]</span>
+        </a>
+        <nav class="nav">
+          <a href="index.html" class="nav-link">~/index</a>
+          <a href="notes.html" class="nav-link">~/notes</a>
+          <a href="about.html" class="nav-link active">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="page-title-block">
+        <div class="page-command">
+          <span class="page-command-sym">$</span>
+          <span class="page-command-text"> cat about.md</span>
+        </div>
+      </div>
+
+      <div class="about-block">
+
+        <h2>// 关于这个站</h2>
+        <p>
+          这是一个私人学习笔记站点。记录在学习物理课程过程中的推导、物理图像和个人理解，
+          不保证严格性，但尽量追求"讲清楚为什么"。
+        </p>
+        <p>
+          目前主要覆盖：数学物理方程（偏微分方程）、理论力学、电动力学。
+        </p>
+
+        <h2>// 技术栈</h2>
+        <p>
+          纯静态 HTML + CSS。公式渲染使用 
+          <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a>。
+          部署在 <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>。
+        </p>
+        <p>
+          没有框架，没有 npm，没有 build step。<br/>
+          <span style="color:#444">// 简单的东西反而最好维护。</span>
+        </p>
+
+        <h2>// 内容许可</h2>
+        <p>
+          笔记内容仅供个人学习参考。转载请注明出处。
+          教材原图/截图版权归原作者所有。
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+</body>
+</html>

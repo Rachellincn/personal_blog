@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电工学 第2章 电路分析方法 // NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo"><span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span></a>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">~/index</a>
+          <a href="../notes.html" class="nav-link">~/notes</a>
+          <a href="../about.html" class="nav-link">~/about</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← cd ../notes</a></div>
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-26</span>
+          <span class="post-tag">电工学</span>
+          <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">电路分析</span>
+        </div>
+        <h1>电工学 第2章 · 电路的分析方法</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 电工技术 第八版 · 秦曾煌 姜三勇</p>
+      </header>
+
+      <nav class="toc">
+        <div class="toc-title">// 目录</div>
+        <ol>
+          <li><a href="#concepts">核心概念：等效网络 / 串并联 / Y-△ / 电源等效</a></li>
+          <li><a href="#theorems">基本定理：叠加 / 戴维宁 / 诺顿</a></li>
+          <li><a href="#method1">支路电流法</a></li>
+          <li><a href="#method2">回路电流法</a></li>
+          <li><a href="#method3">结点电压法（弥尔曼定理）</a></li>
+          <li><a href="#method4">叠加定理 Pipeline</a></li>
+          <li><a href="#method5">戴维宁 / 诺顿定理 Pipeline</a></li>
+          <li><a href="#selector">方法选择指南</a></li>
+          <li><a href="#errors">易错点</a></li>
+        </ol>
+      </nav>
+
+      <article class="article-body">
+
+        <h2 id="concepts">一、核心概念</h2>
+
+        <h3>二端网络与等效</h3>
+        <div class="note-box">
+          <span class="note-label">// 等效变换要点</span>
+          等效只针对<strong>端口外部</strong>，对内部不等效。<br/>
+          等效条件：两网络端口电压 $U_1 = U_2$，电流 $I_1 = I_2$。<br/>
+          等效变换只适用于<strong>线性网络</strong>。
+        </div>
+
+        <h3>电阻串并联</h3>
+        <p><strong>串联</strong>（同一电流）：$R = R_1 + R_2 + \cdots$，分压公式：</p>
+        $$U_1 = \frac{R_1}{R_1+R_2}U, \quad U_2 = \frac{R_2}{R_1+R_2}U$$
+        <p><strong>并联</strong>（两端电压相同）：$\dfrac{1}{R} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots$，分流公式：</p>
+        $$I_1 = \frac{R_2}{R_1+R_2}I, \quad I_2 = \frac{R_1}{R_1+R_2}I$$
+
+        <h3>Y-△ 等效变换</h3>
+        <p>△ → Y（三角变星）：</p>
+        $$R_a = \frac{R_{ab}R_{ca}}{R_{ab}+R_{bc}+R_{ca}}$$
+        <p>Y → △（星变三角）：</p>
+        $$R_{ab} = \frac{R_aR_b + R_bR_c + R_cR_a}{R_c}$$
+        <div class="tip-box">
+          <span class="tip-label">// 对称情况</span>
+          $R_\triangle = 3R_Y$
+        </div>
+
+        <h3>电源的两种模型与等效变换</h3>
+        <p>等效变换条件：$E = I_S R_0$（内阻不变，串联改并联）。</p>
+        <div class="note-box">
+          <span class="note-label">// 四条注意</span>
+          1. 等效只对外电路；2. 方向一一对应（电流源从 $-$ 极流向 $+$ 极）；<br/>
+          3. 理想电压源与理想电流源之间<strong>无等效关系</strong>；<br/>
+          4. 理想电压源不能并联（除非电压相同），理想电流源不能串联（除非电流相同）。
+        </div>
+
+        <h3>受控电源</h3>
+        <p>VCVS / VCCS / CCVS / CCCS：分析方法同独立电源，但<strong>不能单独作用</strong>（叠加时不能令受控源为零）；求等效内阻时含受控源须用<strong>外加电源法</strong>。</p>
+
+        <hr/>
+        <h2 id="theorems">二、基本定理</h2>
+
+        <h3>叠加定理</h3>
+        <p>线性电路中，任一支路的电流/电压等于各电源单独作用时的<strong>代数和</strong>。</p>
+        <div class="note-box">
+          <span class="note-label">// 关键限制</span>
+          只适用于线性电路；<strong>功率不能叠加</strong>（$P \neq P' + P''$）；<br/>
+          不作用的电压源 → 短路；不作用的电流源 → 开路。
+        </div>
+        <p><strong>齐性定理：</strong>单电源线性电路中，响应与电源成正比，电源增大 $n$ 倍则响应增大 $n$ 倍。</p>
+
+        <h3>戴维宁定理</h3>
+        <p>任何线性有源二端网络等效为<strong>电压源串内阻</strong>：</p>
+        $$E = U_{OC}, \quad R_0 = \text{除去全部独立电源后从 a、b 端看入的等效电阻}$$
+
+        <h3>诺顿定理</h3>
+        <p>等效为<strong>电流源并内阻</strong>：$I_S = I_{SC}$，$R_0$ 同戴维宁。两定理关系：$E = I_S R_0$。</p>
+
+        <hr/>
+        <h2 id="method1">三、支路电流法</h2>
+        <div class="note-box">
+          <span class="note-label">// 适用场景</span>支路数较少的电路（通用基础方法）
+        </div>
+        <p><strong>方程数统计：</strong>支路数 $b$ 个未知量；$(n-1)$ 个独立 KCL 方程 + $b-(n-1)$ 个独立 KVL 方程 = $b$ 个方程。</p>
+        <div class="tip-box">
+          <span class="tip-label">// 含恒流源的处理</span>
+          法一：选回路不包含恒流源支路，少列一个 KVL，用 KCL 补充。<br/>
+          法二：设恒流源两端电压为未知量 $U_X$，正常列所有方程。
+        </div>
+
+        <hr/>
+        <h2 id="method2">四、回路电流法</h2>
+        <div class="note-box">
+          <span class="note-label">// 适用场景</span>支路数多、网孔数少的电路
+        </div>
+        <p>KVL 方程规律：</p>
+        $$\text{自电阻} \times I_{\text{本}} - \sum(\text{互电阻} \times I_{\text{邻}}) = \text{本回路电动势代数和}$$
+        <div class="tip-box">
+          <span class="tip-label">// 含恒流源时</span>设恒流源两端电压为未知量，补充约束 $I_{\text{回路差}} = I_S$。
+        </div>
+
+        <hr/>
+        <h2 id="method3">五、结点电压法（弥尔曼定理）</h2>
+        <div class="note-box">
+          <span class="note-label">// 适用场景</span>结点数少（尤其双结点电路）、支路数多的电路
+        </div>
+        <p>KCL 标准形式：自电导 × 本结点电压 $-$ 互电导 × 相邻结点电压 $=$ 流入该结点的电流源电流。</p>
+        <p><strong>双结点弥尔曼定理：</strong></p>
+        $$U = \frac{\displaystyle\sum \frac{E_k}{R_k} + \sum I_{Sk}}{\displaystyle\sum \frac{1}{R_k}}$$
+        <div class="tip-box">
+          <span class="tip-label">// 符号规则</span>
+          分子中 $E_k$：若 $E$ 参考方向与 $U$ 参考方向相反取正，相同取负。<br/>
+          与恒流源串联的电阻<strong>不计入</strong>自电导；恒流源电流直接加入分子（注意方向）。
+        </div>
+
+        <hr/>
+        <h2 id="method4">六、叠加定理 Pipeline</h2>
+        <pre style="background:#111;border:1px solid #222;border-left:3px solid var(--yellow);padding:1rem;font-size:0.83rem;color:#d4d4d4">
+Step 1  将电路分解为各电源单独作用的子电路
+        不作用的电压源 → 短路
+        不作用的电流源 → 开路
+         ↓
+Step 2  对每个子电路用简单方法（串并联、分压分流）求各支路响应
+         ↓
+Step 3  代数叠加：与原参考方向相同取正，相反取负
+         ↓
+Step 4  功率需单独计算，不能叠加</pre>
+
+        <hr/>
+        <h2 id="method5">七、戴维宁 / 诺顿定理 Pipeline</h2>
+        <pre style="background:#111;border:1px solid #222;border-left:3px solid var(--green);padding:1rem;font-size:0.83rem;color:#d4d4d4">
+// 戴维宁
+Step 1  断开待求支路，得有源二端网络
+Step 2  求开路电压 Uoc = E（任意方法）
+Step 3  求等效内阻 R₀
+        · 独立电源全部除去（电压源短路，电流源开路）
+        · 含受控源 → 外加电源法：R₀ = U/I
+Step 4  接入待求支路：I = E / (R₀ + R_L)
+
+// 诺顿
+Step 1  将 a、b 端短路，求短路电流 Isc = Is
+Step 2  求等效内阻 R₀（同戴维宁）
+Step 3  Is 并联 R₀，接入待求支路</pre>
+
+        <hr/>
+        <h2 id="selector">八、方法选择指南</h2>
+        <pre style="background:#111;border:1px solid #222;padding:1rem;font-size:0.82rem;color:#d4d4d4">
+只求某一支路？          → 戴维宁 / 诺顿定理（最高效）
+结点数少（≤3）？        → 结点电压法（弥尔曼定理）
+网孔数少？              → 回路电流法
+支路数少？              → 支路电流法
+电源数不多 + 线性？     → 叠加定理
+含非线性元件？          → 图解法（戴维宁等效 + 负载线）</pre>
+
+        <hr/>
+        <h2 id="errors">九、易错点</h2>
+        <div class="note-box">
+          <span class="note-label">// 常见错误汇总</span>
+          <table style="width:100%;font-size:0.82rem;border-collapse:collapse">
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:#f44747;width:45%">叠加定理计算功率</td>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">❌ 功率不能叠加，须用 $P = I^2R$ 单独算</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:#f44747">电源等效后求内部量</td>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">❌ 等效只对外，需回原电路求内部量</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:#f44747">弥尔曼定理中 $E$ 的符号</td>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">$E$ 与 $U$ 参考方向相反取正，相同取负</td>
+            </tr>
+            <tr style="border-bottom:1px solid #222">
+              <td style="padding:0.4rem 0.6rem;color:#f44747">戴维宁含受控源求 $R_0$</td>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">不能直接化简，必须用外加电源法</td>
+            </tr>
+            <tr>
+              <td style="padding:0.4rem 0.6rem;color:#f44747">Y-△ 变换后求原电路量</td>
+              <td style="padding:0.4rem 0.6rem;color:var(--text-dim)">只能求端口外的量，内部须还原</td>
+            </tr>
+          </table>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+</body>
+</html>
