@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if ever needed for local tooling)
+node_modules/
+npm-debug.log*
+
+# Build artifacts (none for this static site, but good practice)
+dist/
+.cache/
+
+# Vercel
+.vercel/
+
+# WorkBuddy / local dev
+.workbuddy/

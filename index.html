@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>NOTEBOOK</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <!-- RGB ambient glow -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-bracket">[</span>
+          <span class="logo-text">NOTEBOOK</span>
+          <span class="logo-bracket">]</span>
+        </a>
+
+        <!-- Mobile menu toggle -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+
+        <nav class="nav">
+          <a href="index.html" class="nav-link active">INDEX</a>
+          <a href="notes.html" class="nav-link">NOTES</a>
+          <a href="about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <!-- HERO: Personal Profile -->
+      <section class="hero">
+        <div class="hero-glass">
+          <div class="hero-name">
+            <span class="name-zh">向柑潾</span>
+            <span class="name-sep">/</span>
+            <span class="name-en">Xiang Ganlin</span>
+          </div>
+          <div class="hero-subtitle">
+            <span class="hero-school">中国人民大学</span>
+            <span class="hero-dot">·</span>
+            <span class="hero-dept">物理学院</span>
+            <span class="hero-dot">·</span>
+            <span class="hero-year">大二在读</span>
+          </div>
+          <p class="hero-bio">
+            学术热情集中于物理学与人工智能的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
+          </p>
+
+          <!-- Research -->
+          <div class="hero-section">
+            <div class="section-label">研究方向</div>
+            <div class="research-grid">
+              <div class="research-item">
+                <span class="research-icon">◉</span>
+                <div>
+                  <div class="research-title">二维材料与凝聚态物理</div>
+                  <div class="research-desc">全液相前驱体法光纤内二维过渡金属硫族化合物（MoS₂）生长与制备</div>
+                </div>
+              </div>
+              <div class="research-item">
+                <span class="research-icon">◉</span>
+                <div>
+                  <div class="research-title">AI for Science</div>
+                  <div class="research-desc">深度学习、生成式 AI、多模态大语言模型 · 核心项目：PEFT 过参数化微调大模型</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech Stack -->
+          <div class="hero-section">
+            <div class="section-label">技术储备</div>
+            <div class="tech-chips">
+              <span class="chip chip-physics">理论力学</span>
+              <span class="chip chip-physics">电磁学</span>
+              <span class="chip chip-physics">原子物理</span>
+              <span class="chip chip-physics">光学</span>
+              <span class="chip chip-math">线性代数</span>
+              <span class="chip chip-math">数学物理方法</span>
+              <span class="chip chip-num">蒙特卡洛</span>
+              <span class="chip chip-num">共轭梯度</span>
+              <span class="chip chip-num">BFGS</span>
+              <span class="chip chip-num">Lanczos</span>
+              <span class="chip chip-code">Python</span>
+              <span class="chip chip-code">MATLAB</span>
+              <span class="chip chip-code">LaTeX</span>
+              <span class="chip chip-code">Markdown</span>
+            </div>
+          </div>
+
+          <!-- Blog Description -->
+          <div class="blog-desc-box">
+            此 blog 为个人开发网页，用于上传学习笔记、IDEAS 等。内容持续更新中。
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes Index: Small tile grid -->
+      <section class="section">
+        <div class="section-head">
+          <span class="section-line"></span>
+          <span class="section-name">NOTES</span>
+          <span class="section-line"></span>
+        </div>
+        <div class="tile-grid">
+
+          <a href="posts/wave-equation-dalembert-separation.html" class="tile">
+            <div class="tile-tag">数学物理方程</div>
+            <div class="tile-title">达朗贝尔公式<br/>&amp; 分离变数法</div>
+            <div class="tile-meta">2026-03-26</div>
+          </a>
+
+          <a href="posts/atomic-physics-ch2.html" class="tile">
+            <div class="tile-tag">原子物理</div>
+            <div class="tile-title">玻尔模型<br/>与量子力学导论</div>
+            <div class="tile-meta">2026-03-26</div>
+          </a>
+
+          <a href="posts/electrical-engineering-ch2.html" class="tile">
+            <div class="tile-tag">电工学</div>
+            <div class="tile-title">电路的<br/>分析方法</div>
+            <div class="tile-meta">2026-03-26</div>
+          </a>
+
+          <a href="posts/electrical-engineering-ch3.html" class="tile">
+            <div class="tile-tag">电工学</div>
+            <div class="tile-title">电路的<br/>暂态分析</div>
+            <div class="tile-meta">2026-03-26</div>
+          </a>
+
+          <a href="posts/electrical-engineering-ch4.html" class="tile">
+            <div class="tile-tag">电工学</div>
+            <div class="tile-title">正弦<br/>交流电路</div>
+            <div class="tile-meta">2026-03-26</div>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">built with static html &amp; katex &nbsp;·&nbsp; deployed on vercel</span>
+    </div>
+  </footer>
+
+</body>
+</html>
