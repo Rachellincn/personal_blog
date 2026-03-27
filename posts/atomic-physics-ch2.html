@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>原子物理 第二章 // NOTEBOOK</title>
+  <meta name="theme-color" content="#080810" />
+  <title>原子物理 第二章 — NOTEBOOK</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
@@ -12,6 +13,9 @@
 </head>
 <body>
   <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
 
   <header class="site-header">
     <div class="container">
@@ -19,10 +23,14 @@
         <a href="../index.html" class="logo">
           <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
         </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
         <nav class="nav">
-          <a href="../index.html" class="nav-link">~/index</a>
-          <a href="../notes.html" class="nav-link">~/notes</a>
-          <a href="../about.html" class="nav-link">~/about</a>
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
         </nav>
       </div>
     </div>
@@ -30,7 +38,7 @@
 
   <main class="main">
     <div class="post-page">
-      <div class="back-nav"><a href="../notes.html" class="back-link">← cd ../notes</a></div>
+      <div class="back-nav"><a href="../notes.html" class="back-link">← BACK</a></div>
 
       <header class="post-header">
         <div class="post-meta">
@@ -209,7 +217,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+      <span class="footer-text">built with static html &amp; katex &nbsp;·&nbsp; deployed on vercel</span>
     </div>
   </footer>
 </body>

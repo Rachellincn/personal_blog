@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About // NOTEBOOK</title>
+  <meta name="theme-color" content="#080810" />
+  <title>ABOUT — NOTEBOOK</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
 
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
         <a href="index.html" class="logo">
-          <span class="logo-bracket">[</span>
-          <span class="logo-text">NOTEBOOK</span>
-          <span class="logo-bracket">]</span>
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
         </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
         <nav class="nav">
-          <a href="index.html" class="nav-link">~/index</a>
-          <a href="notes.html" class="nav-link">~/notes</a>
-          <a href="about.html" class="nav-link active">~/about</a>
+          <a href="index.html" class="nav-link">INDEX</a>
+          <a href="notes.html" class="nav-link">NOTES</a>
+          <a href="about.html" class="nav-link active">ABOUT</a>
         </nav>
       </div>
     </div>
@@ -30,38 +36,57 @@
     <div class="container">
 
       <div class="page-title-block">
-        <div class="page-command">
-          <span class="page-command-sym">$</span>
-          <span class="page-command-text"> cat about.md</span>
-        </div>
+        <div class="page-title-text">ABOUT ME</div>
+        <p class="page-subtitle">关于我</p>
       </div>
 
       <div class="about-block">
 
-        <h2>// 关于这个站</h2>
         <p>
-          这是一个私人学习笔记站点。记录在学习物理课程过程中的推导、物理图像和个人理解，
-          不保证严格性，但尽量追求"讲清楚为什么"。
-        </p>
-        <p>
-          目前主要覆盖：数学物理方程（偏微分方程）、理论力学、电动力学。
+          你好！我是中国人民大学（RUC）的一名大二物理学本科生。我的学术热情主要集中在物理学与人工智能的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
         </p>
 
-        <h2>// 技术栈</h2>
+        <h2>研究方向与关注领域</h2>
         <p>
-          纯静态 HTML + CSS。公式渲染使用 
-          <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a>。
-          部署在 <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>。
+          <strong>二维材料与凝聚态物理</strong> — 重点关注二维材料的合成与表征。目前正在进行基于全液相前驱体法的光纤内二维过渡金属硫族化合物（如 MoS₂）的生长与制备研究。
         </p>
         <p>
-          没有框架，没有 npm，没有 build step。<br/>
-          <span style="color:#444">// 简单的东西反而最好维护。</span>
+          <strong>AI for Science</strong> — 积极探索深度学习、生成式 AI 和多模态大语言模型在科学计算中的潜力。目前的核心项目是 PEFT 过参数化微调大模型。
         </p>
 
-        <h2>// 内容许可</h2>
+        <h2>技术栈与知识储备</h2>
         <p>
-          笔记内容仅供个人学习参考。转载请注明出处。
-          教材原图/截图版权归原作者所有。
+          <strong>物理与数学基础</strong> — 具备扎实的理论物理基础（涵盖经典力学、理论力学、电磁学、光学、原子物理），并辅以坚实的线性代数与数学物理方法训练。
+        </p>
+        <p>
+          <strong>数值计算与优化</strong> — 熟悉并能应用多种数值计算与优化算法，包括高斯求积、辛普森法则、蒙特卡洛积分、牛顿法、共轭梯度法（CG）、BFGS 以及 Lanczos 算法等。
+        </p>
+        <p>
+          <strong>编程与工具</strong> — 掌握 Python 与 MATLAB，具备构建和调优深度学习模型的实践经验。高效的学术输出流：Markdown 与 LaTeX 重度用户，习惯在 macOS 环境下结合 MarkText 与 Espanso 打造极其流畅的数理公式输入与学术笔记工作流。
+        </p>
+
+        <h2>更多关于我</h2>
+        <p>
+          除了在实验室和代码中寻找物理世界的底层逻辑，我的视线也经常投向更广阔的真实世界，对国际关系与当代地缘政治抱有浓厚的阅读兴趣。
+        </p>
+        <p>
+          在科研与学术之外，我也积极融入校园生活，曾参与组织和策划物理系文体部的春季运动会等大型活动，享受团队协作带来的乐趣。
+        </p>
+        <p>
+          欢迎在这里与我交流物理、AI、技术或是世界局势！
+        </p>
+
+        <h2>关于这个站</h2>
+        <p>
+          这是一个私人学习笔记站点，记录在学习物理课程过程中的推导、物理图像和个人理解。不保证严格性，但尽量追求"讲清楚为什么"。
+        </p>
+        <p>
+          纯静态 HTML + CSS，公式渲染使用 <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a>，部署在 <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>。没有框架，没有 npm，没有 build step。
+        </p>
+
+        <h2>内容许可</h2>
+        <p>
+          笔记内容仅供个人学习参考。转载请注明出处。教材原图/截图版权归原作者所有。
         </p>
 
       </div>
@@ -71,7 +96,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+      <span class="footer-text">built with static html &amp; katex &nbsp;·&nbsp; deployed on vercel</span>
     </div>
   </footer>
 </body>

@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>笔记列表 // NOTEBOOK</title>
+  <meta name="theme-color" content="#080810" />
+  <title>NOTES — NOTEBOOK</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
 
   <header class="site-header">
     <div class="container">
@@ -15,10 +19,14 @@
         <a href="index.html" class="logo">
           <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
         </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
         <nav class="nav">
-          <a href="index.html" class="nav-link">~/index</a>
-          <a href="notes.html" class="nav-link active">~/notes</a>
-          <a href="about.html" class="nav-link">~/about</a>
+          <a href="index.html" class="nav-link">INDEX</a>
+          <a href="notes.html" class="nav-link active">NOTES</a>
+          <a href="about.html" class="nav-link">ABOUT</a>
         </nav>
       </div>
     </div>
@@ -28,15 +36,12 @@
     <div class="container">
 
       <div class="page-title-block">
-        <div class="page-command">
-          <span class="page-command-sym">$</span>
-          <span class="page-command-text"> ls -la notes/</span>
-        </div>
-        <p class="page-subtitle">// 全部学习笔记（5 篇）</p>
+        <div class="page-title-text">NOTES</div>
+        <p class="page-subtitle">全部学习笔记（5 篇）</p>
       </div>
 
       <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">all</button>
+        <button class="filter-btn active" data-filter="all">ALL</button>
         <button class="filter-btn" data-filter="数学物理方程">数学物理方程</button>
         <button class="filter-btn" data-filter="原子物理">原子物理</button>
         <button class="filter-btn" data-filter="电工学">电工学</button>
@@ -54,7 +59,7 @@
           </h2>
           <p class="post-excerpt">波动方程无界/半无界行波解，固定端奇延拓与自由端偶延拓，分离变数法系统流程（4例），极坐标系下导体圆柱对匀强电场的扰动。</p>
           <div class="post-footer">
-            <a href="posts/wave-equation-dalembert-separation.html" class="read-more">read_more →</a>
+            <a href="posts/wave-equation-dalembert-separation.html" class="read-more">READ →</a>
             <span class="post-length">~4000 words</span>
           </div>
         </article>
@@ -63,14 +68,13 @@
           <div class="post-meta">
             <span class="post-date">2026-03-26</span>
             <span class="post-tag">原子物理</span>
-            <span class="post-tag" style="border-color:rgba(156,220,254,0.3);color:#9cdcfe;background:rgba(156,220,254,0.05)">量子力学基础</span>
           </div>
           <h2 class="post-title">
             <a href="posts/atomic-physics-ch2.html">原子物理 第二章 · 玻尔模型与量子力学导论</a>
           </h2>
-          <p class="post-excerpt">轨道类型与能量分类（束缚态/散射态），氢光谱折合质量修正，Franck-Hertz 实验，索末菲椭圆轨道与相对论修正，德布罗意物质波，戴维森-革末实验，一维刚性盒量子化。</p>
+          <p class="post-excerpt">轨道类型与能量分类，氢光谱折合质量修正，Franck-Hertz 实验，索末菲椭圆轨道与相对论修正，德布罗意物质波，戴维森-革末实验。</p>
           <div class="post-footer">
-            <a href="posts/atomic-physics-ch2.html" class="read-more">read_more →</a>
+            <a href="posts/atomic-physics-ch2.html" class="read-more">READ →</a>
             <span class="post-length">~3500 words</span>
           </div>
         </article>
@@ -79,14 +83,13 @@
           <div class="post-meta">
             <span class="post-date">2026-03-26</span>
             <span class="post-tag">电工学</span>
-            <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">电路分析</span>
           </div>
           <h2 class="post-title">
             <a href="posts/electrical-engineering-ch2.html">电工学 第2章 · 电路的分析方法</a>
           </h2>
-          <p class="post-excerpt">等效网络、Y-△变换、电源等效，叠加/戴维宁/诺顿定理，支路电流法、回路电流法、结点电压法（弥尔曼定理）系统 Pipeline 与方法选择指南。</p>
+          <p class="post-excerpt">等效网络、Y-△变换、电源等效，叠加/戴维宁/诺顿定理，支路电流法、回路电流法、结点电压法系统 Pipeline 与方法选择指南。</p>
           <div class="post-footer">
-            <a href="posts/electrical-engineering-ch2.html" class="read-more">read_more →</a>
+            <a href="posts/electrical-engineering-ch2.html" class="read-more">READ →</a>
             <span class="post-length">~2500 words</span>
           </div>
         </article>
@@ -95,14 +98,13 @@
           <div class="post-meta">
             <span class="post-date">2026-03-26</span>
             <span class="post-tag">电工学</span>
-            <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">暂态分析</span>
           </div>
           <h2 class="post-title">
             <a href="posts/electrical-engineering-ch3.html">电工学 第3章 · 电路的暂态分析</a>
           </h2>
-          <p class="post-excerpt">稳态与暂态的概念，换路定则与初始值四步法，RC/RL零输入/零状态响应，三要素法通用公式 Pipeline，微分电路与积分电路。</p>
+          <p class="post-excerpt">稳态与暂态的概念，换路定则与初始值四步法，RC/RL零输入/零状态响应，三要素法通用公式，微分电路与积分电路。</p>
           <div class="post-footer">
-            <a href="posts/electrical-engineering-ch3.html" class="read-more">read_more →</a>
+            <a href="posts/electrical-engineering-ch3.html" class="read-more">READ →</a>
             <span class="post-length">~2200 words</span>
           </div>
         </article>
@@ -111,14 +113,13 @@
           <div class="post-meta">
             <span class="post-date">2026-03-26</span>
             <span class="post-tag">电工学</span>
-            <span class="post-tag" style="border-color:rgba(220,220,170,0.3);color:#dcdcaa;background:rgba(220,220,170,0.05)">交流电路</span>
           </div>
           <h2 class="post-title">
             <a href="posts/electrical-engineering-ch4.html">电工学 第4章 · 正弦交流电路</a>
           </h2>
-          <p class="post-excerpt">正弦量三要素与有效值，相量法与复数运算，R/L/C 单一元件对比，RLC串联电路 5步法，功率三角形，串并联谐振，功率因数补偿，非正弦周期电路。</p>
+          <p class="post-excerpt">正弦量三要素与有效值，相量法与复数运算，RLC串联电路，功率三角形，串并联谐振，功率因数补偿，非正弦周期电路。</p>
           <div class="post-footer">
-            <a href="posts/electrical-engineering-ch4.html" class="read-more">read_more →</a>
+            <a href="posts/electrical-engineering-ch4.html" class="read-more">READ →</a>
             <span class="post-length">~3000 words</span>
           </div>
         </article>
@@ -129,7 +130,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span class="footer-text">// built with static html &amp; katex &nbsp;|&nbsp; deployed on vercel</span>
+      <span class="footer-text">built with static html &amp; katex &nbsp;·&nbsp; deployed on vercel</span>
     </div>
   </footer>
 
