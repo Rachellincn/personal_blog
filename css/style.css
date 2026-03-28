@@ -1552,3 +1552,184 @@ body::after {
     z-index: -1;
   }
 }
+
+/* ================================================================
+   21. POST ARTICLE — Content Classes (section headings, tables,
+       note blocks, lists, inline tags)
+   ================================================================ */
+
+/* Section headings inside post article */
+.section-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-left: 3px solid var(--cyan);
+  padding: 0.25rem 0 0.25rem 0.75rem;
+  margin: 2.5rem 0 1.25rem;
+  text-shadow: 0 0 10px rgba(0,240,255,0.3);
+}
+
+.subsection-heading {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  letter-spacing: 0.05em;
+  margin: 1.75rem 0 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+}
+
+.step-heading {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--magenta);
+  letter-spacing: 0.08em;
+  margin: 1.5rem 0 0.5rem;
+  text-shadow: 0 0 8px rgba(255,0,170,0.2);
+}
+
+/* Content sections */
+.content-section {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.content-section p {
+  margin-bottom: 0.85rem;
+  color: var(--text);
+  font-size: 0.93rem;
+}
+
+/* Note / callout block */
+.note-block {
+  background: rgba(0,240,255,0.03);
+  border: 1px solid rgba(0,240,255,0.15);
+  border-left: 3px solid rgba(0,240,255,0.5);
+  padding: 0.8rem 1rem;
+  margin: 1.25rem 0;
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  line-height: 1.7;
+}
+
+.note-block strong {
+  color: var(--cyan);
+}
+
+.note-block.warn {
+  background: rgba(255,224,0,0.03);
+  border-color: rgba(255,224,0,0.15);
+  border-left-color: rgba(255,224,0,0.6);
+}
+
+.note-block.warn strong {
+  color: var(--yellow);
+}
+
+/* Styled lists */
+.styled-list {
+  padding-left: 1.4rem;
+  margin: 0.6rem 0 1rem;
+}
+
+.styled-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.styled-list li::marker {
+  color: var(--cyan);
+}
+
+.styled-list.inner {
+  margin-top: 0.4rem;
+  padding-left: 1.2rem;
+}
+
+.styled-list.inner li::marker {
+  color: var(--magenta);
+}
+
+ol.styled-list {
+  list-style: decimal;
+}
+
+ol.styled-list li::marker {
+  color: var(--lime);
+}
+
+/* Table */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 480px;
+}
+
+.table-wrap thead tr {
+  background: rgba(0,240,255,0.05);
+  border-bottom: 1px solid rgba(0,240,255,0.15);
+}
+
+.table-wrap th {
+  padding: 0.6rem 1rem;
+  color: var(--cyan);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.table-wrap td {
+  padding: 0.55rem 1rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.table-wrap tr:last-child td {
+  border-bottom: none;
+}
+
+.table-wrap tr:hover td {
+  background: rgba(0,240,255,0.02);
+}
+
+.highlight-cell {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* Inline color tags */
+.tag-cyan {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.tag-magenta {
+  color: var(--magenta);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.tag-lime {
+  color: var(--lime);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
