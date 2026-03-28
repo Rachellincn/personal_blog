@@ -13,12 +13,13 @@
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     }
   ],
   "rewrites": [
     { "source": "/notes", "destination": "/notes.html" },
-    { "source": "/about", "destination": "/about.html" }
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/posts/pde-nonhomogeneous", "destination": "/posts/pde-nonhomogeneous.html" }
   ]
 }
