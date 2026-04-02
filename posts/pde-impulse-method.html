@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>冲量定理法（杜阿梅尔原理）— NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css?v=3" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← BACK</a></div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-28</span>
+          <span class="post-tag">数学物理方程</span>
+          <span class="post-tag" style="border-color:rgba(0,255,170,0.3);color:#00ffaa;background:rgba(0,255,170,0.05)">偏微分方程</span>
+        </div>
+        <h1>冲量定理法（杜阿梅尔原理）</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 数学物理方程 · 非齐次方程求解法</p>
+      </header>
+
+      <div class="post-content">
+
+        <h2 class="section-heading">应用条件</h2>
+
+        <div class="note-block">
+          <strong>适用条件：</strong>非齐次方程且齐次<strong>初</strong>条件，可以转化为齐次方程与非齐次初条件。
+        </div>
+
+        <h3 class="subsection-heading">原始定解问题</h3>
+
+        <div class="content-section">
+          <p>非齐次波动方程：</p>
+          <div class="note-block">
+            $$u_{tt} - a^2 u_{xx} = f(x, t)$$
+          </div>
+          <p>边界条件（两端固定）：</p>
+          <div class="note-block">
+            $$u\mid_{x=0} = 0,\qquad u\mid_{x=l} = 0$$
+          </div>
+          <p>初始条件（非零）：</p>
+          <div class="note-block">
+            $$u\mid_{t=0} = \varphi(x),\qquad u_t\mid_{t=0} = \psi(x)$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">叠加原理：解的分解</h3>
+
+        <div class="content-section">
+          <p>冲量定理法仍然不失一般性，考虑叠加原理，解的叠加分解为两个子问题之和：</p>
+          <div class="note-block">
+            $$u(x, t) = u^{\mathrm{I}}(x, t) + u^{\mathrm{II}}(x, t)$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">子问题 I（左侧）— 齐次方程，非零初始条件</h4>
+
+        <div class="note-block">
+          $$\begin{cases}
+          u^{\mathrm{I}}_{tt} - a^2 u^{\mathrm{I}}_{xx} = 0, \\
+          u^{\mathrm{I}}\mid_{x=0} = 0,\quad u^{\mathrm{I}}\mid_{x=l} = 0, \\
+          u^{\mathrm{I}}\mid_{t=0} = \varphi(x),\quad u^{\mathrm{I}}_t\mid_{t=0} = \psi(x).
+          \end{cases}$$
+        </div>
+
+        <h4 class="step-heading">子问题 II（右侧）— 非齐次方程，零初始条件</h4>
+
+        <div class="note-block">
+          $$\begin{cases}
+          u^{\mathrm{II}}_{tt} - a^2 u^{\mathrm{II}}_{xx} = f(x, t), \\
+          u^{\mathrm{II}}\mid_{x=0} = 0,\quad u^{\mathrm{II}}\mid_{x=l} = 0, \\
+          u^{\mathrm{II}}\mid_{t=0} = 0,\quad u^{\mathrm{II}}_t\mid_{t=0} = 0.
+          \end{cases}$$
+        </div>
+
+        <h3 class="subsection-heading">冲量定理的物理图像</h3>
+
+        <div class="content-section">
+          <p>这个非齐次项 $f(x,t)$ 的物理含义为 $F(x,t) = \rho\,f(x,t)$，代表的是一个力作用在位移 $x$ 上的情况。把这个力分解为一系列脉冲：</p>
+          <div class="note-block">
+            $$F(x,t) = \int F(x,\tau)\,\delta(t-\tau)\,d\tau = \rho f(x,t) = \int \rho f(x,\tau)\,\delta(t-\tau)\,d\tau$$
+          </div>
+          <p>积分上下限 0 到 $t$，对应的总位移为所有瞬时力引起振动的叠加：</p>
+          <div class="note-block">
+            $$u(x,t) = \sum_{\tau=0}^{t} u^{(\tau)}(x,t) = \int_0^t v(x,t;\tau)\,d\tau$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">单脉冲响应方程</h4>
+
+        <div class="content-section">
+          <p>对每个脉冲 $u^{(\tau)}$ 满足：</p>
+          <div class="note-block">
+            $$u_{tt}^{(\tau)} - a^2 u_{xx}^{(\tau)} = f(x,\tau)\,\delta(t-\tau)\,d\tau$$
+          </div>
+          <p>边界条件：$u^{(\tau)}\mid_{x=0} = 0,\ u^{(\tau)}\mid_{x=l} = 0$</p>
+          <p>初始条件：$u^{(\tau)}\mid_{t=0} = 0,\ u^{(\tau)}_t\mid_{t=0} = 0$</p>
+          <p>$u^{(\tau)}$ 必含有因子 $d\tau$，若记 $u^{(\tau)}(x,t) = v(x,t;\tau)\,d\tau$，则 $v(x,t;\tau)$ 满足：</p>
+          <div class="note-block">
+            $$\begin{cases}
+            v_{tt} - a^2 v_{xx} = f(x,\tau)\,\delta(t-\tau), \\
+            v\mid_{x=0} = 0,\quad v\mid_{x=l} = 0, \\
+            v\mid_{t=0} = 0,\quad v_t\mid_{t=0} = 0.
+            \end{cases}$$
+          </div>
+          <p>即转化为：</p>
+          <div class="note-block">
+            $$\begin{cases}
+            v_{tt} - a^2 v_{xx} = 0, \\
+            v\mid_{x=0} = 0,\quad v\mid_{x=l} = 0, \\
+            v\mid_{t=\tau} = 0,\quad v_t\mid_{t=\tau} = f(x,\tau).
+            \end{cases}$$
+          </div>
+          <p>注意：初条件下标变了，做了时间原点的平移。初条件 $v_t\mid_{t=\tau} = f(x,\tau)$ 本式来源于冲量定理 $dv = f(x,t,\tau)\,d\tau$。</p>
+        </div>
+
+        <h4 class="step-heading">最终叠加</h4>
+
+        <div class="note-block warn">
+          $$u(x,t) = \int_0^t v(x,t;\tau)\,d\tau$$
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">杜阿梅尔原理（冲量定理法）</h2>
+
+        <div class="content-section">
+          <p>这里的"冲量定理法"，本质上就是<strong>杜阿梅尔原理</strong>在波动方程上的应用。</p>
+          <p>它的核心想法是：把右端的连续外力 $f(x,t)$ 看成在每一个时刻 $\tau$ 都给系统施加了一次"瞬时冲量"，先研究"在 $t=\tau$ 瞬间打一小下之后系统怎么演化"，然后把从 $\tau=0$ 到 $\tau=t$ 的所有冲量贡献累加起来。</p>
+        </div>
+
+        <div class="note-block">
+          <strong>逻辑链条：</strong>
+          <ol class="styled-list inner">
+            <li>先把非齐次项拆成无数个"瞬时激励"</li>
+            <li>对每个瞬时激励求齐次波动方程的响应</li>
+            <li>最后对时间积分叠加</li>
+          </ol>
+          <p>这就是杜阿梅尔原理。</p>
+        </div>
+
+        <h3 class="subsection-heading">1. 适用对象</h3>
+
+        <div class="content-section">
+          <p>我们考虑一类标准问题：$u_{tt} - a^2 u_{xx} = f(x,t)$，再配上边界条件和初始条件。</p>
+          <p>如果这是一个<strong>线性非齐次波动方程</strong>，并且边界条件是齐次的，那么杜阿梅尔原理通常很好用。</p>
+          <p>特别适合这种题：</p>
+          <ul class="styled-list">
+            <li>右端 $f(x,t)$ 可以分离成空间因子和时间因子</li>
+            <li>边界条件是齐次的</li>
+            <li>初始条件是零，或者容易先化成零初值问题</li>
+          </ul>
+        </div>
+
+        <h3 class="subsection-heading">2. 杜阿梅尔原理的直观物理图像</h3>
+
+        <div class="content-section">
+          <p>设原方程是 $u_{tt} - a^2 u_{xx} = f(x,t)$。</p>
+          <p>把某一时刻 $\tau$ 的右端外力看成"只在那一瞬间作用一下"。那么这一瞬间给系统造成的影响，就会表现为：</p>
+          <ul class="styled-list">
+            <li>位移在 $t=\tau+0$ 时仍然为零</li>
+            <li>但速度会突然获得一个"增量"</li>
+          </ul>
+          <p>这就是为什么教材里先去解一个关于 $v(x,t;\tau)$ 的齐次问题：</p>
+          <div class="note-block">
+            $$v_{tt} - a^2 v_{xx} = 0$$
+          </div>
+          <p>但初始条件不是普通的，而是放在 $t=\tau+0$ 上：</p>
+          <div class="note-block">
+            $$v\mid_{t=\tau+0} = 0,\qquad v_t\mid_{t=\tau+0} = f(x,\tau)$$
+          </div>
+          <p>你可以这么理解：在时刻 $\tau$，外力 $f(x,\tau)$ 没来得及立刻把位移改大，但会先把"速度"踢一下。之后系统从这一下被踢出来的初速度出发，按齐次波动方程自由振动。</p>
+          <p>然后把所有 $\tau$ 的贡献从 $0$ 积到 $t$，就得到总解。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">3. 通用求解 Pipeline</h2>
+
+        <h4 class="step-heading">Step 1：确认题型</h4>
+        <div class="content-section">
+          <p>先看题目是不是下面这个结构：</p>
+          <ul class="styled-list">
+            <li>方程是线性的：$u_{tt} - a^2 u_{xx} = f(x,t)$</li>
+            <li>边界条件是齐次的</li>
+            <li>初始条件最好是零，或者能化成零初值</li>
+          </ul>
+          <p>如果满足，就可以考虑杜阿梅尔原理。</p>
+        </div>
+
+        <h4 class="step-heading">Step 2：把原问题转化为"瞬时冲量响应问题"</h4>
+        <div class="content-section">
+          <p>对每个固定的 $\tau$，构造辅助函数 $v(x,t;\tau)$，使它满足齐次波动方程：</p>
+          <div class="note-block">
+            $$v_{tt} - a^2 v_{xx} = 0$$
+          </div>
+          <p>边界条件与原题相同。在 $t=\tau+0$ 时满足"冲量型初值"：</p>
+          <div class="note-block">
+            $$v(x,\tau+0;\tau) = 0,\qquad v_t(x,\tau+0;\tau) = f(x,\tau)$$
+          </div>
+          <p>这里的 $f(x,\tau)$ 是把原右端里的时间变量 $t$ 换成参数 $\tau$ 得到的。这一步就是把"连续外力"改写成"某个瞬间打一拳"。</p>
+        </div>
+
+        <h4 class="step-heading">Step 3：解这个齐次问题</h4>
+        <div class="content-section">
+          <p>因为这是齐次波动方程，所以通常用分离变量或特征函数展开。</p>
+          <ul class="styled-list">
+            <li>如果边界条件是 Neumann 型（比如 $u_x(0,t) = u_x(l,t) = 0$），那就展开成余弦级数：</li>
+          </ul>
+          <div class="note-block">
+            $$v(x,t;\tau) = \sum_{n=0}^{\infty} T_n(t,\tau)\cos\frac{n\pi x}{l}$$
+          </div>
+          <ul class="styled-list">
+            <li>如果边界条件是 Dirichlet 型（比如 $u(0,t) = u(l,t) = 0$），那就展开成正弦级数。</li>
+          </ul>
+          <p>然后代回方程，得到各模态的常微分方程。</p>
+        </div>
+
+        <h4 class="step-heading">Step 4：利用"冲量初值"求出各模态</h4>
+        <div class="content-section">
+          <p>因为 $v(x,\tau+0;\tau) = 0$，所以每个模态都有 $T_n(\tau,\tau) = 0$。</p>
+          <p>再由 $v_t(x,\tau+0;\tau) = f(x,\tau)$ 得到 $T_n'(\tau,\tau)$ 的值。</p>
+          <p>于是每个模态都是一个二阶常微分方程初值问题，可以解出来。</p>
+        </div>
+
+        <h4 class="step-heading">Step 5：写出 $v(x,t;\tau)$</h4>
+        <div class="content-section">
+          <p>把各模态拼起来，就得到在固定冲量时刻 $\tau$ 下的响应函数 $v(x,t;\tau)$。</p>
+        </div>
+
+        <h4 class="step-heading">Step 6：按杜阿梅尔原理积分叠加</h4>
+        <div class="content-section">
+          <p>总解为：</p>
+          <div class="note-block warn">
+            $$u(x,t) = \int_0^t v(x,t;\tau)\,d\tau$$
+          </div>
+          <p>这一步是整个方法的落脚点：把所有时刻的瞬时响应叠加。</p>
+        </div>
+
+        <h4 class="step-heading">Step 7：把时间积分算出来，必要时讨论共振情形</h4>
+        <div class="content-section">
+          <p>最后通常会出现形如 $\displaystyle\int_0^t \sin\omega\tau\,\sin\lambda(t-\tau)\,d\tau$ 这样的卷积积分。</p>
+          <ul class="styled-list">
+            <li>如果 $\omega \neq \lambda$，按三角恒等变形直接算。</li>
+            <li>如果 $\omega = \lambda$，会出现共振，要单独取极限或直接重算，最后一般会出现一个随时间增长的因子，比如 $t\sin\omega t$ 或 $t\cos\omega t$。</li>
+          </ul>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">4. 例题完整推导</h2>
+
+        <h3 class="subsection-heading">题目</h3>
+
+        <div class="content-section">
+          <p>求解定解问题：</p>
+          <div class="note-block">
+            $$u_{tt} - a^2 u_{xx} = A\cos\frac{\pi x}{l}\sin\omega t$$
+          </div>
+          <p>边界条件：$u_x(0,t) = 0$，$u_x(l,t) = 0$</p>
+          <p>初始条件：$u(x,0) = 0$，$u_t(x,0) = 0$</p>
+        </div>
+
+        <h3 class="subsection-heading">分析</h3>
+
+        <div class="content-section">
+          <p>这是一个标准的线性非齐次波动方程。右端是 $f(x,t) = A\cos\frac{\pi x}{l}\sin\omega t$，边界条件是齐次 Neumann 条件，初始条件也是零。</p>
+          <p>这正是杜阿梅尔原理最舒服的使用场景。对每个固定的 $\tau$，先求辅助函数 $v(x,t;\tau)$，它满足：</p>
+          <div class="note-block">
+            $$v_{tt} - a^2 v_{xx} = 0,\qquad v_x(0,t;\tau) = 0,\ v_x(l,t;\tau) = 0$$
+          </div>
+          <p>并且在 $t=\tau+0$ 时有冲量型初值：</p>
+          <div class="note-block">
+            $$v(x,\tau+0;\tau) = 0,\qquad v_t(x,\tau+0;\tau) = A\cos\frac{\pi x}{l}\sin\omega\tau$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">展开特征函数</h3>
+
+        <div class="content-section">
+          <p>因为边界条件是 Neumann 条件，所以特征函数是余弦函数：$\cos\frac{n\pi x}{l}$，$n = 0,1,2,\dots$</p>
+          <p>设：</p>
+          <div class="note-block">
+            $$v(x,t;\tau) = \sum_{n=0}^{\infty} T_n(t,\tau)\cos\frac{n\pi x}{l}$$
+          </div>
+          <p>代入齐次方程 $v_{tt} - a^2 v_{xx} = 0$，由</p>
+          <div class="note-block">
+            $$\frac{\partial^2}{\partial x^2}\cos\frac{n\pi x}{l} = -\frac{n^2\pi^2}{l^2}\cos\frac{n\pi x}{l}$$
+          </div>
+          <p>得到：</p>
+          <div class="note-block">
+            $$\sum_{n=0}^{\infty}\left[T_n''(t,\tau) + \frac{n^2\pi^2 a^2}{l^2}T_n(t,\tau)\right]\cos\frac{n\pi x}{l} = 0$$
+          </div>
+          <p>由余弦系数唯一性可知，对每个 $n$ 都有：</p>
+          <div class="note-block">
+            $$T_n''(t,\tau) + \frac{n^2\pi^2 a^2}{l^2}T_n(t,\tau) = 0$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">冲量初值确定模态</h3>
+
+        <div class="content-section">
+          <p>由 $v(x,\tau+0;\tau) = 0$ 可知所有模态都满足 $T_n(\tau,\tau) = 0$。</p>
+          <p>再看速度条件 $v_t(x,\tau+0;\tau) = A\cos\frac{\pi x}{l}\sin\omega\tau$，左边展开为：</p>
+          <div class="note-block">
+            $$v_t(x,\tau+0;\tau) = \sum_{n=0}^{\infty} T_n'(\tau,\tau)\cos\frac{n\pi x}{l}$$
+          </div>
+          <p>右边只有一个 $\cos\frac{\pi x}{l}$ 模态，也就是 $n=1$ 模态。所以：</p>
+          <ul class="styled-list">
+            <li>对 $n \neq 1$，有 $T_n'(\tau,\tau) = 0$</li>
+            <li>对 $n = 1$，有 $T_1'(\tau,\tau) = A\sin\omega\tau$</li>
+          </ul>
+          <p>因此<strong>只有第一模态被激发</strong>，其余模态全为零。这一步很关键：因为右端空间形式本来就是一个特征函数，所以根本不需要做复杂展开，直接知道只会激发对应模态。</p>
+        </div>
+
+        <h3 class="subsection-heading">求解 $T_1$</h3>
+
+        <div class="content-section">
+          <p>对 $n=1$，方程变成：</p>
+          <div class="note-block">
+            $$T_1''(t,\tau) + \left(\frac{\pi a}{l}\right)^2 T_1(t,\tau) = 0$$
+          </div>
+          <p>记 $\lambda = \frac{\pi a}{l}$，则方程为 $T_1'' + \lambda^2 T_1 = 0$，初值为：</p>
+          <div class="note-block">
+            $$T_1(\tau,\tau) = 0,\qquad T_1'(\tau,\tau) = A\sin\omega\tau$$
+          </div>
+          <p>这是一个标准二阶常系数初值问题。以 $t - \tau$ 为时间变量，它的解是：</p>
+          <div class="note-block">
+            $$T_1(t,\tau) = \frac{A\sin\omega\tau}{\lambda}\sin\lambda(t-\tau)$$
+          </div>
+          <p>于是：</p>
+          <div class="note-block">
+            $$v(x,t;\tau) = \frac{A}{\lambda}\sin\omega\tau\sin\lambda(t-\tau)\cos\frac{\pi x}{l}$$
+          </div>
+          <p>把 $\lambda = \frac{\pi a}{l}$ 代回去：</p>
+          <div class="note-block">
+            $$v(x,t;\tau) = \frac{Al}{\pi a}\sin\omega\tau\sin\frac{\pi a}{l}(t-\tau)\cos\frac{\pi x}{l}$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">总解：杜阿梅尔积分</h3>
+
+        <div class="content-section">
+          <p>总解是：</p>
+          <div class="note-block warn">
+            $$u(x,t) = \int_0^t v(x,t;\tau)\,d\tau = \frac{Al}{\pi a}\cos\frac{\pi x}{l}\int_0^t \sin\omega\tau\sin\frac{\pi a}{l}(t-\tau)\,d\tau$$
+          </div>
+          <p>记 $\lambda = \frac{\pi a}{l}$，则本质已经被压缩成一个时间卷积积分：</p>
+          <div class="note-block">
+            $$I(t) = \int_0^t \sin\omega\tau\sin\lambda(t-\tau)\,d\tau$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">情形 1：$\omega \neq \lambda$（非共振）</h3>
+
+        <div class="content-section">
+          <p>可验证结果为：</p>
+          <div class="note-block">
+            $$I(t) = \frac{\lambda\sin\omega t - \omega\sin\lambda t}{\lambda^2 - \omega^2}$$
+          </div>
+          <p>因此：</p>
+          <div class="note-block">
+            $$u(x,t) = A\cos\frac{\pi x}{l}\cdot\frac{\sin\omega t - \frac{\omega}{\lambda}\sin\lambda t}{\lambda^2 - \omega^2}$$
+          </div>
+          <p>代回 $\lambda = \frac{\pi a}{l}$ 后可写成：</p>
+          <div class="note-block">
+            $$u(x,t) = \frac{A\cos\frac{\pi x}{l}}{\left(\frac{\pi a}{l}\right)^2 - \omega^2}\left(\sin\omega t - \frac{\omega l}{\pi a}\sin\frac{\pi a}{l}t\right)$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">情形 2：$\omega = \lambda$（共振）</h3>
+
+        <div class="content-section">
+          <p>这时上面的分母变成零，不能直接代，要单独算：</p>
+          <div class="note-block">
+            $$I(t) = \int_0^t \sin\lambda\tau\sin\lambda(t-\tau)\,d\tau = \frac{1}{2}\left(\frac{1}{\lambda}\sin\lambda t - t\cos\lambda t\right)$$
+          </div>
+          <p>所以：</p>
+          <div class="note-block">
+            $$u(x,t) = \cos\frac{\pi x}{l}\left[\frac{Al^2}{2\pi^2 a^2}\sin\frac{\pi a}{l}t - \frac{Al}{2\pi a}t\cos\frac{\pi a}{l}t\right]$$
+          </div>
+          <div class="note-block warn">
+            <strong>⚠️ 共振警告：</strong>这里出现了 $t\cos\lambda t$ 项，这就是共振导致振幅随时间增长的表现。
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">这类题的标准模板总结</h2>
+
+        <div class="content-section">
+          <p>以后你看到题目 $u_{tt} - a^2 u_{xx} = f(x,t)$ 配齐次边界条件和零初始条件时，可以按下面背：</p>
+        </div>
+
+        <h4 class="step-heading">模板 1：构造冲量响应问题</h4>
+        <div class="note-block">
+          对每个 $\tau$，先解：$v_{tt} - a^2 v_{xx} = 0$<br/>
+          边界条件同原题，并在 $t=\tau+0$ 取：<br/>
+          $$v(x,\tau+0;\tau) = 0,\qquad v_t(x,\tau+0;\tau) = f(x,\tau)$$
+        </div>
+
+        <h4 class="step-heading">模板 2：按边界条件展开特征函数</h4>
+        <ul class="styled-list">
+          <li>Dirichlet 边界通常用正弦级数</li>
+          <li>Neumann 边界通常用余弦级数</li>
+        </ul>
+
+        <h4 class="step-heading">模板 3：先求 $v(x,t;\tau)$，再积分</h4>
+        <div class="note-block">
+          求出 $v(x,t;\tau)$ 后，总解为：$u(x,t) = \int_0^t v(x,t;\tau)\,d\tau$
+        </div>
+
+        <h4 class="step-heading">模板 4：最后讨论是否共振</h4>
+        <p>如果外力时间频率和某个固有频率相等，就要单独讨论共振，通常会出现含 $t$ 的增长项。</p>
+
+        <div class="note-block warn">
+          <strong>注意：</strong>另外，如果是<strong>热传导方程</strong>，不再是 $v_t(x,\tau+0;\tau) = f(x,\tau)$，而是 $v(x,\tau+0;\tau) = f(x,\tau)$。
+        </div>
+
+        <h2 class="section-heading">脑子里该怎么想</h2>
+
+        <div class="note-block">
+          <p>你可以把整个方法压缩成一句话：</p>
+          <p><strong>"原方程右端在每个时刻 $\tau$ 都给系统一个空间分布为 $f(x,\tau)$ 的初速度增量，系统从这个增量出发按齐次波动方程自由运动，然后把所有时刻的自由运动叠加起来。"</strong></p>
+          <p>这句话一旦懂了，整题就不会乱。</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Rachell · 物理笔记本 · NOTEBOOK</p>
+  </footer>
+</body>
+</html>
