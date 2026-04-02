@@ -1733,3 +1733,36 @@ ol.styled-list li::marker {
   font-size: 0.8rem;
   letter-spacing: 0.05em;
 }
+
+/* ================================================================
+   22. KATEX FORMULA — Brightened for dark background
+   ================================================================ */
+
+/* Override KaTeX default colors for better contrast on dark bg */
+.katex {
+  color: #e0e0f0 !important;  /* Bright white-blue, not dim gray */
+}
+
+.katex .mord,
+.katex .mop,
+.katex .mrel,
+.katex .mopen,
+.katex .mclose,
+.katex .minner,
+.katex .mfrac,
+.katex .msqrt,
+.katex .msubsup,
+.katex .munderover {
+  color: #e0e0f0 !important;
+}
+
+/* Ensure math in note blocks is also bright */
+.note-block .katex,
+.note-box .katex {
+  color: #e8e8ff !important;
+}
+
+/* Slight glow for inline math to pop against dark bg */
+.katex:not(.katex-display .katex) {
+  text-shadow: 0 0 1px rgba(224, 224, 240, 0.3);
+}
