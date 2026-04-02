@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>第四章 正弦交流电路：知识点与解题方法笔记 — NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css?v=3" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← BACK</a></div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-28</span>
+          <span class="post-tag">电工学</span>
+          <span class="post-tag" style="border-color:rgba(255,224,0,0.3);color:#ffe000;background:rgba(255,224,0,0.05)">交流电路</span>
+        </div>
+        <h1>第四章 正弦交流电路：知识点与解题方法笔记</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 电工学 · Chapter 4</p>
+      </header>
+
+      <div class="post-content">
+
+        <h2 class="section-heading">1. 这一章到底在研究什么</h2>
+
+        <div class="content-section">
+          <p>正弦交流电路和直流电路最本质的差别，不只是"量随时间变化"，而是<strong>电压与电流之间可能存在相位差</strong>。一旦把正弦量改写成相量，很多问题就能转化成"复数版直流电路"来算：欧姆定律仍成立，KCL/KVL 仍成立，串并联、分压分流、支路法、叠加、戴维宁等方法都仍可用。</p>
+          <div class="note-block">
+            <strong>本章主线：</strong>先把瞬时正弦量变成相量，再把电阻、电感、电容变成阻抗，最后用复数电路方法求解，并在需要时再变回瞬时量。
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">2. 正弦量基础：三要素、有效值、相位差</h2>
+
+        <h3 class="subsection-heading">2.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>设正弦电流写成</p>
+          <div class="note-block">
+            $$i(t) = I_m\sin(\omega t + \psi)$$
+          </div>
+          <p>其中：</p>
+          <ul class="styled-list">
+            <li>$I_m$：幅值</li>
+            <li>$\omega$：角频率</li>
+            <li>$\psi$：初相位</li>
+          </ul>
+          <p>这三个量决定一个正弦量，称为正弦量的<strong>三要素</strong>。频率与周期满足</p>
+          <div class="note-block">
+            $$f = \frac{1}{T},\qquad \omega = 2\pi f$$
+          </div>
+          <p>有效值定义为"与该交流在电阻上产生相同热效应的直流值"。对正弦量有</p>
+          <div class="note-block">
+            $$I = \frac{I_m}{\sqrt 2},\qquad U = \frac{U_m}{\sqrt 2}$$
+          </div>
+          <p>相位差只对<strong>同频率</strong>正弦量才有意义。若</p>
+          <div class="note-block">
+            $$u = U_m\sin(\omega t + \psi_u),\qquad i = I_m\sin(\omega t + \psi_i)$$
+          </div>
+          <p>则相位差为</p>
+          <div class="note-block">
+            $$\varphi = \psi_u - \psi_i$$
+          </div>
+          <ul class="styled-list">
+            <li>$\varphi > 0$：电压超前电流</li>
+            <li>$\varphi < 0$：电压滞后电流</li>
+            <li>$\varphi = 0$：同相</li>
+            <li>$\varphi = \pm 180^\circ$：反相</li>
+          </ul>
+        </div>
+
+        <h3 class="subsection-heading">2.2 解题 pipeline：看见瞬时表达式先做什么</h3>
+
+        <ol class="styled-list">
+          <li>先识别幅值、角频率、初相位。</li>
+          <li>若题目需要相量或电表读数，先把幅值换成有效值。</li>
+          <li>若题目问"谁超前谁"，直接比较初相位。</li>
+          <li>若题目给的是波形图，先读出幅值，再读初相位。</li>
+          <li>若题目里两个正弦量频率不同，不谈相位差。</li>
+        </ol>
+
+        <h3 class="subsection-heading">2.3 例题</h3>
+
+        <div class="content-section">
+          <p>已知</p>
+          <div class="note-block">
+            $$i(t) = 10\sin(\omega t + 30^\circ)\,\text{A},\qquad u(t) = 220\sqrt2\sin(\omega t - 45^\circ)\,\text{V}$$
+          </div>
+          <p>求它们的有效值相量，并判断相位关系。</p>
+          <p><strong>解：</strong></p>
+          <div class="note-block">
+            $$\dot I = \frac{10}{\sqrt2}\angle 30^\circ = 7.07\angle 30^\circ\text{ A}$$
+          </div>
+          <div class="note-block">
+            $$\dot U = 220\angle(-45^\circ)\text{ V}$$
+          </div>
+          <p>相位差</p>
+          <div class="note-block">
+            $$\varphi = \psi_u - \psi_i = -45^\circ - 30^\circ = -75^\circ$$
+          </div>
+          <p>所以<strong>电压滞后电流 $75^\circ$</strong>，也就是<strong>电流超前电压 $75^\circ$</strong>。这种"瞬时值 $\to$ 相量 $\to$ 相位关系"的转换，是后面所有题的起点。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">3. 相量法：为什么它是本章核心</h2>
+
+        <h3 class="subsection-heading">3.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>正弦量的相量本质上是一个复数。若</p>
+          <div class="note-block">
+            $$u(t) = U_m\sin(\omega t + \psi)$$
+          </div>
+          <p>则它对应的有效值相量写作</p>
+          <div class="note-block">
+            $$\dot U = U\angle\psi$$
+          </div>
+          <p>其中 $U = U_m/\sqrt2$。相量的模对应有效值，相量的辐角对应初相位。</p>
+          <p>要特别注意：</p>
+          <ul class="styled-list">
+            <li><strong>相量不是瞬时值</strong></li>
+            <li><strong>只有同频率正弦量才能画在同一个相量图里</strong></li>
+            <li>加减法常用代数式</li>
+            <li>乘除法常用极坐标式或指数式</li>
+            <li>乘以 $j$ 表示逆时针旋转 $90^\circ$</li>
+            <li>乘以 $-j$ 表示顺时针旋转 $90^\circ$</li>
+          </ul>
+        </div>
+
+        <h3 class="subsection-heading">3.2 解题 pipeline：相量法通用四步</h3>
+
+        <ol class="styled-list">
+          <li>把电源、电压、电流统一写成相量。</li>
+          <li>把 $R, L, C$ 分别替换成 $R, j\omega L, -j/(\omega C)$。</li>
+          <li>用复数形式的欧姆定律、KCL、KVL 求未知量。</li>
+          <li>若题目要瞬时值，再从相量变回正弦表达式。</li>
+        </ol>
+
+        <h3 class="subsection-heading">3.3 例题</h3>
+
+        <div class="content-section">
+          <p>已知</p>
+          <div class="note-block">
+            $$i_1(t) = 7.2\sqrt2\sin(314t + 30^\circ)\text{ A},\qquad i_2(t) = 11\sqrt2\sin(314t - 60^\circ)\text{ A}$$
+          </div>
+          <p>求总电流 $i = i_1 + i_2$。</p>
+          <p><strong>先写相量：</strong></p>
+          <div class="note-block">
+            $$\dot I_1 = 7.2\angle 30^\circ,\qquad \dot I_2 = 11\angle(-60^\circ)$$
+          </div>
+          <p><strong>转为直角坐标相加：</strong></p>
+          <div class="note-block">
+            $$\dot I_1 = 6.24 + j3.60,\qquad \dot I_2 = 5.50 - j9.53$$
+          </div>
+          <p>所以</p>
+          <div class="note-block">
+            $$\dot I = 11.74 - j5.93$$
+          </div>
+          <p><strong>极坐标式为</strong></p>
+          <div class="note-block">
+            $$\dot I \approx 13.15\angle(-26.8^\circ)\text{ A}$$
+          </div>
+          <p>故瞬时值为</p>
+          <div class="note-block">
+            $$i(t) = 13.15\sqrt2\sin(314t - 26.8^\circ)\text{ A}$$
+          </div>
+          <p>这题的本质就是：<strong>正弦量叠加，先转相量再加复数。</strong></p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">4. 单一参数元件：R、L、C 的交流规律</h2>
+
+        <h3 class="subsection-heading">4.1 电阻元件 $R$</h3>
+
+        <div class="content-section">
+          <p><strong>核心知识点：</strong></p>
+          <p>电阻元件满足 $u = Ri$。</p>
+          <p>相量形式：</p>
+          <div class="note-block">
+            $$\dot U = R\dot I$$
+          </div>
+          <p><strong>特点：</strong></p>
+          <ul class="styled-list">
+            <li>$u$ 与 $i$ <strong>同相</strong></li>
+            <li>$U = IR$</li>
+            <li>有功功率 $P = UI = I^2R = U^2/R$</li>
+            <li>电阻是<strong>耗能元件</strong></li>
+          </ul>
+          <p><strong>pipeline：</strong></p>
+          <ol class="styled-list">
+            <li>先看是不是纯电阻。</li>
+            <li>直接用 $\dot U = R\dot I$。</li>
+            <li>同相，不必纠结相位旋转。</li>
+            <li>功率优先用 $P = I^2R$ 或 $P = U^2/R$。</li>
+          </ol>
+          <p><strong>例题：</strong></p>
+          <p>额定 $220\text{ V}, 100\text{ W}$ 的电烙铁，接到 $380\text{ V}$ 电源上时功率多少？</p>
+          <p>先由额定值求电阻：</p>
+          <div class="note-block">
+            $$R = \frac{U^2}{P} = \frac{220^2}{100} = 484\Omega$$
+          </div>
+          <p>再算实际功率：</p>
+          <div class="note-block">
+            $$P = \frac{380^2}{484} \approx 298\text{ W}$$
+          </div>
+          <p>明显大于额定功率，不安全，会烧坏。若接到 $110\text{ V}$ 上，则</p>
+          <div class="note-block">
+            $$P = \frac{110^2}{484} = 25\text{ W}$$
+          </div>
+          <p>功率太小，达不到正常工作温度。</p>
+        </div>
+
+        <h3 class="subsection-heading">4.2 电感元件 $L$</h3>
+
+        <div class="content-section">
+          <p><strong>核心知识点：</strong></p>
+          <p>电感的时域关系：</p>
+          <div class="note-block">
+            $$u = L\frac{di}{dt}$$
+          </div>
+          <p>相量形式：</p>
+          <div class="note-block">
+            $$\dot U = j\omega L\dot I = jX_L\dot I$$
+          </div>
+          <p>其中</p>
+          <div class="note-block">
+            $$X_L = \omega L = 2\pi fL$$
+          </div>
+          <p><strong>特点：</strong></p>
+          <ul class="styled-list">
+            <li>电压<strong>超前</strong>电流 $90^\circ$</li>
+            <li>$U = IX_L$</li>
+            <li>平均功率 $P = 0$</li>
+            <li>无功功率 $Q = UI = I^2X_L = U^2/X_L$</li>
+            <li>电感是<strong>储能元件</strong>，具有"通直阻交、通低频阻高频"的倾向</li>
+          </ul>
+          <p><strong>pipeline：</strong></p>
+          <ol class="styled-list">
+            <li>求感抗 $X_L = \omega L$。</li>
+            <li>用 $\dot U = jX_L\dot I$。</li>
+            <li>看到 $j$ 就立刻想到"电压超前电流 $90^\circ$"。</li>
+            <li>纯电感只算无功，不算有功。</li>
+          </ol>
+          <p><strong>例题：</strong></p>
+          <p>$L = 0.1\text{ H}$，接在 $U = 10\text{ V}$ 的正弦电源上。</p>
+          <ul class="styled-list">
+            <li>当 $f = 50\text{ Hz}$ 时：</li>
+          </ul>
+          <div class="note-block">
+            $$X_L = 2\pi fL = 2\pi\times50\times0.1 = 31.4\Omega,\qquad I = \frac{U}{X_L} = \frac{10}{31.4} = 0.318\text{ A}$$
+          </div>
+          <ul class="styled-list">
+            <li>当 $f = 5000\text{ Hz}$ 时：</li>
+          </ul>
+          <div class="note-block">
+            $$X_L = 3140\Omega,\qquad I = \frac{10}{3140} = 3.18\text{ mA}$$
+          </div>
+          <p>频率升高，电流急剧减小，这正是电感阻高频的体现。</p>
+        </div>
+
+        <h3 class="subsection-heading">4.3 电容元件 $C$</h3>
+
+        <div class="content-section">
+          <p><strong>核心知识点：</strong></p>
+          <p>电容的时域关系：</p>
+          <div class="note-block">
+            $$i = C\frac{du}{dt}$$
+          </div>
+          <p>相量形式：</p>
+          <div class="note-block">
+            $$\dot U = -j\frac{1}{\omega C}\dot I = -jX_C\dot I$$
+          </div>
+          <p>其中</p>
+          <div class="note-block">
+            $$X_C = \frac{1}{\omega C} = \frac{1}{2\pi fC}$$
+          </div>
+          <p><strong>特点：</strong></p>
+          <ul class="styled-list">
+            <li>电流<strong>超前</strong>电压 $90^\circ$</li>
+            <li>$U = IX_C$</li>
+            <li>平均功率 $P = 0$</li>
+            <li>无功功率 $Q = -UI = -I^2X_C = -U^2/X_C$</li>
+            <li>电容是<strong>储能元件</strong>，具有"隔直通交"的倾向</li>
+          </ul>
+          <p><strong>pipeline：</strong></p>
+          <ol class="styled-list">
+            <li>求容抗 $X_C = 1/(\omega C)$。</li>
+            <li>用 $\dot U = -jX_C\dot I$ 或 $\dot I = j\omega C\dot U$。</li>
+            <li>看到 $-j$ 就想到"电压比电流落后 $90^\circ$"，等价于"电流超前电压 $90^\circ$"。</li>
+            <li>纯电容只算无功，且 $Q < 0$。</li>
+          </ol>
+          <p><strong>例题：</strong></p>
+          <p>电容 $C = 23.5\mu\text{F}$，接在 $U = 220\text{ V}$、$f = 50\text{ Hz}$ 的交流电源上，求 $i(t)$、$P$、$Q$。</p>
+          <p>先算容抗：</p>
+          <div class="note-block">
+            $$X_C = \frac{1}{2\pi fC} = \frac{1}{2\pi\times50\times23.5\times10^{-6}} \approx 135.5\Omega$$
+          </div>
+          <p>电流有效值：</p>
+          <div class="note-block">
+            $$I = \frac{U}{X_C} = \frac{220}{135.5} \approx 1.62\text{ A}$$
+          </div>
+          <p>所以瞬时电流为</p>
+          <div class="note-block">
+            $$i(t) = 1.62\sqrt2\sin(314t + 90^\circ)\text{ A}$$
+          </div>
+          <p>平均功率：</p>
+          <div class="note-block">
+            $$P = 0$$
+          </div>
+          <p>无功功率：</p>
+          <div class="note-block">
+            $$Q = -UI = -220\times1.62 \approx -356.4\text{ var}$$
+          </div>
+          <p>若考虑耐压，额定电压至少应大于峰值</p>
+          <div class="note-block">
+            $$U_m = \sqrt2\,U \approx 311\text{ V}$$
+          </div>
+          <p>所以电容耐压至少要不低于 $311\text{ V}$。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">5. RLC 串联电路：本章最常考的综合题型</h2>
+
+        <h3 class="subsection-heading">5.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>对串联电路，电流相同，总阻抗为</p>
+          <div class="note-block">
+            $$Z = R + j(X_L - X_C)$$
+          </div>
+          <p>阻抗模为</p>
+          <div class="note-block">
+            $$|Z| = \sqrt{R^2 + (X_L - X_C)^2}$$
+          </div>
+          <p>阻抗角为</p>
+          <div class="note-block">
+            $$\varphi = \arctan\frac{X_L - X_C}{R}$$
+          </div>
+          <p>总电流：</p>
+          <div class="note-block">
+            $$\dot I = \frac{\dot U}{Z}$$
+          </div>
+          <p>总电压与分电压满足的是<strong>相量和</strong></p>
+          <div class="note-block">
+            $$\dot U = \dot U_R + \dot U_L + \dot U_C$$
+          </div>
+          <p>不是标量和，所以一般<strong>不能写成</strong></p>
+          <div class="note-block warn">
+            $$U = U_R + U_L + U_C \quad \text{（错误）}$$
+          </div>
+          <p>功率关系：</p>
+          <div class="note-block">
+            $$P = UI\cos\varphi,\qquad Q = UI\sin\varphi,\qquad S = UI$$
+          </div>
+          <p>且有</p>
+          <div class="note-block">
+            $$S^2 = P^2 + Q^2$$
+          </div>
+          <ul class="styled-list">
+            <li>$X_L > X_C$：感性，$\varphi > 0$</li>
+            <li>$X_L < X_C$：容性，$\varphi < 0$</li>
+            <li>$X_L = X_C$：阻性，$\varphi = 0$</li>
+          </ul>
+        </div>
+
+        <h3 class="subsection-heading">5.2 解题 pipeline：RLC 串联题的标准流程</h3>
+
+        <ol class="styled-list">
+          <li>先算 $X_L = \omega L$、$X_C = 1/(\omega C)$。</li>
+          <li>写总阻抗 $Z = R + j(X_L - X_C)$。</li>
+          <li>算总电流 $\dot I = \dot U/Z$。</li>
+          <li>分别求 $\dot U_R = R\dot I,\ \dot U_L = jX_L\dot I,\ \dot U_C = -jX_C\dot I$。</li>
+          <li>判断电路性质：看 $X_L - X_C$ 的正负。</li>
+          <li>功率优先走功率三角形：$P = UI\cos\varphi,\ Q = UI\sin\varphi,\ S = UI$。</li>
+          <li>若要瞬时值，把相量的模换回幅值、辐角直接当初相位。</li>
+        </ol>
+
+        <h3 class="subsection-heading">5.3 例题</h3>
+
+        <div class="content-section">
+          <p>已知</p>
+          <div class="note-block">
+            $$u(t) = 220\sqrt2\sin(314t + 20^\circ)\text{ V}$$
+          </div>
+          <div class="note-block">
+            $$R = 30\Omega,\qquad L = 127\text{ mH},\qquad C = 40\mu\text{F}$$
+          </div>
+          <p>求电流和功率。</p>
+          <p><strong>先算电抗：</strong></p>
+          <div class="note-block">
+            $$X_L = \omega L = 314\times0.127 \approx 40\Omega$$
+          </div>
+          <div class="note-block">
+            $$X_C = \frac{1}{\omega C} = \frac{1}{314\times40\times10^{-6}} \approx 80\Omega$$
+          </div>
+          <p>故总阻抗</p>
+          <div class="note-block">
+            $$Z = 30 + j(40 - 80) = 30 - j40 = 50\angle(-53^\circ)\Omega$$
+          </div>
+          <p>总电压相量：</p>
+          <div class="note-block">
+            $$\dot U = 220\angle20^\circ\text{ V}$$
+          </div>
+          <p>故总电流</p>
+          <div class="note-block">
+            $$\dot I = \frac{\dot U}{Z} = 4.4\angle73^\circ\text{ A}$$
+          </div>
+          <p><strong>瞬时值：</strong></p>
+          <div class="note-block">
+            $$i(t) = 4.4\sqrt2\sin(314t + 73^\circ)\text{ A}$$
+          </div>
+          <p>电路为容性，因为 $X_C > X_L$。</p>
+          <p><strong>有功功率：</strong></p>
+          <div class="note-block">
+            $$P = UI\cos\varphi = 220\times4.4\times\cos(-53^\circ) \approx 580.8\text{ W}$$
+          </div>
+          <p><strong>无功功率：</strong></p>
+          <div class="note-block">
+            $$Q = UI\sin\varphi \approx -774.4\text{ var}$$
+          </div>
+          <p><strong>视在功率：</strong></p>
+          <div class="note-block">
+            $$S = UI = 968\text{ V}\cdot\text{A}$$
+          </div>
+          <p>这题是串联交流题的模板题。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">6. 阻抗串联、并联与分压分流</h2>
+
+        <h3 class="subsection-heading">6.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>对交流电路，电阻的串并联思想不变，只不过把"电阻"替换成"阻抗"。</p>
+          <p><strong>串联：</strong></p>
+          <div class="note-block">
+            $$Z = Z_1 + Z_2 + \cdots$$
+          </div>
+          <p><strong>分压：</strong></p>
+          <div class="note-block">
+            $$\dot U_k = \dot U\frac{Z_k}{\sum Z}$$
+          </div>
+          <p><strong>并联：</strong></p>
+          <div class="note-block">
+            $$\frac1Z = \frac1{Z_1} + \frac1{Z_2} + \cdots$$
+          </div>
+          <p><strong>分流：</strong></p>
+          <div class="note-block">
+            $$\dot I_k = \dot I\frac{Y_k}{\sum Y}\qquad (Y_k = 1/Z_k)$$
+          </div>
+          <p>或者两支路时直接用</p>
+          <div class="note-block">
+            $$\dot I_1 = \dot I\frac{Z_2}{Z_1 + Z_2},\qquad \dot I_2 = \dot I\frac{Z_1}{Z_1 + Z_2}$$
+          </div>
+          <div class="note-block warn">
+            <strong>注意：</strong>一般情况下 $|Z_1 + Z_2| \neq |Z_1| + |Z_2|$，因为这里是复数加法，不是长度直接相加。
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">6.2 解题 pipeline</h3>
+
+        <ol class="styled-list">
+          <li>先看结构：串联就先等效阻抗，并联就先求导纳或用并联公式。</li>
+          <li>所有分压分流都对<strong>相量</strong>使用，不对瞬时值直接生搬。</li>
+          <li>一旦发现题目里有相角，就别再用纯标量算法。</li>
+          <li>最后若题目要电表读数，只取有效值模。</li>
+        </ol>
+
+        <h3 class="subsection-heading">6.3 例题</h3>
+
+        <div class="content-section">
+          <p>设串联支路</p>
+          <div class="note-block">
+            $$Z_1 = 10 + j10\Omega,\qquad Z_2 = -j20\Omega,\qquad \dot U = 220\angle 0^\circ\text{ V}$$
+          </div>
+          <p>求总电流及各支路分压。</p>
+          <p><strong>总阻抗：</strong></p>
+          <div class="note-block">
+            $$Z = Z_1 + Z_2 = 10 - j10 = 14.14\angle(-45^\circ)\Omega$$
+          </div>
+          <p><strong>总电流：</strong></p>
+          <div class="note-block">
+            $$\dot I = \frac{\dot U}{Z} = 15.56\angle45^\circ\text{ A}$$
+          </div>
+          <p><strong>各部分电压：</strong></p>
+          <div class="note-block">
+            $$\dot U_1 = \dot I Z_1 = 220\angle90^\circ\text{ V}$$
+          </div>
+          <div class="note-block">
+            $$\dot U_2 = \dot I Z_2 = 311.1\angle(-45^\circ)\text{ V}$$
+          </div>
+          <p>注意这里完全可能出现某一部分电压模大于总电压模的情况，因为分压是相量关系，不是普通算术和。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">7. 复杂交流电路：通法就是"直流方法复数化"</h2>
+
+        <h3 class="subsection-heading">7.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>只要电路处于正弦稳态，直流电路中学过的方法几乎都能迁移过来：</p>
+          <ul class="styled-list">
+            <li>KCL：节点电流相量代数和为零</li>
+            <li>KVL：回路电压相量代数和为零</li>
+            <li>支路电流法</li>
+            <li>叠加原理</li>
+            <li>戴维宁定理</li>
+            <li>节点法、网孔法也都能用</li>
+          </ul>
+          <div class="note-block">
+            <strong>差别只有一个：</strong>把实数换成复数，把电压电流换成相量。
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">7.2 解题 pipeline：复杂网络总流程</h3>
+
+        <ol class="styled-list">
+          <li>把原图改写为相量模型。</li>
+          <li>电源写成 $\dot U, \dot I$，元件写成 $R, jX_L, -jX_C$。</li>
+          <li>选方法：
+            <ul class="styled-list inner">
+              <li>结构清楚：串并联等效</li>
+              <li>多支路：支路电流法 / 节点法</li>
+              <li>多电源：叠加</li>
+              <li>求某端口负载：戴维宁</li>
+            </ul>
+          </li>
+          <li>解完相量后，再回到有效值或瞬时值。</li>
+        </ol>
+
+        <h3 class="subsection-heading">7.3 例题：相量法解并联支路题</h3>
+
+        <div class="content-section">
+          <p>已知</p>
+          <div class="note-block">
+            $$u(t) = 220\sqrt2\sin\omega t\text{ V}$$
+          </div>
+          <p>两支路并联：</p>
+          <ul class="styled-list">
+            <li>支路 1：$R_1 = 10\Omega,\ X_L = 10\Omega$</li>
+            <li>支路 2：$X_C = 20\Omega$</li>
+          </ul>
+          <p>求 $i_1, i_2, i$。</p>
+          <p><strong>总电压相量：</strong></p>
+          <div class="note-block">
+            $$\dot U = 220\angle0^\circ\text{ V}$$
+          </div>
+          <p><strong>支路 1 阻抗：</strong></p>
+          <div class="note-block">
+            $$Z_1 = 10 + j10 = 14.14\angle45^\circ\Omega \Rightarrow \dot I_1 = \frac{\dot U}{Z_1} = 15.56\angle(-45^\circ)\text{ A}$$
+          </div>
+          <p><strong>支路 2 阻抗：</strong></p>
+          <div class="note-block">
+            $$Z_2 = -j20 = 20\angle(-90^\circ)\Omega \Rightarrow \dot I_2 = \frac{\dot U}{Z_2} = 11\angle90^\circ\text{ A}$$
+          </div>
+          <p><strong>相量相加：</strong></p>
+          <div class="note-block">
+            $$\dot I = \dot I_1 + \dot I_2 = 11\angle0^\circ\text{ A}$$
+          </div>
+          <p>于是</p>
+          <div class="note-block">
+            $$i(t) = 11\sqrt2\sin\omega t\text{ A}$$
+          </div>
+          <p>这题非常典型：<strong>先支路相量，再总电流相量叠加。</strong></p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">8. 频率特性：滤波器题怎么想</h2>
+
+        <h3 class="subsection-heading">8.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>频率特性研究的是：当激励频率改变时，响应的幅值和相位怎样变化。主要看两个量：</p>
+          <ul class="styled-list">
+            <li>幅频特性：$|T(j\omega)|$</li>
+            <li>相频特性：$\varphi(\omega)$</li>
+          </ul>
+          <p>其中传递函数定义为</p>
+          <div class="note-block">
+            $$T(j\omega) = \frac{\dot U_{\text{out}}}{\dot U_{\text{in}}}$$
+          </div>
+          <p><strong>一阶 RC 低通：</strong></p>
+          <div class="note-block">
+            $$T(j\omega) = \frac{1}{1 + j\omega RC}$$
+          </div>
+          <div class="note-block">
+            $$|T(j\omega)| = \frac{1}{\sqrt{1 + (\omega RC)^2}},\qquad \varphi(\omega) = -\arctan(\omega RC)$$
+          </div>
+          <p>截止频率：</p>
+          <div class="note-block">
+            $$\omega_0 = \frac{1}{RC}$$
+          </div>
+          <p>当 $\omega = \omega_0$ 时，</p>
+          <div class="note-block">
+            $$|T(j\omega_0)| = 0.707,\qquad \varphi = -45^\circ$$
+          </div>
+          <p>同理，RC 高通与 RC 带通也都通过 $T(j\omega)$ 来判断频率选择特性。</p>
+        </div>
+
+        <h3 class="subsection-heading">8.2 解题 pipeline</h3>
+
+        <ol class="styled-list">
+          <li>先明确输出取在哪个元件上。</li>
+          <li>写出阻抗分压关系，得到传递函数 $T(j\omega)$。</li>
+          <li>分别求模和辐角。</li>
+          <li>看低频极限、高频极限，判断低通/高通/带通。</li>
+          <li>截止频率一阶 RC 基本就是 $\omega_0 = 1/RC$。</li>
+        </ol>
+
+        <h3 class="subsection-heading">8.3 例题</h3>
+
+        <div class="content-section">
+          <p>RC 串联电路，输出取在电阻上。已知</p>
+          <div class="note-block">
+            $$R = 2\text{ k}\Omega,\qquad C = 0.1\mu\text{F},\qquad f = 500\text{ Hz},\qquad U_1 = 1\text{ V}$$
+          </div>
+          <p>求输出电压 $U_2$，并判断相位关系。</p>
+          <p>由于输出取在电阻上，所以这是高通形式：</p>
+          <div class="note-block">
+            $$T(j\omega) = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega RC}{1 + j\omega RC}$$
+          </div>
+          <p>先算</p>
+          <div class="note-block">
+            $$\omega RC = 2\pi\times500\times2000\times0.1\times10^{-6} \approx 0.628$$
+          </div>
+          <p>故</p>
+          <div class="note-block">
+            $$|T| = \frac{0.628}{\sqrt{1 + 0.628^2}} \approx 0.54 \Rightarrow U_2 = 0.54\text{ V}$$
+          </div>
+          <p>相位：</p>
+          <div class="note-block">
+            $$\varphi = \arctan\frac{1}{\omega RC} \approx 58^\circ$$
+          </div>
+          <p>因此输出电压比输入电压<strong>超前约 $58^\circ$</strong>。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">9. 谐振：交流电路最有"物理图像"的一章</h2>
+
+        <h3 class="subsection-heading">9.1 串联谐振</h3>
+
+        <div class="content-section">
+          <p><strong>核心知识点：</strong></p>
+          <p>串联 RLC 中，当</p>
+          <div class="note-block">
+            $$X_L = X_C$$
+          </div>
+          <p>时发生谐振，即</p>
+          <div class="note-block">
+            $$\omega_0 = \frac{1}{\sqrt{LC}},\qquad f_0 = \frac{1}{2\pi\sqrt{LC}}$$
+          </div>
+          <p><strong>谐振时：</strong></p>
+          <ul class="styled-list">
+            <li>$Z = R$，阻抗最小</li>
+            <li>$I = U/R$，电流最大</li>
+            <li>电压与电流同相</li>
+            <li>$U_L$ 与 $U_C$ 大小相等、方向相反</li>
+            <li>可能出现 $U_L, U_C \gg U$ 的"电压谐振"现象</li>
+          </ul>
+          <p>品质因数</p>
+          <div class="note-block">
+            $$Q = \frac{\omega_0 L}{R} = \frac{1}{\omega_0 CR}$$
+          </div>
+          <p>谐振时有</p>
+          <div class="note-block">
+            $$U_L = U_C = QU$$
+          </div>
+          <p>所以工程上既可利用谐振选频，也必须防止过电压。</p>
+          <p><strong>pipeline：</strong></p>
+          <ol class="styled-list">
+            <li>看到串联 LC，先想谐振条件 $X_L = X_C$。</li>
+            <li>求 $\omega_0$ 或由给定频率反求 $L, C$。</li>
+            <li>谐振时直接把总阻抗看成 $R$。</li>
+            <li>若问线圈/电容两端电压，优先想 $U_L = U_C = QU$。</li>
+            <li>若问选频性能，关注品质因数和通频带。</li>
+          </ol>
+          <p><strong>例题：</strong></p>
+          <p>接收机输入回路中，已知</p>
+          <div class="note-block">
+            $$L = 0.3\text{ mH},\qquad R = 16\Omega$$
+          </div>
+          <p>若要选出频率</p>
+          <div class="note-block">
+            $$f_0 = 640\text{ kHz}$$
+          </div>
+          <p>的信号，问应配多大的电容？</p>
+          <p>由谐振条件：</p>
+          <div class="note-block">
+            $$f_0 = \frac{1}{2\pi\sqrt{LC}} \Rightarrow C = \frac{1}{(2\pi f_0)^2 L} \approx 204\text{ pF}$$
+          </div>
+          <p>这就是典型的"已知目标频率，反求谐振参数"的选频题。</p>
+        </div>
+
+        <h3 class="subsection-heading">9.2 并联谐振</h3>
+
+        <div class="content-section">
+          <p><strong>核心知识点：</strong></p>
+          <p>并联谐振本质上也是"总电压与总电流同相"，但其外特征与串联谐振相反：</p>
+          <ul class="styled-list">
+            <li>总阻抗最大</li>
+            <li>恒压源供电时，总电流最小</li>
+            <li>支路内电流可能很大，称"电流谐振"</li>
+            <li>当线圈电阻较小且 $\omega_0 L \gg R$ 时，</li>
+          </ul>
+          <div class="note-block">
+            $$\omega_0 \approx \frac{1}{\sqrt{LC}}$$
+          </div>
+          <p>并且总阻抗近似</p>
+          <div class="note-block">
+            $$Z_0 \approx \frac{L}{RC}$$
+          </div>
+          <div class="note-block">
+            <strong>这类题的物理图像是：</strong>外面看电流很小，里面 L 与 C 支路却在大电流来回交换能量。
+          </div>
+          <p><strong>pipeline：</strong></p>
+          <ol class="styled-list">
+            <li>判断是不是并联 LC 结构。</li>
+            <li>若线圈内阻很小，可用近似谐振频率。</li>
+            <li>恒压源下优先抓"谐振时总电流最小"。</li>
+            <li>若求总阻抗，用 $Z_0 \approx L/(RC)$。</li>
+            <li>若求支路电流，常结合品质因数。</li>
+          </ol>
+          <p><strong>例题：</strong></p>
+          <p>已知</p>
+          <div class="note-block">
+            $$L = 250\text{ mH},\qquad C = 85\text{ pF},\qquad R = 25\Omega$$
+          </div>
+          <p>求并联谐振时的品质因数和谐振阻抗。</p>
+          <p>先求</p>
+          <div class="note-block">
+            $$\omega_0 \approx \frac{1}{\sqrt{LC}}$$
+          </div>
+          <p>再算品质因数</p>
+          <div class="note-block">
+            $$Q = \frac{\omega_0 L}{R} \approx 68.6$$
+          </div>
+          <p>谐振阻抗近似为</p>
+          <div class="note-block">
+            $$Z_0 \approx \frac{L}{RC} \approx 117\text{ k}\Omega$$
+          </div>
+          <p>这说明并联谐振时，从外部看电路阻抗很大。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">10. 功率因数提高：这类题别死算相量，直接抓公式</h2>
+
+        <h3 class="subsection-heading">10.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>功率因数定义为</p>
+          <div class="note-block">
+            $$\cos\varphi = \frac{P}{S}$$
+          </div>
+          <p>其中</p>
+          <div class="note-block">
+            $$P = UI\cos\varphi,\qquad Q = UI\sin\varphi,\qquad S = UI$$
+          </div>
+          <p>当功率因数低时，会导致：</p>
+          <ol class="styled-list">
+            <li>电源设备容量利用率低</li>
+            <li>线路电流大，从而线路损耗 $I^2r$ 增大</li>
+          </ol>
+          <p>实际中感性负载很多，所以常在负载两端<strong>并联电容</strong>来补偿无功功率。补偿前后要求：</p>
+          <ul class="styled-list">
+            <li>原负载电压不变</li>
+            <li>原负载有功功率不变</li>
+            <li>原负载本身工作状态不变</li>
+          </ul>
+          <p>并联电容后，总电流减小，功率因数升高。所需电容：</p>
+          <div class="note-block warn">
+            $$C = \frac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega U^2}$$
+          </div>
+          <p>这是最重要的补偿公式。</p>
+        </div>
+
+        <h3 class="subsection-heading">10.2 解题 pipeline</h3>
+
+        <ol class="styled-list">
+          <li>先由 $\cos\varphi$ 反求 $\varphi$。</li>
+          <li>若求补偿前后电流，直接用 $I = P/(U\cos\varphi)$。</li>
+          <li>若求补偿电容，直接套 $C = \dfrac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega U^2}$。</li>
+          <li>记住：并联电容补偿后，总有功功率不变。</li>
+          <li>一般没必要把 $\cos\varphi$ 补到 1，经济性常不划算。</li>
+        </ol>
+
+        <h3 class="subsection-heading">10.3 例题</h3>
+
+        <div class="content-section">
+          <p>感性负载</p>
+          <div class="note-block">
+            $$P = 10\text{ kW},\qquad U = 220\text{ V},\qquad f = 50\text{ Hz},\qquad \cos\varphi_1 = 0.6$$
+          </div>
+          <p>现提高到</p>
+          <div class="note-block">
+            $$\cos\varphi_2 = 0.95$$
+          </div>
+          <p>求所需并联电容和补偿前后电流。</p>
+          <p><strong>先求角度：</strong></p>
+          <div class="note-block">
+            $$\varphi_1 \approx 53^\circ,\qquad \varphi_2 \approx 18^\circ$$
+          </div>
+          <p><strong>电容：</strong></p>
+          <div class="note-block">
+            $$C = \frac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega U^2} \approx 656\mu\text{F}$$
+          </div>
+          <p><strong>补偿前电流：</strong></p>
+          <div class="note-block">
+            $$I_1 = \frac{P}{U\cos\varphi_1} = \frac{10^4}{220\times0.6} \approx 75.8\text{ A}$$
+          </div>
+          <p><strong>补偿后电流：</strong></p>
+          <div class="note-block">
+            $$I_2 = \frac{P}{U\cos\varphi_2} = \frac{10^4}{220\times0.95} \approx 47.8\text{ A}$$
+          </div>
+          <p>这题最关键的物理意义是：<strong>有功功率没变，但由于无功被电容就地补偿，所以电源提供的总电流显著减小。</strong></p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">11. 非正弦周期量：本章最后一块，重点抓两个结论</h2>
+
+        <h3 class="subsection-heading">11.1 核心知识点</h3>
+
+        <div class="content-section">
+          <p>非正弦周期量可展开成傅里叶级数：</p>
+          <div class="note-block">
+            $$f(\omega t) = A_0 + \sum_{k=1}^{\infty} A_{mk}\sin(k\omega t + \psi_k)$$
+          </div>
+          <p>即由：</p>
+          <ul class="styled-list">
+            <li>直流分量</li>
+            <li>基波</li>
+            <li>各次谐波</li>
+          </ul>
+          <p>组成。</p>
+          <p><strong>最重要的两个计算结论：</strong></p>
+          <p>1. 有效值平方可分解叠加：</p>
+          <div class="note-block">
+            $$I^2 = I_0^2 + I_1^2 + I_2^2 + \cdots,\qquad U^2 = U_0^2 + U_1^2 + U_2^2 + \cdots$$
+          </div>
+          <p>2. 平均功率只由同频对应分量贡献：</p>
+          <div class="note-block">
+            $$P = P_0 + P_1 + P_2 + \cdots$$
+          </div>
+          <p>这是因为不同频率正交，平均后交叉项消失。</p>
+        </div>
+
+        <h3 class="subsection-heading">11.2 解题 pipeline</h3>
+
+        <ol class="styled-list">
+          <li>先把波形按定义写成分段函数。</li>
+          <li>求平均值：一周期积分再除以周期。</li>
+          <li>求有效值：平方积分、平均、开方。</li>
+          <li>若题目给出傅里叶展开，直接用"平方和开方"求有效值。</li>
+          <li>若求平均功率，只取同频率对应项的有功贡献。</li>
+        </ol>
+
+        <h3 class="subsection-heading">11.3 例题</h3>
+
+        <div class="content-section">
+          <p>设一个周期波形为：在</p>
+          <div class="note-block">
+            $$\frac{\pi}{3} \leqslant \omega t \leqslant \pi$$
+          </div>
+          <p>区间内</p>
+          <div class="note-block">
+            $$u = 10\sin(\omega t)$$
+          </div>
+          <p>其余时间为 0。求平均值与有效值。</p>
+          <p><strong>平均值：</strong></p>
+          <div class="note-block">
+            $$\bar U = \frac{1}{2\pi}\int_{\pi/3}^{\pi}10\sin\theta\,d\theta = \frac{15}{2\pi} \approx 2.39\text{ V}$$
+          </div>
+          <p><strong>有效值：</strong></p>
+          <div class="note-block">
+            $$U = \sqrt{\frac{1}{2\pi}\int_{\pi/3}^{\pi}100\sin^2\theta\,d\theta} \approx 4.49\text{ V}$$
+          </div>
+          <p>这类题的难点不在交流电理论，而在<strong>分段积分一定要稳</strong>。</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">12. 全章通用总 pipeline</h2>
+
+        <div class="content-section">
+          <p>这部分最值得考前背一下。</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>题型</th><th>标准流程</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag-cyan">A：已知瞬时值</span></td>
+                <td>读三要素 → 换有效值相量 → 元件替换成阻抗 → 复数电路求解 → 还原瞬时值</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">B：单一参数元件</span></td>
+                <td>判断 $R/L/C$ → 写对应阻抗 → 立刻判断相位 → 功率：$R$ 算有功，$L/C$ 算无功</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">C：RLC 串联</span></td>
+                <td>算 $X_L, X_C$ → $Z = R + j(X_L - X_C)$ → $\dot I = \dot U/Z$ → 各分电压 → 求 $P, Q, S$ → 判断感性/容性</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">D：复杂网络</span></td>
+                <td>先画相量模型 → 优先串并联等效 → 不行就用 KCL/KVL、支路法、叠加、戴维宁 → 一切在复数域完成</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">E：频率特性/滤波</span></td>
+                <td>先确定输出端 → 写 $T(j\omega)$ → 求模求相位 → 看低频高频极限 → 一阶 RC 截止 $\omega_0 = 1/RC$</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">F：谐振</span></td>
+                <td>先判断串联/并联 → 抓条件 $X_L = X_C$ → 写 $\omega_0 = 1/\sqrt{LC}$ → 串联：阻抗最小电流最大；并联：阻抗最大总电流最小</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">G：功率因数补偿</span></td>
+                <td>算补偿前后相角 → $I = P/(U\cos\varphi)$ → $C = \dfrac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega U^2}$ → 补偿后有功不变、电源电流减小</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">13. 考试时最容易错的清单</h2>
+
+        <ol class="styled-list">
+          <li><strong>相量不是瞬时值</strong>，不能直接写 $\dot U = u(t)$。</li>
+          <li><strong>有效值和最大值别混</strong>。电表读数、铭牌数值默认是有效值。</li>
+          <li><strong>只有同频率正弦量才能谈相位差</strong>。</li>
+          <li><strong>交流串联电压满足相量和，不满足普通数值和</strong>。</li>
+          <li><strong>纯电感、纯电容的平均功率都为 0</strong>，但无功功率不为 0。</li>
+          <li><strong>看到 $j$ 就想到逆时针 $90^\circ$，看到 $-j$ 就想到顺时针 $90^\circ$</strong>。</li>
+          <li><strong>功率因数补偿是并联电容，不是随便串个电容</strong>。</li>
+          <li><strong>谐振题先判断串联/并联</strong>，否则物理图像会完全反。</li>
+        </ol>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Rachell · 物理笔记本 · NOTEBOOK</p>
+  </footer>
+</body>
+</html>

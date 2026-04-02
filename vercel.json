@@ -20,6 +20,10 @@
   "rewrites": [
     { "source": "/notes", "destination": "/notes.html" },
     { "source": "/about", "destination": "/about.html" },
-    { "source": "/posts/pde-nonhomogeneous", "destination": "/posts/pde-nonhomogeneous.html" }
+    { "source": "/posts/pde-nonhomogeneous", "destination": "/posts/pde-nonhomogeneous.html" },
+    { "source": "/posts/atomic-physics-ch3", "destination": "/posts/atomic-physics-ch3.html" },
+    { "source": "/posts/pde-impulse-method", "destination": "/posts/pde-impulse-method.html" },
+    { "source": "/posts/pde-nonhomogeneous-boundary", "destination": "/posts/pde-nonhomogeneous-boundary.html" },
+    { "source": "/posts/electrical-engineering-ch4-ac", "destination": "/posts/electrical-engineering-ch4-ac.html" }
   ]
 }

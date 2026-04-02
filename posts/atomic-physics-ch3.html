@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>原子物理 第三章 · 不确定关系与波函数统计解释 — NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css?v=3" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← BACK</a></div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-28</span>
+          <span class="post-tag">原子物理</span>
+          <span class="post-tag" style="border-color:rgba(156,220,254,0.3);color:#9cdcfe;background:rgba(156,220,254,0.05)">量子力学基础</span>
+        </div>
+        <h1>原子物理 第三章 · 不确定关系与波函数统计解释</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 原子物理 · Chapter 3</p>
+      </header>
+
+      <div class="post-content">
+
+        <h2 class="section-heading">3.3 不确定关系</h2>
+
+        <div class="content-section">
+          <p>波不像经典小球那样能被压缩到一个几何点上，它总要在空间中占据一段范围。</p>
+          <p>不确定关系的表述：微观粒子具有波动性，不能同时具有完全确定的位置，动量等物理量。</p>
+        </div>
+
+        <h3 class="subsection-heading">定量表述</h3>
+
+        <div class="note-block">
+          <strong>海森堡不确定关系（粗略表述）</strong><br/>
+          $$\Delta x\,\Delta p_x \geqslant \hbar/2,\qquad \Delta t\,\Delta E \geqslant \hbar/2.$$
+        </div>
+
+        <div class="note-block warn">
+          <strong>严格表述：</strong>$\Delta p\,\Delta q \geqslant \hbar$<br/>
+          能量时间不确定关系：$\Delta E\,\Delta t \geqslant 2\hbar$<br/>
+          这一条和位置—动量不完全同类。因为在通常非相对论量子力学中，<strong>时间不是算符，而是参数</strong>。所以它不像 $x$ 和 $p$ 那样来自一个简单的对易关系。
+        </div>
+
+        <h3 class="subsection-heading">时间—能量关系的物理图像</h3>
+
+        <div class="content-section">
+          <p>时间—能量关系通常要按具体语境理解，例如：</p>
+          <ul class="styled-list">
+            <li>态寿命越短，能量展宽越大；</li>
+            <li>短时间过程对应较宽的频谱。</li>
+          </ul>
+          <p>在原子物理中，自发辐射谱线宽度就和这个有关。这与波尔模型不矛盾：波尔模型里的"定态"是<strong>理想定态</strong>，默认它可以一直存在下去。</p>
+          <p>也就是说，在那个模型中：状态寿命 $\Delta t \to \infty$，那么能量宽度 $\Delta E \to 0$。这正好和能量—时间不确定关系一致。</p>
+          <p>也就是：$\Delta t$ 很大 $\Rightarrow$ $\Delta E$ 很小。在原子物理里，最常见的是<strong>激发态</strong>。</p>
+        </div>
+
+        <h3 class="subsection-heading">激发态寿命与能级宽度</h3>
+
+        <div class="content-section">
+          <p>比如某个原子被激发到了较高能级 $E_2$，它不会永远待在那里，通常过一段时间就会跃迁到较低能级 $E_1$，同时发出光子。所以激发态往往有一个平均寿命 $\tau$。这时，就不能再把这个激发态看成"无限稳定、无限长寿命"的理想状态了。于是它对应的能量不再是无限精确的一点，而会有一个宽度：</p>
+          <div class="note-block">
+            $$\Delta E \sim \frac{\tau}{\hbar}$$
+          </div>
+          <p>这就是原子光谱里常说的<strong>能级宽度</strong>。</p>
+        </div>
+
+        <h3 class="subsection-heading">和谱线联系起来最直观</h3>
+
+        <div class="content-section">
+          <p>设原子从高能级 $E_2$ 跃迁到低能级 $E_1$，按波尔理论，发射光的频率应该满足：</p>
+          <div class="note-block">
+            $$h\nu = E_2 - E_1$$
+          </div>
+          <p>如果两个能级都无限精确，那么 $\nu$ 也应该是一个精确值，谱线应当无限细。但实验上，谱线并不是绝对无限细的，它总有一定宽度。一个重要原因就是：</p>
+          <ul class="styled-list">
+            <li>上能级寿命有限；</li>
+            <li>所以上能级本身的能量就有一点宽度；</li>
+            <li>因而能级差也有一点宽度；</li>
+            <li>所以发出的光频率也有一点范围；</li>
+            <li>最后表现为<strong>谱线展宽</strong>。</li>
+          </ul>
+          <p>这叫<strong>自然线宽</strong>。</p>
+        </div>
+
+        <h3 class="subsection-heading">不确定关系的物理意义</h3>
+
+        <ol class="styled-list">
+          <li>粒子处于位置 $x$ 完全确定的状态时，其动量 $p$ 的数值是完全不确定的，反之，当粒子处于动量 $p$ 完全确定的状态时，粒子的位置是完全不确定的，粒子不能被束缚，具有非定域性。</li>
+          <li>粒子在客观上不能同时具有确定的坐标和动量。</li>
+          <li>我们无法用轨道的概念精确描述微观粒子的运动。</li>
+          <li>不确定关系给出了经典理论的适用范围。</li>
+        </ol>
+
+        <div class="note-block">
+          <strong>个人理解：</strong>基态通常寿命很长，因而能级展宽近于零；激发态寿命有限，因此能量有一定宽度。类似，在原子中高能级电子的空间分布通常更大，$\Delta p$ 不定。
+        </div>
+
+        <h3 class="subsection-heading">初步推导</h3>
+
+        <div class="content-section">
+          <p><strong>初步形式：</strong></p>
+          <div class="note-block">
+            $$\Delta x\,\Delta p_x \geqslant h,\qquad \Delta t\,\Delta E \geqslant h$$
+          </div>
+          <p><strong>严格形式：</strong></p>
+          <div class="note-block">
+            $$\Delta x\,\Delta p_x \geqslant \frac{\hbar}{2},\qquad \Delta t\,\Delta E \geqslant \frac{\hbar}{2}$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">第一种推导：从经典波包出发</h4>
+
+        <div class="content-section">
+          <p>经典波动关系：</p>
+          <div class="note-block">
+            $$\Delta t\,\Delta \nu \geqslant 1,\qquad \Delta x\,\Delta \lambda \geqslant \lambda^2$$
+          </div>
+          <ul class="styled-list">
+            <li>若 $\Delta \nu \to 0$，则 $\Delta t \to \infty$ &nbsp;👉 频率越确定，时间越不确定</li>
+            <li>若 $\Delta x \downarrow \Rightarrow \Delta \lambda \uparrow$，$\Delta \lambda \to 0 \Rightarrow \Delta x \to \infty$</li>
+          </ul>
+          <p>👉 位置越确定，波长越不确定</p>
+          <p>引入德布罗意关系 $\lambda = h/p$，微分得 $\Delta \lambda = \frac{h}{p_x^2}\Delta p_x$，代入 $\Delta x\,\Delta \lambda \geqslant \lambda^2$：</p>
+          <div class="note-block">
+            $$\Delta x\,\Delta p_x \geqslant h \quad \Longrightarrow \quad \Delta t\,\Delta E \geqslant h$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">第二种推导：单缝衍射</h4>
+
+        <div class="content-section">
+          <p>中心峰角度：$\sin\theta = \pm \frac{\lambda}{d}$</p>
+          <p>位置不确定度 $\Delta x \sim d$，动量不确定度 $\Delta p_x \geqslant p\sin\theta$</p>
+          <p>代入 $\sin\theta = \frac{\lambda}{d}$，得 $\Delta p_x \geqslant p\frac{\lambda}{d}$</p>
+          <p>代入德布罗意关系 $p = \frac{h}{\lambda}$，得</p>
+          <div class="note-block">
+            $$\Delta x\,\Delta p_x \geqslant h$$
+          </div>
+          <p><strong>严格结果：</strong></p>
+          <div class="note-block">
+            $$\Delta x\,\Delta p_x \geqslant \frac{\hbar}{2},\qquad \Delta t\,\Delta E \geqslant \frac{\hbar}{2}$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">核心物理图像</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>图像</th><th>关键结论</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag-cyan">波包图像</span></td>
+                <td>窄波包 ⇒ 位置确定 ⇒ 波长分散 ⇒ 动量不确定</td>
+              </tr>
+              <tr>
+                <td><span class="tag-cyan">衍射图像</span></td>
+                <td>狭缝变窄 ⇒ $\Delta x$ 变小，衍射变强 ⇒ $\Delta p_x$ 变大</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-block warn">
+          <strong>位置的局域化必然导致动量的弥散化，这源于微观粒子的波动性</strong>
+        </div>
+
+        <h4 class="step-heading">物理假设的深层理解</h4>
+
+        <div class="content-section">
+          <p>① 如果你把粒子的位置测得"无限精确"，那你其实是在假设它是一个"无限小的点"。</p>
+          <p>② 如果你把一个波的频率或波长测得"无限精确"，那这个波必须在空间中"无限延展"。</p>
+          <p>先看最基础的波：一个"完美单一波长"的波：</p>
+          <div class="note-block">
+            $$\psi(x) = \sin(kx)$$
+          </div>
+          <p>它的特点：</p>
+          <ul class="styled-list">
+            <li>波长完全确定（$\lambda$ 是固定的）</li>
+            <li>频率完全确定</li>
+            <li>动量完全确定（因为 $p = h/\lambda$）</li>
+          </ul>
+          <p>但是：<strong>它在整个空间从 $-\infty$ 到 $+\infty$ 都存在</strong>。</p>
+          <p>也就是说：它<strong>没有"在哪儿"这个概念</strong>，你无法说"粒子在某个位置"。</p>
+          <div class="note-block warn">
+            <strong>结论：波长越确定，位置越不确定（甚至完全不确定）</strong>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2.5rem 0;" />
+
+        <h2 class="section-heading">3.4 波函数及其统计解释</h2>
+
+        <h3 class="subsection-heading">一、由经典波到物质波的类比</h3>
+
+        <div class="content-section">
+          <p>在经典电磁理论中：</p>
+          <ul class="styled-list">
+            <li>电磁场的能量密度正比于电场强度的平方，即 $u \propto |E|^2$</li>
+            <li>光强与光子数密度成正比</li>
+          </ul>
+          <p>因此很自然地联想到：对于物质波，粒子在空间中的分布也应当与波函数的模平方有关。</p>
+        </div>
+
+        <h3 class="subsection-heading">波函数的概率解释（Born 解释）</h3>
+
+        <div class="content-section">
+          <p>设粒子的波函数为 $\psi(\mathbf r, t)$。则在 $t$ 时刻，粒子出现在 $\mathbf r$ 附近体积元 $d\tau$ 内的概率为</p>
+          <div class="note-block">
+            $$dW(\mathbf r,t) = |\psi(\mathbf r,t)|^2\,d\tau$$
+          </div>
+          <p>因此，概率密度为</p>
+          <div class="note-block">
+            $$w(\mathbf r,t) = |\psi(\mathbf r,t)|^2 \quad \text{（也常记作 } \rho(\mathbf r,t)\text{）}$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">归一化条件</h4>
+
+        <div class="content-section">
+          <p>因为粒子必定出现在全空间的某处，所以全空间概率之和必须等于 1：</p>
+          <div class="note-block">
+            $$\int |\psi(\mathbf r,t)|^2\,d\tau = 1$$
+          </div>
+          <p>这称为<strong>波函数的归一化条件</strong>。它反映的是：</p>
+          <ul class="styled-list">
+            <li>概率守恒</li>
+            <li>粒子在整个空间中被找到的总概率为 1</li>
+          </ul>
+        </div>
+
+        <h4 class="step-heading">波函数的非唯一性</h4>
+
+        <div class="content-section">
+          <p>波函数 $\psi$ 与 $C\psi$ 描述同一物理状态，其中 $C$ 为任意<strong>非零复常数</strong>。</p>
+          <p>原因是：物理上真正有意义的是 $|\psi|^2$，若 $\psi \to C\psi$，则 $|\psi|^2 \to |C|^2|\psi|^2$，这个整体常数因子可以通过归一化吸收掉。</p>
+          <div class="note-block">
+            $$\psi(\mathbf r,t)\ \text{与}\ e^{i\alpha}\psi(\mathbf r,t)\ \text{对应同一物理状态}$$
+          </div>
+        </div>
+
+        <h4 class="step-heading">概率振幅的理解</h4>
+
+        <div class="content-section">
+          <p>可以把波函数理解为一种"概率振幅"：</p>
+          <ul class="styled-list">
+            <li>$\psi(\mathbf r,t)$ 本身一般不是直接可观测量</li>
+            <li>真正可观测的是它的模平方 $|\psi(\mathbf r,t)|^2$</li>
+            <li>$|\psi(\mathbf r,t)|^2$ 给出粒子在空间中出现的概率分布</li>
+          </ul>
+          <p>所以：波函数大，并不直接表示"粒子多"，而是表示该处<strong>出现粒子的概率更大</strong>。</p>
+        </div>
+
+        <h4 class="step-heading">波函数的数学条件</h4>
+
+        <div class="note-block">
+          <strong>波函数必须单值、有限且连续，性质及其优良。</strong>
+        </div>
+
+        <div class="note-block warn">
+          <p>量子力学中，波函数 $\psi$ 不是直接可观测量；它的模平方 $|\psi|^2$ 才表示粒子在空间中的<strong>概率密度</strong>，而总概率必须满足归一化条件</p>
+          <div style="text-align:center;font-size:1.1em;">
+            $$\int |\psi|^2 d\tau = 1$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">物质波的理解</h3>
+
+        <div class="content-section">
+          <p>两种视角：</p>
+          <ol class="styled-list">
+            <li>波是基本的，不同频率的波合成波包，对应粒子位置</li>
+            <li>粒子是基本的，波表示大量粒子的分布</li>
+          </ol>
+        </div>
+
+        <h3 class="subsection-heading">自由粒子的波函数</h3>
+
+        <div class="content-section">
+          <p>如果粒子不受力，是自由粒子，那么最简单的波函数可写成</p>
+          <div class="note-block">
+            $$\psi(\mathbf r,t) = A\,e^{i(\mathbf k\cdot\mathbf r - \omega t)}$$
+          </div>
+          <p>一维时写成</p>
+          <div class="note-block">
+            $$\psi(x,t) = A\,e^{i(kx - \omega t)}$$
+          </div>
+          <p>结合德布罗意关系</p>
+          <div class="note-block">
+            $$p = \hbar k,\qquad E = \hbar\omega$$
+          </div>
+          <p>所以这个式子的含义是：</p>
+          <ol class="styled-list inner">
+            <li>先按"波"的形式写出；</li>
+            <li>再用 $p = \hbar k,\ E = \hbar\omega$ 把它解释为粒子的量子态。</li>
+          </ol>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2.5rem 0;" />
+
+        <h2 class="section-heading">电子双缝干涉实验</h2>
+
+        <div class="content-section">
+          <p>（此处补充电子双缝干涉实验的讨论。实验展示了微观粒子的波粒二象性：单个电子也能形成干涉条纹，说明每个电子都以概率波的形式同时通过两条缝，与自身发生干涉。）</p>
+        </div>
+
+        <div class="note-block">
+          <strong>小结：</strong>本章建立了量子力学的两条核心原理：① 不确定关系（$\Delta x\,\Delta p_x \geqslant \hbar/2$）限制了经典概念在微观尺度的适用性；② 波函数的 Born 统计解释（$|\psi|^2$ 为概率密度）给出了微观粒子行为的概率本质。两者共同构成了量子力学的物理图像基础。
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Rachell · 物理笔记本 · NOTEBOOK</p>
+  </footer>
+</body>
+</html>

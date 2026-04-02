@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>8.3 非齐次边条件 &amp; 8.4 泊松方程 — NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css?v=3" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="post-page">
+      <div class="back-nav"><a href="../notes.html" class="back-link">← BACK</a></div>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <span class="post-date">2026-03-28</span>
+          <span class="post-tag">数学物理方程</span>
+          <span class="post-tag" style="border-color:rgba(0,255,170,0.3);color:#00ffaa;background:rgba(0,255,170,0.05)">偏微分方程</span>
+        </div>
+        <h1>8.3 非齐次边条件 &amp; 8.4 泊松方程</h1>
+        <p style="font-size:0.83rem;color:#555;font-family:var(--mono);">// 数学物理方程 · Chapter 8.3–8.4</p>
+      </header>
+
+      <div class="post-content">
+
+        <h2 class="section-heading">8.3 非齐次边界条件</h2>
+
+        <h3 class="subsection-heading">标准问题</h3>
+
+        <div class="note-block">
+          波动方程（齐次）：
+          $$u_{tt} - a^2 u_{xx} = 0$$
+        </div>
+
+        <p>非齐次边界条件：</p>
+        <div class="note-block">
+          $$u\mid_{x=0} = \mu(t),\qquad u\mid_{x=l} = \nu(t)$$
+        </div>
+
+        <p>初始条件：</p>
+        <div class="note-block">
+          $$u\mid_{t=0} = \varphi(x),\qquad u_t\mid_{t=0} = \psi(x)$$
+        </div>
+
+        <h3 class="subsection-heading">核心思路：把边条件吸收入解的分解</h3>
+
+        <div class="content-section">
+          <p>取 $u = v + w$，设 $v(x,t)$ 为 $x$ 的线性函数：</p>
+          <div class="note-block">
+            $$v(x,t) = A(t)x + B(t)$$
+          </div>
+          <p>若要求 $v$ 满足非齐次边条件，令 $v\mid_{x=0} = \mu(t)$，$v\mid_{x=l} = \nu(t)$，得：</p>
+          <div class="note-block warn">
+            $$v(x,t) = \frac{[\nu(t) - \mu(t)]}{l}\,x + \mu(t)$$
+          </div>
+        </div>
+
+        <h3 class="subsection-heading">转化为齐次边条件问题</h3>
+
+        <div class="content-section">
+          <p>注意，$v$ 不满足波动方程。把 $u = w + v$ 代入波动方程，得关于 $w$ 的方程：</p>
+          <div class="note-block">
+            $$w_{tt} - a^2 w_{xx} = -v_{tt} + a^2 v_{xx} = \frac{x}{l}[\mu''(t) - \nu''(t)] - \mu''(t)$$
+          </div>
+          <p>边界条件：</p>
+          <div class="note-block">
+            $$w\mid_{x=0} = 0,\qquad w\mid_{x=l} = 0$$
+          </div>
+          <p>初条件：</p>
+          <div class="note-block">
+            $$w\mid_{t=0} = \varphi(x) - v\mid_{t=0} = \varphi(x) + \frac{1}{l}[\mu(0) - \nu(0)]x - \mu(0)$$
+            $$w_t\mid_{t=0} = \psi(x) - v_t\mid_{t=0} = \psi(x) + \frac{1}{l}[\mu'(0) - \nu'(0)]x - \mu'(0)$$
+          </div>
+        </div>
+
+        <div class="note-block">
+          <strong>说明：</strong>虽然方程是非齐次的，但边界条件是齐次的，可按 §8.2 求解。
+        </div>
+
+        <h3 class="subsection-heading">特殊情况：两端都是第二类（Neumann）非齐次边界条件</h3>
+
+        <div class="content-section">
+          <p>若边界条件为：</p>
+          <div class="note-block">
+            $$u_x\mid_{x=0} = \mu(t),\qquad u_x\mid_{x=l} = \nu(t)$$
+          </div>
+          <p>如果仍取线性函数 $v(x,t) = A(t)x + B(t)$，代入边界条件得：</p>
+          <div class="note-block">
+            $$v_x\mid_{x=0} = A(t) = \mu(t),\qquad v_x\mid_{x=l} = A(t) = \nu(t)$$
+          </div>
+          <p><strong>除非 $\mu(t) = \nu(t)$，否则这两式互相矛盾。</strong></p>
+          <p>这时不妨改试：</p>
+          <div class="note-block warn">
+            $$v(x,t) = A(t)x^2 + B(t)x$$
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:2rem 0;" />
+
+        <h2 class="section-heading">8.4 泊松方程</h2>
+
+        <div class="content-section">
+          <p>前面对非齐次项的讨论局限于含时间的输运方程与波动方程，那对泊松方程怎么处理呢？</p>
+        </div>
+
+        <h3 class="subsection-heading">泊松方程的标准形式</h3>
+
+        <div class="note-block">
+          $$\nabla^2 u = f(x,y,z)$$
+        </div>
+
+        <h3 class="subsection-heading">求解思路：线性叠加猜特解</h3>
+
+        <div class="content-section">
+          <p>仍然线性叠加猜特解 $v$，考虑边界条件的齐次通解若为 $w$，设 $u = w + v$，求解 $w$ 即可。</p>
+          <p>特解 $v$ 一般能"丁真"出来（即通过观察或标准方法直接构造）。</p>
+        </div>
+
+        <div class="note-block">
+          <strong>核心思想：</strong>把泊松方程的非齐次右端 $f$ 看作"源项"，先找一个特解 $v$ 让它满足方程，再加上齐次泊松方程（拉普拉斯方程）的通解 $w$ 来满足边界条件。
+        </div>
+
+        <div class="note-block warn">
+          <strong>补充：</strong>8.3 的方法（把边条件吸收入分解）与 8.4 的方法（特解 + 齐次通解）在精神上是一脉相承的——都是<strong>把困难的部分分离出去</strong>，留下可求解的齐次问题。
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Rachell · 物理笔记本 · NOTEBOOK</p>
+  </footer>
+</body>
+</html>
