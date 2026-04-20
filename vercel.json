@@ -24,6 +24,10 @@
     { "source": "/posts/atomic-physics-ch3", "destination": "/posts/atomic-physics-ch3.html" },
     { "source": "/posts/pde-impulse-method", "destination": "/posts/pde-impulse-method.html" },
     { "source": "/posts/pde-nonhomogeneous-boundary", "destination": "/posts/pde-nonhomogeneous-boundary.html" },
-    { "source": "/posts/electrical-engineering-ch4-ac", "destination": "/posts/electrical-engineering-ch4-ac.html" }
+    { "source": "/posts/electrical-engineering-ch4-ac", "destination": "/posts/electrical-engineering-ch4-ac.html" },
+    { "source": "/posts/atomic-physics-wavefunction-superposition", "destination": "/posts/atomic-physics-wavefunction-superposition.html" },
+    { "source": "/posts/atomic-physics-applications-operators", "destination": "/posts/atomic-physics-applications-operators.html" },
+    { "source": "/posts/atomic-physics-nuclear-force", "destination": "/posts/atomic-physics-nuclear-force.html" },
+    { "source": "/posts/pde-special-functions-odes", "destination": "/posts/pde-special-functions-odes.html" }
   ]
 }

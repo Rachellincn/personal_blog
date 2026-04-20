@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080810" />
+  <title>数学物理方程 · 特殊函数常微分方程 — NOTEBOOK</title>
+  <link rel="stylesheet" href="../css/style.css?v=5" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });"></script>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="nav">
+          <a href="../index.html" class="nav-link">INDEX</a>
+          <a href="../notes.html" class="nav-link">NOTES</a>
+          <a href="../about.html" class="nav-link">ABOUT</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <div class="note-header">
+        <div class="note-meta">
+          <span class="tag-magenta">数学物理方程</span>
+          <span class="tag-lime">特殊函数</span>
+        </div>
+        <h1 class="note-title glitch" data-text="特殊函数常微分方程">特殊函数常微分方程</h1>
+        <p class="note-date">2026-04-20 · 数学物理方程第九章 · ~4000 words</p>
+      </div>
+
+      <!-- 目录 -->
+      <div class="toc-box">
+        <div class="toc-title">CONTENTS</div>
+        <ul class="toc-list">
+          <li><a href="#sec1">1. 球坐标系中的拉普拉斯方程</a></li>
+          <li><a href="#sec2">2. 柱坐标系中的拉普拉斯方程</a></li>
+          <li><a href="#sec3">3. 核心思想与学习抓手</a></li>
+          <li><a href="#sec4">4. 球坐标分离变量法 Pipeline</a></li>
+          <li><a href="#sec5">5. 柱坐标分离变量法 Pipeline</a></li>
+        </ul>
+      </div>
+
+      <!-- 正文 -->
+      <div class="note-content">
+
+        <div class="note-box">
+          <p>这一节开始，我们不再只停留在直角坐标系中的分离变数，而是进入"特殊曲线坐标系"中的分离变量。你可以把它理解成：</p>
+          <p><strong>同一个偏微分方程，换一个更适合区域和边界形状的坐标系之后，往往更容易分离，也更容易把边界条件写清楚。</strong></p>
+          <p>最典型的例子就是：</p>
+          <ul class="styled-list">
+            <li>球面、球壳区域 $\rightarrow$ 球坐标系</li>
+            <li>圆柱、圆盘区域 $\rightarrow$ 柱坐标系</li>
+            <li>椭圆、双曲边界 $\rightarrow$ 对应的曲线坐标系</li>
+          </ul>
+        </div>
+
+        <h2 id="sec1" class="section-heading">1. 球坐标系中的拉普拉斯方程</h2>
+
+        <div class="content-section">
+          <p>球坐标系中，未知函数写作 $u=u(r,\theta,\varphi)$，其中：</p>
+          <ul class="styled-list">
+            <li>$r$ 表示到原点的距离</li>
+            <li>$\theta$ 表示极角</li>
+            <li>$\varphi$ 表示方位角</li>
+          </ul>
+
+          <p>课本给出的球坐标系下拉普拉斯方程为</p>
+          <p class="formula-center">$$\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial u}{\partial r}\right)+\frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial u}{\partial\theta}\right)+\frac{1}{r^2\sin^2\theta}\frac{\partial^2u}{\partial\varphi^2}=0 \tag{9.1.1}$$</p>
+
+          <p>这个式子一眼看上去比直角坐标下的 $\Delta u=u_{xx}+u_{yy}+u_{zz}=0$ 复杂得多，但它的结构其实非常整齐：</p>
+          <ul class="styled-list">
+            <li>第一项只和径向变量 $r$ 有关</li>
+            <li>后两项只和角变量 $\theta,\varphi$ 有关</li>
+          </ul>
+          <p>这正是适合分离变量的信号。</p>
+
+          <h4 class="step-heading">第一步：先把 $r$ 与角变量分开</h4>
+          <p>课本先设</p>
+          <p class="formula-center">$$u(r,\theta,\varphi)=R(r)Y(\theta,\varphi)$$</p>
+          <p>这里的想法非常自然：</p>
+          <ul class="styled-list">
+            <li>$R(r)$ 负责描述"离原点远近"对解的影响</li>
+            <li>$Y(\theta,\varphi)$ 负责描述"方向"对解的影响</li>
+          </ul>
+
+          <p>把它代入方程 (9.1.1)，再把各项整理后，得到</p>
+          <p class="formula-center">$$\frac{1}{R}\frac{d}{dr}\left(r^2\frac{dR}{dr}\right)=-\frac{1}{\sin\theta\,Y}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)-\frac{1}{Y}\frac{1}{\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}$$</p>
+
+          <p>这一步是整个分离变量法最关键的观察点：</p>
+          <ul class="styled-list">
+            <li>左边只含 $r$</li>
+            <li>右边只含 $\theta,\varphi$</li>
+          </ul>
+          <p>既然两边分别依赖于不同变量，而它们却恒等相等，那么除非它们都等于同一个常数。</p>
+
+          <p>课本把这个常数记作 $l(l+1)$，于是得到</p>
+          <p class="formula-center">$$\frac{1}{R}\frac{d}{dr}\left(r^2\frac{dR}{dr}\right)=-\frac{1}{Y\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)-\frac{1}{Y\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}=l(l+1)$$</p>
+
+          <div class="note-box">
+            <p><strong>这里为什么常写成 $l(l+1)$，而不直接写成某个 $\lambda$？</strong></p>
+            <p>因为后面角向方程的本征值最终恰好自然地写成这个形式；这不是拍脑袋写法，而是为了让后续方程的标准形式更整洁。</p>
+          </div>
+
+          <p>于是分裂成两个方程：</p>
+          <p class="formula-center">$$\frac{d}{dr}\left(r^2\frac{dR}{dr}\right)-l(l+1)R=0 \tag{9.1.2}$$</p>
+          <p class="formula-center">$$\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)+\frac{1}{\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}+l(l+1)Y=0 \tag{9.1.3}$$</p>
+
+          <p>到这里要有一个概念：球坐标中的拉普拉斯方程，第一次分离之后，就已经被拆成了</p>
+          <ul class="styled-list">
+            <li>一个径向常微分方程</li>
+            <li>一个球面上的角向方程</li>
+          </ul>
+
+          <h4 class="step-heading">第二步：先解径向方程</h4>
+          <p>(9.1.2) 可写成</p>
+          <p class="formula-center">$$r^2R''+2rR'-l(l+1)R=0$$</p>
+          <p>这是一个欧拉型方程。欧拉型方程的标准试探形式是 $R=r^\alpha$。</p>
+          <p>代入后得到特征方程</p>
+          <p class="formula-center">$$\alpha(\alpha-1)+2\alpha-l(l+1)=0$$</p>
+          <p>即 $\alpha^2+\alpha-l(l+1)=0$</p>
+          <p>它的两个根是</p>
+          <p class="formula-center">$$\alpha=l,\qquad \alpha=-(l+1)$$</p>
+          <p>所以径向解为</p>
+          <p class="formula-center">$$R(r)=Cr^l+D\frac{1}{r^{l+1}} \tag{9.1.4}$$</p>
+
+          <div class="note-box">
+            <p><strong>这一步的物理和几何意义都很重要：</strong></p>
+            <ul class="styled-list">
+              <li>$r^l$ 在 $r=0$ 附近通常是正常的</li>
+              <li>$r^{-(l+1)}$ 在 $r=0$ 附近通常发散</li>
+            </ul>
+            <p><strong>如果问题区域包含原点，为了要求解有界，常常必须取 $D=0$。</strong></p>
+            <p><strong>如果问题是在球外区域，还常常要反过来保留衰减项、舍去增长项。</strong></p>
+            <p><strong>所以径向方程的两个基本解，最终保留哪一个，不是由微分方程本身决定，而是由区域和边界条件决定。</strong></p>
+          </div>
+
+          <h4 class="step-heading">第三步：再把角向方程继续分离</h4>
+          <p>课本把 (9.1.3) 称为<strong>球函数方程</strong>。接下来再设</p>
+          <p class="formula-center">$$Y(\theta,\varphi)=\Theta(\theta)\Phi(\varphi)$$</p>
+          <p>这一步相当于把"方向"再拆成：</p>
+          <ul class="styled-list">
+            <li>$\Theta(\theta)$：控制极角变化</li>
+            <li>$\Phi(\varphi)$：控制绕 $z$ 轴旋转时的变化</li>
+          </ul>
+
+          <p>代入 (9.1.3)，整理后得到</p>
+          <p class="formula-center">$$\frac{\sin\theta}{\Theta}\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)+l(l+1)\sin^2\theta=-\frac{1}{\Phi}\frac{d^2\Phi}{d\varphi^2}$$</p>
+
+          <p>现在左右两边又分别只依赖不同变量：</p>
+          <ul class="styled-list">
+            <li>左边只依赖 $\theta$</li>
+            <li>右边只依赖 $\varphi$</li>
+          </ul>
+          <p>所以它们又必须共同等于一个常数。课本记这个常数为 $\lambda$，于是得到</p>
+          <p class="formula-center">$$\frac{\sin\theta}{\Theta}\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)+l(l+1)\sin^2\theta=-\frac{1}{\Phi}\frac{d^2\Phi}{d\varphi^2}=\lambda$$</p>
+
+          <p>这又分解成两个常微分方程：</p>
+          <p class="formula-center">$$\Phi''+\lambda\Phi=0 \tag{9.1.5}$$</p>
+          <p class="formula-center">$$\sin\theta\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)+\bigl[l(l+1)\sin^2\theta-\lambda\bigr]\Theta=0 \tag{9.1.6}$$</p>
+
+          <div class="note-box">
+            <p><strong>到这里你应该注意到一个非常漂亮的结构：</strong></p>
+            <p>球坐标中的 Laplace 方程，经过两次分离以后，最后变成了三个 ODE：</p>
+            <ul class="styled-list">
+              <li>径向方程 $R$</li>
+              <li>方位角方程 $\Phi$</li>
+              <li>极角方程 $\Theta$</li>
+            </ul>
+            <p>而整个三维问题就被拆解完了。</p>
+          </div>
+
+          <h4 class="step-heading">第四步：处理 $\varphi$ 方程，得到周期条件与本征值</h4>
+          <p>先看最简单的 $\Phi$ 方程：</p>
+          <p class="formula-center">$$\Phi''+\lambda\Phi=0$$</p>
+          <p>这看起来只是一个普通常系数二阶 ODE，但它有一个"自然的周期条件"：</p>
+          <p class="formula-center">$$\Phi(\varphi+2\pi)=\Phi(\varphi)$$</p>
+
+          <p><strong>为什么这个条件必须加上？</strong></p>
+          <p>因为在球坐标中，$\varphi$ 和 $\varphi+2\pi$ 表示同一个方向。也就是说，解作为空间中的单值函数，绕一圈后必须回到自己。</p>
+          <p>所以这不是额外人为附加的条件，而是坐标本身带来的几何要求。</p>
+
+          <p>对方程 $\Phi''+\lambda\Phi=0$，要满足 $2\pi$ 周期，只有当</p>
+          <p class="formula-center">$$\lambda=m^2,\qquad m=0,\pm1,\pm2,\dots$$</p>
+          <p>时才可能。此时解为</p>
+          <p class="formula-center">$$\Phi(\varphi)=A\cos m\varphi+B\sin m\varphi$$</p>
+          <p>或者更紧凑地写成复指数形式</p>
+          <p class="formula-center">$$\Phi(\varphi)=Ce^{im\varphi}$$</p>
+
+          <div class="note-box">
+            <p>所以这里第一次出现了"本征值离散化"的现象：不是任意 $\lambda$ 都可以，而只能取一串离散值 $m^2$。</p>
+            <p>这就是特殊曲线坐标下分离变量法与常微分方程本征值问题之间的本质联系。</p>
+          </div>
+
+          <h4 class="step-heading">第五步：得到关于 $\theta$ 的连带勒让德方程</h4>
+          <p>把 $\lambda=m^2$ 代回 $\Theta$ 方程，可得</p>
+          <p class="formula-center">$$\frac{1}{\sin\theta}\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)+\left[l(l+1)-\frac{m^2}{\sin^2\theta}\right]\Theta=0 \tag{9.1.9}$$</p>
+          <p>这就是课本中的角向方程标准形式。</p>
+
+          <p>为了把它化成熟悉的形式，课本作变量代换</p>
+          <p class="formula-center">$$x=\cos\theta$$</p>
+          <p>这一步非常经典，也非常值得你记住。因为在球坐标问题中，凡是出现 $\sin\theta,\cos\theta$ 混合的角向方程，通常都要换成 $x=\cos\theta$ 来整理。</p>
+
+          <p>由于 $x=\cos\theta$，所以</p>
+          <p class="formula-center">$$\frac{d\Theta}{d\theta}=\frac{d\Theta}{dx}\frac{dx}{d\theta}=-\sin\theta\frac{d\Theta}{dx}$$</p>
+
+          <p>代入并整理后，课本把 (9.1.9) 化成</p>
+          <p class="formula-center">$$\frac{d}{dx}\left[(1-x^2)\frac{d\Theta}{dx}\right]+\left[l(l+1)-\frac{m^2}{1-x^2}\right]\Theta=0 \tag{9.1.10}$$</p>
+          <p>也就是</p>
+          <p class="formula-center">$$(1-x^2)\Theta''-2x\Theta'+\left[l(l+1)-\frac{m^2}{1-x^2}\right]\Theta=0 \tag{9.1.11}$$</p>
+
+          <p>这就叫作 $l$ 阶<strong>连带勒让德方程</strong>。</p>
+          <p>若 $m=0$，它退化为</p>
+          <p class="formula-center">$$(1-x^2)\Theta''-2x\Theta'+l(l+1)\Theta=0 \tag{9.1.12}$$</p>
+          <p>这就是普通的<strong>勒让德方程</strong>。</p>
+
+          <div class="note-box">
+            <p><strong>这里要理解两个层次：</strong></p>
+            <ul class="styled-list">
+              <li>$m=0$ 时，对应轴对称情形，不依赖方位角 $\varphi$</li>
+              <li>$m\neq0$ 时，就进入一般球函数情形，需要用连带勒让德函数</li>
+            </ul>
+            <p>所以，普通勒让德方程只是更一般连带勒让德方程的特例。</p>
+          </div>
+
+          <h4 class="step-heading">球坐标分离的整体结构总结</h4>
+          <p>现在把前面的推导串起来，整个球坐标分离的逻辑链条就是：</p>
+          <p>先从拉普拉斯方程出发 $\Delta u=0$</p>
+          <p>在球坐标中写为 (9.1.1) 的形式。</p>
+
+          <p>然后依次做两次分离：</p>
+          <p><strong>第一次分离：</strong>$u(r,\theta,\varphi)=R(r)Y(\theta,\varphi)$</p>
+          <p>得到径向方程和球函数方程</p>
+
+          <p><strong>第二次分离：</strong>$Y(\theta,\varphi)=\Theta(\theta)\Phi(\varphi)$</p>
+          <p>得到 $\Phi$ 的周期本征值问题和 $\Theta$ 的连带勒让德方程</p>
+
+          <p>最后三个因子分别是：</p>
+          <ul class="styled-list">
+            <li>$R(r)$：由欧拉型方程给出</li>
+            <li>$\Phi(\varphi)$：由周期条件给出三角函数或复指数</li>
+            <li>$\Theta(\theta)$：由勒让德/连带勒让德方程给出</li>
+          </ul>
+
+          <p>因此，球坐标下 Laplace 方程的分离解一般写成</p>
+          <p class="formula-center">$$u(r,\theta,\varphi)=R(r)\Theta(\theta)\Phi(\varphi)$$</p>
+          <p>进一步代入上面三个方程的解，便得到</p>
+          <p class="formula-center">$$u(r,\theta,\varphi)=\left(Cr^l+D r^{-(l+1)}\right)\Theta(\theta)\Phi(\varphi)$$</p>
+          <p>如果把所有允许的 $l,m$ 都叠加起来，就得到一般级数解。</p>
+        </div>
+
+        <h2 id="sec2" class="section-heading">2. 柱坐标系中的拉普拉斯方程</h2>
+
+        <div class="content-section">
+          <p>我们现在讲拉普拉斯方程在柱坐标系 $(\rho,\varphi,z)$ 下的求解。这里最核心的思想仍然是分离变量法，但和直角坐标不同的是，柱坐标下分离出来的径向方程不再是常系数方程，而会导向贝塞尔方程或修正贝塞尔方程。这是这一部分最值得抓住的主线。</p>
+
+          <p>拉普拉斯方程写成</p>
+          <p class="formula-center">$$\nabla^2 u=0$$</p>
+          <p>在柱坐标系中就是</p>
+          <p class="formula-center">$$\frac{\partial^2 u}{\partial \rho^2}+\frac{1}{\rho}\frac{\partial u}{\partial \rho}+\frac{1}{\rho^2}\frac{\partial^2 u}{\partial \varphi^2}+\frac{\partial^2 u}{\partial z^2}=0$$</p>
+
+          <p>这里要特别注意：柱坐标里的径向变量是 $\rho$，不是球坐标里的 $r$；另外还有角变量 $\varphi$ 和轴向变量 $z$。</p>
+
+          <p>分离变量的第一步，是设解可写成三个单变量函数的乘积：</p>
+          <p class="formula-center">$$u(\rho,\varphi,z)=R(\rho)\Phi(\varphi)Z(z)$$</p>
+
+          <p>把它代入方程，得到</p>
+          <p class="formula-center">$$R''\Phi Z+\frac{1}{\rho}R'\Phi Z+\frac{1}{\rho^2}R\Phi'' Z+R\Phi Z''=0$$</p>
+
+          <p>再除以 $R\Phi Z$，得</p>
+          <p class="formula-center">$$\frac{R''}{R}+\frac{1}{\rho}\frac{R'}{R}+\frac{1}{\rho^2}\frac{\Phi''}{\Phi}+\frac{Z''}{Z}=0$$</p>
+
+          <p>乘以 $\rho^2$，化成</p>
+          <p class="formula-center">$$\rho^2\frac{R''}{R}+\rho\frac{R'}{R}+\frac{\Phi''}{\Phi}+\rho^2\frac{Z''}{Z}=0$$</n
+          <p>这一步非常关键，因为它把 $\rho,\varphi,z$ 的依赖关系显式分开了。接下来先分离角变量 $\varphi$。</p>
+
+          <h4 class="step-heading">角向分离与周期条件</h4>
+          <p>由于 $\varphi$ 是角变量，物理上必须满足单值性，也就是</p>
+          <p class="formula-center">$$u(\rho,\varphi+2\pi,z)=u(\rho,\varphi,z)$$</p>
+          <p>因此自然要求</p>
+          <p class="formula-center">$$\Phi(\varphi+2\pi)=\Phi(\varphi)$$</p>
+
+          <p>于是我们令</p>
+          <p class="formula-center">$$\frac{\Phi''}{\Phi}=-m^2$$</p>
+          <p>从而得到角向方程</p>
+          <p class="formula-center">$$\Phi''+m^2\Phi=0$$</p>
+
+          <p>它的通解为</p>
+          <p class="formula-center">$$\Phi(\varphi)=A\cos m\varphi+B\sin m\varphi$$</p>
+
+          <p>再由周期条件 $\Phi(\varphi+2\pi)=\Phi(\varphi)$，可知</p>
+          <p class="formula-center">$$m=0,1,2,\cdots$$</p>
+
+          <p>所以角向本征函数就是 $\cos m\varphi, \sin m\varphi$。</p>
+
+          <div class="note-box">
+            <p>这一步的意义非常大：柱坐标下角向部分其实就是傅里叶级数，因此后面边界条件如果依赖于 $\varphi$，通常都要做角向傅里叶展开。</p>
+          </div>
+
+          <p>把 $\Phi''/\Phi=-m^2$ 代回去，可得</p>
+          <p class="formula-center">$$\rho^2\frac{R''}{R}+\rho\frac{R'}{R}-m^2+\rho^2\frac{Z''}{Z}=0$$</p>
+          <p>也就是</p>
+          <p class="formula-center">$$\rho^2\frac{R''}{R}+\rho\frac{R'}{R}-m^2=-\rho^2\frac{Z''}{Z}$$</p>
+
+          <p>左边只与 $\rho$ 有关，右边表面上与 $\rho,z$ 都有关。为了让分离成立，只能继续把 $Z$ 部分取成常数。这里有两种常见分法，而这正是柱坐标解法里最容易混乱的地方。</p>
+
+          <h4 class="step-heading">第一种分法：$Z$ 取三角函数型</h4>
+          <p>令</p>
+          <p class="formula-center">$$Z''+k^2 Z=0$$</p>
+          <p>那么</p>
+          <p class="formula-center">$$Z(z)=C\cos kz+D\sin kz$$</p>
+
+          <p>这时径向方程变为</p>
+          <p class="formula-center">$$\rho^2 R''+\rho R'-(k^2\rho^2+m^2)R=0$$</p>
+          <p>令 $x=k\rho$，就得到</p>
+          <p class="formula-center">$$x^2\frac{d^2R}{dx^2}+x\frac{dR}{dx}-(x^2+m^2)R=0$$</p>
+
+          <p>这就是 $m$ 阶<strong>修正贝塞尔方程</strong>。它的通解是</p>
+          <p class="formula-center">$$R(\rho)=C_1 I_m(k\rho)+C_2 K_m(k\rho)$$</p>
+
+          <p>所以这一类分离解写成</p>
+          <p class="formula-center">$$u(\rho,\varphi,z)=\big[C_1 I_m(k\rho)+C_2 K_m(k\rho)\big]\big[A\cos m\varphi+B\sin m\varphi\big]\big[C\cos kz+D\sin kz\big]$$</p>
+
+          <h4 class="step-heading">第二种分法：$Z$ 取指数型</h4>
+          <p>令</p>
+          <p class="formula-center">$$Z''-k^2 Z=0$$</p>
+          <p>那么</p>
+          <p class="formula-center">$$Z(z)=C e^{kz}+D e^{-kz}$$</p>
+
+          <p>这时径向方程变为</p>
+          <p class="formula-center">$$\rho^2 R''+\rho R'+(k^2\rho^2-m^2)R=0$$</p>
+          <p>令 $x=k\rho$，得</p>
+          <p class="formula-center">$$x^2\frac{d^2R}{dx^2}+x\frac{dR}{dx}+(x^2-m^2)R=0$$</p>
+
+          <p>这就是 $m$ 阶<strong>贝塞尔方程</strong>，通解为</p>
+          <p class="formula-center">$$R(\rho)=C_1 J_m(k\rho)+C_2 Y_m(k\rho)$$</p>
+
+          <p>因此对应的分离解为</p>
+          <p class="formula-center">$$u(\rho,\varphi,z)=\big[C_1 J_m(k\rho)+C_2 Y_m(k\rho)\big]\big[A\cos m\varphi+B\sin m\varphi\big]\big[C e^{kz}+D e^{-kz}\big]$$</p>
+
+          <div class="note-box note-important">
+            <p><strong>你要特别记住：</strong>到底出现普通贝塞尔函数 $J_m,Y_m$，还是修正贝塞尔函数 $I_m,K_m$，不是"天上掉下来"的，而是由你对 $z$ 方向分离常数的取法决定的；而分离常数怎么取，又主要由边界条件决定。</p>
+          </div>
+
+          <h4 class="step-heading">$k=0$ 的特例</h4>
+          <p>还有一个特例不能漏掉，就是 $k=0$。这时 $Z''=0$，所以</p>
+          <p class="formula-center">$$Z(z)=Az+B$$</p>
+          <p>径向方程变为</p>
+          <p class="formula-center">$$\rho^2R''+\rho R'-m^2R=0$$</p>
+          <p>这是欧拉方程。</p>
+          <p>当 $m\ge 1$ 时，$R(\rho)=C_1\rho^m+C_2\rho^{-m}$</p>
+          <p>当 $m=0$ 时，$R(\rho)=C_1+C_2\ln\rho$</p>
+          <p>所以 $k=0$ 的情形其实对应的是最简单的一类柱坐标调和函数。</p>
+
+          <h4 class="step-heading">选解原则</h4>
+          <p>分离变量求出来的只是形式通解，真正能留下哪些项，要看定义域和边界条件。</p>
+
+          <p><strong>如果区域包含轴线 $\rho=0$</strong>，那么解必须在 $\rho=0$ 有限。于是：</p>
+          <ul class="styled-list">
+            <li>普通贝塞尔方程里，$Y_m(k\rho)$ 在 $\rho=0$ 奇异，所以要舍去；</li>
+            <li>修正贝塞尔方程里，$K_m(k\rho)$ 在 $\rho=0$ 奇异，所以要舍去；</li>
+            <li>欧拉方程里，$\rho^{-m}$ 和 $\ln\rho$ 在 $\rho=0$ 奇异，所以也要舍去。</li>
+          </ul>
+          <p>因此，只要区域包含中心轴，通常只能保留 $J_m(k\rho)$ 或 $I_m(k\rho)$，以及 $k=0$ 时的有限项。</p>
+
+          <p><strong>如果区域是不含轴线的圆环域</strong>，那么奇异项未必一定要舍去，因为它们在该区域内可能仍然是有界的。这时要由内外边界条件共同决定。</p>
+
+          <p><strong>如果是外部问题</strong>，还常常要考虑 $\rho\to\infty$ 时的行为。比如修正贝塞尔函数中：</p>
+          <p class="formula-center">$$I_m(k\rho)\to \infty,\qquad K_m(k\rho)\to 0\quad (\rho\to\infty)$$</p>
+          <p>所以要求无穷远处衰减时，常保留 $K_m$，舍去 $I_m$。</p>
+
+          <h4 class="step-heading">求解流程总结</h4>
+          <p>从求解流程上看，柱坐标拉普拉斯方程的套路可以概括为：</p>
+          <ol>
+            <li>先写出柱坐标下的方程；</li>
+            <li>设 $u=R(\rho)\Phi(\varphi)Z(z)$；</li>
+            <li>先由角向周期性得到 $\Phi$ 的本征函数 $\cos m\varphi,\sin m\varphi$；</li>
+            <li>再根据 $z$ 方向边界条件，决定取三角函数型还是指数函数型；</li>
+            <li>径向方程随之化成贝塞尔方程或修正贝塞尔方程；</li>
+            <li>再根据 $\rho=0$ 附近是否要求有限、以及 $\rho\to\infty$ 是否要求衰减，删去不合适的解；</li>
+            <li>最后把边界条件展开到这些本征函数系中，确定展开系数。</li>
+          </ol>
+
+          <h4 class="step-heading">典型例题：有限圆柱区域</h4>
+          <p>设区域为</p>
+          <p class="formula-center">$$0\le \rho<a,\qquad 0\le \varphi<2\pi,\qquad 0\le z\le h$$</p>
+          <p>并且满足</p>
+          <p class="formula-center">$$u(\rho,\varphi,0)=0,\qquad u(\rho,\varphi,h)=0$$</p>
+          <p>侧面给定</p>
+          <p class="formula-center">$$u(a,\varphi,z)=f(\varphi,z)$$</p>
+          <p>同时要求在 $\rho=0$ 有限。</p>
+
+          <p>由于 $z=0,h$ 是齐次边界条件，最自然选</p>
+          <p class="formula-center">$$Z_n(z)=\sin\frac{n\pi z}{h},\qquad n=1,2,\cdots$$</p>
+          <p>对应</p>
+          <p class="formula-center">$$Z_n''+\left(\frac{n\pi}{h}\right)^2 Z_n=0$$</p>
+
+          <p>于是径向方程变为</p>
+          <p class="formula-center">$$\rho^2R''+\rho R'-\left[\left(\frac{n\pi}{h}\right)^2\rho^2+m^2\right]R=0$$</p>
+          <p>所以径向解应取修正贝塞尔函数</p>
+          <p class="formula-center">$$R_{mn}(\rho)=I_m\left(\frac{n\pi}{h}\rho\right)$$</p>
+          <p>因为 $K_m$ 在 $\rho=0$ 奇异，要舍去。</p>
+
+          <p>因此总解可写成级数形式</p>
+          <p class="formula-center">$$u(\rho,\varphi,z)=\sum_{m=0}^{\infty}\sum_{n=1}^{\infty}\left[a_{mn}\cos m\varphi+b_{mn}\sin m\varphi\right]\frac{I_m\left(\frac{n\pi}{h}\rho\right)}{I_m\left(\frac{n\pi}{h}a\right)}\sin\frac{n\pi z}{h}$$</p>
+
+          <p>这里分母的作用只是把 $\rho=a$ 处归一化，方便直接和边界函数 $f(\varphi,z)$ 对应。接下来只需把 $f(\varphi,z)$ 按照 $\cos m\varphi, \sin m\varphi, \sin\frac{n\pi z}{h}$ 做展开，就能求出系数 $a_{mn},b_{mn}$。</p>
+        </div>
+
+        <h2 id="sec3" class="section-heading">3. 核心思想与学习抓手</h2>
+
+        <div class="content-section">
+          <h4 class="step-heading">你要重点理解的数学思想</h4>
+          <p>这一讲不是让你死记球坐标公式，而是要真正理解以下几点。</p>
+
+          <div class="note-block">
+            <h5 class="step-heading">第一，换坐标系不是炫技，而是为了让方程和边界"顺着区域形状走"。</h5>
+            <p>例如在球域内求解，若还坚持用直角坐标，边界 $x^2+y^2+z^2=a^2$ 很难处理；而在球坐标中，边界就是 $r=a$，瞬间简单很多。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第二，分离变量法的核心永远是"变量各自独立，所以必须等于常数"。</h5>
+            <p>不管是在直角坐标、极坐标、柱坐标还是球坐标中，这个逻辑都不变。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第三，特殊曲线坐标系下，分离后得到的常微分方程往往不是初等的，而是特殊函数方程。</h5>
+            <p>在球坐标中自然出现：勒让德方程、连带勒让德方程、球函数（球谐函数）。</p>
+            <p>这说明"特殊函数"并不是凭空发明的，它们是 PDE 在特殊坐标系下分离变量的产物。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第四，本征值不是任取的，而是由单值性、周期性、有界性等条件筛出来的。</h5>
+            <p>例如这里：</p>
+            <ul class="styled-list">
+              <li>$\Phi(\varphi)$ 因周期性，要求 $\lambda=m^2$</li>
+              <li>$R(r)$ 因原点有界性，可能要舍去 $r^{-(l+1)}$</li>
+              <li>$\Theta(\theta)$ 因在 $\theta=0,\pi$ 处正则，要求解必须是适当的连带勒让德函数</li>
+            </ul>
+            <p>所以"分离常数"虽然是人为引入的，但最终并不自由，而是会被边界和正则性条件量子化。</p>
+          </div>
+
+          <h4 class="step-heading">学习抓手</h4>
+          <p>学这部分时，不要把重点放在"背结论"，而要抓住下面的骨架。</p>
+          <ol>
+            <li>先会写出该坐标系下的 PDE</li>
+            <li>会猜乘积型设解</li>
+            <li>能做出第一次和第二次分离</li>
+            <li>认出分离后出现的是哪类 ODE</li>
+            <li>知道这些 ODE 的解为什么要受周期性、有界性、单值性约束</li>
+            <li>最后再根据具体区域选取保留项</li>
+          </ol>
+          <p>你一旦把这个骨架抓住了，后面的柱坐标、球坐标、甚至更一般正交曲线坐标系，套路其实都是同一个套路。</p>
+        </div>
+
+        <h2 id="sec4" class="section-heading">4. 球坐标分离变量法 Pipeline</h2>
+
+        <div class="content-section">
+          <p>拿到球坐标问题后，可以按下面流程做：</p>
+
+          <div class="note-block">
+            <h5 class="step-heading">1. 判断区域和边界是否适合球坐标</h5>
+            <p>例如球面、球壳、锥面对称区域，通常优先考虑球坐标。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">2. 先把 PDE 写成球坐标形式</h5>
+            <p>对 Laplace 方程，要会写出课本的 (9.1.1)。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">3. 先做第一次分离</h5>
+            <p>设 $u(r,\theta,\varphi)=R(r)Y(\theta,\varphi)$</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">4. 得到径向方程和球函数方程</h5>
+            <p>径向方程是欧拉型，先解出 $R(r)=Cr^l+Dr^{-(l+1)}$</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">5. 对球函数方程继续分离</h5>
+            <p>设 $Y(\theta,\varphi)=\Theta(\theta)\Phi(\varphi)$</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">6. 由 $\varphi$ 的周期性得到 $\lambda=m^2$，以及 $\Phi(\varphi)=A\cos m\varphi+B\sin m\varphi$</h5>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">7. 把 $\lambda=m^2$ 代回 $\Theta$ 方程，化成连带勒让德方程</h5>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">8. 按区域和正则性条件选解</h5>
+            <ul class="styled-list">
+              <li>原点有界：去掉奇异径向项</li>
+              <li>极点正则：选取正规角向解</li>
+              <li>周期单值：$m$ 必须取整数</li>
+            </ul>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">9. 若边界条件不是单一模态，就做级数叠加</h5>
+            <p>对不同的 $l,m$ 叠加，最后由边界条件定系数</p>
+          </div>
+        </div>
+
+        <h2 id="sec5" class="section-heading">5. 柱坐标分离变量法 Pipeline</h2>
+
+        <div class="content-section">
+          <p>最后把这一章最容易混淆的点总结一下。</p>
+
+          <div class="note-block">
+            <h5 class="step-heading">第一，角向本征值一定是离散的</h5>
+            <p>因为有周期条件，所以 $m$ 必须是整数。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第二，$z$ 方向分离常数的正负零三种取法都可能出现</h5>
+            <p>不同取法会把径向方程变成不同类型：普通贝塞尔、修正贝塞尔或欧拉方程。不是"永远只有一种"。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第三，真正的物理解不是把所有形式解全都写上去</h5>
+            <p>而是要根据区域是否包含 $\rho=0$、是否要求无穷远衰减、以及具体边界条件来删项。</p>
+          </div>
+
+          <div class="note-block">
+            <h5 class="step-heading">第四，柱坐标拉普拉斯方程最本质的函数系是：</h5>
+            <p class="formula-center">$$\cos m\varphi,\ \sin m\varphi,\ J_m,\ Y_m,\ I_m,\ K_m$$</p>
+            <p>其中前两个来自角向周期性，后四个来自径向方程。</p>
+          </div>
+
+          <div class="note-box">
+            <p><strong>记忆口诀：</strong></p>
+            <p>"角向周期性 $\to$ 傅里叶模态 $m$；轴向边界 $\to$ 选三角型或指数型；径向方程 $\to$ 贝塞尔函数；中心轴与无穷远条件 $\to$ 删项"</p>
+            <p>那么柱坐标系的拉普拉斯方程你就真正掌握了。</p>
+          </div>
+
+          <p>你可以把它和球坐标系的情况作比较：球坐标里角向会导出勒让德函数；柱坐标里径向会导出贝塞尔函数。这就是两种曲线坐标分离变量法最核心的差别。</p>
+        </div>
+
+      </div>
+
+      <div class="note-footer">
+        <a href="../notes.html" class="back-link">← 返回 NOTES</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-text">built with static html &amp; katex · deployed on vercel</span>
+    </div>
+  </footer>
+
+</body>
+</html>
