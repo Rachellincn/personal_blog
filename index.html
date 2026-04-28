@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080810" />
-  <title>NOTEBOOK</title>
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <meta name="theme-color" content="#05050a" />
+  <title>NOTEBOOK — Xiang Ganlin</title>
+  <link rel="stylesheet" href="css/style.css?v=6" />
 </head>
 <body>
   <div class="scanline"></div>
 
-  <!-- RGB ambient glow -->
+  <!-- Ambient glow -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
   <div class="ambient-glow glow-3"></div>
@@ -51,72 +51,81 @@
             <span class="name-en">Xiang Ganlin</span>
           </div>
           <div class="hero-subtitle">
-            <span class="hero-school">中国人民大学</span>
+            <span>中国人民大学</span>
             <span class="hero-dot">·</span>
-            <span class="hero-dept">物理学院</span>
+            <span>物理学院</span>
             <span class="hero-dot">·</span>
-            <span class="hero-year">大二在读</span>
+            <span>大二在读</span>
           </div>
           <p class="hero-bio">
-            学术热情集中于物理学与人工智能的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
+            学术热情集中于<strong>物理学</strong>与<strong>人工智能</strong>的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
           </p>
+        </div>
+      </section>
 
-          <!-- Research -->
-          <div class="hero-section">
-            <div class="section-label">研究方向</div>
-            <div class="research-grid">
-              <div class="research-item">
-                <span class="research-icon">◉</span>
-                <div>
-                  <div class="research-title">二维材料与凝聚态物理</div>
-                  <div class="research-desc">全液相前驱体法光纤内二维过渡金属硫族化合物（MoS₂）生长与制备</div>
-                </div>
-              </div>
-              <div class="research-item">
-                <span class="research-icon">◉</span>
-                <div>
-                  <div class="research-title">AI for Science</div>
-                  <div class="research-desc">深度学习、生成式 AI、多模态大语言模型 · 核心项目：PEFT 过参数化微调大模型</div>
-                </div>
-              </div>
-            </div>
+      <!-- Research Focus: Bento Grid -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Research Focus</h2>
+            <p class="section-subtitle">Main areas of academic exploration</p>
+          </div>
+          <span class="section-line"></span>
+          <span class="section-tag">SECTION_02</span>
+        </div>
+
+        <div class="bento-grid">
+          <!-- 2D Materials Card -->
+          <div class="bento-card">
+            <div class="bento-card-icon cyan">◈</div>
+            <h3>2D Materials & Condensed Matter</h3>
+            <p>Synthesis and characterization of 2D TMDCs (e.g., MoS₂) using all-liquid phase precursor methods within optical fibers.</p>
+            <a href="notes.html" class="bento-card-link">LEARN_MORE →</a>
           </div>
 
-          <!-- Tech Stack -->
-          <div class="hero-section">
-            <div class="section-label">技术储备</div>
-            <div class="tech-chips">
-              <span class="chip chip-physics">理论力学</span>
-              <span class="chip chip-physics">电磁学</span>
-              <span class="chip chip-physics">原子物理</span>
-              <span class="chip chip-physics">光学</span>
-              <span class="chip chip-math">线性代数</span>
-              <span class="chip chip-math">数学物理方法</span>
-              <span class="chip chip-num">蒙特卡洛</span>
-              <span class="chip chip-num">共轭梯度</span>
-              <span class="chip chip-num">BFGS</span>
-              <span class="chip chip-num">Lanczos</span>
-              <span class="chip chip-code">Python</span>
-              <span class="chip chip-code">MATLAB</span>
-              <span class="chip chip-code">LaTeX</span>
-              <span class="chip chip-code">Markdown</span>
-            </div>
+          <!-- AI4S Card -->
+          <div class="bento-card">
+            <div class="bento-card-icon magenta">⚡</div>
+            <h3>AI for Science (AI4S)</h3>
+            <p>Exploring deep learning and multi-modal LLMs in scientific computing. Specialized in PEFT (Parameter-Efficient Fine-Tuning).</p>
+            <a href="notes.html" class="bento-card-link">PROJECT_HUB →</a>
           </div>
+        </div>
 
-          <!-- Blog Description -->
-          <div class="blog-desc-box">
-            此 blog 为个人开发网页，用于上传学习笔记、IDEAS 等。内容持续更新中。
+        <!-- Tech Stack Panel -->
+        <div class="tech-stack-panel">
+          <div class="tech-stack-label">
+            <span>◇</span> Knowledge Base & Toolchain
+          </div>
+          <div class="tech-chips">
+            <span class="chip chip-physics">理论力学</span>
+            <span class="chip chip-physics">电磁学</span>
+            <span class="chip chip-physics">原子物理</span>
+            <span class="chip chip-physics">光学</span>
+            <span class="chip chip-math">线性代数</span>
+            <span class="chip chip-math">数学物理方法</span>
+            <span class="chip chip-math">蒙特卡洛</span>
+            <span class="chip chip-math">数值优化</span>
+            <span class="chip chip-code">Python</span>
+            <span class="chip chip-code">MATLAB</span>
+            <span class="chip chip-code">PyTorch</span>
+            <span class="chip chip-tool">LaTeX</span>
+            <span class="chip chip-tool">Markdown</span>
           </div>
         </div>
       </section>
 
-      <!-- Notes Index: Small tile grid -->
+      <!-- Notes Preview -->
       <section class="section">
         <div class="section-head">
+          <div>
+            <h2 class="section-title">Research Journal</h2>
+            <p class="section-subtitle">Calculations, derivations, and insights</p>
+          </div>
           <span class="section-line"></span>
-          <span class="section-name">NOTES</span>
-          <span class="section-line"></span>
+          <span class="section-tag">SECTION_03</span>
         </div>
+
         <div class="tile-grid">
 
           <a href="posts/atomic-physics-wavefunction-superposition.html" class="tile">
@@ -204,6 +213,10 @@
           </a>
 
         </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="notes.html" class="filter-btn active" style="text-decoration: none;">VIEW_ALL_NOTES →</a>
+        </div>
       </section>
 
     </div>
@@ -211,7 +224,14 @@
 
   <footer class="site-footer">
     <div class="container">
-      <span class="footer-text">built with static html &amp; katex &nbsp;·&nbsp; deployed on vercel</span>
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 XIANG GANLIN // RUC PHYSICS</span>
+        <div class="footer-tags">
+          <span>LATEX_RENDER</span>
+          <span>DEPLOYED_VERCEL</span>
+          <span>AI4SCIENCE_DRIVEN</span>
+        </div>
+      </div>
     </div>
   </footer>
 
