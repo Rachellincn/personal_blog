@@ -130,6 +130,10 @@ button, input { font: inherit; }
 }
 .display-title em { color: var(--coral); font-weight: 400; }
 .lede { color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.2rem); max-width: 42rem; }
+.lede.bilingual-en {
+  margin-top: 1rem; padding-left: 1rem; border-left: 2px solid var(--coral-soft);
+  font-size: clamp(.88rem, 1.25vw, 1rem); line-height: 1.62;
+}
 .serif { font-family: var(--display); font-weight: 400; }
 
 .hero { min-height: 76vh; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: clamp(2rem, 6vw, 6rem); padding: 2rem 0 4.5rem; }

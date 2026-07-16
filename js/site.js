@@ -70,7 +70,7 @@
       if (!card.hidden) visible += 1;
     });
     empty?.classList.toggle('visible', visible === 0);
-    if (count) count.textContent = `${visible} 篇笔记`;
+    if (count) count.textContent = `${visible} ${visible === 1 ? 'note' : 'notes'}`;
   };
 
   buttons.forEach((button) => {

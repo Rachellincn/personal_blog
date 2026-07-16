@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f4ed">
-  <meta name="description" content="向柑潾的物理与 AI4Science 学习笔记：二维材料、凝聚态物理、数学物理方法与人工智能。">
-  <title>向柑潾 · Physics, notes &amp; little discoveries</title>
+  <meta name="description" content="Ganlin Xiang's bilingual personal blog about physics, LLM emergence, social thought, and semester study notes.">
+  <title>Ganlin Xiang · Physics, notes &amp; little discoveries</title>
   <link rel="stylesheet" href="css/style.css?v=8">
   <script defer src="js/site.js?v=1"></script>
 </head>
 <body>
-  <a class="skip-link" href="#content">跳到正文</a>
+  <a class="skip-link" href="#content">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
   <div class="ambient-glow glow-1" aria-hidden="true"></div>
   <div class="ambient-glow glow-2" aria-hidden="true"></div>
@@ -18,15 +18,15 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="向柑潾的学习手记，返回首页">
+      <a href="index.html" class="logo" aria-label="Ganlin's field notes, back to home">
         <span class="logo-mark">向</span><span class="logo-text">Ganlin's field notes</span>
       </a>
       <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
-      <label for="nav-toggle" class="nav-hamburger" aria-label="打开导航"><span></span><span></span><span></span></label>
-      <nav class="nav" aria-label="主导航">
-        <a href="index.html" class="nav-link active">首页</a>
-        <a href="notes.html" class="nav-link">学习笔记</a>
-        <a href="about.html" class="nav-link">关于</a>
+      <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></label>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="notes.html" class="nav-link">Notes</a>
+        <a href="about.html" class="nav-link">About</a>
       </nav>
     </div>
   </header>
@@ -35,19 +35,20 @@
     <div class="container">
       <section class="hero">
         <div class="hero-copy reveal">
-          <span class="eyebrow">RUC · Undergraduate researcher</span>
+          <span class="eyebrow">RUC · Rising junior in physics</span>
           <h1 class="display-title">Physics, notes<br>&amp; little <em>discoveries.</em></h1>
-          <p class="lede">你好，我是向柑潾，中国人民大学物理学院大二学生。我在二维材料与 AI for Science 的交界处做实验、写代码，也把真正想明白的瞬间留在这里。</p>
+          <p class="lede">你好，我是向柑潾（Ganlin Xiang），一名人民大学准大三的物理学本科生。我喜欢在物理的世界里知晓万物规律，也喜欢探索发现LLM的自我涌现机制，我还喜欢聊聊社会科学，哲学，社会现象。这是我的个人blog，每学期更新我的学习笔记。一起进步！</p>
+          <p class="lede bilingual-en" lang="en">Hi, I’m Ganlin Xiang, a rising junior studying physics at Renmin University of China. I love learning how the universe works through physics, and I’m equally curious about the mechanisms behind emergent behavior in LLMs. I also enjoy conversations about the social sciences, philosophy, and the patterns we notice in society. This is my personal blog, where I update my study notes every semester. Let’s keep growing together.</p>
           <div class="hero-actions">
-            <a class="button primary" href="notes.html">翻开学习笔记 <span class="arrow">→</span></a>
-            <a class="button" href="about.html">认识我</a>
+            <a class="button primary" href="notes.html">Browse my notes <span class="arrow">→</span></a>
+            <a class="button" href="about.html">About me</a>
           </div>
         </div>
 
-        <div class="research-canvas reveal" data-tilt aria-label="由电子轨道、二维材料晶格与波函数构成的研究图谱">
+        <div class="research-canvas reveal" data-tilt aria-label="A research map made of electron orbits, a 2D lattice, and wave functions">
           <svg class="orbit-visual" viewBox="0 0 520 520" role="img" aria-labelledby="orbit-title orbit-desc">
-            <title id="orbit-title">研究轨道</title>
-            <desc id="orbit-desc">抽象表现电子轨道、二维晶格和人工智能节点之间的关系。</desc>
+            <title id="orbit-title">Research orbit</title>
+            <desc id="orbit-desc">An abstract relationship between electron orbits, a two-dimensional lattice, and AI nodes.</desc>
             <defs>
               <linearGradient id="orbitGradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#315b73"/><stop offset="1" stop-color="#a795c8"/>
@@ -93,19 +94,19 @@
 
       <section class="section reveal" aria-labelledby="focus-title">
         <div class="section-head">
-          <div><span class="section-kicker">01 / Research orbit</span><h2 class="section-title" id="focus-title">我在追的问题</h2><p class="section-subtitle">研究兴趣不只是一串关键词，而是一组仍在生长的问题。</p></div>
+          <div><span class="section-kicker">01 / Research orbit</span><h2 class="section-title" id="focus-title">Questions I keep chasing</h2><p class="section-subtitle">Research interests are not a list of keywords, but a set of questions still taking shape.</p></div>
           <span class="section-tag">CURRENT FOCUS</span>
         </div>
         <div class="focus-grid">
           <article class="focus-card">
             <span class="focus-number">MATTER / 01</span>
             <h3>2D Materials<br>&amp; Condensed Matter</h3>
-            <p>关注二维材料的合成与表征。目前探索基于全液相前驱体法，在光纤内生长二维过渡金属硫族化合物（如 MoS₂）。</p>
+            <p>I study the synthesis and characterization of two-dimensional materials, including the growth of transition-metal dichalcogenides such as MoS₂ inside optical fibers using all-liquid-phase precursors.</p>
           </article>
           <article class="focus-card ai">
             <span class="focus-number">MODEL / 02</span>
             <h3>AI for<br>Science</h3>
-            <p>探索深度学习、生成式 AI 与多模态大模型在科学计算中的可能性，当前重点是 PEFT 与过参数化微调。</p>
+            <p>I explore deep learning, generative AI, and multimodal language models for scientific work, with a current interest in parameter-efficient fine-tuning and the emergence of model capabilities.</p>
           </article>
         </div>
         <div class="tech-stack-panel">
@@ -116,7 +117,7 @@
 
       <section class="section reveal" aria-labelledby="now-title">
         <div class="section-head">
-          <div><span class="section-kicker">02 / On my desk</span><h2 class="section-title" id="now-title">最近在学</h2><p class="section-subtitle">来自个人知识库的最新切片，整理于 2026 年春季学期。</p></div>
+          <div><span class="section-kicker">02 / On my desk</span><h2 class="section-title" id="now-title">What I’m studying</h2><p class="section-subtitle">Recent entries from my personal knowledge base, organized during the Spring 2026 semester.</p></div>
           <span class="section-tag">LIVE NOTEBOOK</span>
         </div>
         <div class="now-grid">
@@ -128,8 +129,8 @@
 
       <section class="section reveal" aria-labelledby="journal-title">
         <div class="section-head">
-          <div><span class="section-kicker">03 / Selected notes</span><h2 class="section-title" id="journal-title">学习手记</h2><p class="section-subtitle">推导、物理图像，以及那些终于想通的“为什么”。</p></div>
-          <a class="button" href="notes.html">查看全部 <span class="arrow">→</span></a>
+          <div><span class="section-kicker">03 / Selected notes</span><h2 class="section-title" id="journal-title">Selected notes</h2><p class="section-subtitle">Derivations, physical intuition, and the “why” that finally clicked.</p></div>
+          <a class="button" href="notes.html">View all notes <span class="arrow">→</span></a>
         </div>
         <div class="tile-grid">
           <a href="posts/atomic-fine-structure-spin.html" class="tile"><div class="tile-tag">原子物理 · NEW</div><div class="tile-title">精细结构、磁矩<br>与电子自旋</div><div class="tile-meta">2026.05 · 8 min read</div></a>
@@ -142,7 +143,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div><span class="footer-kicker">Keep asking why.</span><p class="footer-title">向柑潾的学习手记</p><span class="footer-copy">© 2026 · RUC School of Physics</span></div>
+      <div><span class="footer-kicker">Keep asking why.</span><p class="footer-title">Ganlin's field notes</p><span class="footer-copy">© 2026 · RUC School of Physics</span></div>
       <div class="footer-tags"><span>PHYSICS</span><span>AI4SCIENCE</span><span>LATEX</span><span>VERCEL</span></div>
     </div>
   </footer>
