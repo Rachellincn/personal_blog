@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NoteCard from '../components/NoteCard.astro';
+const notes = (await getCollection('notes')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const subjects = [...new Set(notes.map((note) => note.data.subject))];
+---
+<BaseLayout title="Notes · Ganlin Xiang" description="Ganlin Xiang's Chinese study notes on atomic physics, mathematical physics, and electrical engineering." active="notes" language="zh-CN" canonicalPath="/notes.html">
+  <main id="content" class="main"><div class="container">
+    <header class="page-title-block reveal"><span class="eyebrow">The living archive</span><h1 class="page-title-text">Notes, slowly<br />made clear.</h1><p class="page-subtitle">A growing map of derivations, intuition, and the mistakes worth remembering. Note titles and content remain in Chinese.</p></header>
+    <div class="notes-tools reveal"><label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">Search notes</span><input id="note-search" class="search-input" type="search" placeholder="Search titles, concepts, or keywords…" autocomplete="off" /></label><div class="filter-bar" role="group" aria-label="Filter notes by subject"><button class="filter-btn active" data-filter="all" aria-pressed="true">全部</button>{subjects.map((subject) => <button class="filter-btn" data-filter={subject} aria-pressed="false">{subject}</button>)}</div></div>
+    <p id="result-count" class="section-tag" aria-live="polite">{notes.length} notes</p>
+    <section class="post-list" id="post-list" aria-label="Study notes">{notes.map((note) => <NoteCard note={note} />)}<div class="empty-state"><span class="serif">No matching note found.</span><br />Try a shorter keyword or switch back to “全部”.</div></section>
+  </div></main>
+</BaseLayout>

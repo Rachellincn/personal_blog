@@ -1,0 +1,23 @@
+<div class="research-canvas reveal" data-research-canvas aria-label="Interactive research map of electron orbits, a two-dimensional lattice, and AI nodes">
+  <canvas class="research-pulse-canvas" aria-hidden="true"></canvas>
+  <svg class="orbit-visual" viewBox="0 0 520 520" role="img" aria-labelledby="orbit-title orbit-desc">
+    <title id="orbit-title">Research orbit</title>
+    <desc id="orbit-desc">An abstract relationship between electron orbits, a two-dimensional lattice, and AI nodes.</desc>
+    <defs>
+      <linearGradient id="orbitGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#315b73"/><stop offset="1" stop-color="#a795c8"/></linearGradient>
+      <filter id="softGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g fill="none" stroke="url(#orbitGradient)" stroke-width="1.4" opacity=".64">
+      <ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(18 260 245)"/><ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(76 260 245)"/><ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(136 260 245)"/><circle cx="260" cy="245" r="118" stroke-dasharray="3 10"/>
+    </g>
+    <g stroke="#7ba7c7" stroke-width="1" opacity=".45"><path d="M128 329 198 369 268 329 338 369 408 329"/><path d="M128 329 128 410M198 369v81M268 329v81M338 369v81M408 329v81"/><path d="M128 410 198 450 268 410 338 450 408 410"/></g>
+    <g fill="#315b73" filter="url(#softGlow)"><circle cx="260" cy="245" r="13"/><circle data-electron cx="94" cy="190" r="6" fill="#ef8d78"/><circle data-electron cx="392" cy="126" r="6" fill="#a795c8"/><circle data-electron cx="357" cy="390" r="6" fill="#7ba7c7"/></g>
+    <g fill="#315b73" opacity=".55" data-lattice><circle cx="128" cy="329" r="4"/><circle cx="198" cy="369" r="4"/><circle cx="268" cy="329" r="4"/><circle cx="338" cy="369" r="4"/><circle cx="408" cy="329" r="4"/><circle cx="128" cy="410" r="4"/><circle cx="198" cy="450" r="4"/><circle cx="268" cy="410" r="4"/><circle cx="338" cy="450" r="4"/><circle cx="408" cy="410" r="4"/></g>
+  </svg>
+  <button class="equation-chip chip-a" type="button" data-research-topic="quantum">Hψ = Eψ</button>
+  <button class="equation-chip chip-b" type="button" data-research-topic="materials">MoS₂ · 2D</button>
+  <button class="equation-chip chip-c" type="button" data-research-topic="ai">AI × Science</button>
+  <div class="research-info" data-research-info role="status" aria-live="polite" hidden></div>
+  <p class="canvas-caption">A small map of what I keep circling around: matter, models, and the mathematics between them. Tap the labels or empty space.</p>
+</div>
+<script src="../scripts/research-canvas.ts"></script>

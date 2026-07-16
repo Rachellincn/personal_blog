@@ -1,0 +1,16 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((note) => ({ params: { slug: note.id.replace(/\.md$/, '') }, props: { note } }));
+}
+interface Props { note: CollectionEntry<'notes'> }
+const { note } = Astro.props;
+const { Content } = await render(note);
+---
+<BaseLayout title={note.data.documentTitle} description={note.data.description} active="notes" language={note.data.language} canonicalPath={note.data.legacyPath} article>
+  <Content />
+  <script src="../../scripts/article-enhancements.ts"></script>
+</BaseLayout>
