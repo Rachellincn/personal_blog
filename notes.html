@@ -1,304 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#05050a" />
-  <title>NOTES — NOTEBOOK</title>
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed"><meta name="description" content="向柑潾的原子物理、数学物理方程与电工学学习笔记。">
+  <title>学习笔记 · 向柑潾</title>
+  <link rel="stylesheet" href="css/style.css?v=8"><script defer src="js/site.js?v=1"></script>
 </head>
 <body>
-  <div class="scanline"></div>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
+  <a class="skip-link" href="#content">跳到正文</a><div class="scroll-progress" aria-hidden="true"></div>
+  <div class="ambient-glow glow-1" aria-hidden="true"></div><div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <header class="site-header"><div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="返回首页"><span class="logo-mark">向</span><span class="logo-text">Ganlin's field notes</span></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden><label for="nav-toggle" class="nav-hamburger" aria-label="打开导航"><span></span><span></span><span></span></label>
+    <nav class="nav" aria-label="主导航"><a href="index.html" class="nav-link">首页</a><a href="notes.html" class="nav-link active">学习笔记</a><a href="about.html" class="nav-link">关于</a></nav>
+  </div></header>
 
-  <header class="site-header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="index.html" class="logo">
-          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
-        </a>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </label>
-        <nav class="nav">
-          <a href="index.html" class="nav-link">INDEX</a>
-          <a href="notes.html" class="nav-link active">NOTES</a>
-          <a href="about.html" class="nav-link">ABOUT</a>
-        </nav>
+  <main id="content" class="main"><div class="container">
+    <header class="page-title-block reveal"><span class="eyebrow">The living archive</span><h1 class="page-title-text">Notes, slowly<br>made clear.</h1><p class="page-subtitle">不是资料堆积，而是把推导、直觉与易错点重新组织成可以回看的知识地图。</p></header>
+
+    <div class="notes-tools reveal">
+      <label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">搜索笔记</span><input id="note-search" class="search-input" type="search" placeholder="搜索标题、概念或关键词…" autocomplete="off"></label>
+      <div class="filter-bar" role="group" aria-label="按学科筛选">
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">全部</button>
+        <button class="filter-btn" data-filter="原子物理" aria-pressed="false">原子物理</button>
+        <button class="filter-btn" data-filter="数学物理" aria-pressed="false">数学物理</button>
+        <button class="filter-btn" data-filter="电工学" aria-pressed="false">电工学</button>
       </div>
     </div>
-  </header>
+    <p id="result-count" class="section-tag" aria-live="polite">17 篇笔记</p>
 
-  <main class="main">
-    <div class="container">
-
-      <div class="page-title-block">
-        <div class="page-title-text">NOTES</div>
-        <p class="page-subtitle">全部学习笔记（14 篇）</p>
-      </div>
-
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">ALL</button>
-        <button class="filter-btn" data-filter="数学物理方程">数学物理方程</button>
-        <button class="filter-btn" data-filter="原子物理">原子物理</button>
-        <button class="filter-btn" data-filter="电工学">电工学</button>
-      </div>
-
-      <div class="post-list" id="post-list">
-
-        <article class="post-card" data-tags="原子物理,量子力学基础">
-          <div class="post-meta">
-            <span class="post-date">2026-04-20</span>
-            <span class="post-tag">原子物理</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/atomic-physics-wavefunction-superposition.html">原子物理 · 波函数叠加与薛定谔方程</a>
-          </h2>
-          <p class="post-excerpt">态叠加原理、四项基本规则、双缝干涉实验的量子解释、概率幅叠加与概率叠加的区别、薛定谔方程的导出与物理意义、定态薛定谔方程与能量本征值问题。</p>
-          <div class="post-footer">
-            <a href="posts/atomic-physics-wavefunction-superposition.html" class="read-more">READ →</a>
-            <span class="post-length">~3500 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="原子物理,量子力学应用">
-          <div class="post-meta">
-            <span class="post-date">2026-04-20</span>
-            <span class="post-tag">原子物理</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/atomic-physics-applications-operators.html">原子物理 · 应用举例与算符</a>
-          </h2>
-          <p class="post-excerpt">一维无限深势阱求解与能量量子化、有限深势阱与隧道效应、一维谐振子与厄米多项式、力学量平均值、位置与动量算符、对易关系、本征函数与本征值。</p>
-          <div class="post-footer">
-            <a href="posts/atomic-physics-applications-operators.html" class="read-more">READ →</a>
-            <span class="post-length">~2800 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="原子物理,核物理">
-          <div class="post-meta">
-            <span class="post-date">2026-04-20</span>
-            <span class="post-tag">原子物理</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/atomic-physics-nuclear-force.html">原子物理 · 核力</a>
-          </h2>
-          <p class="post-excerpt">核力的六条基本性质（短程性、饱和性、强度、电荷无关性、斥力芯、自旋相关性）；汤川介子理论与核力传递机制；结合能与核力短程性的关系。</p>
-          <div class="post-footer">
-            <a href="posts/atomic-physics-nuclear-force.html" class="read-more">READ →</a>
-            <span class="post-length">~2200 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="数学物理方程,特殊函数">
-          <div class="post-meta">
-            <span class="post-date">2026-04-20</span>
-            <span class="post-tag">数学物理方程</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/pde-special-functions-odes.html">数学物理方程 · 特殊函数常微分方程</a>
-          </h2>
-          <p class="post-excerpt">球坐标系下拉普拉斯方程分离变量、勒让德方程与连带勒让德方程、柱坐标系下贝塞尔方程与修正贝塞尔方程、周期性边界条件与本征值问题。</p>
-          <div class="post-footer">
-            <a href="posts/pde-special-functions-odes.html" class="read-more">READ →</a>
-            <span class="post-length">~4000 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="原子物理,量子力学基础">
-          <div class="post-meta">
-            <span class="post-date">2026-03-28</span>
-            <span class="post-tag">原子物理</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/atomic-physics-ch3.html">原子物理 第三章 · 不确定关系与波函数统计解释</a>
-          </h2>
-          <p class="post-excerpt">海森堡不确定关系 $\Delta x\Delta p_x\geqslant\hbar/2$ 与能量时间不确定关系；Born 波函数概率解释、归一化条件；激发态寿命与能级宽度、自然线宽；单缝衍射推导、波包图像与衍射图像；德布罗意波。</p>
-          <div class="post-footer">
-            <a href="posts/atomic-physics-ch3.html" class="read-more">READ →</a>
-            <span class="post-length">~2800 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="数学物理方程">
-          <div class="post-meta">
-            <span class="post-date">2026-03-28</span>
-            <span class="post-tag">数学物理方程</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/pde-impulse-method.html">数学物理方程 · 冲量定理法（杜阿梅尔原理）</a>
-          </h2>
-          <p class="post-excerpt">齐次化原理、冲量定理法求解非齐次波动方程初始条件问题、杜阿梅尔原理在热传导方程中的应用、齐次化原理的物理意义与推导过程。</p>
-          <div class="post-footer">
-            <a href="posts/pde-impulse-method.html" class="read-more">READ →</a>
-            <span class="post-length">~2600 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="数学物理方程">
-          <div class="post-meta">
-            <span class="post-date">2026-03-28</span>
-            <span class="post-tag">数学物理方程</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/pde-nonhomogeneous-boundary.html">数学物理方程 · 非齐次边条件与泊松方程</a>
-          </h2>
-          <p class="post-excerpt">非齐次边条件的处理方法（加边值法、特征函数展开法）、泊松方程与拉普拉斯方程的关系、圆域泊松方程的格林函数法求解、泊松方程的物理意义（电荷密度与电势）。</p>
-          <div class="post-footer">
-            <a href="posts/pde-nonhomogeneous-boundary.html" class="read-more">READ →</a>
-            <span class="post-length">~2400 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="电工学">
-          <div class="post-meta">
-            <span class="post-date">2026-03-28</span>
-            <span class="post-tag">电工学</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/electrical-engineering-ch4-ac.html">电工学 · 正弦交流电路知识点与解题方法</a>
-          </h2>
-          <p class="post-excerpt">阻抗与导纳、相量图法、功率分析（有功/无功/视在功率）、功率因数补偿、串联谐振与并联谐振电路分析与设计。</p>
-          <div class="post-footer">
-            <a href="posts/electrical-engineering-ch4-ac.html" class="read-more">READ →</a>
-            <span class="post-length">~3200 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="数学物理方程">
-          <div class="post-meta">
-            <span class="post-date">2026-03-28</span>
-            <span class="post-tag">数学物理方程</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/pde-nonhomogeneous.html">数学物理方程 · 非齐次方程：叠加原理与傅里叶级数法 Pipeline</a>
-          </h2>
-          <p class="post-excerpt">傅里叶变换法求解非齐次方程、特征函数展开法、 Sturm-Liouville 理论简介、广义傅里叶级数展开在 PDE 中的应用。</p>
-          <div class="post-footer">
-            <a href="posts/pde-nonhomogeneous.html" class="read-more">READ →</a>
-            <span class="post-length">~2900 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="数学物理方程">
-          <div class="post-meta">
-            <span class="post-date">2026-03-26</span>
-            <span class="post-tag">数学物理方程</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/wave-equation-dalembert-separation.html">数学物理方程 · 达朗贝尔公式 &amp; 分离变数法</a>
-          </h2>
-          <p class="post-excerpt">波动方程的推导与物理背景、达朗贝尔公式的推导与适用条件、分离变数法的核心思想与步骤、三类典型边界条件（ Dirichlet/Neumann/Robin）的处理。</p>
-          <div class="post-footer">
-            <a href="posts/wave-equation-dalembert-separation.html" class="read-more">READ →</a>
-            <span class="post-length">~3100 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="原子物理,量子力学基础">
-          <div class="post-meta">
-            <span class="post-date">2026-03-26</span>
-            <span class="post-tag">原子物理</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/atomic-physics-ch2.html">原子物理第二章 · 玻尔模型与量子力学导论</a>
-          </h2>
-          <p class="post-excerpt">玻尔模型的基本假设与局限性、索末菲的量子化条件推广、爱因斯坦受激辐射与玻色统计、德布罗意波粒二象性与物质波假说。</p>
-          <div class="post-footer">
-            <a href="posts/atomic-physics-ch2.html" class="read-more">READ →</a>
-            <span class="post-length">~3000 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="电工学">
-          <div class="post-meta">
-            <span class="post-date">2026-03-26</span>
-            <span class="post-tag">电工学</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/electrical-engineering-ch2.html">电工学第2章 · 电路的分析方法</a>
-          </h2>
-          <p class="post-excerpt">等效电路变换（星三角变换）、回路电流法与节点电压法、叠加定理、戴维南定理与诺顿定理、最大功率传输定理。</p>
-          <div class="post-footer">
-            <a href="posts/electrical-engineering-ch2.html" class="read-more">READ →</a>
-            <span class="post-length">~2700 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="电工学">
-          <div class="post-meta">
-            <span class="post-date">2026-03-26</span>
-            <span class="post-tag">电工学</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/electrical-engineering-ch3.html">电工学第3章 · 电路的暂态分析</a>
-          </h2>
-          <p class="post-excerpt">换路定理与初始条件、一阶电路（RC、RL）的零输入响应与零状态响应、全响应与三要素法、二阶电路的震荡与阻尼现象。</p>
-          <div class="post-footer">
-            <a href="posts/electrical-engineering-ch3.html" class="read-more">READ →</a>
-            <span class="post-length">~2500 words</span>
-          </div>
-        </article>
-
-        <article class="post-card" data-tags="电工学">
-          <div class="post-meta">
-            <span class="post-date">2026-03-26</span>
-            <span class="post-tag">电工学</span>
-          </div>
-          <h2 class="post-title">
-            <a href="posts/electrical-engineering-ch4.html">电工学第4章 · 正弦交流电路</a>
-          </h2>
-          <p class="post-excerpt">正弦量的相量表示法、阻抗与导纳的串并联分析、交流功率计算与功率因数提高、谐振电路的频率特性与带宽分析。</p>
-          <div class="post-footer">
-            <a href="posts/electrical-engineering-ch4.html" class="read-more">READ →</a>
-            <span class="post-length">~2800 words</span>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-copy">© 2026 XIANG GANLIN // RUC PHYSICS</span>
-        <div class="footer-tags">
-          <span>LATEX_RENDER</span>
-          <span>DEPLOYED_VERCEL</span>
-          <span>AI4SCIENCE_DRIVEN</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Filter functionality
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const postCards = document.querySelectorAll('.post-card');
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Update active state
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
-
-        postCards.forEach(card => {
-          if (filter === 'all' || card.dataset.tags.includes(filter)) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
-
-</body>
-</html>
+    <section class="post-list" id="post-list" aria-label="学习笔记列表">
+      <article class="post-card reveal" data-tags="原子物理,自旋,精细结构"><div class="post-meta"><span class="post-date">2026.05.13</span><span class="post-tag">原子物理 · NEW</span></div><h2 class="post-title"><a href="posts/atomic-fine-structure-spin.html">精细结构、磁矩与电子自旋</a></h2><p class="post-excerpt">从载流线圈的磁矩出发，经 Larmor 进动与 Stern–Gerlach 实验，走向自旋和总角动量耦合。</p><div class="post-footer"><a class="read-more" href="posts/atomic-fine-structure-spin.html">开始阅读 →</a><span class="post-length">8 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,泡利原理,多电子原子"><div class="post-meta"><span class="post-date">2026.05.27</span><span class="post-tag">原子物理 · NEW</span></div><h2 class="post-title"><a href="posts/pauli-principle.html">泡利不相容原理与交换对称性</a></h2><p class="post-excerpt">连接电子组态、LS / jj 耦合、单态与三重态，理解为什么一部分“形式允许”的原子态实际不存在。</p><div class="post-footer"><a class="read-more" href="posts/pauli-principle.html">开始阅读 →</a><span class="post-length">9 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,本征值,Sturm Liouville"><div class="post-meta"><span class="post-date">2026.05.19</span><span class="post-tag">数学物理 · NEW</span></div><h2 class="post-title"><a href="posts/sturm-liouville.html">Sturm–Liouville 本征值问题</a></h2><p class="post-excerpt">从固定弦的驻波出发，理解自伴随算子、边界条件、带权正交与广义 Fourier 级数的统一结构。</p><div class="post-footer"><a class="read-more" href="posts/sturm-liouville.html">开始阅读 →</a><span class="post-length">10 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,量子力学"><div class="post-meta"><span class="post-date">2026.04.20</span><span class="post-tag">原子物理</span></div><h2 class="post-title"><a href="posts/atomic-physics-wavefunction-superposition.html">波函数叠加与薛定谔方程</a></h2><p class="post-excerpt">态叠加、概率幅、双缝干涉与定态薛定谔方程的物理意义。</p><div class="post-footer"><a class="read-more" href="posts/atomic-physics-wavefunction-superposition.html">开始阅读 →</a><span class="post-length">12 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,算符,量子力学"><div class="post-meta"><span class="post-date">2026.04.20</span><span class="post-tag">原子物理</span></div><h2 class="post-title"><a href="posts/atomic-physics-applications-operators.html">势阱、隧穿与力学量算符</a></h2><p class="post-excerpt">无限深势阱、有限深势阱、谐振子，以及位置与动量算符的本征值图像。</p><div class="post-footer"><a class="read-more" href="posts/atomic-physics-applications-operators.html">开始阅读 →</a><span class="post-length">10 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,核物理"><div class="post-meta"><span class="post-date">2026.04.20</span><span class="post-tag">原子物理</span></div><h2 class="post-title"><a href="posts/atomic-physics-nuclear-force.html">核力：六条性质与汤川图像</a></h2><p class="post-excerpt">短程性、饱和性、斥力芯、自旋相关性，以及有质量交换粒子如何对应短程相互作用。</p><div class="post-footer"><a class="read-more" href="posts/atomic-physics-nuclear-force.html">开始阅读 →</a><span class="post-length">9 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,特殊函数,勒让德,贝塞尔"><div class="post-meta"><span class="post-date">2026.04.20</span><span class="post-tag">数学物理</span></div><h2 class="post-title"><a href="posts/pde-special-functions-odes.html">特殊函数常微分方程</a></h2><p class="post-excerpt">球坐标与柱坐标下的分离变量，勒让德、贝塞尔函数和边界本征值。</p><div class="post-footer"><a class="read-more" href="posts/pde-special-functions-odes.html">开始阅读 →</a><span class="post-length">14 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,不确定关系"><div class="post-meta"><span class="post-date">2026.03.28</span><span class="post-tag">原子物理</span></div><h2 class="post-title"><a href="posts/atomic-physics-ch3.html">不确定关系与波函数统计解释</a></h2><p class="post-excerpt">从 de Broglie 波到概率解释，梳理位置—动量不确定关系的来源与边界。</p><div class="post-footer"><a class="read-more" href="posts/atomic-physics-ch3.html">开始阅读 →</a><span class="post-length">11 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,冲量定理,杜阿梅尔"><div class="post-meta"><span class="post-date">2026.03.28</span><span class="post-tag">数学物理</span></div><h2 class="post-title"><a href="posts/pde-impulse-method.html">冲量定理法与 Duhamel 原理</a></h2><p class="post-excerpt">把持续外源拆成无穷多个瞬时冲量，构造非齐次演化方程的解。</p><div class="post-footer"><a class="read-more" href="posts/pde-impulse-method.html">开始阅读 →</a><span class="post-length">8 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,非齐次边界,泊松方程"><div class="post-meta"><span class="post-date">2026.03.28</span><span class="post-tag">数学物理</span></div><h2 class="post-title"><a href="posts/pde-nonhomogeneous-boundary.html">非齐次边界条件与 Poisson 方程</a></h2><p class="post-excerpt">边界齐次化、叠加分解与二维 Poisson 方程的分离变量路线。</p><div class="post-footer"><a class="read-more" href="posts/pde-nonhomogeneous-boundary.html">开始阅读 →</a><span class="post-length">9 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="电工学,正弦交流"><div class="post-meta"><span class="post-date">2026.03.28</span><span class="post-tag">电工学</span></div><h2 class="post-title"><a href="posts/electrical-engineering-ch4-ac.html">正弦交流电路：知识点与解题法</a></h2><p class="post-excerpt">相量表示、阻抗与导纳、复功率及功率因数的系统化解题框架。</p><div class="post-footer"><a class="read-more" href="posts/electrical-engineering-ch4-ac.html">开始阅读 →</a><span class="post-length">10 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,非齐次方程,Fourier"><div class="post-meta"><span class="post-date">2026.03.28</span><span class="post-tag">数学物理</span></div><h2 class="post-title"><a href="posts/pde-nonhomogeneous.html">非齐次方程与 Fourier 法</a></h2><p class="post-excerpt">用叠加原理和本征函数展开处理有源波动、热传导方程。</p><div class="post-footer"><a class="read-more" href="posts/pde-nonhomogeneous.html">开始阅读 →</a><span class="post-length">8 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="数学物理,波动方程,达朗贝尔"><div class="post-meta"><span class="post-date">2026.03.26</span><span class="post-tag">数学物理</span></div><h2 class="post-title"><a href="posts/wave-equation-dalembert-separation.html">达朗贝尔公式与分离变量</a></h2><p class="post-excerpt">从行波图像到驻波模态，比较一维波动方程的两条经典求解路线。</p><div class="post-footer"><a class="read-more" href="posts/wave-equation-dalembert-separation.html">开始阅读 →</a><span class="post-length">10 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="原子物理,玻尔模型"><div class="post-meta"><span class="post-date">2026.03.26</span><span class="post-tag">原子物理</span></div><h2 class="post-title"><a href="posts/atomic-physics-ch2.html">玻尔模型与量子力学导论</a></h2><p class="post-excerpt">原子光谱、Bohr 量子化条件、Franck–Hertz 实验与旧量子论的边界。</p><div class="post-footer"><a class="read-more" href="posts/atomic-physics-ch2.html">开始阅读 →</a><span class="post-length">12 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="电工学,电路分析"><div class="post-meta"><span class="post-date">2026.03.26</span><span class="post-tag">电工学</span></div><h2 class="post-title"><a href="posts/electrical-engineering-ch2.html">电路的分析方法</a></h2><p class="post-excerpt">支路电流、节点电压、叠加、戴维南与诺顿定理。</p><div class="post-footer"><a class="read-more" href="posts/electrical-engineering-ch2.html">开始阅读 →</a><span class="post-length">9 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="电工学,暂态分析"><div class="post-meta"><span class="post-date">2026.03.26</span><span class="post-tag">电工学</span></div><h2 class="post-title"><a href="posts/electrical-engineering-ch3.html">电路的暂态分析</a></h2><p class="post-excerpt">换路定理、一阶电路的零输入与零状态响应、三要素法。</p><div class="post-footer"><a class="read-more" href="posts/electrical-engineering-ch3.html">开始阅读 →</a><span class="post-length">9 MIN</span></div></article>
+      <article class="post-card reveal" data-tags="电工学,交流电路"><div class="post-meta"><span class="post-date">2026.03.26</span><span class="post-tag">电工学</span></div><h2 class="post-title"><a href="posts/electrical-engineering-ch4.html">正弦交流电路</a></h2><p class="post-excerpt">相量、RLC 串并联、交流功率、谐振频率与带宽。</p><div class="post-footer"><a class="read-more" href="posts/electrical-engineering-ch4.html">开始阅读 →</a><span class="post-length">10 MIN</span></div></article>
+      <div class="empty-state"><span class="serif">没有找到对应笔记。</span><br>试试更短的关键词，或切换到“全部”。</div>
+    </section>
+  </div></main>
+  <footer class="site-footer"><div class="container footer-inner"><div><span class="footer-kicker">17 notes and counting.</span><p class="footer-title">向柑潾的学习手记</p><span class="footer-copy">© 2026 · RUC School of Physics</span></div><div class="footer-tags"><span>PHYSICS</span><span>MATH METHODS</span><span>AI4SCIENCE</span></div></div></footer>
+</body></html>

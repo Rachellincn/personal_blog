@@ -13,7 +13,13 @@
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     }
   ],
@@ -28,6 +34,9 @@
     { "source": "/posts/atomic-physics-wavefunction-superposition", "destination": "/posts/atomic-physics-wavefunction-superposition.html" },
     { "source": "/posts/atomic-physics-applications-operators", "destination": "/posts/atomic-physics-applications-operators.html" },
     { "source": "/posts/atomic-physics-nuclear-force", "destination": "/posts/atomic-physics-nuclear-force.html" },
-    { "source": "/posts/pde-special-functions-odes", "destination": "/posts/pde-special-functions-odes.html" }
+    { "source": "/posts/pde-special-functions-odes", "destination": "/posts/pde-special-functions-odes.html" },
+    { "source": "/posts/atomic-fine-structure-spin", "destination": "/posts/atomic-fine-structure-spin.html" },
+    { "source": "/posts/pauli-principle", "destination": "/posts/pauli-principle.html" },
+    { "source": "/posts/sturm-liouville", "destination": "/posts/sturm-liouville.html" }
   ]
 }
