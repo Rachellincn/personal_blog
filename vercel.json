@@ -24,6 +24,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/favicon.ico", "destination": "/favicon.svg" },
     { "source": "/notes", "destination": "/notes.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/posts/pde-nonhomogeneous", "destination": "/posts/pde-nonhomogeneous.html" },
