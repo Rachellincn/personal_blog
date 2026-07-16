@@ -1,6 +1,6 @@
-# NOTEBOOK — Personal Tech Blog
+# Ganlin's Field Notes — Personal Academic Blog
 
-硬核简约风格个人技术博客，基于纯静态 HTML + KaTeX，部署于 Vercel。
+面向青年研究者的个人学术博客，记录物理、数学物理方法与 AI4Science 学习过程。基于纯静态 HTML、CSS、少量原生 JavaScript 与 KaTeX，部署于 Vercel。
 
 ## 目录结构
 
@@ -11,7 +11,9 @@
 ├── about.html              # 关于页
 ├── vercel.json             # Vercel 部署配置
 ├── css/
-│   └── style.css           # 全局样式（深色极简风）
+│   └── style.css           # 明亮学术编辑风设计系统
+├── js/
+│   └── site.js             # 搜索、筛选、滚动揭示与轻量交互
 └── posts/
     └── wave-equation-dalembert-separation.html   # 达朗贝尔公式 & 分离变数法
 ```
@@ -19,8 +21,11 @@
 ## 技术栈
 
 - 纯静态 HTML5 + CSS3
+- 原生 JavaScript — 搜索、学科筛选、滚动进度与渐进增强动效
 - [KaTeX](https://katex.org) — LaTeX 公式渲染（CDN 引入，无需构建）
 - [Vercel](https://vercel.com) — 静态托管
+
+动效遵循 `prefers-reduced-motion`，主要使用 `transform` 与 `opacity`，保持移动端流畅性。
 
 ## 本地预览
 

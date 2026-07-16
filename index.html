@@ -1,239 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#05050a" />
-  <title>NOTEBOOK — Xiang Ganlin</title>
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="向柑潾的物理与 AI4Science 学习笔记：二维材料、凝聚态物理、数学物理方法与人工智能。">
+  <title>向柑潾 · Physics, notes &amp; little discoveries</title>
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <script defer src="js/site.js?v=1"></script>
 </head>
 <body>
-  <div class="scanline"></div>
-
-  <!-- Ambient glow -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
 
   <header class="site-header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="index.html" class="logo">
-          <span class="logo-bracket">[</span>
-          <span class="logo-text">NOTEBOOK</span>
-          <span class="logo-bracket">]</span>
-        </a>
-
-        <!-- Mobile menu toggle -->
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </label>
-
-        <nav class="nav">
-          <a href="index.html" class="nav-link active">INDEX</a>
-          <a href="notes.html" class="nav-link">NOTES</a>
-          <a href="about.html" class="nav-link">ABOUT</a>
-        </nav>
-      </div>
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="向柑潾的学习手记，返回首页">
+        <span class="logo-mark">向</span><span class="logo-text">Ganlin's field notes</span>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden>
+      <label for="nav-toggle" class="nav-hamburger" aria-label="打开导航"><span></span><span></span><span></span></label>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="notes.html" class="nav-link">学习笔记</a>
+        <a href="about.html" class="nav-link">关于</a>
+      </nav>
     </div>
   </header>
 
-  <main class="main">
+  <main id="content" class="main">
     <div class="container">
-
-      <!-- HERO: Personal Profile -->
       <section class="hero">
-        <div class="hero-glass">
-          <div class="hero-name">
-            <span class="name-zh">向柑潾</span>
-            <span class="name-sep">/</span>
-            <span class="name-en">Xiang Ganlin</span>
+        <div class="hero-copy reveal">
+          <span class="eyebrow">RUC · Undergraduate researcher</span>
+          <h1 class="display-title">Physics, notes<br>&amp; little <em>discoveries.</em></h1>
+          <p class="lede">你好，我是向柑潾，中国人民大学物理学院大二学生。我在二维材料与 AI for Science 的交界处做实验、写代码，也把真正想明白的瞬间留在这里。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="notes.html">翻开学习笔记 <span class="arrow">→</span></a>
+            <a class="button" href="about.html">认识我</a>
           </div>
-          <div class="hero-subtitle">
-            <span>中国人民大学</span>
-            <span class="hero-dot">·</span>
-            <span>物理学院</span>
-            <span class="hero-dot">·</span>
-            <span>大二在读</span>
-          </div>
-          <p class="hero-bio">
-            学术热情集中于<strong>物理学</strong>与<strong>人工智能</strong>的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
-          </p>
+        </div>
+
+        <div class="research-canvas reveal" data-tilt aria-label="由电子轨道、二维材料晶格与波函数构成的研究图谱">
+          <svg class="orbit-visual" viewBox="0 0 520 520" role="img" aria-labelledby="orbit-title orbit-desc">
+            <title id="orbit-title">研究轨道</title>
+            <desc id="orbit-desc">抽象表现电子轨道、二维晶格和人工智能节点之间的关系。</desc>
+            <defs>
+              <linearGradient id="orbitGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#315b73"/><stop offset="1" stop-color="#a795c8"/>
+              </linearGradient>
+              <filter id="softGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g fill="none" stroke="url(#orbitGradient)" stroke-width="1.4" opacity=".64">
+              <ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(18 260 245)"/>
+              <ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(76 260 245)"/>
+              <ellipse cx="260" cy="245" rx="190" ry="74" transform="rotate(136 260 245)"/>
+              <circle cx="260" cy="245" r="118" stroke-dasharray="3 10"/>
+            </g>
+            <g stroke="#7ba7c7" stroke-width="1" opacity=".45">
+              <path d="M128 329 198 369 268 329 338 369 408 329"/>
+              <path d="M128 329 128 410M198 369v81M268 329v81M338 369v81M408 329v81"/>
+              <path d="M128 410 198 450 268 410 338 450 408 410"/>
+            </g>
+            <g fill="#315b73" filter="url(#softGlow)">
+              <circle cx="260" cy="245" r="13"/>
+              <circle cx="94" cy="190" r="6" fill="#ef8d78"/>
+              <circle cx="392" cy="126" r="6" fill="#a795c8"/>
+              <circle cx="357" cy="390" r="6" fill="#7ba7c7"/>
+            </g>
+            <g fill="#315b73" opacity=".55">
+              <circle cx="128" cy="329" r="4"/><circle cx="198" cy="369" r="4"/><circle cx="268" cy="329" r="4"/>
+              <circle cx="338" cy="369" r="4"/><circle cx="408" cy="329" r="4"/><circle cx="128" cy="410" r="4"/>
+              <circle cx="198" cy="450" r="4"/><circle cx="268" cy="410" r="4"/><circle cx="338" cy="450" r="4"/><circle cx="408" cy="410" r="4"/>
+            </g>
+          </svg>
+          <span class="equation-chip chip-a">Hψ = Eψ</span>
+          <span class="equation-chip chip-b">MoS₂ · 2D</span>
+          <span class="equation-chip chip-c">AI × Science</span>
+          <p class="canvas-caption">A small map of what I keep circling around: matter, models, and the mathematics between them.</p>
         </div>
       </section>
 
-      <!-- Research Focus: Bento Grid -->
-      <section class="section">
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>二维材料 <i>✦</i></span><span>凝聚态物理 <i>✦</i></span><span>AI FOR SCIENCE <i>✦</i></span><span>数学物理方法 <i>✦</i></span><span>原子物理 <i>✦</i></span><span>PARAMETER-EFFICIENT FINE-TUNING <i>✦</i></span>
+          <span>二维材料 <i>✦</i></span><span>凝聚态物理 <i>✦</i></span><span>AI FOR SCIENCE <i>✦</i></span><span>数学物理方法 <i>✦</i></span><span>原子物理 <i>✦</i></span><span>PARAMETER-EFFICIENT FINE-TUNING <i>✦</i></span>
+        </div>
+      </div>
+
+      <section class="section reveal" aria-labelledby="focus-title">
         <div class="section-head">
-          <div>
-            <h2 class="section-title">Research Focus</h2>
-            <p class="section-subtitle">Main areas of academic exploration</p>
-          </div>
-          <span class="section-line"></span>
-          <span class="section-tag">SECTION_02</span>
+          <div><span class="section-kicker">01 / Research orbit</span><h2 class="section-title" id="focus-title">我在追的问题</h2><p class="section-subtitle">研究兴趣不只是一串关键词，而是一组仍在生长的问题。</p></div>
+          <span class="section-tag">CURRENT FOCUS</span>
         </div>
-
-        <div class="bento-grid">
-          <!-- 2D Materials Card -->
-          <div class="bento-card">
-            <div class="bento-card-icon cyan">◈</div>
-            <h3>2D Materials & Condensed Matter</h3>
-            <p>Synthesis and characterization of 2D TMDCs (e.g., MoS₂) using all-liquid phase precursor methods within optical fibers.</p>
-            <a href="notes.html" class="bento-card-link">LEARN_MORE →</a>
-          </div>
-
-          <!-- AI4S Card -->
-          <div class="bento-card">
-            <div class="bento-card-icon magenta">⚡</div>
-            <h3>AI for Science (AI4S)</h3>
-            <p>Exploring deep learning and multi-modal LLMs in scientific computing. Specialized in PEFT (Parameter-Efficient Fine-Tuning).</p>
-            <a href="notes.html" class="bento-card-link">PROJECT_HUB →</a>
-          </div>
+        <div class="focus-grid">
+          <article class="focus-card">
+            <span class="focus-number">MATTER / 01</span>
+            <h3>2D Materials<br>&amp; Condensed Matter</h3>
+            <p>关注二维材料的合成与表征。目前探索基于全液相前驱体法，在光纤内生长二维过渡金属硫族化合物（如 MoS₂）。</p>
+          </article>
+          <article class="focus-card ai">
+            <span class="focus-number">MODEL / 02</span>
+            <h3>AI for<br>Science</h3>
+            <p>探索深度学习、生成式 AI 与多模态大模型在科学计算中的可能性，当前重点是 PEFT 与过参数化微调。</p>
+          </article>
         </div>
-
-        <!-- Tech Stack Panel -->
         <div class="tech-stack-panel">
-          <div class="tech-stack-label">
-            <span>◇</span> Knowledge Base & Toolchain
-          </div>
-          <div class="tech-chips">
-            <span class="chip chip-physics">理论力学</span>
-            <span class="chip chip-physics">电磁学</span>
-            <span class="chip chip-physics">原子物理</span>
-            <span class="chip chip-physics">光学</span>
-            <span class="chip chip-math">线性代数</span>
-            <span class="chip chip-math">数学物理方法</span>
-            <span class="chip chip-math">蒙特卡洛</span>
-            <span class="chip chip-math">数值优化</span>
-            <span class="chip chip-code">Python</span>
-            <span class="chip chip-code">MATLAB</span>
-            <span class="chip chip-code">PyTorch</span>
-            <span class="chip chip-tool">LaTeX</span>
-            <span class="chip chip-tool">Markdown</span>
-          </div>
+          <div class="tech-stack-label">Knowledge base &amp; toolchain</div>
+          <div class="tech-chips"><span class="chip">理论力学</span><span class="chip">电磁学</span><span class="chip">原子物理</span><span class="chip">光学</span><span class="chip chip-math">线性代数</span><span class="chip chip-math">数学物理方法</span><span class="chip chip-math">蒙特卡洛</span><span class="chip chip-code">Python</span><span class="chip chip-code">MATLAB</span><span class="chip chip-code">PyTorch</span><span class="chip chip-tool">LaTeX</span></div>
         </div>
       </section>
 
-      <!-- Notes Preview -->
-      <section class="section">
+      <section class="section reveal" aria-labelledby="now-title">
         <div class="section-head">
-          <div>
-            <h2 class="section-title">Research Journal</h2>
-            <p class="section-subtitle">Calculations, derivations, and insights</p>
-          </div>
-          <span class="section-line"></span>
-          <span class="section-tag">SECTION_03</span>
+          <div><span class="section-kicker">02 / On my desk</span><h2 class="section-title" id="now-title">最近在学</h2><p class="section-subtitle">来自个人知识库的最新切片，整理于 2026 年春季学期。</p></div>
+          <span class="section-tag">LIVE NOTEBOOK</span>
         </div>
-
-        <div class="tile-grid">
-
-          <a href="posts/atomic-physics-wavefunction-superposition.html" class="tile">
-            <div class="tile-tag">原子物理</div>
-            <div class="tile-title">波函数叠加<br/>与薛定谔方程</div>
-            <div class="tile-meta">2026-04-20</div>
-          </a>
-
-          <a href="posts/atomic-physics-applications-operators.html" class="tile">
-            <div class="tile-tag">原子物理</div>
-            <div class="tile-title">应用举例<br/>与算符</div>
-            <div class="tile-meta">2026-04-20</div>
-          </a>
-
-          <a href="posts/atomic-physics-nuclear-force.html" class="tile">
-            <div class="tile-tag">原子物理</div>
-            <div class="tile-title">核力</div>
-            <div class="tile-meta">2026-04-20</div>
-          </a>
-
-          <a href="posts/pde-special-functions-odes.html" class="tile">
-            <div class="tile-tag">数学物理方程</div>
-            <div class="tile-title">特殊函数<br/>常微分方程</div>
-            <div class="tile-meta">2026-04-20</div>
-          </a>
-
-          <a href="posts/atomic-physics-ch3.html" class="tile">
-            <div class="tile-tag">原子物理</div>
-            <div class="tile-title">不确定关系<br/>波函数统计解释</div>
-            <div class="tile-meta">2026-03-28</div>
-          </a>
-
-          <a href="posts/pde-impulse-method.html" class="tile">
-            <div class="tile-tag">数学物理方程</div>
-            <div class="tile-title">冲量定理法<br/>杜阿梅尔原理</div>
-            <div class="tile-meta">2026-03-28</div>
-          </a>
-
-          <a href="posts/pde-nonhomogeneous-boundary.html" class="tile">
-            <div class="tile-tag">数学物理方程</div>
-            <div class="tile-title">非齐次边条件<br/>泊松方程</div>
-            <div class="tile-meta">2026-03-28</div>
-          </a>
-
-          <a href="posts/electrical-engineering-ch4-ac.html" class="tile">
-            <div class="tile-tag">电工学</div>
-            <div class="tile-title">正弦交流电路<br/>知识点与解题方法</div>
-            <div class="tile-meta">2026-03-28</div>
-          </a>
-
-          <a href="posts/pde-nonhomogeneous.html" class="tile">
-            <div class="tile-tag">数学物理方程</div>
-            <div class="tile-title">非齐次方程<br/>叠加原理 &amp; 傅里叶法</div>
-            <div class="tile-meta">2026-03-28</div>
-          </a>
-
-          <a href="posts/wave-equation-dalembert-separation.html" class="tile">
-            <div class="tile-tag">数学物理方程</div>
-            <div class="tile-title">达朗贝尔公式<br/>&amp; 分离变数法</div>
-            <div class="tile-meta">2026-03-26</div>
-          </a>
-
-          <a href="posts/atomic-physics-ch2.html" class="tile">
-            <div class="tile-tag">原子物理</div>
-            <div class="tile-title">玻尔模型<br/>与量子力学导论</div>
-            <div class="tile-meta">2026-03-26</div>
-          </a>
-
-          <a href="posts/electrical-engineering-ch2.html" class="tile">
-            <div class="tile-tag">电工学</div>
-            <div class="tile-title">电路的<br/>分析方法</div>
-            <div class="tile-meta">2026-03-26</div>
-          </a>
-
-          <a href="posts/electrical-engineering-ch3.html" class="tile">
-            <div class="tile-tag">电工学</div>
-            <div class="tile-title">电路的<br/>暂态分析</div>
-            <div class="tile-meta">2026-03-26</div>
-          </a>
-
-          <a href="posts/electrical-engineering-ch4.html" class="tile">
-            <div class="tile-tag">电工学</div>
-            <div class="tile-title">正弦<br/>交流电路</div>
-            <div class="tile-meta">2026-03-26</div>
-          </a>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 2rem;">
-          <a href="notes.html" class="filter-btn active" style="text-decoration: none;">VIEW_ALL_NOTES →</a>
+        <div class="now-grid">
+          <article class="now-card"><div class="now-meta"><span>ATOMIC PHYSICS</span><span>01</span></div><h3>精细结构与自旋</h3><p>从轨道磁矩、Larmor 进动到 Stern–Gerlach 实验，建立角动量量子化的连贯图像。</p></article>
+          <article class="now-card"><div class="now-meta"><span>QUANTUM STATES</span><span>02</span></div><h3>泡利原理与多电子原子</h3><p>为什么单态与三重态拥有相反的空间对称性，以及这件事如何决定原子光谱。</p></article>
+          <article class="now-card"><div class="now-meta"><span>MATH METHODS</span><span>03</span></div><h3>Sturm–Liouville 谱</h3><p>把矩阵本征值问题搬到函数空间，理解边界条件、正交性与广义 Fourier 展开。</p></article>
         </div>
       </section>
 
+      <section class="section reveal" aria-labelledby="journal-title">
+        <div class="section-head">
+          <div><span class="section-kicker">03 / Selected notes</span><h2 class="section-title" id="journal-title">学习手记</h2><p class="section-subtitle">推导、物理图像，以及那些终于想通的“为什么”。</p></div>
+          <a class="button" href="notes.html">查看全部 <span class="arrow">→</span></a>
+        </div>
+        <div class="tile-grid">
+          <a href="posts/atomic-fine-structure-spin.html" class="tile"><div class="tile-tag">原子物理 · NEW</div><div class="tile-title">精细结构、磁矩<br>与电子自旋</div><div class="tile-meta">2026.05 · 8 min read</div></a>
+          <a href="posts/pauli-principle.html" class="tile"><div class="tile-tag">多电子原子 · NEW</div><div class="tile-title">泡利不相容原理<br>与交换对称性</div><div class="tile-meta">2026.05 · 9 min read</div></a>
+          <a href="posts/sturm-liouville.html" class="tile"><div class="tile-tag">数学物理 · NEW</div><div class="tile-title">Sturm–Liouville<br>本征值问题</div><div class="tile-meta">2026.05 · 10 min read</div></a>
+        </div>
+      </section>
     </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-copy">© 2026 XIANG GANLIN // RUC PHYSICS</span>
-        <div class="footer-tags">
-          <span>LATEX_RENDER</span>
-          <span>DEPLOYED_VERCEL</span>
-          <span>AI4SCIENCE_DRIVEN</span>
-        </div>
-      </div>
+    <div class="container footer-inner">
+      <div><span class="footer-kicker">Keep asking why.</span><p class="footer-title">向柑潾的学习手记</p><span class="footer-copy">© 2026 · RUC School of Physics</span></div>
+      <div class="footer-tags"><span>PHYSICS</span><span>AI4SCIENCE</span><span>LATEX</span><span>VERCEL</span></div>
     </div>
   </footer>
-
 </body>
 </html>

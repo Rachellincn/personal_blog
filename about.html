@@ -1,111 +1,45 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#05050a" />
-  <title>ABOUT — NOTEBOOK</title>
-  <link rel="stylesheet" href="css/style.css?v=6" />
-</head>
-<body>
-  <div class="scanline"></div>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
+<!doctype html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f4ed">
+  <meta name="description" content="关于向柑潾：来自中国人民大学物理学院，关注二维材料、凝聚态物理与 AI for Science。">
+  <title>关于 · 向柑潾</title><link rel="stylesheet" href="css/style.css?v=8"><script defer src="js/site.js?v=1"></script>
+</head><body>
+  <a class="skip-link" href="#content">跳到正文</a><div class="scroll-progress" aria-hidden="true"></div><div class="ambient-glow glow-3" aria-hidden="true"></div>
+  <header class="site-header"><div class="container header-inner"><a href="index.html" class="logo" aria-label="返回首页"><span class="logo-mark">向</span><span class="logo-text">Ganlin's field notes</span></a><input type="checkbox" id="nav-toggle" class="nav-toggle" hidden><label for="nav-toggle" class="nav-hamburger" aria-label="打开导航"><span></span><span></span><span></span></label><nav class="nav" aria-label="主导航"><a href="index.html" class="nav-link">首页</a><a href="notes.html" class="nav-link">学习笔记</a><a href="about.html" class="nav-link active">关于</a></nav></div></header>
+  <main id="content" class="main"><div class="container">
+    <header class="page-title-block reveal"><span class="eyebrow">A student, in progress</span><h1 class="page-title-text">About the person<br>behind the notes.</h1><p class="page-subtitle">我相信真正的理解，通常从一句不太满意的“为什么”开始。</p></header>
+    <div class="about-layout">
+      <aside class="portrait-card reveal">
+        <div class="portrait-orbit" aria-label="向柑潾的抽象字母肖像"><span class="portrait-initial">G</span></div>
+        <p class="portrait-caption">向柑潾 · Xiang Ganlin<br>RUC School of Physics · Class of 2028</p>
+        <div class="tech-chips"><span class="chip">Physics</span><span class="chip chip-math">AI4Science</span><span class="chip chip-code">Curious mind</span></div>
+      </aside>
+      <article class="about-block reveal">
+        <h2>你好，我是向柑潾。</h2>
+        <p>我是<strong>中国人民大学物理学院</strong>大二本科生。我的学术热情集中在<strong>物理学与人工智能的交叉领域（AI4Science）</strong>，希望理解前沿 AI 技术如何参与材料科学和基础物理研究，而不是只把它当作一个黑箱工具。</p>
 
-  <header class="site-header">
-    <div class="container">
-      <div class="header-inner">
-        <a href="index.html" class="logo">
-          <span class="logo-bracket">[</span><span class="logo-text">NOTEBOOK</span><span class="logo-bracket">]</span>
-        </a>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
-        <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </label>
-        <nav class="nav">
-          <a href="index.html" class="nav-link">INDEX</a>
-          <a href="notes.html" class="nav-link">NOTES</a>
-          <a href="about.html" class="nav-link active">ABOUT</a>
-        </nav>
-      </div>
-    </div>
-  </header>
+        <h2>研究方向没有改变，表达方式更清晰了。</h2>
+        <p><strong>二维材料与凝聚态物理</strong> — 关注二维材料的合成与表征。目前正在进行基于全液相前驱体法的光纤内二维过渡金属硫族化合物（如 MoS₂）的生长与制备研究。</p>
+        <p><strong>AI for Science</strong> — 探索深度学习、生成式 AI 和多模态大语言模型在科学计算中的潜力。目前核心项目围绕 <strong>PEFT 与过参数化微调大模型</strong>展开。</p>
 
-  <main class="main">
-    <div class="container">
+        <div class="mini-timeline" aria-label="当前学习与研究轨迹">
+          <div class="timeline-item"><small>MATTER</small><h3>从材料生长到物性表征</h3><p>在具体实验体系里学习“可控”与“可重复”究竟意味着什么。</p></div>
+          <div class="timeline-item"><small>MODEL</small><h3>从调参到理解模型</h3><p>关注高效微调为什么有效，以及模型能力如何与科学任务真正对接。</p></div>
+          <div class="timeline-item"><small>METHOD</small><h3>把数学方法连成结构</h3><p>从特殊函数、本征值问题到数值优化，不只记公式，也追踪它们共享的骨架。</p></div>
+        </div>
 
-      <div class="page-title-block">
-        <div class="page-title-text">ABOUT ME</div>
-        <p class="page-subtitle">关于我</p>
-      </div>
+        <h2>知识与工具</h2>
+        <p>物理基础覆盖经典力学、理论力学、电磁学、光学与原子物理；数学训练主要包括线性代数与数学物理方法。数值计算方面接触过高斯求积、Simpson 法、Monte Carlo 积分、Newton 法、共轭梯度、BFGS 与 Lanczos 算法。</p>
+        <p>我使用 Python、MATLAB 与 PyTorch 做计算和模型实验，也重度依赖 Markdown、LaTeX 与 Obsidian 建立个人知识库。这个博客就是从那套知识库里逐步整理出的公开版本。</p>
 
-      <div class="about-block">
-
-        <p>
-          你好！我是<strong>中国人民大学（RUC）</strong>的一名大二物理学本科生。我的学术热情主要集中在<strong>物理学</strong>与<strong>人工智能</strong>的交叉领域（AI4Science），致力于探索前沿 AI 技术在材料科学和基础物理研究中的应用。
-        </p>
-
-        <h2>研究方向与关注领域</h2>
-        <p>
-          <strong>二维材料与凝聚态物理</strong> — 重点关注二维材料的合成与表征。目前正在进行基于全液相前驱体法的光纤内二维过渡金属硫族化合物（如 MoS₂）的生长与制备研究。
-        </p>
-        <p>
-          <strong>AI for Science</strong> — 积极探索深度学习、生成式 AI 和多模态大语言模型在科学计算中的潜力。目前的核心项目是 <strong>PEFT 过参数化微调大模型</strong>。
-        </p>
-
-        <h2>技术栈与知识储备</h2>
-        <p>
-          <strong>物理与数学基础</strong> — 具备扎实的理论物理基础（涵盖经典力学、理论力学、电磁学、光学、原子物理），并辅以坚实的线性代数与数学物理方法训练。
-        </p>
-        <p>
-          <strong>数值计算与优化</strong> — 熟悉并能应用多种数值计算与优化算法，包括高斯求积、辛普森法则、蒙特卡洛积分、牛顿法、共轭梯度法（CG）、BFGS 以及 Lanczos 算法等。
-        </p>
-        <p>
-          <strong>编程与工具</strong> — 掌握 Python 与 MATLAB，具备构建和调优深度学习模型的实践经验。高效的学术输出流：Markdown 与 LaTeX 重度用户，习惯在 macOS 环境下结合 MarkText 与 Espanso 打造极其流畅的数理公式输入与学术笔记工作流。
-        </p>
-
-        <h2>更多关于我</h2>
-        <p>
-          除了在实验室和代码中寻找物理世界的底层逻辑，我的视线也经常投向更广阔的真实世界，对<strong>国际关系与当代地缘政治</strong>抱有浓厚的阅读兴趣。
-        </p>
-        <p>
-          在科研与学术之外，我也积极融入校园生活，曾参与组织和策划物理系文体部的春季运动会等大型活动，享受团队协作带来的乐趣。
-        </p>
-        <p>
-          欢迎在这里与我交流物理、AI、技术或是世界局势！
-        </p>
+        <h2>物理之外</h2>
+        <p>我也持续阅读国际关系与当代地缘政治，并参与校园文体活动的组织策划。实验、代码与真实世界并不是彼此隔离的三个房间；它们都在训练如何观察、建模、协作和修正判断。</p>
 
         <h2>关于这个站</h2>
-        <p>
-          这是一个私人学习笔记站点，记录在学习物理课程过程中的推导、物理图像和个人理解。不保证严格性，但尽量追求"讲清楚为什么"。
-        </p>
-        <p>
-          纯静态 HTML + CSS，公式渲染使用 <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a>，部署在 <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>。没有框架，没有 npm，没有 build step。
-        </p>
-
-        <h2>内容许可</h2>
-        <p>
-          笔记内容仅供个人学习参考。转载请注明出处。教材原图/截图版权归原作者所有。
-        </p>
-
-      </div>
-
+        <p>这里记录课程学习中的推导、物理图像与个人理解。内容会持续修订，不承诺每一版都绝对严谨，但会尽量说清楚“为什么”。网站保持纯静态 HTML、CSS 与少量 JavaScript，公式使用 <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a>，部署于 <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a>。</p>
+        <p>笔记仅供学习参考；引用或转载时请注明出处。教材原图与截图版权归原作者所有，新版页面不再复制整本教材或来源不明的图像。</p>
+      </article>
     </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-copy">© 2026 XIANG GANLIN // RUC PHYSICS</span>
-        <div class="footer-tags">
-          <span>LATEX_RENDER</span>
-          <span>DEPLOYED_VERCEL</span>
-          <span>AI4SCIENCE_DRIVEN</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+  </div></main>
+  <footer class="site-footer"><div class="container footer-inner"><div><span class="footer-kicker">Still learning.</span><p class="footer-title">向柑潾的学习手记</p><span class="footer-copy">© 2026 · RUC School of Physics</span></div><div class="footer-tags"><span>2D MATERIALS</span><span>AI4SCIENCE</span><span>PHYSICS</span></div></div></footer>
+</body></html>
