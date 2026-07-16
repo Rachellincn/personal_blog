@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { note: CollectionEntry<'notes'> }
+const { note } = Astro.props;
+const date = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(note.data.date).replace(/-/g, '.');
+---
+<article class="post-card reveal" data-tags={note.data.tags.join(',')}>
+  <div class="post-meta"><span class="post-date">{date}</span><span class="post-tag">{note.data.subject}</span></div>
+  <h2 class="post-title"><a href={note.data.legacyPath}>{note.data.title}</a></h2>
+  <p class="post-excerpt">{note.data.description}</p>
+  <div class="post-footer"><a class="read-more" href={note.data.legacyPath}>Read note →</a><span class="post-length">{note.data.readingTime} MIN</span></div>
+</article>

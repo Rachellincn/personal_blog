@@ -1,0 +1,29 @@
+---
+import ExperimentControls from './ExperimentControls.astro';
+import PhysicsDataPanel from './PhysicsDataPanel.astro';
+---
+<div class="playground-shell" data-playground>
+  <div class="experiment-tabs" role="tablist" aria-label="Physics experiments">
+    <button type="button" role="tab" id="tab-projectile" aria-controls="experiment-stage" aria-selected="true" data-experiment="projectile"><span>01</span> Projectile</button>
+    <button type="button" role="tab" id="tab-pendulum" aria-controls="experiment-stage" aria-selected="false" data-experiment="pendulum" tabindex="-1"><span>02</span> Double pendulum</button>
+    <button type="button" role="tab" id="tab-wave" aria-controls="experiment-stage" aria-selected="false" data-experiment="wave" tabindex="-1"><span>03</span> Wave lab</button>
+  </div>
+  <div class="experiment-layout">
+    <ExperimentControls />
+    <section id="experiment-stage" class="experiment-stage" role="tabpanel" aria-labelledby="tab-projectile" tabindex="0">
+      <div class="canvas-frame">
+        <canvas id="physics-canvas" aria-label="Interactive physics experiment"></canvas>
+        <div class="canvas-badge"><span id="experiment-number">EXPERIMENT 01</span><strong id="experiment-name">Projectile target</strong></div>
+      </div>
+      <div id="experiment-actions" class="experiment-actions" aria-label="Experiment actions"></div>
+      <p id="keyboard-help" class="keyboard-help">Keyboard: Space launch/pause · R reset · N new target · Arrow keys aim</p>
+    </section>
+    <PhysicsDataPanel />
+  </div>
+  <noscript>
+    <section class="no-script-note">
+      <h2>Physics Playground needs JavaScript for the live instruments.</h2>
+      <p>The projectile experiment uses <code>x(t)=v₀cos(θ)t</code> and <code>y(t)=v₀sin(θ)t−½gt²</code>. The double pendulum integrates coupled nonlinear equations with RK4. Wave Lab visualizes superposed damped waves <code>u=Σ A·sin(kr−ωt+φ)e^(−αr)</code>.</p>
+    </section>
+  </noscript>
+</div>

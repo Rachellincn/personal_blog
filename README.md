@@ -1,68 +1,67 @@
-# Ganlin's Field Notes — Personal Academic Blog
+# Ganlin's Field Notes
 
-面向青年研究者的个人学术博客，记录物理、数学物理方法与 AI4Science 学习过程。基于纯静态 HTML、CSS、少量原生 JavaScript 与 KaTeX，部署于 Vercel。
+Ganlin Xiang’s bilingual academic blog for physics, mathematical methods, and AI for Science. The site is statically generated with Astro and deployed on Vercel. It preserves the original `.html` URLs while centralizing shared layout, metadata, navigation, and note indexing.
 
-## 目录结构
+## Physics Playground
 
+`/playground.html` contains three native Canvas + TypeScript instruments:
+
+- Projectile Target — analytic, drag-to-aim ballistic motion with target scoring and local best score.
+- Double Pendulum — coupled nonlinear equations integrated with fixed-step RK4, plus a nearby-initial-state chaos comparison.
+- Wave Lab — single/double-source damped wave superposition with displacement, intensity, and equal-phase displays.
+
+The experiments dynamically import only on the Playground page. They share animation, DPR resize, visibility, reduced-motion, controls, readout, persistence, and destroy lifecycles. See [docs/PHYSICS_PLAYGROUND.md](docs/PHYSICS_PLAYGROUND.md) for the models and extension guide.
+
+## Project structure
+
+```text
+src/
+├── components/            # Header, navigation, note cards, research visual, lab shell
+├── content/notes/         # Typed note collection; original article bodies are preserved
+├── layouts/BaseLayout.astro
+├── pages/                 # Legacy-compatible static routes, RSS, robots, sitemap input
+├── scripts/
+│   ├── playground/core/   # Shared loop, canvas, math, controls, lifecycle contracts
+│   └── playground/games/  # Projectile, double pendulum, wave lab
+└── styles/global.css
+tests/                     # Playwright navigation, interaction, a11y-mode, mobile, visual checks
+docs/PHYSICS_PLAYGROUND.md
+vercel.json
 ```
-.
-├── index.html              # 首页
-├── notes.html              # 笔记列表页
-├── about.html              # 关于页
-├── vercel.json             # Vercel 部署配置
-├── css/
-│   └── style.css           # 明亮学术编辑风设计系统
-├── js/
-│   └── site.js             # 搜索、筛选、滚动揭示与轻量交互
-└── posts/
-    └── wave-equation-dalembert-separation.html   # 达朗贝尔公式 & 分离变数法
-```
 
-## 技术栈
+Before migration, the repo had repeated headers/footers across `index.html`, `notes.html`, `about.html`, and 17 files under `posts/`. After migration, Astro components own the shell and the note collection owns article metadata and bodies.
 
-- 纯静态 HTML5 + CSS3
-- 原生 JavaScript — 搜索、学科筛选、滚动进度与渐进增强动效
-- [KaTeX](https://katex.org) — LaTeX 公式渲染（CDN 引入，无需构建）
-- [Vercel](https://vercel.com) — 静态托管
-
-动效遵循 `prefers-reduced-motion`，主要使用 `transform` 与 `opacity`，保持移动端流畅性。
-
-## 本地预览
+## Local development
 
 ```bash
-# 任意静态服务器均可，例如：
-npx serve .
-# 或
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
 
-浏览器打开 `http://localhost:8080`
-
-## 部署到 Vercel
-
-### 方法一：Vercel CLI
+Production-equivalent verification:
 
 ```bash
-npm i -g vercel
-vercel --prod
+npm run check
+npm run build
+npm run check:links
+npx playwright install chromium
+npm test
 ```
 
-### 方法二：连接 GitHub 仓库
+## Adding a note
 
-1. 将此目录推送到 GitHub 仓库
-2. 登录 [vercel.com](https://vercel.com)，选择 **Add New Project**
-3. 导入该 GitHub 仓库
-4. Framework Preset 选 **Other**，Output Directory 保持默认（根目录）
-5. 点击 **Deploy** 即可
+Create `src/content/notes/my-note.md` with the schema in `src/content.config.ts`. The Notes page, RSS feed, sitemap, category metadata, and `/posts/my-note.html` route are generated automatically. KaTeX delimiters use `$…$` and `$$…$$`; article headings receive anchors, and formulas/code blocks receive copy controls in the browser.
 
-Vercel 会自动检测到 `vercel.json` 配置。
+## Deployment
 
-## 添加新文章
+Vercel detects Astro, runs `npm run build`, and publishes `dist/`. Non-production branches create Preview Deployments through the connected Git integration. Production promotion is intentionally outside this feature branch workflow.
 
-1. 在 `posts/` 目录新建 HTML 文件（参考现有文章结构）
-2. 在 `notes.html` 的 `#post-list` 中新增 `.post-card`
-3. 在 `index.html` 首页的 `recent_posts` 中更新最新文章
+## Compatibility routes
 
-公式使用 KaTeX 语法：
-- 行内公式：`$...$`
-- 块级公式：`$$...$$`
+| Public path | Generated or rewritten target |
+|---|---|
+| `/`, `/index.html` | `dist/index.html` |
+| `/notes`, `/notes.html` | `dist/notes.html` |
+| `/about`, `/about.html` | `dist/about.html` |
+| `/playground`, `/playground.html` | `dist/playground.html` |
+| `/posts/:slug`, `/posts/:slug.html` | `dist/posts/:slug.html` |

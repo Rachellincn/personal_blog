@@ -1,0 +1,367 @@
+---
+title: "核力：六条性质与汤川图像"
+documentTitle: "原子物理 · 核力 — NOTEBOOK"
+description: "短程性、饱和性、斥力芯、自旋相关性，以及有质量交换粒子如何对应短程相互作用。"
+date: "2026-04-20"
+subject: "原子物理"
+tags: ["原子物理","核物理"]
+readingTime: 9
+language: "zh-CN"
+legacyPath: "/posts/atomic-physics-nuclear-force.html"
+---
+
+<main id="content" class="main">
+    <div class="container">
+
+      <div class="note-header">
+        <div class="note-meta">
+          <span class="tag-cyan">原子物理</span>
+          <span class="tag-lime">核物理</span>
+        </div>
+        <h1 class="note-title glitch" data-text="核力">核力</h1>
+        <p class="note-date">2026-04-20 · 原子物理第四章 · ~2200 words</p>
+      </div>
+
+      <!-- 目录 -->
+      <div class="toc-box">
+        <div class="toc-title">CONTENTS</div>
+        <ul class="toc-list">
+          <li><a href="#sec1">1. 这节在回答什么问题</a></li>
+          <li><a href="#sec2">2. 核力的一般性质</a></li>
+          <li><a href="#sec3">3. 六条性质浓缩表</a></li>
+          <li><a href="#sec4">4. 为什么"结合能正比于 A"能说明核力短程又饱和</a></li>
+          <li><a href="#sec5">5. 核力的介子理论</a></li>
+          <li><a href="#sec6">6. 最容易糊涂的几个点</a></li>
+          <li><a href="#sec7">7. 复习要点</a></li>
+        </ul>
+      </div>
+
+      <!-- 正文 -->
+      <div class="note-content">
+
+        <h2 id="sec1" class="section-heading">1. 这节在回答什么问题</h2>
+
+        <div class="content-section">
+          <p>原子核里有质子和中子。</p>
+          <ul class="styled-list">
+            <li>质子带正电，质子之间存在库仑斥力；</li>
+            <li>万有引力在原子核尺度上又小得几乎可以忽略；</li>
+            <li>但原子核却能稳定存在，还非常致密。</li>
+          </ul>
+
+          <p>所以一定还存在一种新的相互作用，把核子牢牢束缚在一起，这种力就叫<strong>核力</strong>。</p>
+
+          <div class="note-box note-important">
+            <p><strong>一句话理解：</strong>核力是作用在核子之间、负责把原子核"粘"在一起的强相互作用的低能表现。</p>
+          </div>
+        </div>
+
+        <h2 id="sec2" class="section-heading">2. 核力的一般性质</h2>
+
+        <div class="content-section">
+          <p>这一部分最重要，建议直接记住下面 6 条。</p>
+
+          <div class="note-block">
+            <h4 class="step-heading">1. 短程力</h4>
+            <p>核力只在很短的距离内才明显，数量级是<strong>飞米（fm）</strong>。</p>
+            <ul class="styled-list">
+              <li>$1 \text{ fm} = 10^{-15}\,\text{m}$</li>
+              <li>书里强调：核力只在原子核尺度内起作用</li>
+            </ul>
+
+            <p><strong>为什么说它是短程力？</strong></p>
+            <p>因为如果核力像库仑力那样是长程力，那么一个核子就会同时和很多远处核子强烈作用，核结合能就会随着核子对数增长，近似正比于 $A^2$。</p>
+            <p>但实验告诉我们，核结合能大致正比于 $A$，这说明：</p>
+            <div class="note-box">
+              <p>一个核子主要只和附近少数几个核子强烈作用，而不是和整个核内所有核子都强烈作用。</p>
+            </div>
+            <p>这就是短程性的直接证据。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">2. 饱和性</h4>
+            <p>饱和性和短程性是连在一起理解的。</p>
+            <p>实验上发现，很多原子核的<strong>平均结合能</strong> $$\frac{E_B}{A}$$ 变化不大，往往在几个 MeV 到约 8 MeV 这个量级，不会随着 $A$ 无限增大。</p>
+
+            <p>这说明：</p>
+            <ul class="styled-list">
+              <li>每增加一个核子，它并不会和全部旧核子都强烈结合；</li>
+              <li>它主要只和邻近核子结合；</li>
+              <li>所以每个核子平均"贡献"的结合能不会无限增加。</li>
+            </ul>
+
+            <div class="note-box">
+              <p><strong>直观比喻：</strong>像人手拉手站成一团。每个人主要只能拉住身边几个人，不可能同时牢牢拉住几百个人。</p>
+            </div>
+            <p>所以核力有"饱和性"。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">3. 很强</h4>
+            <p>核力必须足够强，否则它不可能克服质子之间的库仑斥力，把核子束缚在一起。</p>
+            <p>所以核力是<strong>强相互作用的一种表现</strong>。在原子核尺度上，它比库仑作用强得多，才能让原子核保持稳定。</p>
+            <p>你可以这样理解：</p>
+            <ul class="styled-list">
+              <li>远距离看，库仑力更"显眼"；</li>
+              <li>很近距离看，核力占主导。</li>
+            </ul>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">4. 与电荷近似无关</h4>
+            <p>书里给出的意思是：去掉库仑作用后，核力对不同核子组合差别不大，近似满足</p>
+            <p class="formula-center">$$F_{pp} \approx F_{nn} \approx F_{np}$$</p>
+            <p>也就是说：</p>
+            <ul class="styled-list">
+              <li>质子-质子之间有核力；</li>
+              <li>中子-中子之间有核力；</li>
+              <li>质子-中子之间也有核力；</li>
+              <li>这三种核力在强度上比较接近。</li>
+            </ul>
+            <div class="note-box">
+              <p><strong>注意：</strong>这里说的是"核力部分"近似一样，不是说质子和中子在一切相互作用上都一样。因为质子有电荷，中子没电荷，所以它们的电磁性质当然不同。</p>
+            </div>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">5. 在极短距离有斥力</h4>
+            <p>这点非常重要。</p>
+            <p>核力并不是"永远吸引"。实验表明：</p>
+            <ul class="styled-list">
+              <li>当核子间距离在大约 $0.8\sim 2.0\,\text{fm}$ 时，核力主要表现为吸引；</li>
+              <li>当距离更小，特别是小于约 $0.8\,\text{fm}$ 时，会出现明显斥力；</li>
+              <li>距离很大时，核力迅速减弱并消失。</li>
+            </ul>
+
+            <p>这说明核力的作用势大致像这样：</p>
+            <ul class="styled-list">
+              <li>中等近距离：吸引；</li>
+              <li>过近：排斥；</li>
+              <li>远距离：几乎没有作用。</li>
+            </ul>
+
+            <p><strong>为什么这个性质重要？</strong></p>
+            <p>因为如果核力在任意近距离都只是吸引，那么核子会无限靠近，原子核就会"塌缩"。</p>
+            <p>所以这部分斥力常叫做<strong>斥力芯</strong>或<strong>硬核斥力</strong>，它保证核子不会无限压到一起。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">6. 与自旋有关</h4>
+            <p>核力不只是看"你是谁"，还看"你们的自旋怎么排"。</p>
+            <p>书中举的关键例子是<strong>氘核</strong>（一个质子 + 一个中子）：</p>
+            <ul class="styled-list">
+              <li>氘核能够稳定存在；</li>
+              <li>氘核总自旋为 1；</li>
+              <li>这说明质子和中子自旋平行时，核力更容易把它们束缚成束缚态。</li>
+            </ul>
+            <p>此外，中子-质子散射实验也说明：自旋平行时，散射情况和自旋反平行时并不相同。</p>
+            <p>所以：<strong>核力与核子的相对自旋取向有关。</strong></p>
+          </div>
+        </div>
+
+        <h2 id="sec3" class="section-heading">3. 六条性质浓缩表</h2>
+
+        <div class="content-section">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>性质</th>
+                  <th>最简单理解</th>
+                  <th>你该怎么记</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="highlight-cell">短程性</td>
+                  <td>只在核尺度内明显</td>
+                  <td>只管"近邻"</td>
+                </tr>
+                <tr>
+                  <td class="highlight-cell">饱和性</td>
+                  <td>每个核子不会和所有核子都强烈作用</td>
+                  <td>平均结合能不会无限长大</td>
+                </tr>
+                <tr>
+                  <td class="highlight-cell">强相互作用</td>
+                  <td>足以压过近距离库仑斥力</td>
+                  <td>不强就绑不住核子</td>
+                </tr>
+                <tr>
+                  <td class="highlight-cell">与电荷近似无关</td>
+                  <td>$pp,nn,np$ 的核力差不多</td>
+                  <td>核力不太挑电荷</td>
+                </tr>
+                <tr>
+                  <td class="highlight-cell">极短程斥力</td>
+                  <td>太近反而排斥</td>
+                  <td>防止原子核塌缩</td>
+                </tr>
+                <tr>
+                  <td class="highlight-cell">与自旋有关</td>
+                  <td>自旋排法不同，作用不同</td>
+                  <td>核力"认自旋"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box">
+            <p>如果考试只让你写"核力有哪些基本性质"，写出这 6 点，基本就抓住主干了。</p>
+          </div>
+        </div>
+
+        <h2 id="sec4" class="section-heading">4. 为什么"结合能正比于 A"能说明核力短程又饱和</h2>
+
+        <div class="content-section">
+          <h4 class="step-heading">先看错误情况</h4>
+          <p>如果一个核子和所有别的核子都强烈作用，那么作用对数大约是</p>
+          <p class="formula-center">$$\frac{A(A-1)}{2}$$</p>
+          <p>这说明总结合能应该接近 $A^2$ 增长。</p>
+
+          <h4 class="step-heading">但实验不是这样</h4>
+          <p>实验上总结合能大致正比于 $A$，所以平均结合能 $$\frac{E_B}{A}$$ 不会无限增大。</p>
+
+          <h4 class="step-heading">这说明什么</h4>
+          <p>说明一个核子真正"强烈感受到"的，只是附近有限个核子。</p>
+          <p>这就是：</p>
+          <ul class="styled-list">
+            <li><strong>短程性</strong>：只对近邻起强作用；</li>
+            <li><strong>饱和性</strong>：每个核子的结合能力有上限。</li>
+          </ul>
+          <p>这两条本质上是一回事的两个侧面。</p>
+        </div>
+
+        <h2 id="sec5" class="section-heading">5. 核力的介子理论</h2>
+
+        <div class="content-section">
+          <p>这一部分的核心问题是：<strong>核力是怎么传递的？</strong></p>
+
+          <div class="note-block">
+            <h4 class="step-heading">1. 类比电磁相互作用</h4>
+            <p>现代观点里，电磁力可以理解为带电粒子交换光子而产生。</p>
+            <p>汤川秀树就提出：<strong>核力也许也是一种"交换作用"，只不过交换的不是光子，而是某种新的粒子。</strong></p>
+            <p>这种粒子后来被称为<strong>介子</strong>。</p>
+            <p>所以，核子之间不是"隔空神秘吸引"，而是通过交换介子发生相互作用。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">2. 为什么介子必须有质量</h4>
+            <p>这是本节最关键的估算。</p>
+            <p>如果一个虚粒子存在时间为 $\Delta t$，根据不确定关系，可以允许出现的能量不确定度约为</p>
+            <p class="formula-center">$$\Delta E \sim \frac{\hbar}{\Delta t}$$</p>
+            <p>而它在这段时间内传播的最大距离大约为</p>
+            <p class="formula-center">$$\Delta x \sim c\Delta t$$</p>
+            <p>于是得到</p>
+            <p class="formula-center">$$\Delta E \sim \frac{\hbar c}{\Delta x}$$</p>
+            <p>如果这部分能量主要对应介子的静能，那么</p>
+            <p class="formula-center">$$mc^2 \sim \frac{\hbar c}{\Delta x}$$</p>
+            <p>这就是<strong>汤川估算的核心公式</strong>。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">3. 代入核力的作用距离</h4>
+            <p>取核力作用距离量级 $\Delta x \sim 2.0\,\text{fm}$</p>
+            <p>再用 $\hbar c \approx 197\,\text{MeV}\cdot\text{fm}$</p>
+            <p>可得</p>
+            <p class="formula-center">$$mc^2 \sim \frac{197\,\text{MeV}\cdot\text{fm}}{2.0\,\text{fm}} \approx 100\,\text{MeV}$$</p>
+            <p>这说明核力的传播者：</p>
+            <ul class="styled-list">
+              <li>质量不能像光子那样为 0；</li>
+              <li>它应该是一个质量在 $10^2\,\text{MeV}$ 量级的粒子。</li>
+            </ul>
+            <p>这和后来发现的<strong>π 介子</strong>质量数量级是符合的。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">4. 为什么光子不适合传递核力</h4>
+            <p>因为光子静质量为 0。</p>
+            <p>若传播粒子质量为 0，那么相互作用通常是长程的，典型例子就是电磁相互作用。而核力明明是短程的，所以传播它的粒子不能是无质量粒子。</p>
+            <div class="note-box">
+              <p><strong>一句话记忆：</strong>长程力对应轻或无质量传播子，短程力对应有质量传播子。</p>
+            </div>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">5. 实验上找到了什么</h4>
+            <p>后来实验发现了参与强相互作用的 π 介子：</p>
+            <ul class="styled-list">
+              <li>$\pi^+$</li>
+              <li>$\pi^-$</li>
+              <li>$\pi^0$</li>
+            </ul>
+            <p>它们的质量都在百 MeV 量级，和汤川的估算是同一数量级。</p>
+            <p>这说明汤川关于"核力由介子传递"的思想是非常成功的。</p>
+          </div>
+        </div>
+
+        <h2 id="sec6" class="section-heading">6. 最容易糊涂的几个点</h2>
+
+        <div class="content-section">
+          <div class="note-block">
+            <h4 class="step-heading">1. "核力与电荷无关"不等于"质子和中子完全一样"</h4>
+            <p>这里只是说它们之间的<strong>核力部分</strong>差不多。电磁相互作用当然还是不一样，因为质子带电，中子不带电。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">2. "短程"不等于"弱"</h4>
+            <p>核力是<strong>短程但很强</strong>。它不是作用范围大，而是在很近的地方特别强。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">3. "有斥力"不等于"核力主要排斥"</h4>
+            <p>核力总体上仍然要能形成束缚，所以中等距离还是吸引为主；只是到了极短距离，才出现强斥力。</p>
+          </div>
+
+          <div class="note-block">
+            <h4 class="step-heading">4. 介子交换里的粒子常是"虚粒子"</h4>
+            <p>这里不是说我们总能直接在实验里看见一个小球从一个核子飞到另一个核子。"交换粒子"是量子场论里的相互作用图像。</p>
+          </div>
+        </div>
+
+        <h2 id="sec7" class="section-heading">7. 复习要点</h2>
+
+        <div class="content-section">
+          <div class="note-block note-important">
+            <h4 class="step-heading">必背 1：核力的六个基本性质</h4>
+            <ul class="styled-list">
+              <li>短程性</li>
+              <li>饱和性</li>
+              <li>很强</li>
+              <li>与电荷近似无关</li>
+              <li>极短程有斥力</li>
+              <li>与自旋有关</li>
+            </ul>
+          </div>
+
+          <div class="note-block note-important">
+            <h4 class="step-heading">必背 2：汤川估算公式</h4>
+            <p class="formula-center">$$mc^2 \sim \frac{\hbar c}{\Delta x}$$</p>
+            <p>核力作用距离越短，传播子的质量就越大。</p>
+          </div>
+
+          <div class="note-block note-important">
+            <h4 class="step-heading">必背 3</h4>
+            <p>π 介子是核力传播的重要媒介粒子，说明核力是短程交换力。</p>
+          </div>
+
+          <div class="note-box">
+            <h4 class="step-heading">自测问题</h4>
+            <ol>
+              <li>为什么说"结合能大致正比于 $A$"能说明核力有饱和性？</li>
+              <li>为什么传播核力的粒子不能像光子那样质量为零？</li>
+              <li>为什么核力在极短距离必须出现斥力？</li>
+              <li>为什么氘核的存在说明核力与自旋有关？</li>
+            </ol>
+            <p>如果这 4 个问题你都能用自己的话回答出来，这一节就算掌握得比较扎实了。</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note-footer">
+        <a href="../notes.html" class="back-link">← 返回 NOTES</a>
+      </div>
+
+    </div>
+  </main>

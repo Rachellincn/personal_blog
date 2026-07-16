@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlaygroundShell from '../components/PlaygroundShell.astro';
+---
+<BaseLayout title="Physics Playground · Ganlin Xiang" description="Interactive projectile, double-pendulum chaos, and wave-interference experiments built with native Canvas and TypeScript." active="playground" canonicalPath="/playground.html">
+  <main id="content" class="main playground-page"><div class="container">
+    <header class="playground-hero reveal"><div><span class="eyebrow">Notebook apparatus / 001–003</span><h1 class="page-title-text">Physics<br /><em>Playground.</em></h1></div><div class="playground-intro"><p>Three small instruments for turning equations into motion: aim a projectile, perturb a chaotic pendulum, and paint interference with waves.</p><p class="formula-note">No engine. No pre-baked animation. Just browser APIs, numerical models, and a carefully managed animation lifecycle.</p></div></header>
+    <PlaygroundShell />
+    <section class="playground-notes reveal" aria-labelledby="lab-notes-title"><span class="section-kicker">Lab notes</span><h2 id="lab-notes-title">What the instruments calculate</h2><div class="lab-note-grid"><article><span>01 / BALLISTICS</span><h3>Analytic trajectory</h3><p><code>x=v₀cos(θ)t</code><br /><code>y=v₀sin(θ)t−½gt²</code></p></article><article><span>02 / CHAOS</span><h3>Coupled nonlinear motion</h3><p>Two generalized angles are integrated with a fixed-step fourth-order Runge–Kutta method.</p></article><article><span>03 / INTERFERENCE</span><h3>Wave superposition</h3><p><code>u=Σ A sin(kr−ωt+φ)e<sup>−αr</sup></code></p></article></div></section>
+  </div></main>
+  <script src="../scripts/playground/main.ts"></script>
+</BaseLayout>

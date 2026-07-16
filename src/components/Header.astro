@@ -1,0 +1,24 @@
+---
+interface Props { active?: 'home' | 'notes' | 'playground' | 'about' }
+const { active } = Astro.props;
+const links = [
+  ['home', 'Home', '/index.html'],
+  ['notes', 'Notes', '/notes.html'],
+  ['playground', 'Playground', '/playground.html'],
+  ['about', 'About', '/about.html'],
+] as const;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/index.html" class="logo" aria-label="Ganlin's field notes, back to home">
+      <span class="logo-mark">向</span><span class="logo-text">Ganlin's field notes</span>
+    </a>
+    <button class="nav-hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="main-nav" aria-label="Main navigation">
+      {links.map(([key, label, href]) => <a href={href} class:list={['nav-link', { active: active === key }]} aria-current={active === key ? 'page' : undefined}>{label}</a>)}
+    </nav>
+  </div>
+</header>
