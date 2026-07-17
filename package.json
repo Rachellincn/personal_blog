@@ -9,6 +9,7 @@
     "check": "astro check",
     "preview": "astro preview",
     "test": "playwright test",
+    "test:physics": "node --experimental-strip-types --test tests/physics-models.test.ts",
     "test:update": "playwright test --update-snapshots",
     "check:links": "node scripts/check-links.mjs"
   },
