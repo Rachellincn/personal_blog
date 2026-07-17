@@ -3,10 +3,10 @@ import ExperimentControls from './ExperimentControls.astro';
 import PhysicsDataPanel from './PhysicsDataPanel.astro';
 ---
 <div class="playground-shell" data-playground>
-  <div class="experiment-tabs" role="tablist" aria-label="Physics experiments">
-    <button type="button" role="tab" id="tab-projectile" aria-controls="experiment-stage" aria-selected="true" data-experiment="projectile"><span>01</span> Projectile</button>
-    <button type="button" role="tab" id="tab-pendulum" aria-controls="experiment-stage" aria-selected="false" data-experiment="pendulum" tabindex="-1"><span>02</span> Double pendulum</button>
-    <button type="button" role="tab" id="tab-wave" aria-controls="experiment-stage" aria-selected="false" data-experiment="wave" tabindex="-1"><span>03</span> Wave lab</button>
+  <div class="experiment-browser">
+    <label for="experiment-category">Atlas</label>
+    <select id="experiment-category" aria-label="Experiment category"></select>
+    <div class="experiment-tabs" role="tablist" aria-label="Physics experiments"></div>
   </div>
   <div class="experiment-layout">
     <ExperimentControls />
@@ -20,10 +20,11 @@ import PhysicsDataPanel from './PhysicsDataPanel.astro';
     </section>
     <PhysicsDataPanel />
   </div>
+  <section id="experiment-details" class="experiment-details" aria-label="Formula and physical explanation"></section>
   <noscript>
     <section class="no-script-note">
       <h2>Physics Playground needs JavaScript for the live instruments.</h2>
-      <p>The projectile experiment uses <code>x(t)=v₀cos(θ)t</code> and <code>y(t)=v₀sin(θ)t−½gt²</code>. The double pendulum integrates coupled nonlinear equations with RK4. Wave Lab visualizes superposed damped waves <code>u=Σ A·sin(kr−ωt+φ)e^(−αr)</code>.</p>
+      <p>The projectile experiment uses <code>x(t)=v₀cos(θ)t</code> and <code>y(t)=v₀sin(θ)t−½gt²</code>. The double pendulum integrates coupled nonlinear equations with RK4. Wave Lab visualizes superposed damped waves. The Electromagnetism Atlas evaluates <code>E=(1/4πε₀)Σqᵢ(r−rᵢ)/|r−rᵢ|³</code> while excluding point-charge singularities.</p>
     </section>
   </noscript>
 </div>

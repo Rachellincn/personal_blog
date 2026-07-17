@@ -9,6 +9,7 @@
     "check": "astro check",
     "preview": "astro preview",
     "test": "playwright test",
+    "test:physics": "vitest run tests/physics",
     "test:update": "playwright test --update-snapshots",
     "check:links": "node scripts/check-links.mjs"
   },
@@ -25,6 +26,7 @@
     "@astrojs/check": "0.9.6",
     "@playwright/test": "1.61.1",
     "@types/katex": "0.16.8",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "^4.1.10"
   }
 }

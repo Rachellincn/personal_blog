@@ -14,7 +14,7 @@ test('legacy routes and primary navigation remain available', async ({ page }) =
   await page.getByRole('link', { name: 'Playground', exact: true }).click(); await expect(page).toHaveURL(/playground\.html$/);
 });
 
-test('all three experiments switch and expose their core actions', async ({ page }) => {
+test('foundation experiments switch and expose their core actions', async ({ page }) => {
   await page.goto('/playground.html?seed=123');
   await expect(page.getByRole('button', { name: 'Launch' })).toBeVisible();
   await page.getByRole('tab', { name: /Double pendulum/ }).click();
@@ -25,6 +25,30 @@ test('all three experiments switch and expose their core actions', async ({ page
   await expect(page.getByLabel('Wave sources')).toBeVisible();
   await page.getByRole('tab', { name: /Projectile/ }).click();
   await expect(page.locator('#experiment-name')).toHaveText('Projectile target');
+});
+
+test('electromagnetism atlas exposes all field views and recomputes after drag', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism');
+  await expect(page.getByLabel('Experiment category')).toHaveValue('Electromagnetism');
+  await expect(page.locator('#experiment-name')).toHaveText('Electric field & potential atlas');
+  await expect(page.getByLabel('Charge preset')).toHaveValue('dipole');
+  await page.getByLabel('Source mobility').selectOption('fixed');
+  await expect(page.locator('#physics-data')).toContainText('Fixed');
+  await page.getByLabel('Source mobility').selectOption('movable');
+  const rendering = page.getByLabel('Rendering mode');
+  for (const mode of ['arrows', 'lines', 'contours', 'magnitude', 'tracers', 'flux']) {
+    await rendering.selectOption(mode);
+    await expect(page.locator('#physics-data')).toContainText(mode === 'flux' ? '2-D line flux' : 'Rendering');
+  }
+  await page.getByLabel('Charge preset').selectOption('quadrupole');
+  await expect(page.locator('#physics-data')).not.toContainText('NaN');
+  const canvas = page.locator('#physics-canvas');
+  const box = await canvas.boundingBox();
+  expect(box).not.toBeNull();
+  await rendering.selectOption('arrows');
+  await canvas.click({ position: { x: box!.width * .56, y: box!.height * .64 } });
+  await expect(page.locator('#experiment-status')).toContainText('High-precision field recomputed');
+  await expect(page.locator('#experiment-details')).toContainText('singular exclusion region');
 });
 
 test('projectile launches and resets', async ({ page }) => {
@@ -57,7 +81,7 @@ test('wave lab switches source mode, display, and single-steps', async ({ page }
 
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=electromagnetism']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);
@@ -93,7 +117,14 @@ test('deterministic visual surfaces remain stable', async ({ browser }) => {
   await expect(page.locator('.hero')).toHaveScreenshot('home-hero.png', { animations: 'disabled' });
   await page.goto('/playground.html?seed=123&experiment=projectile');
   await expect(page.locator('.playground-shell')).toHaveScreenshot('playground-projectile.png', { animations: 'disabled' });
+  await page.goto('/playground.html?experiment=electromagnetism');
+  await expect(page.locator('.playground-shell')).toHaveScreenshot('playground-electromagnetism.png', { animations: 'disabled' });
   await context.close();
+  const mobileContext = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
+  const mobilePage = await mobileContext.newPage();
+  await mobilePage.goto('/playground.html?experiment=electromagnetism');
+  await expect(mobilePage.locator('.playground-shell')).toHaveScreenshot('playground-electromagnetism-mobile.png', { animations: 'disabled' });
+  await mobileContext.close();
 });
 
 function captureErrors(page: Page, errors: string[]) {

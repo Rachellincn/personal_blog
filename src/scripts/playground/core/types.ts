@@ -7,6 +7,7 @@ export interface ExperimentElements {
   data: HTMLElement;
   status: HTMLElement;
   stage: HTMLElement;
+  details: HTMLElement;
 }
 
 export interface Experiment {
