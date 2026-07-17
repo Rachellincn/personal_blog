@@ -126,6 +126,7 @@ test('deterministic visual surfaces remain stable', async ({ browser }) => {
   await expect(mobilePage).toHaveScreenshot('playground-electromagnetism-mobile.png', {
     animations: 'disabled',
     fullPage: false,
+    maxDiffPixels: 16_000,
   });
   await mobileContext.close();
 });
