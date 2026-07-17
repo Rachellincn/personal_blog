@@ -1,7 +1,7 @@
-type ControlDefinition = {
+export type ControlDefinition = {
   key: string;
   label: string;
-  type: 'range' | 'checkbox' | 'select';
+  type: 'range' | 'checkbox' | 'select' | 'text';
   value: number | boolean | string;
   min?: number;
   max?: number;
@@ -75,7 +75,16 @@ export function updateData(container: HTMLElement, values: Array<[string, string
 
 export function announce(element: HTMLElement, message: string) { element.textContent = message; }
 
+export function updateDetails(container: HTMLElement, formula: string, symbols: Array<[string, string]>, explanation: string) {
+  const symbolRows = symbols.map(([symbol, meaning]) => `<dt>${escapeHtml(symbol)}</dt><dd>${escapeHtml(meaning)}</dd>`).join('');
+  container.innerHTML = `<details open><summary>Formula &amp; model</summary><code class="experiment-formula">${escapeHtml(formula)}</code><dl class="symbol-list">${symbolRows}</dl><p>${escapeHtml(explanation)}</p></details>`;
+}
+
 function format(value: number | boolean | string, unit = '') {
   if (typeof value === 'boolean') return value ? 'On' : 'Off';
   return `${value}${unit ? ` ${unit}` : ''}`;
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character] ?? character);
 }
