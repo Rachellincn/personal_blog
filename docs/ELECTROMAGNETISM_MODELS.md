@@ -66,3 +66,69 @@ The 0.09 m disk is a numerical/display exclusion radius, not a finite-size charg
 - See that field lines leave positive charges and enter negative charges or the view boundary.
 - Verify locally that equipotential contours are transverse to `E` and that `E = −∇V`.
 - Recognize a point-charge singularity as undefined rather than merely “very large.”
+
+## EM 05: continuous charge distributions
+
+### Shared integral
+
+Every continuous source evaluates the same SI-space Coulomb integral,
+
+```text
+E(r) = (1 / 4πε₀) ∫ (r − r′) / |r − r′|³ dq′,
+dq′ = λ dl′, σ dA′, or ρ dV′.
+```
+
+The experiment includes a finite uniform rod, uniform ring, uniform disk, infinite line, infinite plane, uniform spherical shell, and uniform solid sphere. Each has an analytic evaluator and an independent direct-integration evaluator. The live readout shows both magnitudes, sample count, relative vector error, and the active validity statement.
+
+The ring and disk closed forms are intentionally axis-only. Moving the probe off axis reports `analytic-axis-only`; it does not silently apply an axial formula to a general point. Ideal zero-radius or zero-thickness source points report `singular` rather than a capped value.
+
+### Infinite-source approximations
+
+The analytic infinite line and plane are ideal models. Numerical mode must use a finite source:
+
+- the line integrates a symmetric segment `z = ±Lwindow`;
+- the plane integrates a finite disk of radius `Rwindow`.
+
+The chosen window is stated in the readout. Increasing it demonstrates convergence toward the infinite-source result; it does not turn the sampled finite object into a literally infinite one.
+
+### Teaching goals
+
+- Connect `dq = λdl`, `σdA`, and `ρdV` to the same Coulomb integral.
+- Compare a closed form with a weighted numerical sum at the same probe.
+- Distinguish an ideal source singularity from a numerical overflow.
+- See where a symmetry-derived analytic formula is valid and where numerical integration is still general.
+- Interpret an “infinite” numerical source as a finite-window convergence experiment.
+
+## EM 06: Gauss law and symmetry
+
+### Physical 3-D surface integral
+
+```text
+∯S E·dA = Qenclosed / ε₀.
+```
+
+The model samples true closed 3-D spheres, cylinders, and pillboxes. Every sample retains its position, outward unit normal, area weight, electric field, and local contribution `E·dA`. The report includes numerical flux, expected flux, enclosed charge, separately reported un-enclosed finite charge, skipped singular samples, and relative integration error.
+
+Scenarios cover a point charge, uniform solid sphere, infinite line, infinite plane, and asymmetric point-charge group. Sphere–sphere enclosed volume is analytic, including partial overlap. Cylinder–sphere overlap uses deterministic area quadrature. Infinite line and plane scenarios report un-enclosed charge as non-finite rather than pretending it is zero.
+
+### Law versus symmetry
+
+Gauss law is valid for every closed 3-D surface. Extracting `E` from the integral requires an additional symmetry argument:
+
+- a Gaussian sphere must be concentric with a point charge or spherical distribution;
+- a Gaussian cylinder must be coaxial with the infinite line;
+- a pillbox must cross the infinite plane;
+- asymmetric sources generally do not make `|E|` constant on a convenient surface.
+
+The “Wrong surface preset” deliberately breaks those conditions. Flux still agrees with `Qenclosed/ε₀`, while the readout says that `E` cannot be pulled outside the integral.
+
+### 2-D diagnostic boundary
+
+The optional closed-curve view computes `∮C E·n dl` in a plane. Its units are `N·m/C`, it never infers enclosed charge, and the interface labels it “not a Gaussian surface.” The physical Gauss-law views use closed 3-D surfaces and units `N·m²/C`.
+
+### Known limitations
+
+- The Canvas is a projection/cross-section of the sampled 3-D surface, not a perspective renderer.
+- Surface quadrature is deterministic and finite; visual local arrows are subsampled from the full report.
+- A singular source exactly on a sampled surface element is skipped and counted. Such a surface is mathematically ill-posed for the ideal point-source field and should be moved.
+- Continuous media are static, uniform, and in vacuum; conductors and dielectric boundary conditions are outside this slice.
