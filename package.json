@@ -9,7 +9,9 @@
     "check": "astro check",
     "preview": "astro preview",
     "test": "playwright test",
-    "test:physics": "vitest run tests/physics",
+    "test:physics": "npm run test:physics:mechanics && npm run test:physics:electromagnetism",
+    "test:physics:mechanics": "node --experimental-strip-types --test tests/physics-models.test.ts",
+    "test:physics:electromagnetism": "vitest run tests/physics/",
     "test:update": "playwright test --update-snapshots",
     "check:links": "node scripts/check-links.mjs"
   },

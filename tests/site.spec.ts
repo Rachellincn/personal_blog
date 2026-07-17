@@ -29,7 +29,7 @@ test('foundation experiments switch and expose their core actions', async ({ pag
 
 test('electromagnetism atlas exposes all field views and recomputes after drag', async ({ page }) => {
   await page.goto('/playground.html?experiment=electromagnetism');
-  await expect(page.getByLabel('Experiment category')).toHaveValue('Electromagnetism');
+  await expect(page.getByLabel('Experiment category')).toHaveValue('Electromagnetism / 电磁学');
   await expect(page.locator('#experiment-name')).toHaveText('Electric field & potential atlas');
   await expect(page.getByLabel('Charge preset')).toHaveValue('dipole');
   await page.getByLabel('Source mobility').selectOption('fixed');
@@ -79,9 +79,35 @@ test('wave lab switches source mode, display, and single-steps', async ({ page }
   await expect(page.locator('#experiment-status')).toContainText('Advanced');
 });
 
+test('all Classical Mechanics Atlas experiments mount with shared teaching controls', async ({ page }) => {
+  const errors: string[] = [];
+  captureErrors(page, errors);
+  await page.goto('/playground.html?experiment=mechanics-kinematics-1d');
+
+  for (const [category, expectedCount] of [
+    ['Classical Mechanics / 经典力学 · Atlas I', 10],
+    ['Classical Mechanics / 经典力学 · Atlas II', 16],
+  ] as const) {
+    await page.getByLabel('Experiment category').selectOption(category);
+    const tabs = page.getByRole('tab');
+    await expect(tabs).toHaveCount(expectedCount);
+    for (let index = 0; index < expectedCount; index += 1) {
+      await tabs.nth(index).click();
+      await expect(page.locator('#experiment-status')).not.toContainText('could not start');
+      await expect(page.getByLabel('Typical preset')).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Pause / Continue' })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Step', exact: true })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Reset', exact: true })).toBeVisible();
+      await expect(page.locator('#experiment-details')).toContainText('Formula & model');
+      await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+    }
+  }
+  expect(errors).toEqual([]);
+});
+
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=electromagnetism']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);
