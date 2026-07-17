@@ -32,3 +32,8 @@ Readouts choose a teaching prefix that keeps the displayed magnitude legible, us
 ## Range validation
 
 Unit conversion rejects non-finite numbers, unsupported symbols, and dimension mismatches. Individual experiments additionally clamp UI positions and parameters to their documented valid ranges.
+## Electromagnetism additions
+
+Continuous distributions store `λ` in C/m, `σ` in C/m², and `ρ` in C/m³. Canvas coordinates are metres even when the drawing is a cross-section of a 3-D object. Electric field is N/C.
+
+Physical Gaussian flux `∯E·dA` has units N·m²/C. The planar diagnostic `∮E·n dl` has units N·m/C and must not be interpreted as enclosed charge divided by `ε₀`.

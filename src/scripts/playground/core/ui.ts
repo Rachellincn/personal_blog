@@ -34,8 +34,8 @@ export function buildControls(container: HTMLElement, definitions: ControlDefini
       input.type = definition.type;
       if (definition.type === 'checkbox') input.checked = Boolean(definition.value);
       else {
-        input.value = String(definition.value);
         input.min = String(definition.min ?? 0); input.max = String(definition.max ?? 100); input.step = String(definition.step ?? 1);
+        input.value = String(definition.value);
       }
     }
     input.id = `control-${definition.key}`;

@@ -51,6 +51,40 @@ test('electromagnetism atlas exposes all field views and recomputes after drag',
   await expect(page.locator('#experiment-details')).toContainText('singular exclusion region');
 });
 
+test('continuous-charge atlas compares all seven distributions without non-finite output', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-continuous-charge');
+  await expect(page.locator('#experiment-name')).toHaveText('Continuous charge distributions');
+  await expect(page.locator('[data-control="size"]')).toHaveValue('1.15');
+  await expect(page.locator('[data-control="samples"]')).toHaveValue('2400');
+  const distribution = page.locator('[data-control="distribution"]');
+  for (const kind of ['rod', 'ring', 'disk', 'infinite-line', 'infinite-plane', 'spherical-shell', 'uniform-sphere']) {
+    await test.step(kind, async () => {
+      await distribution.selectOption(kind, { timeout: 5_000 });
+      await expect(page.locator('#physics-data')).toContainText('Relative error');
+      await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+    });
+  }
+  await distribution.selectOption('ring');
+  await page.getByRole('button', { name: 'Move probe off axis' }).click();
+  await expect(page.locator('#physics-data')).toContainText('axis-only formula');
+  await expect(page.locator('#experiment-details')).toContainText('Seven distributions');
+});
+
+test('Gauss-law atlas separates universal flux from symmetry and 2-D diagnostics', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-gauss-law');
+  await expect(page.locator('#experiment-name')).toHaveText('Gauss law & symmetry');
+  await expect(page.locator('#physics-data')).toContainText('Can extract E by symmetry?Yes');
+  await page.getByRole('button', { name: 'Wrong surface preset' }).click();
+  await expect(page.locator('#physics-data')).toContainText('Can extract E by symmetry?No');
+  await expect(page.locator('#physics-data')).toContainText('Gauss law still holds');
+  await page.getByLabel('Charge scenario').selectOption('plane');
+  await expect(page.getByLabel('Integration surface')).toHaveValue('pillbox');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  await page.getByLabel('Integration surface').selectOption('curve-2d');
+  await expect(page.locator('#physics-data')).toContainText('not a Gaussian surface');
+  await expect(page.locator('#physics-data')).toContainText('not inferred from 2-D line flux');
+});
+
 test('projectile launches and resets', async ({ page }) => {
   await page.goto('/playground.html?seed=42&experiment=projectile');
   await page.getByRole('button', { name: 'Launch', exact: true }).click();
@@ -107,7 +141,7 @@ test('all Classical Mechanics Atlas experiments mount with shared teaching contr
 
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);

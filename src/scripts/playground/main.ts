@@ -59,6 +59,28 @@ const catalog: CatalogEntry[] = [
       "Movable point sources drive the field, potential, contours, streamlines, tracers, and planar flux diagnostic.",
   },
   {
+    id: "electromagnetism-continuous-charge",
+    shortName: "Continuous charge",
+    number: "EM 05",
+    category: "Electromagnetism / 电磁学",
+    loader: () => import("./games/electromagnetism-continuous-charge"),
+    help: "Drag the probe · compare analytic and numerical fields · R reset",
+    formula: "E(r) = (1 / 4πε₀) ∫ (r−r′)/|r−r′|³ dq′",
+    explanation:
+      "Seven continuous source geometries compare closed-form fields with direct Coulomb integration and explicit approximation limits.",
+  },
+  {
+    id: "electromagnetism-gauss-law",
+    shortName: "Gauss law & symmetry",
+    number: "EM 06",
+    category: "Electromagnetism / 电磁学",
+    loader: () => import("./games/electromagnetism-gauss-law"),
+    help: "Drag the surface · inspect local E·dA · try the wrong-surface preset · R reset",
+    formula: "∯S E·dA = Q enclosed / ε₀",
+    explanation:
+      "True 3-D Gaussian surfaces separate the universal flux law from the extra symmetry needed to solve directly for E.",
+  },
+  {
     id: "mechanics-kinematics-1d",
     shortName: "一维运动学",
     category: "Classical Mechanics / 经典力学 · Atlas I",

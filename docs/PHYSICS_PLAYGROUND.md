@@ -21,7 +21,7 @@ Switching experiments calls `destroy()` before the next dynamic module mounts. N
 
 Movable ideal point charges provide analytic `E` and `V`. A reusable field engine samples arrows, midpoint-integrated streamlines, marching-squares equipotentials, magnitude maps, massless tracers, and arbitrary closed 2-D line-flux curves. All calculations use SI units. Queries within 0.09 m of a point source return an explicit undefined result; the Canvas shows a dashed exclusion disk and never presents a clipped finite field as physical.
 
-See `ELECTROMAGNETISM_MODELS.md`, `NUMERICAL_METHODS.md`, and `UNITS_AND_CONVENTIONS.md` for the complete PR 1 model contract.
+EM 05 adds seven continuous distributions with analytic/direct-integration comparison. EM 06 composes charge scenarios with true 3-D Gaussian spheres, cylinders, and pillboxes, while retaining the arbitrary 2-D curve as an explicitly non-Gaussian diagnostic. See `ELECTROMAGNETISM_MODELS.md`, `NUMERICAL_METHODS.md`, and `UNITS_AND_CONVENTIONS.md` for the complete model contract.
 
 ### Projectile Target
 
