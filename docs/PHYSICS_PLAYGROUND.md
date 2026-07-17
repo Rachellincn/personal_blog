@@ -1,5 +1,7 @@
 # Physics Playground engineering notes
 
+The expanded 26-experiment mechanics implementation is documented in [CLASSICAL_MECHANICS_ATLAS.md](./CLASSICAL_MECHANICS_ATLAS.md). This file retains the original three-instrument architecture and migration notes.
+
 ## Architecture and lifecycle
 
 `PlaygroundShell.astro` provides one canvas, one control surface, and one text readout. `main.ts` dynamically imports exactly one experiment and destroys it before mounting the next. Each experiment owns only its model-specific state and drawing code.
