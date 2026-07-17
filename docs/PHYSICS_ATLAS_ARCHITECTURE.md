@@ -34,6 +34,8 @@ This functional boundary allows later experiments to supply electric, magnetic, 
 
 `electromagnetism/gauss-law.ts` separates `ChargeScenario` from `GaussianSurface`. Scenarios provide fields and independently calculate enclosed charge; surfaces provide containment, intersection geometry, and weighted surface samples. `verifyGaussLaw` combines them into local and total flux results. This composition lets the UI intentionally pair a source with a poor surface without special-case rendering logic.
 
+`electromagnetism/conductors.ts` owns a pure boundary-collocation solve and returns field/potential closures plus error diagnostics. `electromagnetism/capacitors.ts` owns analytic geometry, dielectric, network, excitation, and energy calculations. EM 08 and EM 09 both consume that module, preventing their energy and charge readouts from drifting into separate formulas.
+
 The arbitrary 2-D curve remains in `field-engine.ts`. It does not implement `GaussianSurface`, so TypeScript keeps planar line flux out of the physical 3-D Gauss-law calculation.
 
 ## Lifecycle and performance

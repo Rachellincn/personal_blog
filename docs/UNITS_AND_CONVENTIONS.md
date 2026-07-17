@@ -37,3 +37,5 @@ Unit conversion rejects non-finite numbers, unsupported symbols, and dimension m
 Continuous distributions store `λ` in C/m, `σ` in C/m², and `ρ` in C/m³. Canvas coordinates are metres even when the drawing is a cross-section of a 3-D object. Electric field is N/C.
 
 Physical Gaussian flux `∯E·dA` has units N·m²/C. The planar diagnostic `∮E·n dl` has units N·m/C and must not be interpreted as enclosed charge divided by `ε₀`.
+
+The EM 07 conductor cross-section is translationally invariant; its solved panel and net charges are line charges in C/m. Capacitance is F, displacement and polarization are C/m², field-energy density is J/m³, and total stored energy is J.

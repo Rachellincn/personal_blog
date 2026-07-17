@@ -73,3 +73,19 @@ Enclosed charge is calculated independently of the flux integral. Point inclusio
 - Infinite sources expose a finite-window approximation only in the continuous-charge numerical experiment; Gauss scenarios use their analytic ideal fields.
 - `canExtractFieldBySymmetry` is a geometry predicate, not an inference from a small numerical error.
 - The 2-D line-flux diagnostic and 3-D surface flux use distinct result types, units, formulas, and UI labels.
+
+## Conductor boundary collocation
+
+EM 07 discretizes the outer conductor and cavity into constant line-charge panels. For `N` panels it solves `N` equal-potential equations plus one total-line-charge constraint. Partial-pivot Gaussian elimination is applied after scaling charge unknowns to nC/m so voltage and constraint rows remain numerically comparable.
+
+The 2-D logarithmic Green function is the correct model for an infinitely long cross-section. A panel diagonal uses the average self-distance `L/(2e)` for panel length `L`; off-diagonal interactions use the collocation-point distance. Field samples use the derivative of the logarithmic kernel.
+
+Accuracy is not inferred from one picture. The model reports:
+
+- maximum minus minimum solved boundary potential;
+- that spread relative to the larger conductor/external potential scale;
+- residual interior field relative to the applied field;
+- residual field at the cavity center;
+- boundary sample count.
+
+The test suite checks circular charge uniformity, equipotential residual, ellipse tip enhancement, interior screening, empty-cavity screening, charge conservation, and finite off-boundary evaluation.

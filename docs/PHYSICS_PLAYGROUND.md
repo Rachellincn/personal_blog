@@ -23,6 +23,8 @@ Movable ideal point charges provide analytic `E` and `V`. A reusable field engin
 
 EM 05 adds seven continuous distributions with analytic/direct-integration comparison. EM 06 composes charge scenarios with true 3-D Gaussian spheres, cylinders, and pillboxes, while retaining the arbitrary 2-D curve as an explicitly non-Gaussian diagnostic. See `ELECTROMAGNETISM_MODELS.md`, `NUMERICAL_METHODS.md`, and `UNITS_AND_CONVENTIONS.md` for the complete model contract.
 
+EM 07 solves conductor surface line charge for tip and shielding presets. EM 08 covers parallel-plate, spherical, coaxial, network, and dielectric models. EM 09 reuses the capacitor state to compare energy under fixed-voltage and fixed-charge constraints.
+
 ### Projectile Target
 
 With launch height `y₀`, speed `v₀`, angle `θ`, and constant downward gravity `g`, the model is analytic:
