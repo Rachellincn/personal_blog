@@ -43,3 +43,7 @@ The EM 07 conductor cross-section is translationally invariant; its solved panel
 Circuit models store carrier density in m⁻³, mobility in m²/(V·s), drift velocity in m/s, current density in A/m², current in A, resistivity in Ω·m, conductivity in S/m, resistance in Ω, capacitance in F, and inductance in H. UI values in mm², µF, and mH are converted once at the control boundary.
 
 Every branch current is positive from its declared `from` node to `to` node; a voltage source uses `positive` to `negative`. A negative result means physical current is opposite the drawn reference arrow. Ground is exactly `0 V`. Phasor angles are stored in radians and only converted to degrees for display; source and current waveforms use cosine convention.
+
+Magnetostatic fields use tesla, magnetic flux uses weber, magnetic moment uses A·m², torque uses N·m, field gradient uses T/m, and force per length uses N/m. `μ₀ = 4π × 10⁻⁷ T·m/A` is exact in the teaching model.
+
+Long-wire and loop current signs are referenced to the declared wire direction. Cross products use a right-handed world coordinate system before Canvas y inversion. `⊙` means a vector out of the displayed plane and `⊗` means into it; color is redundant, not the only direction encoding.

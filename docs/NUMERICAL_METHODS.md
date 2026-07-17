@@ -110,3 +110,21 @@ EM 13–15 do not numerically integrate equations whose closed forms are availab
 Sinusoidal RLC uses complex-vector arithmetic represented by `{x,y}` pairs. Component phasors are computed from one current phasor, and their vector sum is checked against the source phasor in tests. Waveform phase, impedance, phasor drawing, charge, and energy are all projections of the same state; the renderer does not maintain a second animation phase.
 
 Verification includes the one-time-constant RC/RL values, RC source-work balance, all three RLC damping classifications, ideal-LC energy conservation, phasor voltage addition, and peak series current at analytic resonance.
+
+## Magnetostatic current-element quadrature
+
+EM 20 and EM 22 use the midpoint Biot–Savart approximation for straight current elements. Each contribution retains its segment id, midpoint, distance, distance to the physical segment, and signed vector. The total is a direct vector sum.
+
+Singularity handling is deliberately strict. The exclusion predicate uses the closest point on the entire line segment. If any ideal segment intersects the probe exclusion radius, its contribution and the total field are `null`; the solver does not drop the divergent term and present a finite remainder. The loop field uses 72 elements and the sketch exposes user refinement by adding shorter segments.
+
+The circular-loop cross section adapts the 3-D Biot–Savart result into a 2-D `(Bx,Bz)` function accepted by the shared Field Visualization Engine. Arrow grids use robust logarithmic scaling, and closed field lines use its normalized midpoint streamline integrator.
+
+## Ampère and magnetic-flux integration
+
+Ampère loops use midpoint line quadrature of `B·Δl`. Circular paths contain 240 elements; each rectangular edge contains 40. Enclosed signed current is calculated independently with point-in-polygon geometry, so agreement with `μ₀Ienclosed` is not the same computation displayed twice. A separate geometry predicate decides whether the path/source pair has enough symmetry to extract constant `|B|`.
+
+The no-monopole test samples a sphere in midpoint latitude/longitude cells with area `r² sinθ dθ dφ` and integrates `B·n dA`. It reports signed flux, absolute local flux, skipped samples, and sample count. Regression uses `|Φ|/Σ|dΦ|`, avoiding an unstable relative error against the exactly zero target.
+
+## Motor update
+
+The simplified EM 25 rotor advances angular velocity and angle at the shared fixed `1/120 s` step. At every step, `μ = NIA n̂(θ)` and `τ = μ×B` are recalculated before applying fixed inertia and linear angular damping. Direction is therefore inherited from current, field, and instantaneous angle.
