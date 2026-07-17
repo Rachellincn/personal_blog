@@ -123,7 +123,10 @@ test('deterministic visual surfaces remain stable', async ({ browser }) => {
   const mobileContext = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
   const mobilePage = await mobileContext.newPage();
   await mobilePage.goto('/playground.html?experiment=electromagnetism');
-  await expect(mobilePage.locator('.playground-shell')).toHaveScreenshot('playground-electromagnetism-mobile.png', { animations: 'disabled' });
+  await expect(mobilePage).toHaveScreenshot('playground-electromagnetism-mobile.png', {
+    animations: 'disabled',
+    fullPage: false,
+  });
   await mobileContext.close();
 });
 
