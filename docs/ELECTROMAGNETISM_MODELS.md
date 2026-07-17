@@ -132,3 +132,44 @@ The optional closed-curve view computes `∮C E·n dl` in a plane. Its units are
 - Surface quadrature is deterministic and finite; visual local arrows are subsampled from the full report.
 - A singular source exactly on a sampled surface element is skipped and counted. Such a surface is mathematically ill-posed for the ideal point-source field and should be moved.
 - Continuous media are static, uniform, and in vacuum; conductors and dielectric boundary conditions are outside this slice.
+
+## EM 07: conductors and electrostatic shielding
+
+The conductor experiment solves an infinitely long 2-D conductor cross-section with a boundary-collocation method. Boundary panels carry unknown line charge `λⱼ`; the linear system enforces one conductor potential and a specified total line charge:
+
+```text
+Φ(r) = Φext(r) − (1 / 2πε₀) Σ λⱼ ln|r − rⱼ|,
+Φ(rᵢ on every connected boundary) = Φconductor.
+```
+
+Outer ellipse and optional circular cavity panels share the same solved potential. The renderer derives every surface-charge marker from the solution. It reports boundary-potential spread, residual field at an interior point, cavity shielding ratio, tip-density enhancement, and collocation count. The charged-circle, ellipse-tip, and empty-cavity presets demonstrate uniform charge, sharp-curvature enhancement, zero field in metal, equipotential surfaces, and electrostatic shielding.
+
+This is a controlled teaching approximation for an infinitely long cross-section, not a general 3-D boundary-element solver. Charge is per unit length (C/m). Panel self-potential uses the analytic average logarithmic distance of a constant panel. Refining the boundary is the user-visible convergence check.
+
+## EM 08: capacitors and dielectrics
+
+The analytic capacitor model includes:
+
+```text
+parallel plates: C = εA/d
+concentric spheres: C = 4πεab/(b−a)
+coaxial cylinders: C = 2πεL/ln(b/a)
+series: 1/Ceq = Σ1/Cᵢ
+parallel: Ceq = ΣCᵢ
+```
+
+Vacuum and uniform linear dielectrics scale `ε = ε₀εr`. A partially inserted parallel-plate dielectric is modeled as side-by-side area capacitors. Layers normal to the plates are modeled in series, giving the thickness-weighted harmonic permittivity. Readouts include `E`, `D`, `P`, free and bound surface charge, capacitance, charge, voltage, stored energy, energy density, and the equivalent value of a three-capacitor network.
+
+Parallel-plate fringing is optional and explicitly labeled as a first-order finite-square-plate capacitance correction. The drawn interior field remains the ideal uniform field; it is not presented as a numerical fringe-field map. Sphere and coax models exclude misalignment and end effects.
+
+## EM 09: electrostatic energy
+
+The energy laboratory uses the same capacitor model and compares dielectric insertion under two physical constraints:
+
+```text
+u = ½ E·D,
+U = ½CV²  (fixed applied voltage),
+U = Q²/(2C)  (fixed isolated charge).
+```
+
+At fixed voltage, stored field energy rises as capacitance increases and the battery exchanges energy and charge. At fixed charge, stored field energy falls and voltage decreases. The plotted curve is recomputed from the selected dielectric fraction, not pre-drawn. A positive insertion tendency is calculated from `dC/df` for both constraints.

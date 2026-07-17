@@ -85,6 +85,45 @@ test('Gauss-law atlas separates universal flux from symmetry and 2-D diagnostics
   await expect(page.locator('#physics-data')).toContainText('not inferred from 2-D line flux');
 });
 
+test('conductor atlas exposes tip enhancement, cavities, and numerical residuals', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-conductors');
+  await expect(page.locator('#experiment-name')).toHaveText('Conductors & electrostatic shielding');
+  await expect(page.locator('#physics-data')).toContainText('Tip charge enhancement');
+  await page.getByRole('button', { name: 'Shielded cavity' }).click();
+  await expect(page.locator('#physics-data')).toContainText('Cavity shielding ratio');
+  await expect(page.locator('#physics-data')).toContainText('empty cavity');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  await expect(page.locator('#experiment-details')).toContainText('boundary-collocation');
+});
+
+test('capacitor atlas covers geometry, dielectric, network, and source constraints', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-capacitors');
+  await expect(page.locator('#experiment-name')).toHaveText('Capacitors & dielectrics');
+  const geometry = page.locator('[data-control="geometry"]');
+  for (const kind of ['parallel-plate', 'spherical', 'coaxial']) {
+    await geometry.selectOption(kind);
+    await expect(page.locator('#physics-data')).toContainText('Capacitance');
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+  await geometry.selectOption('parallel-plate');
+  await page.locator('[data-control="dielectric"]').selectOption('layered');
+  await expect(page.locator('#physics-data')).toContainText('Polarization P');
+  await page.locator('[data-control="connection"]').selectOption('parallel');
+  await expect(page.locator('#physics-data')).toContainText('Network equivalent');
+  await page.getByRole('button', { name: 'Toggle battery / isolated' }).click();
+  await expect(page.locator('[data-control="constraint"]')).toHaveValue('fixed-charge');
+});
+
+test('electrostatic energy lab distinguishes fixed voltage and fixed charge', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-energy');
+  await expect(page.locator('#experiment-name')).toHaveText('Electrostatic energy laboratory');
+  await expect(page.locator('#physics-data')).toContainText('battery also exchanges energy');
+  await page.getByRole('button', { name: 'Toggle battery / isolated' }).click();
+  await expect(page.locator('#physics-data')).toContainText('Stored field energy falls');
+  await expect(page.locator('#physics-data')).toContainText('Energy density');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+});
+
 test('projectile launches and resets', async ({ page }) => {
   await page.goto('/playground.html?seed=42&experiment=projectile');
   await page.getByRole('button', { name: 'Launch', exact: true }).click();
@@ -141,7 +180,7 @@ test('all Classical Mechanics Atlas experiments mount with shared teaching contr
 
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law', '/playground.html?experiment=electromagnetism-conductors', '/playground.html?experiment=electromagnetism-capacitors', '/playground.html?experiment=electromagnetism-energy']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);
