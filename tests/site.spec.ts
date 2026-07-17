@@ -54,6 +54,8 @@ test('electromagnetism atlas exposes all field views and recomputes after drag',
 test('continuous-charge atlas compares all seven distributions without non-finite output', async ({ page }) => {
   await page.goto('/playground.html?experiment=electromagnetism-continuous-charge');
   await expect(page.locator('#experiment-name')).toHaveText('Continuous charge distributions');
+  await expect(page.locator('[data-control="size"]')).toHaveValue('1.15');
+  await expect(page.locator('[data-control="samples"]')).toHaveValue('2400');
   const distribution = page.locator('[data-control="distribution"]');
   for (const kind of ['rod', 'ring', 'disk', 'infinite-line', 'infinite-plane', 'spherical-shell', 'uniform-sphere']) {
     await test.step(kind, async () => {
