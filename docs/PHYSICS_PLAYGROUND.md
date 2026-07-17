@@ -25,6 +25,8 @@ EM 05 adds seven continuous distributions with analytic/direct-integration compa
 
 EM 07 solves conductor surface line charge for tip and shielding presets. EM 08 covers parallel-plate, spherical, coaxial, network, and dielectric models. EM 09 reuses the capacitor state to compare energy under fixed-voltage and fixed-charge constraints.
 
+EM 10 connects signed carrier drift to conventional current, and EM 11 connects `J = σE` to `V = IR`. EM 12 provides a grounded one-branch editor backed by modified nodal analysis. EM 13–15 share analytic transient/steady-state state among circuit motion, voltage/current/charge/energy readouts, time curves, phase plots, waveforms, damping presets, resonance, impedance, and phasors.
+
 ### Projectile Target
 
 With launch height `y₀`, speed `v₀`, angle `θ`, and constant downward gravity `g`, the model is analytic:

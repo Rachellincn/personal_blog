@@ -89,3 +89,24 @@ Accuracy is not inferred from one picture. The model reports:
 - boundary sample count.
 
 The test suite checks circular charge uniformity, equipotential residual, ellipse tip enhancement, interior screening, empty-cavity screening, charge conservation, and finite off-boundary evaluation.
+
+## Modified nodal analysis for DC circuits
+
+EM 12 maps every non-ground node to a voltage unknown. Resistors stamp the conductance block; current sources stamp the right-hand side. Each voltage source, wire, DC inductor, or closed switch adds one MNA constraint row and one branch-current unknown:
+
+```text
+[G B][v] = [i]
+[C 0][j]   [e]
+```
+
+For these ideal reciprocal constraints, `C = Bᵀ`. Capacitors and open switches stamp no DC conductance. Dense Gaussian elimination uses partial pivoting and rejects pivots below `10⁻¹⁴`; a floating or contradictory circuit therefore raises a clear singular-matrix error.
+
+The result is checked after the solve rather than trusted implicitly. Signed branch currents are accumulated independently at every non-ground node to produce KCL residuals. Each ideal voltage constraint reports its voltage residual, and the teaching circuit also sums its explicit loop voltage drops. Tests cover voltage and current sources, resistors, capacitors, inductors, switches, wires, ground, node-voltage solutions, and residual bounds.
+
+## Analytic RC, RL, and RLC state
+
+EM 13–15 do not numerically integrate equations whose closed forms are available. RC and RL step responses evaluate exponentials at the shared time. The RLC free response selects distinct formulas for complex roots, a repeated critical root, and two real roots. A relative discriminant tolerance of `10⁻¹²ω₀²` identifies the repeated-root case after the exact damping preset is applied.
+
+Sinusoidal RLC uses complex-vector arithmetic represented by `{x,y}` pairs. Component phasors are computed from one current phasor, and their vector sum is checked against the source phasor in tests. Waveform phase, impedance, phasor drawing, charge, and energy are all projections of the same state; the renderer does not maintain a second animation phase.
+
+Verification includes the one-time-constant RC/RL values, RC source-work balance, all three RLC damping classifications, ideal-LC energy conservation, phasor voltage addition, and peak series current at analytic resonance.

@@ -124,6 +124,92 @@ test('electrostatic energy lab distinguishes fixed voltage and fixed charge', as
   await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
 });
 
+test('current-density and Ohm labs keep microscopic and macroscopic state linked', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-current-density');
+  await expect(page.locator('#experiment-name')).toHaveText('Current density & drift velocity');
+  await expect(page.locator('#physics-data')).toContainText('opposite E');
+  await expect(page.locator('#physics-data')).toContainText('conventional current follows E');
+  await page.locator('[data-control="field"]').evaluate((input: HTMLInputElement) => {
+    input.value = '6'; input.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+
+  await page.goto('/playground.html?experiment=electromagnetism-ohm-law');
+  await expect(page.locator('#experiment-name')).toHaveText('Ohm law from J to V–I');
+  await page.locator('[data-control="temperature"]').evaluate((input: HTMLInputElement) => {
+    input.value = '100'; input.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await expect(page.locator('#physics-data')).toContainText('R = ρ(T)L/A; J = σE');
+  await expect(page.locator('#physics-data')).toContainText('Joule power');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+});
+
+test('Kirchhoff editor solves every supported branch component and reports residuals', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-kirchhoff');
+  await expect(page.locator('#experiment-name')).toHaveText('Kirchhoff circuit solver');
+  await expect(page.locator('#physics-data')).toContainText('voltage source · current source · resistor · capacitor · inductor · switch · wire · ground');
+  const component = page.getByLabel('Editable branch component');
+  for (const kind of ['resistor', 'current-source', 'voltage-source', 'capacitor', 'inductor', 'switch', 'wire']) {
+    await component.selectOption(kind);
+    await expect(page.locator('#physics-data')).toContainText(`Placed branch X1${kind}`);
+    await expect(page.locator('#physics-data')).toContainText('KCL max residual');
+    await expect(page.locator('#physics-data')).toContainText('KVL loop residual');
+    await expect(page.locator('#physics-data')).toContainText('Numerical solution');
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+  await component.selectOption('switch');
+  await page.getByRole('button', { name: 'Toggle switch' }).click();
+  await expect(page.locator('[data-control="switch"]')).toHaveValue('open');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  await expect(page.locator('#experiment-details')).toContainText('Modified nodal analysis');
+});
+
+test('RC and RL labs single-step one shared animation and energy state', async ({ page }) => {
+  for (const [route, name, energy] of [
+    ['electromagnetism-rc', 'RC charging & energy', 'Capacitor energy'],
+    ['electromagnetism-rl', 'RL transient & magnetic energy', 'Inductor energy'],
+  ] as const) {
+    await page.goto(`/playground.html?experiment=${route}`);
+    await expect(page.locator('#experiment-name')).toHaveText(name);
+    await page.getByRole('button', { name: 'Pause / Continue' }).click();
+    await page.getByRole('button', { name: 'Step', exact: true }).click();
+    await expect(page.locator('#experiment-status')).toContainText('Advanced shared circuit time');
+    await expect(page.locator('#physics-data')).toContainText(energy);
+    await expect(page.locator('#physics-data')).toContainText('Time constant');
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+});
+
+test('RLC lab shares phasor parameters and exposes all damping regimes', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-rlc');
+  await expect(page.locator('#experiment-name')).toHaveText('RLC resonance & phasors');
+  await expect(page.locator('#physics-data')).toContainText('phasor and waveform use identical R, L, C, f, phase');
+  await expect(page.locator('#physics-data')).toContainText('Resonance f₀');
+  for (const [button, regime] of [['Underdamped', 'underdamped'], ['Critical damping', 'critical'], ['Overdamped', 'overdamped']] as const) {
+    await page.getByRole('button', { name: button }).click();
+    await expect(page.locator('#physics-data')).toContainText(`Regime${regime}`);
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+  await page.getByRole('button', { name: 'Tune resonance' }).click();
+  await expect(page.locator('#experiment-status')).toContainText('tuned');
+  await expect(page.locator('#physics-data')).toContainText('Shared state');
+});
+
+test('all Electromagnetism Atlas experiments mount and release cleanly', async ({ page }) => {
+  const errors: string[] = [];
+  captureErrors(page, errors);
+  await page.goto('/playground.html?experiment=electromagnetism');
+  await page.getByLabel('Experiment category').selectOption('Electromagnetism / 电磁学');
+  const tabs = page.getByRole('tab');
+  await expect(tabs).toHaveCount(15);
+  for (let index = 0; index < 15; index += 1) {
+    await tabs.nth(index).click();
+    await expect(page.locator('#experiment-status')).not.toContainText('could not start');
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+  expect(errors).toEqual([]);
+});
+
 test('projectile launches and resets', async ({ page }) => {
   await page.goto('/playground.html?seed=42&experiment=projectile');
   await page.getByRole('button', { name: 'Launch', exact: true }).click();
@@ -180,7 +266,7 @@ test('all Classical Mechanics Atlas experiments mount with shared teaching contr
 
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law', '/playground.html?experiment=electromagnetism-conductors', '/playground.html?experiment=electromagnetism-capacitors', '/playground.html?experiment=electromagnetism-energy']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law', '/playground.html?experiment=electromagnetism-conductors', '/playground.html?experiment=electromagnetism-capacitors', '/playground.html?experiment=electromagnetism-energy', '/playground.html?experiment=electromagnetism-current-density', '/playground.html?experiment=electromagnetism-ohm-law', '/playground.html?experiment=electromagnetism-kirchhoff', '/playground.html?experiment=electromagnetism-rc', '/playground.html?experiment=electromagnetism-rl', '/playground.html?experiment=electromagnetism-rlc']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);

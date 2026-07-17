@@ -31,6 +31,7 @@ import {
 
 type ViewMode = 'arrows' | 'lines' | 'contours' | 'magnitude' | 'tracers' | 'flux';
 type Preset = 'single-positive' | 'single-negative' | 'dipole' | 'like-pair' | 'quadrupole' | 'linear-multipole' | 'random';
+export interface ElectromagnetismAtlasConfig { id: string; name: string; number: string; view: ViewMode; preset: Preset }
 
 const VIEW_LABELS: Record<ViewMode, string> = {
   arrows: 'Vector arrows', lines: 'Field lines', contours: 'Equipotential contours', magnitude: 'Magnitude map', tracers: 'Particle tracers', flux: 'Flux view',
@@ -39,14 +40,14 @@ const VIEW_LABELS: Record<ViewMode, string> = {
 const COLORS = { positive: '#e6654f', negative: '#315b73', field: '#263238', contourPositive: '#d75d49', contourNegative: '#315b73', test: '#987ab3', paper: '#fbf8f1' };
 
 export default class ElectromagnetismAtlasExperiment implements Experiment {
-  readonly id = 'electromagnetism';
-  readonly name = 'Electric field & potential atlas';
-  readonly number = 'ATLAS EM 01';
+  readonly id: string;
+  readonly name: string;
+  readonly number: string;
   private elements!: ExperimentElements;
   private surface!: CanvasSurface;
   private loop!: AnimationLoop;
-  private preset: Preset = 'dipole';
-  private view: ViewMode = 'arrows';
+  private preset: Preset;
+  private view: ViewMode;
   private logarithmic = true;
   private showContributions = true;
   private sourcesLocked = false;
@@ -66,6 +67,14 @@ export default class ElectromagnetismAtlasExperiment implements Experiment {
   private readonly random = seededRandom(20260717);
   private readonly buffer = document.createElement('canvas');
   private readonly bufferContext = this.buffer.getContext('2d')!;
+
+  constructor(config: Partial<ElectromagnetismAtlasConfig> = {}) {
+    this.id = config.id ?? 'electromagnetism';
+    this.name = config.name ?? 'Electric field & potential atlas';
+    this.number = config.number ?? 'ATLAS EM 01';
+    this.view = config.view ?? 'arrows';
+    this.preset = config.preset ?? 'dipole';
+  }
 
   mount(elements: ExperimentElements) {
     this.elements = elements;
@@ -422,8 +431,9 @@ export default class ElectromagnetismAtlasExperiment implements Experiment {
   private clampWorld(point: Vec2) { const bounds = this.bounds(); return { x: clamp(point.x, bounds.minX + .12, bounds.maxX - .12), y: clamp(point.y, bounds.minY + .12, bounds.maxY - .12) }; }
   private invalidate() { this.cacheKey = ''; }
   private syncViewControl() { const input = this.elements.controls.querySelector<HTMLSelectElement>('[data-control="view"]'); if (input) input.value = this.view; this.updateModelDetails(); }
-  private persist() { try { localStorage.setItem('physics-playground:electromagnetism-settings', JSON.stringify({ preset: this.preset, view: this.view, logarithmic: this.logarithmic, showContributions: this.showContributions, sourcesLocked: this.sourcesLocked, testPositive: this.testCharge.charge > 0 })); } catch {} }
-  private restore() { try { const saved = JSON.parse(localStorage.getItem('physics-playground:electromagnetism-settings') ?? '{}'); this.preset = saved.preset ?? this.preset; this.view = saved.view ?? this.view; this.logarithmic = saved.logarithmic ?? this.logarithmic; this.showContributions = saved.showContributions ?? this.showContributions; this.sourcesLocked = saved.sourcesLocked ?? this.sourcesLocked; this.testCharge.charge = saved.testPositive === false ? -1e-9 : 1e-9; } catch {} }
+  private storageKey() { return this.id === 'electromagnetism' ? 'physics-playground:electromagnetism-settings' : `physics-playground:${this.id}-settings`; }
+  private persist() { try { localStorage.setItem(this.storageKey(), JSON.stringify({ preset: this.preset, view: this.view, logarithmic: this.logarithmic, showContributions: this.showContributions, sourcesLocked: this.sourcesLocked, testPositive: this.testCharge.charge > 0 })); } catch {} }
+  private restore() { try { const saved = JSON.parse(localStorage.getItem(this.storageKey()) ?? '{}'); this.preset = saved.preset ?? this.preset; this.view = saved.view ?? this.view; this.logarithmic = saved.logarithmic ?? this.logarithmic; this.showContributions = saved.showContributions ?? this.showContributions; this.sourcesLocked = saved.sourcesLocked ?? this.sourcesLocked; this.testCharge.charge = saved.testPositive === false ? -1e-9 : 1e-9; } catch {} }
 }
 
 function line(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }

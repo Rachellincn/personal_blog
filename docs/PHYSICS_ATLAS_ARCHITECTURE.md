@@ -2,7 +2,7 @@
 
 ## Delivery boundaries
 
-The Atlas grows through independently deployable experiment slices. The first Electromagnetism Atlas slice adds electric fields and potential. The second adds continuous-charge integration and Gaussian surfaces. Conductors, circuits, magnetism, induction, and waves remain separate PRs so each model can be tested and reviewed without importing unfinished code.
+The Atlas grows through independently deployable experiment slices. The first Electromagnetism Atlas slice adds electric fields and potential. The second adds continuous-charge integration and Gaussian surfaces, the third adds conductors/capacitors/energy, and the fourth adds current and circuits. Magnetism, charged particles, induction, and waves remain separate PRs so each model can be tested and reviewed without importing unfinished code.
 
 ## Runtime layers
 
@@ -36,6 +36,10 @@ This functional boundary allows later experiments to supply electric, magnetic, 
 
 `electromagnetism/conductors.ts` owns a pure boundary-collocation solve and returns field/potential closures plus error diagnostics. `electromagnetism/capacitors.ts` owns analytic geometry, dielectric, network, excitation, and energy calculations. EM 08 and EM 09 both consume that module, preventing their energy and charge readouts from drifting into separate formulas.
 
+`electromagnetism/circuits.ts` is a DOM-free layer for signed carrier transport, ohmic conductors, DC modified nodal analysis, and RC/RL/RLC responses. `games/circuit-atlas.ts` is the shared presentation layer for EM 10–15. The circuit editor emits a discriminated `DcElement` graph; only the model decides current signs, voltage drops, damping regime, impedance, phase, and energy. EM 13–15 share one time variable among circuit motion, curve, readout, phase plot, and phasor/waveform views.
+
+EM 02–04 are independent catalog entries configured from the EM 01 experiment class. This preserves 39 addressable experiment numbers without cloning the Field Visualization Engine or its lifecycle listeners.
+
 The arbitrary 2-D curve remains in `field-engine.ts`. It does not implement `GaussianSurface`, so TypeScript keeps planar line flux out of the physical 3-D Gauss-law calculation.
 
 ## Lifecycle and performance
@@ -48,6 +52,7 @@ The arbitrary 2-D curve remains in `field-engine.ts`. It does not implement `Gau
 - Mobile uses reduced grid and field-line counts.
 - Cached numerical geometry is keyed by source position, charge, viewport bounds, and precision mode.
 - Continuous-charge and Gaussian experiments are static: they schedule no animation frame. During pointer movement they temporarily lower quadrature resolution and recompute at full selected resolution on release.
+- Current, RC, RL, and RLC use the shared visibility-aware `AnimationLoop`; Ohm and Kirchhoff remain static. Switching among all 15 current EM entries is covered by a console/page-error lifecycle regression.
 
 ## Accessibility
 
