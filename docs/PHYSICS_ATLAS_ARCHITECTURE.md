@@ -2,7 +2,7 @@
 
 ## Delivery boundaries
 
-The Atlas grows through independently deployable experiment slices. The first Electromagnetism Atlas slice adds electric fields and potential. The second adds continuous-charge integration and Gaussian surfaces, the third adds conductors/capacitors/energy, and the fourth adds current and circuits. Magnetism, charged particles, induction, and waves remain separate PRs so each model can be tested and reviewed without importing unfinished code.
+The Atlas grows through independently deployable experiment slices. The first Electromagnetism Atlas slice adds electric fields and potential. The second adds continuous-charge integration and Gaussian surfaces, the third adds conductors/capacitors/energy, the fourth adds current/circuits, and the fifth adds magnetostatics. Charged particles, induction, and waves remain separate PRs so each model can be tested and reviewed without importing unfinished code.
 
 ## Runtime layers
 
@@ -40,6 +40,8 @@ This functional boundary allows later experiments to supply electric, magnetic, 
 
 EM 02–04 are independent catalog entries configured from the EM 01 experiment class. This preserves 39 addressable experiment numbers without cloning the Field Visualization Engine or its lifecycle listeners.
 
+`electromagnetism/magnetostatics.ts` owns long-wire, current-element, loop-axis, finite-solenoid, Ampère, dipole, flux, and force calculations without DOM or Canvas dependencies. `games/magnetostatics-atlas.ts` configures EM 19–25 from one lifecycle-aware presentation class. Circular-loop magnetic fields are passed into the same generic vector sampler and streamline engine used by electrostatics, proving that the Field Visualization Engine is source-agnostic.
+
 The arbitrary 2-D curve remains in `field-engine.ts`. It does not implement `GaussianSurface`, so TypeScript keeps planar line flux out of the physical 3-D Gauss-law calculation.
 
 ## Lifecycle and performance
@@ -52,7 +54,8 @@ The arbitrary 2-D curve remains in `field-engine.ts`. It does not implement `Gau
 - Mobile uses reduced grid and field-line counts.
 - Cached numerical geometry is keyed by source position, charge, viewport bounds, and precision mode.
 - Continuous-charge and Gaussian experiments are static: they schedule no animation frame. During pointer movement they temporarily lower quadrature resolution and recompute at full selected resolution on release.
-- Current, RC, RL, and RLC use the shared visibility-aware `AnimationLoop`; Ohm and Kirchhoff remain static. Switching among all 15 current EM entries is covered by a console/page-error lifecycle regression.
+- Current, RC, RL, and RLC use the shared visibility-aware `AnimationLoop`; Ohm and Kirchhoff remain static. Switching among all 22 current EM entries is covered by a console/page-error lifecycle regression.
+- Magnetostatic scenes remain static except the simplified motor. The motor uses the same visibility/reduced-motion aware loop; the Biot–Savart canvas listener and motor loop are released when any of the 22 current EM entries is replaced.
 
 ## Accessibility
 

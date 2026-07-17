@@ -290,3 +290,116 @@ The current waveform and `VR`, `VL`, `VC`, and source phasors are derived from t
 - **Approximation/numerics:** ideal series lumped RLC; exact homogeneous solutions and complex phasor algebra. Free and driven modes are separate teaching models, not a combined forced transient.
 - **Limitations:** no component tolerance, nonlinear loss, source impedance, parasitics, switching transient in driven mode, or arbitrary topology.
 - **Teaching goal:** connect damping roots, resonance, impedance phase, waveform timing, phasor addition, phase space, and energy exchange without duplicating parameters between views.
+
+## EM 19: long straight wire
+
+### Model
+
+```text
+B(r) = μ₀I/(2πr) φ̂
+φ̂ = l̂ × r̂⊥
+```
+
+The wire direction, signed current, perpendicular displacement, and cross product determine the field vector. Reversing current reverses every field arrow and right-hand-rule circle. Queries within the ideal-wire exclusion radius return `null` rather than a capped finite field.
+
+- **Parameters:** current `−10–10 A`, probe radius `0.08–1.4 m`.
+- **Approximation/numerics:** infinitely long, zero-radius wire in vacuum; analytic vector evaluation.
+- **Limitations:** no finite endpoints, material permeability, skin effect, return conductor, or finite wire radius.
+- **Teaching goal:** derive circular field direction and the inverse-radius law from a signed vector model.
+
+## EM 20: circular current loop
+
+### Model
+
+```text
+Baxis(z) = μ₀NIa² / [2(a² + z²)³ᐟ²]
+μ = NIπa² n̂
+Bdipole,axis = μ₀μ/(2π|z|³)
+```
+
+The cross-sectional field map subdivides the loop into 72 current elements and sends the resulting `Bx,Bz` field through the shared vector sampler, logarithmic arrow scaling, and midpoint streamline engine. The independent axis formula and dipole approximation expose when the far-field model becomes accurate.
+
+- **Parameters:** current `−10–10 A`, radius `0.15–0.8 m`, `1–240` turns, axial probe `0–2.2 m`.
+- **Approximation/numerics:** filamentary circular turns in vacuum; midpoint Biot–Savart quadrature for the 2-D slice and analytic axis field.
+- **Limitations:** turns are coincident, wire thickness is excluded, and the segmented off-axis field is a teaching quadrature rather than an elliptic-integral evaluator.
+- **Teaching goal:** connect current direction, closed field lines, axis field, magnetic moment, and the far-field dipole limit.
+
+## EM 21: finite solenoid
+
+The axial field uses the finite-solenoid expression
+
+```text
+Bz = (μ₀nI/2)(cosθnear − cosθfar),  n = N/L.
+```
+
+The readout compares this result with the long-solenoid interior `μ₀nI` and reports a fringe factor. Interior arrows use the signed analytic direction. Dashed exterior return curves are explicitly labeled qualitative; their shape is not used for numerical readouts.
+
+- **Parameters:** current `−10–10 A`, radius `0.12–0.65 m`, length `0.4–2.2 m`, `20–500` turns, axial probe `−1.8–1.8 m`.
+- **Approximation/numerics:** continuous surface-current sheet with uniform winding density; analytic on-axis field.
+- **Limitations:** off-axis magnitude, discrete winding ripple, core response, finite wire, and lead fields are omitted.
+- **Teaching goal:** distinguish the useful uniform-interior approximation from finite-length fringe and exterior return fields.
+
+## EM 22: Biot–Savart wire sketch
+
+### Model and interaction
+
+```text
+dB ≈ (μ₀/4π) I Δl × r / |r|³
+B = Σ dB.
+```
+
+Canvas taps append up to 12 wire vertices. Each adjacent pair becomes a current element; the live panel exposes every element contribution, their vector sum, skipped singular elements, and the selected probe. Undoing or adding points is the visible refinement path.
+
+- **Parameters:** current `−10–10 A`; probe coordinates `−1.3–1.3 m` and `−1–1 m`; up to 11 segments.
+- **Numerical method:** midpoint current-element quadrature. The exclusion test uses distance to the entire segment, not only its midpoint. If the probe intersects any ideal segment, the total is `null` because omitting that divergent term would be misleading.
+- **Limitations:** a coarse polyline is not a converged smooth-wire result; all points lie in one plane and wire radius is zero.
+- **Teaching goal:** see how signed `Δl × r` contributions add and why shorter elements improve a Riemann-sum approximation.
+
+## EM 23: Ampère loop law
+
+```text
+∮C B·dl = μ₀Ienclosed.
+```
+
+Centered circle, offset “wrong” circle, subdivided rectangle, and multi-wire presets show local oriented `dl`, `B·dl`, the numerical integral, enclosed signed current, expected `μ₀I`, residual, and skipped singular samples. Point-in-polygon geometry calculates enclosed current independently of the field integral.
+
+`canExtractFieldBySymmetry` is a separate geometric predicate. Only a circular loop coaxial with all represented long wires permits `|B|` to be factored out. The equality remains valid for offset, rectangular, and asymmetric multi-wire paths.
+
+- **Parameters:** current `−10–10 A`, loop size `0.2–1.1 m`; 160 rectangle or 240 circle elements.
+- **Approximation/numerics:** ideal infinite parallel wires and midpoint line integration.
+- **Limitations:** prescribed planar loops only; no surface-current density or arbitrary 3-D contour editor in this slice.
+- **Teaching goal:** separate the universal integral law from the additional symmetry needed to solve directly for field magnitude.
+
+## EM 24: magnetic dipole interaction
+
+```text
+τ = μ × B
+U = −μ·B
+Fj = Σi μi ∂Bi/∂xj
+Bdipole = μ₀[3(μ·r̂)r̂ − μ]/(4πr³)
+```
+
+Moment angle, external field, and `dBz/dx` drive torque, potential energy, and nonuniform-field force. A deterministic spherical surface integral of the same dipole field reports near-zero net magnetic flux, implementing the no-magnetic-monopole check.
+
+- **Parameters:** moment `0.05–1 A·m²`, field `−0.8–0.8 T`, angle `0–180°`, gradient `−0.5–0.5 T/m`.
+- **Approximation/numerics:** ideal point dipole and locally linear field gradient; analytic interaction plus midpoint spherical flux quadrature.
+- **Limitations:** no finite magnet geometry, hysteresis, induced moment, higher multipoles, or back-reaction on the external source.
+- **Teaching goal:** connect the loop right-hand rule to `μ`, alignment energy, torque, gradient force, and `∇·B = 0`.
+
+## EM 25: force on currents and simplified motor
+
+### Models
+
+```text
+F = I L × B
+Fparallel/L = μ₀I₁I₂/(2πd)
+μcoil = NIA n̂
+τcoil = μcoil × B.
+```
+
+Parallel-wire arrows use the sign of `I₁I₂`: equal signed directions attract and opposite directions repel. The rectangular-coil scene shows the force couple through its net magnetic moment. The motor scene advances a damped rotor from the calculated torque; reversing current reverses moment and torque rather than merely reversing an animation flag.
+
+- **Parameters:** currents `−10–10 A`, external field `−0.8–0.8 T`, `1–240` turns, coil angle `0–180°`; displayed wire spacing and coil dimensions are fixed teaching geometry.
+- **Approximation/numerics:** uniform external field, rigid filamentary coil, fixed moment of inertia, linear damping, and fixed-step rotor integration.
+- **Limitations:** no commutator, electrical back-emf, inductive current dynamics, bearings, load torque, or magnetic-core geometry.
+- **Teaching goal:** unify force on a segment, interaction between currents, torque on a loop, and motor rotation through signed cross products.

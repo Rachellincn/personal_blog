@@ -27,6 +27,8 @@ EM 07 solves conductor surface line charge for tip and shielding presets. EM 08 
 
 EM 10 connects signed carrier drift to conventional current, and EM 11 connects `J = σE` to `V = IR`. EM 12 provides a grounded one-branch editor backed by modified nodal analysis. EM 13–15 share analytic transient/steady-state state among circuit motion, voltage/current/charge/energy readouts, time curves, phase plots, waveforms, damping presets, resonance, impedance, and phasors.
 
+EM 19–25 add long-wire, circular-loop, finite-solenoid, user-sketched Biot–Savart, Ampère-loop, magnetic-dipole, wire-force, coil, and motor views. Magnetic arrows use the signed 3-D model; the circular-loop slice reuses the shared Field Visualization Engine. Ideal-wire intersections remain undefined, and qualitative solenoid return lines are labeled separately from analytic readouts.
+
 ### Projectile Target
 
 With launch height `y₀`, speed `v₀`, angle `θ`, and constant downward gravity `g`, the model is analytic:

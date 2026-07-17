@@ -195,14 +195,84 @@ test('RLC lab shares phasor parameters and exposes all damping regimes', async (
   await expect(page.locator('#physics-data')).toContainText('Shared state');
 });
 
+test('straight wire, current loop, and solenoid derive signed magnetic fields', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-straight-wire');
+  await expect(page.locator('#experiment-name')).toHaveText('Long straight-wire magnetic field');
+  await expect(page.locator('#physics-data')).toContainText('concentric closed circles');
+  await page.getByRole('button', { name: 'Reverse current' }).click();
+  await expect(page.locator('#physics-data')).toContainText('−y at the +x probe');
+  await page.locator('[data-control="current"]').evaluate((input: HTMLInputElement) => { input.value = '0'; input.dispatchEvent(new Event('input', { bubbles: true })); });
+  await expect(page.locator('#physics-data')).toContainText('no magnetic field at I = 0');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+
+  await page.goto('/playground.html?experiment=electromagnetism-current-loop');
+  await expect(page.locator('#physics-data')).toContainText('Axis field exact');
+  await expect(page.locator('#physics-data')).toContainText('Dipole approximation');
+  await expect(page.locator('#physics-data')).toContainText('shared field engine');
+
+  await page.goto('/playground.html?experiment=electromagnetism-solenoid');
+  await expect(page.locator('#physics-data')).toContainText('Finite-solenoid field');
+  await expect(page.locator('#physics-data')).toContainText('Fringe factor');
+  await expect(page.locator('#physics-data')).toContainText('qualitative dashed closure');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+});
+
+test('Biot–Savart sketch recomputes per-element contributions after drawing', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-biot-savart');
+  await expect(page.locator('#experiment-name')).toHaveText('Biot–Savart wire sketch');
+  await expect(page.locator('#physics-data')).toContainText('Segments3');
+  await page.locator('#physics-canvas').click({ position: { x: 420, y: 180 } });
+  await expect(page.locator('#physics-data')).toContainText('Segments4');
+  await expect(page.locator('#physics-data')).toContainText('Element contributions');
+  await expect(page.locator('#physics-data')).toContainText('midpoint current elements');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+});
+
+test('Ampère lab separates the integral law from symmetry', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-ampere');
+  await expect(page.locator('#physics-data')).toContainText('Can extract |B| by symmetry?Yes');
+  const preset = page.getByLabel('Ampere loop preset');
+  for (const kind of ['offset', 'rectangle', 'multiple']) {
+    await preset.selectOption(kind);
+    await expect(page.locator('#physics-data')).toContainText('Loop integral');
+    await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+  }
+  await preset.selectOption('offset');
+  await expect(page.locator('#physics-data')).toContainText('No — Ampere law still holds');
+  await expect(page.locator('#physics-data')).toContainText('Enclosed current0 A');
+});
+
+test('dipole, parallel-wire, coil, and motor forces come from vector state', async ({ page }) => {
+  await page.goto('/playground.html?experiment=electromagnetism-magnetic-dipole');
+  await expect(page.locator('#physics-data')).toContainText('Torque μ×B');
+  await expect(page.locator('#physics-data')).toContainText('Gradient force');
+  await expect(page.locator('#physics-data')).toContainText('no monopole');
+  await page.getByRole('button', { name: 'Align moment' }).click();
+  await expect(page.locator('[data-control="angle"]')).toHaveValue('0');
+
+  await page.goto('/playground.html?experiment=electromagnetism-wire-force');
+  await expect(page.locator('#physics-data')).toContainText('attraction');
+  await page.locator('[data-control="current2"]').evaluate((input: HTMLInputElement) => { input.value = '0'; input.dispatchEvent(new Event('input', { bubbles: true })); });
+  await expect(page.locator('#physics-data')).toContainText('no force when either current is zero');
+  await page.locator('[data-control="current2"]').evaluate((input: HTMLInputElement) => { input.value = '-3'; input.dispatchEvent(new Event('input', { bubbles: true })); });
+  await expect(page.locator('#physics-data')).toContainText('repulsion');
+  await page.getByLabel('Force scene').selectOption('coil');
+  await expect(page.locator('#physics-data')).toContainText('rectangular current loop');
+  await page.getByLabel('Force scene').selectOption('motor');
+  await page.getByRole('button', { name: 'Pause / Continue' }).click();
+  await page.getByRole('button', { name: 'Step', exact: true }).click();
+  await expect(page.locator('#experiment-status')).toContainText('Advanced motor dynamics');
+  await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
+});
+
 test('all Electromagnetism Atlas experiments mount and release cleanly', async ({ page }) => {
   const errors: string[] = [];
   captureErrors(page, errors);
   await page.goto('/playground.html?experiment=electromagnetism');
   await page.getByLabel('Experiment category').selectOption('Electromagnetism / 电磁学');
   const tabs = page.getByRole('tab');
-  await expect(tabs).toHaveCount(15);
-  for (let index = 0; index < 15; index += 1) {
+  await expect(tabs).toHaveCount(22);
+  for (let index = 0; index < 22; index += 1) {
     await tabs.nth(index).click();
     await expect(page.locator('#experiment-status')).not.toContainText('could not start');
     await expect(page.locator('#physics-data')).not.toContainText(/NaN|Infinity/);
@@ -266,7 +336,7 @@ test('all Classical Mechanics Atlas experiments mount with shared teaching contr
 
 test('mobile viewport has no material horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law', '/playground.html?experiment=electromagnetism-conductors', '/playground.html?experiment=electromagnetism-capacitors', '/playground.html?experiment=electromagnetism-energy', '/playground.html?experiment=electromagnetism-current-density', '/playground.html?experiment=electromagnetism-ohm-law', '/playground.html?experiment=electromagnetism-kirchhoff', '/playground.html?experiment=electromagnetism-rc', '/playground.html?experiment=electromagnetism-rl', '/playground.html?experiment=electromagnetism-rlc']) {
+  for (const route of ['/index.html', '/notes.html', '/about.html', '/playground.html?experiment=wave', '/playground.html?experiment=mechanics-effective-potential', '/playground.html?experiment=electromagnetism', '/playground.html?experiment=electromagnetism-continuous-charge', '/playground.html?experiment=electromagnetism-gauss-law', '/playground.html?experiment=electromagnetism-conductors', '/playground.html?experiment=electromagnetism-capacitors', '/playground.html?experiment=electromagnetism-energy', '/playground.html?experiment=electromagnetism-current-density', '/playground.html?experiment=electromagnetism-ohm-law', '/playground.html?experiment=electromagnetism-kirchhoff', '/playground.html?experiment=electromagnetism-rc', '/playground.html?experiment=electromagnetism-rl', '/playground.html?experiment=electromagnetism-rlc', '/playground.html?experiment=electromagnetism-straight-wire', '/playground.html?experiment=electromagnetism-current-loop', '/playground.html?experiment=electromagnetism-solenoid', '/playground.html?experiment=electromagnetism-biot-savart', '/playground.html?experiment=electromagnetism-ampere', '/playground.html?experiment=electromagnetism-magnetic-dipole', '/playground.html?experiment=electromagnetism-wire-force']) {
     await page.goto(route);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, route).toBeLessThanOrEqual(1);
