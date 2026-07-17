@@ -7,6 +7,7 @@ export interface ExperimentElements {
   data: HTMLElement;
   status: HTMLElement;
   stage: HTMLElement;
+  details: HTMLElement;
 }
 
 export interface Experiment {
@@ -21,3 +22,11 @@ export interface Experiment {
 }
 
 export interface Point { x: number; y: number }
+
+export interface Vector extends Point {
+  dx: number;
+  dy: number;
+  label: string;
+  value?: string;
+  kind?: 'velocity' | 'acceleration' | 'force' | 'constraint';
+}
