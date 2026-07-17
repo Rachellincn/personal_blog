@@ -67,6 +67,16 @@ The 0.09 m disk is a numerical/display exclusion radius, not a finite-size charg
 - Verify locally that equipotential contours are transverse to `E` and that `E = −∇V`.
 - Recognize a point-charge singularity as undefined rather than merely “very large.”
 
+## EM 02–04: field lines, equipotentials, and multipoles
+
+EM 02, EM 03, and EM 04 are independent deep links backed by the EM 01 Field Visualization Engine. EM 02 starts in normalized-streamline mode, EM 03 starts with marching-squares potential contours, and EM 04 starts with the quadrupole magnitude map. Each entry has its own persisted preset/view state; the underlying field, potential, singularity, gradient, and rendering contracts remain identical to EM 01.
+
+- **Theory:** EM 02 integrates curves tangent to `E`; EM 03 samples `V = constant` and checks `E = −∇V`; EM 04 compares monopole, dipole, quadrupole, and linear-multipole source arrangements.
+- **Approximations and numerical method:** these are 2-D slices of ideal 3-D point-charge fields. Streamlines use bounded midpoint integration, contours use finite-grid marching squares, and far-field dominance is demonstrated by the exact source sum rather than by fitting coefficients.
+- **Parameter range:** the same ±3.2 m view, 2–10 nC presets, ±1 nC test charge, and 0.09 m singularity exclusion used by EM 01.
+- **Known limitations:** line density is qualitative, contour topology is resolution-dependent near exclusions, and EM 04 does not expose a symbolic arbitrary-order multipole tensor.
+- **Teaching goal:** keep three different representations—integral curves, scalar level sets, and far-field source structure—distinct while showing that all are calculated from one field/potential state.
+
 ## EM 05: continuous charge distributions
 
 ### Shared integral
@@ -173,3 +183,110 @@ U = Q²/(2C)  (fixed isolated charge).
 ```
 
 At fixed voltage, stored field energy rises as capacitance increases and the battery exchanges energy and charge. At fixed charge, stored field energy falls and voltage decreases. The plotted curve is recomputed from the selected dielectric fraction, not pre-drawn. A positive insertion tendency is calculated from `dC/df` for both constraints.
+
+## EM 10: current density and drift velocity
+
+### Model
+
+```text
+v_d = sign(q) μE
+J = nqv_d
+I = JA
+```
+
+The signed carrier charge determines drift direction. For electrons, `v_d` points opposite `E`, while the two negative signs in `nqv_d` make conventional `J` point with `E`. The animation reads that signed velocity; its direction is not a decorative constant.
+
+- **Parameters:** `E = 0.2–8 V/m`, mobility `0.5–8 × 10⁻³ m²/(V·s)`, area `0.2–4 mm²`; copper-like density `8.5 × 10²⁸ m⁻³` is fixed.
+- **Approximation/numerics:** uniform material, uniform field, one carrier population, analytic arithmetic only.
+- **Limitations:** no Fermi surface, scattering-time distribution, Hall field, heating, or velocity saturation.
+- **Teaching goal:** distinguish slow electron drift from conventional current and link microscopic carrier flux to amperes.
+
+## EM 11: Ohm law from microscopic to circuit scale
+
+### Model
+
+```text
+ρ(T) = ρref[1 + α(T − Tref)]
+R = ρ(T)L/A
+E = V/L
+J = σE = I/A
+P = VI
+```
+
+- **Parameters:** `V = 1–24 V`, `L = 0.5–5 m`, area `0.2–4 mm²`, temperature `0–120 °C`; copper reference resistivity and linear coefficient are used.
+- **Approximation/numerics:** a homogeneous ohmic conductor with a linear temperature coefficient; direct analytic evaluation.
+- **Limitations:** no self-heating feedback, contact resistance, skin effect, non-ohmic response, or temperature-dependent geometry.
+- **Teaching goal:** show that `V = IR` and `J = σE` are the same constitutive statement at different scales.
+
+## EM 12: Kirchhoff editor and DC solver
+
+The lightweight editor keeps a grounded source and series resistor, then lets the user replace a branch with a voltage source, current source, resistor, capacitor, inductor, switch, or wire. Ground is an explicit reference node. The graph is rebuilt and solved after every edit.
+
+Modified nodal analysis (MNA) solves node voltages plus ideal-voltage-constraint currents. Branch-current signs follow the displayed endpoint order. The readout includes nodes, branches, current directions, voltage drops, KCL residual, loop KVL residual, the equation labels, and the numerical solution.
+
+- **Parameters:** source `2–24 V`, series resistance `10–200 Ω`; the edited branch derives a safe teaching-scale value from the same controls.
+- **DC approximations:** capacitors are open circuits; inductors and wires are ideal shorts; an open switch is open and a closed switch is an ideal short. All sources and components are ideal and time-independent.
+- **Numerical method:** dense partial-pivot Gaussian elimination on the small MNA matrix. Singular/floating or contradictory ideal circuits throw instead of returning non-finite values.
+- **Known limitations:** one editable two-terminal branch, no drag-and-drop topology, dependent sources, nonlinear devices, transient netlist solve, or sparse-matrix scaling.
+- **Teaching goal:** connect a drawn branch orientation to signed current, node voltage, KCL, KVL, and the matrix solution rather than memorizing loop directions.
+
+## EM 13: RC charging
+
+```text
+τ = RC
+Vc(t) = V(1 − e⁻ᵗ/τ)
+I(t) = (V/R)e⁻ᵗ/τ
+q(t) = CVc(t)
+UC = ½CVc²
+```
+
+The moving circuit markers, voltage curve, current, charge, energy, and normalized `Vc–I` phase curve all sample the same time state. Source work equals capacitor energy plus resistor heat within floating-point precision.
+
+- **Parameters:** `R = 5–150 Ω`, `C = 20–300 µF`, `V = 2–24 V`; the plot spans six time constants.
+- **Approximation/numerics:** ideal step source and lumped, linear components; closed-form response, no time integrator.
+- **Limitations:** charging only in this slice; no ESR, leakage, dielectric absorption, switch bounce, or parasitic inductance.
+- **Teaching goal:** relate one time constant to simultaneous voltage, current, charge, and energy transfer.
+
+## EM 14: RL transient
+
+```text
+τ = L/R
+I(t) = (V/R)(1 − e⁻ᵗ/τ)
+VL(t) = Ve⁻ᵗ/τ
+UL = ½LI²
+```
+
+The circuit motion, current curve, inductor voltage, energy, and normalized `I–VL` phase curve share one time coordinate.
+
+- **Parameters:** `R = 5–150 Ω`, `L = 10–200 mH`, `V = 2–24 V`; the plot spans six time constants.
+- **Approximation/numerics:** ideal DC step and linear lumped elements; analytic response.
+- **Limitations:** no winding resistance beyond the selected series `R`, saturation, hysteresis, core loss, or stray capacitance.
+- **Teaching goal:** connect back-emf decay, current growth, and magnetic-energy storage.
+
+## EM 15: RLC free response and sinusoidal steady state
+
+### Free response
+
+```text
+α = R/(2L),  ω₀ = 1/√(LC)
+α < ω₀: underdamped
+α = ω₀: critical
+α > ω₀: overdamped
+```
+
+The solver uses the exact real solution for each regime, including the repeated-root critical case. Buttons set `R` directly from `2√(L/C)`, so the critical preset is not lost to slider quantization. The live `q–I` phase trajectory, time curve, electric energy, magnetic energy, and circuit markers share one analytic state. At `R = 0`, the tested LC limit conserves `q²/(2C) + LI²/2`.
+
+### Sinusoidal steady state
+
+```text
+Z = R + j(ωL − 1/ωC)
+I₀ = V₀/|Z|
+f₀ = 1/(2π√(LC))
+```
+
+The current waveform and `VR`, `VL`, `VC`, and source phasors are derived from the identical `R`, `L`, `C`, frequency, source phase, and shared time. The resonance action writes the analytic `f₀` into that same model state. Instantaneous charge and electric/magnetic energies are calculated from the steady-state current phase.
+
+- **Parameters:** `R = 5–150 Ω` through the slider (preset values may be exact between steps), `L = 10–200 mH`, `C = 20–300 µF`, amplitude `2–24 V`, frequency `2–100 Hz`.
+- **Approximation/numerics:** ideal series lumped RLC; exact homogeneous solutions and complex phasor algebra. Free and driven modes are separate teaching models, not a combined forced transient.
+- **Limitations:** no component tolerance, nonlinear loss, source impedance, parasitics, switching transient in driven mode, or arbitrary topology.
+- **Teaching goal:** connect damping roots, resonance, impedance phase, waveform timing, phasor addition, phase space, and energy exchange without duplicating parameters between views.

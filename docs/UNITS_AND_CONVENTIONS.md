@@ -39,3 +39,7 @@ Continuous distributions store `λ` in C/m, `σ` in C/m², and `ρ` in C/m³. Ca
 Physical Gaussian flux `∯E·dA` has units N·m²/C. The planar diagnostic `∮E·n dl` has units N·m/C and must not be interpreted as enclosed charge divided by `ε₀`.
 
 The EM 07 conductor cross-section is translationally invariant; its solved panel and net charges are line charges in C/m. Capacitance is F, displacement and polarization are C/m², field-energy density is J/m³, and total stored energy is J.
+
+Circuit models store carrier density in m⁻³, mobility in m²/(V·s), drift velocity in m/s, current density in A/m², current in A, resistivity in Ω·m, conductivity in S/m, resistance in Ω, capacitance in F, and inductance in H. UI values in mm², µF, and mH are converted once at the control boundary.
+
+Every branch current is positive from its declared `from` node to `to` node; a voltage source uses `positive` to `negative`. A negative result means physical current is opposite the drawn reference arrow. Ground is exactly `0 V`. Phasor angles are stored in radians and only converted to degrees for display; source and current waveforms use cosine convention.
