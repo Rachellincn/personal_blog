@@ -1,10 +1,11 @@
 ---
-interface Props { active?: 'home' | 'notes' | 'playground' | 'about' }
+interface Props { active?: 'home' | 'notes' | 'playground' | 'study' | 'about' }
 const { active } = Astro.props;
 const links = [
   ['home', 'Home', '/index.html'],
   ['notes', 'Notes', '/notes.html'],
   ['playground', 'Playground', '/playground.html'],
+  ['study', 'Study', '/study/index.html'],
   ['about', 'About', '/about.html'],
 ] as const;
 ---
