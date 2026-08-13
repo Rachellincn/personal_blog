@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Griffiths 量子力学｜6周强化预习</title>
+  <meta name="description" content="面向物理系本科生的 Griffiths 量子力学 6 周＋3 天强化预习打卡表">
+  <style>
+    :root{
+      --ink:#172126;--muted:#68757b;--paper:#f1efe8;--card:#fffdfa;--line:#dedbd2;
+      --navy:#102d35;--navy2:#17424b;--teal:#19766f;--teal-soft:#e5f3ef;
+      --gold:#d89538;--gold-soft:#fbefd9;--red:#b95843;--shadow:0 18px 50px rgba(20,37,41,.10);
+      --radius:20px
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.55}
+    button,input,textarea{font:inherit}button{color:inherit}.app{min-height:100vh;display:grid;grid-template-columns:268px minmax(0,1fr)}
+    .side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--navy);color:#edf5f2;padding:28px 20px;display:flex;flex-direction:column}
+    .brand{display:flex;gap:13px;align-items:center;margin-bottom:30px}.mark{width:44px;height:44px;border:1px solid rgba(255,255,255,.28);border-radius:50%;position:relative;background:radial-gradient(circle at center,var(--gold) 0 5px,transparent 6px)}
+    .mark:before,.mark:after{content:"";position:absolute;inset:8px 3px;border:1px solid rgba(255,255,255,.62);border-radius:50%;transform:rotate(35deg)}.mark:after{transform:rotate(-35deg)}
+    .brand h1{font-size:15px;margin:0}.brand p{font-size:10px;letter-spacing:.13em;color:#94afb3;margin:3px 0 0}.side-label{font-size:10px;letter-spacing:.15em;color:#799ba0;font-weight:800;margin:0 8px 8px}.week-nav{display:grid;gap:4px}
+    .nav-btn{width:100%;border:0;background:transparent;color:#a9c0c2;border-radius:11px;padding:9px 9px;display:grid;grid-template-columns:27px minmax(0,1fr) 34px;gap:7px;align-items:center;text-align:left;cursor:pointer}.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,.09);color:#fff}.nav-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nav-pct{font-size:10px;text-align:right}
+    .side-bottom{margin-top:auto;padding-top:25px}.side-bottom label{display:block;color:#95adb1;font-size:11px;margin:0 6px 7px}.date-input{width:100%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;color-scheme:dark;border-radius:11px;padding:9px}.privacy{color:#78979c;font-size:10px;margin:9px 6px 0}
+    main{width:100%;max-width:1480px;margin:0 auto;padding:30px clamp(20px,4vw,58px) 80px;min-width:0}.mobile-head{display:none}.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(126deg,var(--navy),var(--navy2));color:#fff;padding:38px;box-shadow:var(--shadow)}
+    .orbits{position:absolute;width:390px;height:390px;right:-90px;top:-180px;border:1px solid rgba(255,255,255,.08);border-radius:50%}.orbits:before,.orbits:after{content:"";position:absolute;inset:42px -10px;border:1px solid rgba(255,255,255,.07);border-radius:50%;transform:rotate(52deg)}.orbits:after{transform:rotate(-52deg)}
+    .kicker{position:relative;color:#e9b66f;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.17em}.hero h2{position:relative;font-family:Georgia,"STSong",serif;font-weight:500;font-size:clamp(30px,4.4vw,50px);line-height:1.12;max-width:760px;margin:12px 0 13px}.hero-copy{position:relative;color:#b7cdd0;font-size:14px;max-width:730px;margin:0 0 28px}
+    .metrics{position:relative;display:grid;grid-template-columns:1.25fr repeat(3,.7fr);gap:11px}.metric{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.065);border-radius:17px;padding:15px}.metric small{display:block;color:#9fbbbe;font-size:10px;letter-spacing:.1em;text-transform:uppercase}.metric strong{display:block;font-size:25px;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums}.metric span{color:#9fbbbe;font-size:11px}
+    .overall{display:flex;gap:14px;align-items:center}.ring{--p:0;width:61px;height:61px;flex:0 0 61px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.12) 0);position:relative}.ring:after{content:"";position:absolute;inset:7px;background:#1a4650;border-radius:50%}.ring b{position:relative;z-index:1;font-size:13px}
+    .next{margin:18px 0 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:19px 22px;display:grid;grid-template-columns:45px minmax(0,1fr) auto;gap:14px;align-items:center}.next-icon{width:43px;height:43px;border-radius:13px;background:var(--gold-soft);color:#a96717;display:grid;place-items:center;font-weight:900}.next small{font-size:10px;color:var(--teal);font-weight:850;letter-spacing:.1em}.next h3{font-size:16px;margin:2px 0}.next p{font-size:11px;color:var(--muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.primary,.secondary,.danger{border:0;border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer}.primary{background:var(--teal);color:#fff}.primary:hover{background:#12645f}.secondary{background:#e9e6de}.danger{background:#fff0ec;color:#9d432f;border:1px solid #ecc7bd}
+    .toolbar{position:sticky;top:0;z-index:15;margin:19px -6px 10px;padding:10px 6px;background:rgba(241,239,232,.91);backdrop-filter:blur(12px);display:flex;gap:8px;align-items:center}.search{flex:1}.search input{width:100%;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 13px;outline:none}.search input:focus{border-color:#6da29e;box-shadow:0 0 0 3px rgba(25,118,111,.11)}.filter{border:1px solid var(--line);background:var(--card);padding:8px 11px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted)}.filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}.tool-btn{border:1px solid var(--line);background:var(--card);height:38px;border-radius:10px;padding:0 11px;cursor:pointer;font-size:12px}.tools{display:flex;gap:5px;margin-left:auto}
+    .brief{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:16px 0}.brief-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px 21px}.brief-card h3{font-family:Georgia,"STSong",serif;font-size:19px;margin:0 0 9px}.brief-card p,.brief-card li{font-size:12px;color:var(--muted)}.brief-card p{margin:0}.brief-card ul{padding-left:18px;margin:0}.brief-card li+li{margin-top:5px}
+    #weeks{display:grid;gap:15px}.week{scroll-margin-top:75px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.week-head{width:100%;border:0;background:transparent;padding:20px 21px;display:grid;grid-template-columns:47px minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;cursor:pointer}.week-head:hover{background:#fcfaf5}.week-no{width:44px;height:44px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:19px}.week-title h3{font-size:16px;margin:0}.week-title p{font-size:11px;color:var(--muted);margin:3px 0 0}.week-stat{text-align:right}.week-stat b{font-size:13px}.week-stat span{display:block;color:var(--muted);font-size:10px}.week.collapsed .days{display:none}.week.collapsed .arrow{transform:rotate(-90deg)}.arrow{display:inline-block;margin-left:8px;transition:.2s}
+    .days{border-top:1px solid var(--line)}.day{border-bottom:1px solid #ebe7df}.day:last-child{border-bottom:0}.day-summary{display:grid;grid-template-columns:32px 47px minmax(0,1fr) auto;gap:12px;align-items:center;padding:15px 21px;cursor:pointer}.day-summary:hover{background:#faf8f2}.day.done{background:#f7fbf9}.day.done .day-name{text-decoration:line-through;color:#7a8782}.big-check{appearance:none;width:27px;height:27px;border:1.5px solid #b8b7b1;border-radius:9px;background:#fff;display:grid;place-items:center;cursor:pointer;margin:0}.big-check:checked{background:var(--teal);border-color:var(--teal)}.big-check:checked:after{content:"✓";color:#fff;font-weight:900}.day-num{text-align:center;font-family:Georgia,serif;font-size:18px}.day-num small{display:block;font-family:inherit;font-size:8px;color:#a09a90;letter-spacing:.08em}.tag-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:3px}.tag{display:inline-flex;border-radius:99px;padding:2px 7px;font-size:9px;font-weight:800}.tag.core{background:var(--teal-soft);color:var(--teal)}.tag.quick{background:var(--gold-soft);color:#9b671e}.tag.test{background:#f4e8ee;color:#8b526c}.section{color:#7a7166;border:1px solid #ddd5c8;background:#fff;padding:2px 7px;border-radius:99px;font-size:9px;font-weight:750}.day-name{font-size:14px;font-weight:780}.day-goal{font-size:11px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.day-side{text-align:right;color:#8b948f;font-size:10px}.note-dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin-left:5px}
+    .day-detail{display:none;padding:0 21px 19px 112px}.day.open .day-detail{display:block}.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:11px}.time-box{border:1px solid var(--line);border-radius:13px;padding:10px;background:#fff}.time-box b{display:block;color:var(--teal);font-size:10px;margin-bottom:3px}.time-box span{font-size:11px;color:var(--muted)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:11px}.subcheck{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-size:11px;color:#4f5e62}.subcheck input{accent-color:var(--teal);margin-top:2px;flex:0 0 auto}.note{width:100%;min-height:72px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fffefb;font-size:12px;outline:none}.note:focus{border-color:#6da29e}.detail-actions{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:8px}.autosave{font-size:10px;color:#96928a}.empty{background:var(--card);border:1px dashed #bdb8ae;border-radius:18px;padding:45px;text-align:center;color:var(--muted)}
+    .toast{position:fixed;left:50%;bottom:25px;z-index:100;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:var(--navy);color:#fff;border-radius:11px;padding:10px 15px;font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:850px){.app{display:block}.side{display:none}.mobile-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;font-size:12px;font-weight:800}main{padding:17px 14px 55px}.hero{padding:27px 22px;border-radius:22px}.metrics{grid-template-columns:1fr 1fr}.overall{grid-column:span 2}.next{grid-template-columns:43px 1fr}.next .primary{grid-column:1/-1}.toolbar{flex-wrap:wrap}.search{flex-basis:100%}.tools{margin-left:0}.brief{grid-template-columns:1fr}.day-summary{grid-template-columns:29px 38px 1fr;padding:14px 13px;gap:8px}.day-side{display:none}.day-detail{padding:0 13px 17px 88px}.time-grid{grid-template-columns:1fr 1fr}.checks{grid-template-columns:1fr}.week-head{padding:17px 14px}.week-title p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55vw}}
+    @media(max-width:480px){.hero h2{font-size:29px}.metric strong{font-size:21px}.filter:nth-of-type(3){display:none}.tool-btn span{display:none}.day-detail{padding-left:13px}.day-goal{display:none}.time-grid{grid-template-columns:1fr}.brief{display:none}}
+    @media print{.side,.toolbar,.next,.detail-actions,.note,.mobile-head{display:none!important}.app{display:block}main{padding:0}.hero{box-shadow:none}.week{break-inside:avoid}.day-detail{display:block!important}.time-grid{grid-template-columns:repeat(4,1fr)}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="mark" aria-hidden="true"></div><div><h1>Griffiths 量子力学</h1><p>INTENSIVE PREVIEW · 66H</p></div></div>
+    <div class="side-label">七个学习周</div><nav class="week-nav" id="weekNav"></nav>
+    <div class="side-bottom"><label for="startDate">计划开始日期</label><input class="date-input" id="startDate" type="date"><p class="privacy">进度和笔记仅保存在当前浏览器，可导出备份。</p></div>
+  </aside>
+  <main>
+    <div class="mobile-head"><span>Griffiths · 强化预习</span><span id="mobileProgress">0 / 33</span></div>
+    <section class="hero">
+      <div class="orbits" aria-hidden="true"></div>
+      <div class="kicker">RUC Physics · 6 Weeks + 3 Days</div>
+      <h2>从会算原子谱，<br>走到会使用量子力学。</h2>
+      <p class="hero-copy">每天 2 小时、每周 5 天。数学随用随补；原子物理已学内容快速复核；精力集中在状态—算符—测量、典型模型、近似方法与动力学。</p>
+      <div class="metrics">
+        <div class="metric overall"><div class="ring" id="ring"><b id="ringText">0%</b></div><div><small>总体进度</small><strong id="progressWords">尚未开始</strong><span id="itemProgress">0 / 132 个检查点</span></div></div>
+        <div class="metric"><small>完成天数</small><strong id="doneDays">0</strong><span>/ 33 天</span></div>
+        <div class="metric"><small>有效投入</small><strong id="hours">0h</strong><span>/ 66 小时</span></div>
+        <div class="metric"><small>当前阶段</small><strong id="phase">一维</strong><span id="weekLabel">第 1 周</span></div>
+      </div>
+    </section>
+    <section class="next" id="nextCard"><div class="next-icon">→</div><div><small>下一项</small><h3>载入中</h3><p></p></div><button class="primary" type="button">打开任务</button></section>
+    <div class="toolbar">
+      <label class="search"><input id="search" type="search" aria-label="搜索任务" placeholder="搜索章节、概念或验收目标…"></label>
+      <button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="todo">待完成</button><button class="filter" data-filter="quick">快速复核</button>
+      <div class="tools"><button class="tool-btn" id="exportBtn">↓ <span>导出</span></button><button class="tool-btn" id="importBtn">↑ <span>导入</span></button><input id="importFile" type="file" accept="application/json" hidden><button class="tool-btn" id="printBtn">⎙ <span>打印</span></button><button class="tool-btn" id="resetBtn">↺ <span>重置</span></button></div>
+    </div>
+    <section class="brief">
+      <article class="brief-card"><h3>这不是压缩阅读，而是分层预习</h3><p>“核心”日要求能独立推导并做题；“快速复核”日以闭卷验收为准，若不会才回读正文。第 1—6 章与第 9 章保留计算强度，第 7、8、10、11 章先建立可用框架。</p></article>
+      <article class="brief-card"><h3>打卡判据</h3><ul><li>四个检查点全部完成，才算完成一天。</li><li>看懂不算；能闭卷复述或独立算出才算。</li><li>一道题卡 25 分钟后可查正文，但隔天必须重做。</li></ul></article>
+    </section>
+    <div id="weeks"></div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script id="planData" type="application/json">
+[
+ {"n":1,"title":"波函数与一维骨架","phase":"一维","range":"第1章；2.1—2.2","days":[
+  {"d":1,"sec":"1.1—1.3","kind":"core","name":"薛定谔方程、统计诠释与概率","goal":"说清量子态、概率幅、概率密度和测量结果的区别。","blocks":["15m｜闭卷：经典状态与量子状态","45m｜精读1.1—1.3并手推均值、方差","10m｜休息","40m｜习题1.1＋一个连续分布计算","10m｜口述Born统计诠释"],"checks":["检查薛定谔方程各项量纲","会算连续分布的归一化、均值和方差","能解释期待值为何不是一次测量值","写出一个仍不理解的测量问题"]},
+  {"d":2,"sec":"1.4—1.5","kind":"core","name":"归一化、概率守恒与动量算符","goal":"重推归一化守恒，并理解动量算符不是凭空规定。","blocks":["15m｜复述统计诠释","50m｜精读1.4—1.5，逐行重推","10m｜休息","35m｜完成习题1.4的核心小问","10m｜整理边界项条件"],"checks":["独立证明归一化随时间保持","能正确做分部积分并说明边界项","由d〈x〉/dt重构动量期待值","完成一个分段波函数归一化题"]},
+  {"d":3,"sec":"1.6；第1章","kind":"core","name":"不确定关系与第1章闭环","goal":"区分量子弥散、测量误差与对易结构。","blocks":["15m｜闭卷写x、p期待值","45m｜精读1.6并重推关键式","10m｜休息","40m｜指数型或高斯型综合题","10m｜第1章概念图"],"checks":["会算Δx与Δp","能说明不确定度不是仪器误差","完成一题归一化—概率—期待值—弥散","画出第1章概念图"]},
+  {"d":4,"sec":"2.1","kind":"core","name":"分离变量、定态与谱展开","goal":"从含时方程推出定态方程，并解释定态为何不等于静止。","blocks":["15m｜复习分离变量","50m｜精读2.1并独立推导","10m｜休息","35m｜定态叠加态计算","10m｜总结相位与概率密度"],"checks":["推出空间方程和时间因子","解释能量本征态与一般态的区别","会写一般态的谱展开与时间演化","解释为何叠加态通常不是定态"]},
+  {"d":5,"sec":"2.2","kind":"test","name":"无限深方势阱：完整标准问题","goal":"独立完成本征态、任意初态展开、时间演化和测量概率。","blocks":["10m｜列解题框架","45m｜重推本征态与能谱","10m｜休息","45m｜做一题任意初态展开","10m｜验收与订正"],"checks":["由边界条件推出离散能谱","验证正交归一性","会求展开系数cn与Ψ(x,t)","会算能量概率与〈H〉"]}
+ ]},
+ {"n":2,"title":"精确模型与波包","phase":"模型","range":"2.3—2.6；第2章综合","days":[
+  {"d":6,"sec":"2.3","kind":"core","name":"谐振子：微分方程法","goal":"掌握渐近分析—级数截断—能量量子化的逻辑。","blocks":["15m｜无量纲化准备","50m｜渐近分析与Hermite方程","10m｜休息","35m｜基态及低激发态计算","10m｜闭卷重建逻辑链"],"checks":["完成无量纲化与渐近分析","解释级数为何必须截断","推出Eₙ=(n+1/2)ℏω","会算基态的Δx、Δp"]},
+  {"d":7,"sec":"2.3","kind":"core","name":"谐振子：升降算符法","goal":"用对易关系得到谱、态与常见矩阵元。","blocks":["15m｜复习对易子","50m｜因式分解与升降关系","10m｜休息","35m｜矩阵元练习","10m｜比较两种方法"],"checks":["推出[a₋,a₊]=1与H的表达式","说明能量为何有下界","由a₋ψ₀=0求基态","用升降算符计算x或x²矩阵元"]},
+  {"d":8,"sec":"2.4","kind":"core","name":"自由粒子、动量表象与波包","goal":"真正理解平面波不可归一化以及傅里叶波包的物理意义。","blocks":["15m｜复习傅里叶变换","45m｜精读自由粒子与波包","10m｜休息","40m｜高斯波包或谱分解题","10m｜画波包演化"],"checks":["解释平面波为何不可归一化","会在x与k/p表象间变换","区分相速度与群速度","说明自由波包展宽的来源"]},
+  {"d":9,"sec":"2.5—2.6","kind":"core","name":"δ势与有限深势阱","goal":"掌握分区求解、连续条件、导数跳变和超越方程。","blocks":["15m｜复述分区求解模板","45m｜δ势束缚/散射","10m｜休息","40m｜有限阱奇偶解与图解","10m｜模型比较"],"checks":["由积分推出δ势导数跳变","求出δ势阱唯一束缚态","会验证散射R+T=1","能用图像判断有限阱束缚态数"]},
+  {"d":10,"sec":"第2章","kind":"test","name":"一维量子力学综合测验","goal":"在不看书条件下选择正确方法解决模型题。","blocks":["10m｜公式默写","80m｜闭卷：展开题＋束缚/散射题","10m｜休息","15m｜订正","5m｜弱项登记"],"checks":["完成一个初态时间演化题","完成一个束缚态或散射题","解释能谱离散/连续的条件","测验达到75%或完成订正重做"]}
+ ]},
+ {"n":3,"title":"形式理论与三维空间","phase":"形式","range":"第3章；4.1；4.3前半","days":[
+  {"d":11,"sec":"3.1—3.2；附录A","kind":"core","name":"Hilbert空间、内积与可观测量","goal":"把熟悉的线代升级为量子状态空间语言。","blocks":["15m｜有限维类比","50m｜精读3.1—3.2与附录选段","10m｜休息","35m｜厄米性与边界项练习","10m｜概念映射"],"checks":["对应向量、内积、基、分量与波函数","说明平方可积与归一化的区别","证明一个微分算符的厄米性","说清态与可观测量为何是不同对象"]},
+  {"d":12,"sec":"3.3—3.4","kind":"core","name":"本征函数与广义统计诠释","goal":"用谱分解统一位置、动量、能量等测量。","blocks":["15m｜回忆厄米矩阵谱定理","50m｜精读3.3—3.4","10m｜休息","35m｜离散/连续谱测量题","10m｜测量公设口述"],"checks":["证明不同本征值的本征态正交","会由展开系数求测量概率","说明测量后的状态变化","区分离散谱和连续谱的归一化"]},
+  {"d":13,"sec":"3.5—3.6","kind":"core","name":"一般不确定关系与Dirac符号","goal":"从对易子理解不确定性，并能在三种表示之间翻译。","blocks":["15m｜Schwarz不等式回顾","45m｜推导一般不确定关系","10m｜休息","40m｜Dirac符号翻译练习","10m｜二能级验收"],"checks":["推出ΔAΔB的一般下界","会算[x,p]及简单矩阵对易子","在ket、列向量、波函数间转换","完成2×2厄米矩阵测量题"]},
+  {"d":14,"sec":"4.1","kind":"core","name":"中心势、球坐标分离与径向方程","goal":"理解l、m以及有效势怎样从分离变量中出现。","blocks":["15m｜球坐标拉普拉斯回顾","50m｜分离径向与角向方程","10m｜休息","35m｜球谐与有效势","10m｜量子数来源图"],"checks":["独立写出球坐标分离步骤","由单值性说明m为整数","理解球谐函数的正交与宇称","写出径向有效势及离心项"]},
+  {"d":15,"sec":"4.3","kind":"core","name":"角动量代数与升降算符","goal":"不用坐标波函数，仅从代数推出l、m结构。","blocks":["15m｜经典角动量回顾","50m｜对易关系与L±推导","10m｜休息","35m｜升降与测量概率题","10m｜对照球谐结果"],"checks":["推出[Lx,Ly]=iℏLz循环关系","说明为何选L²与Lz共同本征态","推出m范围及升降系数","连接代数态|lm〉与Yₗᵐ"]}
+ ]},
+ {"n":4,"title":"氢、自旋与全同粒子","phase":"多体","range":"4.2—4.4；第5章","days":[
+  {"d":16,"sec":"4.2","kind":"quick","name":"氢原子：从已知光谱反查量子推导","goal":"不重复原子物理事实，闭环径向方程、量子数和简并度。","blocks":["15m｜闭卷写波尔能级与量子数","40m｜快速读4.2推导结构","10m｜休息","45m｜径向概率或〈r〉题","10m｜节点/简并度验收"],"checks":["说出n、l、m分别来自哪一步","解释能量为何只依赖n","会判断径向/角向节点数","完成一个径向概率计算"]},
+  {"d":17,"sec":"4.4","kind":"core","name":"自旋1/2、Pauli矩阵与任意方向测量","goal":"把自旋当作内禀二态自由度，而不是经典小球转动。","blocks":["15m｜二态空间回顾","50m｜旋量、Pauli矩阵、本征态","10m｜休息","35m｜S·n测量题","10m｜物理解释"],"checks":["会验证Pauli矩阵代数","求任意方向自旋本征态","计算连续Stern–Gerlach测量概率","解释2π旋转后的相位特点"]},
+  {"d":18,"sec":"4.4","kind":"core","name":"磁场演化与角动量合成","goal":"掌握自旋进动及两个自旋1/2的单态、三重态。","blocks":["15m｜时间演化算符回顾","45m｜磁场中自旋进动","10m｜休息","40m｜角动量合成与CG结构","10m｜态表整理"],"checks":["求恒定磁场中的旋量演化","解释Larmor进动","写出三重态与单态","判断合成态的交换对称性"]},
+  {"d":19,"sec":"5.1","kind":"core","name":"两粒子体系、纠缠与交换对称性","goal":"区分乘积态、叠加态和不可分解的纠缠态。","blocks":["15m｜张量积回顾","50m｜精读5.1","10m｜休息","35m｜对称化与纠缠题","10m｜概念反例"],"checks":["会写两粒子Hilbert空间","判断一个态是否可分离","构造玻色/费米对称化态","由总波函数推出空间—自旋配对"]},
+  {"d":20,"sec":"5.2—5.4","kind":"quick","name":"原子、固体与量子统计快速贯通","goal":"以Pauli原理为主线连接原子结构、电子气和BE/FD分布。","blocks":["15m｜原子物理知识自测","40m｜快速读5.2—5.4","10m｜休息","45m｜两粒子/统计分布练习","10m｜章节主线总结"],"checks":["用交换对称性解释Pauli原理","区分单态、三重态及空间对称性","说出BE、FD与MB分布的适用对象","解释费米能或简并压力的来源"]}
+ ]},
+ {"n":5,"title":"近似方法","phase":"近似","range":"第6—8章","days":[
+  {"d":21,"sec":"6.1","kind":"core","name":"非简并定态微扰","goal":"能从级数展开推出并使用一、二阶能量修正。","blocks":["15m｜设定无微扰基","50m｜推导6.9、6.13、6.15","10m｜休息","35m｜无限阱或振子微扰题","10m｜适用性检查"],"checks":["推出一级能量修正","推出一级态修正与二级能量修正","完成一个非简并微扰计算","说明微扰展开可能失效的情形"]},
+  {"d":22,"sec":"6.2","kind":"core","name":"简并微扰：在子空间中对角化","goal":"真正理解“好零级态”就是微扰矩阵的本征态。","blocks":["15m｜复习简并子空间","50m｜精读推导与矩阵方法","10m｜休息","35m｜二重/三重简并题","10m｜错误方法对比"],"checks":["构造简并子空间内W矩阵","求一级能量分裂","求对应的好零级态","解释为何不能直接套非简并公式"]},
+  {"d":23,"sec":"6.3—6.5","kind":"quick","name":"精细、Zeeman与超精细结构一日验收","goal":"用微扰和角动量语言重构已学原子物理，不重复基础事实。","blocks":["20m｜闭卷画修正层级","35m｜快速核对6.3—6.5","10m｜休息","45m｜L·S与Zeeman验收题","10m｜好量子数表"],"checks":["用J²、L²、S²化简L·S","区分弱场/强场Zeeman的好量子数","说明相对论修正与自旋轨道项的量级","画出玻尔—精细—超精细修正层级"]},
+  {"d":24,"sec":"第7章","kind":"core","name":"变分原理、氦原子与成键图像","goal":"会选简单试探函数并把参数优化转化为能量上界。","blocks":["15m｜泛函与参数回顾","45m｜推导变分原理","10m｜休息","40m｜完整变分计算","10m｜氦/氢分子离子图像"],"checks":["证明基态能量上界","正确归一化试探函数","完成一次参数极小化","解释有效核电荷或成键的变分意义"]},
+  {"d":25,"sec":"第8章","kind":"core","name":"WKB、隧穿与联结公式","goal":"识别经典允许/禁阻区，并会估算隧穿率和量子化条件。","blocks":["15m｜局域波数与经典动量","45m｜WKB解及适用条件","10m｜休息","40m｜隧穿或量子化题","10m｜转折点总结"],"checks":["写出允许区与禁阻区WKB形式","说明振幅1/√p的来源","使用指数因子估算隧穿率","会用WKB量子化条件检验谐振子"]}
+ ]},
+ {"n":6,"title":"跃迁、绝热与散射","phase":"动力学","range":"第9—11章前半","days":[
+  {"d":26,"sec":"9.1","kind":"core","name":"含时微扰与两能级体系","goal":"从态展开得到耦合系数方程与一级跃迁振幅。","blocks":["15m｜相互作用绘景直觉","50m｜推导两能级系数方程","10m｜休息","35m｜常/周期微扰题","10m｜概率适用性检查"],"checks":["写出含时基底展开","推出一级跃迁振幅","完成一个常微扰跃迁题","说明一级结果何时不再可信"]},
+  {"d":27,"sec":"9.1—9.2","kind":"core","name":"共振、Rabi振荡与吸收/受激发射","goal":"理解共振峰、旋转波近似和跃迁矩阵元。","blocks":["15m｜共振条件预判","45m｜周期微扰与Rabi结构","10m｜休息","40m｜电偶极跃迁计算","10m｜物理图像总结"],"checks":["解释共振峰宽度随时间的变化","理解旋转波近似保留了什么","会由矩阵元判断跃迁强弱","区分吸收与受激发射"]},
+  {"d":28,"sec":"9.3","kind":"quick","name":"自发发射、Einstein系数与选择定则","goal":"把已有原子跃迁知识接到含时微扰和对称性上。","blocks":["15m｜原子跃迁自测","40m｜快速读9.3","10m｜休息","45m｜选择定则/寿命题","10m｜允许与禁戒的边界"],"checks":["写出自发发射率的主要依赖关系","由宇称或矩阵元推出电偶极选择定则","解释亚稳态为何长寿命","说明“禁戒”并非绝对不可能"]},
+  {"d":29,"sec":"第10章","kind":"core","name":"绝热定理、动力学相与Berry相","goal":"区分慢变条件、动力学相位和几何相位。","blocks":["15m｜瞬时本征态回顾","45m｜绝热定理与条件","10m｜休息","40m｜Berry相/自旋磁场例题","10m｜参数空间图"],"checks":["准确表述绝热定理","写出绝热条件的物理含义","区分动力学相与几何相","解释Berry相为何只依赖路径"]},
+  {"d":30,"sec":"11.1—11.2","kind":"core","name":"散射语言与分波法","goal":"从入射平面波＋出射球面波理解截面与分波展开。","blocks":["15m｜经典散射截面回顾","50m｜精读11.1—11.2","10m｜休息","35m｜低能分波/硬球题","10m｜散射量词典"],"checks":["解释微分截面与总截面","由概率流得到dσ/dΩ=|f|²","写出散射振幅的分波展开","说明低能时为何s波主导"]}
+ ]},
+ {"n":7,"title":"散射收束与总验收","phase":"收束","range":"11.3—11.4；第12章；全书","days":[
+  {"d":31,"sec":"11.3—11.4","kind":"core","name":"相移、Born近似与光学定理框架","goal":"会用相移表达截面，并判断Born近似的适用条件。","blocks":["15m｜复习分波","45m｜相移与截面","10m｜休息","40m｜Born近似计算","10m｜近似条件清单"],"checks":["由相移写出分波振幅与总截面","理解共振对应相移快速变化","会写球对称势的Born振幅","说出Born近似适用的物理条件"]},
+  {"d":32,"sec":"第12章；全书","kind":"quick","name":"诠释、Bell与全书知识地图","goal":"理解计算规则与诠释问题的边界，建立全书统一结构。","blocks":["15m｜回看1.2的三个立场","40m｜精读第12章","10m｜休息","45m｜绘制全书知识地图","10m｜列仍存疑问题"],"checks":["区分现实主义、正统与不可知论立场","说明Bell结果排除了什么而未排除什么","解释测量塌缩与幺正演化的张力","画出态—演化—测量—近似—应用总图"]},
+  {"d":33,"sec":"全书验收","kind":"test","name":"120分钟终测与后续路线","goal":"用闭卷表现而非阅读页数判断预习是否成功。","blocks":["40m｜概念：态、算符、测量、对称性","40m｜推导：自选两条核心推导","40m｜计算：微扰/自旋/跃迁/散射选二","0m｜测后另找时间订正"],"checks":["概念题达到75%","完整复现两条核心推导","独立完成两道综合计算","列出正式开课最需补强的三个主题"]}
+ ]}
+]
+  </script>
+  <script>
+  (()=>{
+    const plan=JSON.parse(document.getElementById('planData').textContent);
+    const days=plan.flatMap(w=>w.days.map(x=>({...x,week:w.n,phase:w.phase,weekTitle:w.title})));
+    const KEY='griffiths-qm-6w3d-v1';
+    const base={checks:{},notes:{},startDate:'',collapsed:{}};
+    let state;try{state={...base,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{state={...base}}
+    let filter='all',query='';
+    const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+    const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
+    const key=(d,i)=>`d${d}-${i}`;
+    const complete=d=>d.checks.every((_,i)=>!!state.checks[key(d.d,i)]);
+    const checkCount=d=>d.checks.reduce((n,_,i)=>n+(state.checks[key(d.d,i)]?1:0),0);
+    const esc=s=>(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1800)}
+    function dateFor(index){if(!state.startDate)return'';let d=new Date(state.startDate+'T12:00:00');let added=0;while(added<index){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)added++}return`${d.getMonth()+1}/${d.getDate()}`}
+    function renderNav(){
+      $('#weekNav').innerHTML=plan.map(w=>{const n=w.days.filter(complete).length,p=Math.round(n/w.days.length*100);return`<button class="nav-btn" data-week="${w.n}"><b>${String(w.n).padStart(2,'0')}</b><span class="nav-title">${w.title}</span><span class="nav-pct">${p}%</span></button>`}).join('');
+      $$('.nav-btn').forEach(b=>b.onclick=()=>document.getElementById('week-'+b.dataset.week)?.scrollIntoView({behavior:'smooth'}));
+    }
+    function visible(d){const hay=`${d.name}${d.goal}${d.sec}${d.checks.join('')}`.toLowerCase();return(!query||hay.includes(query))&&(filter==='all'||filter==='todo'&&!complete(d)||filter==='quick'&&d.kind==='quick')}
+    function render(){
+      renderNav();
+      const shownWeeks=plan.map(w=>({...w,shown:w.days.filter(visible)})).filter(w=>w.shown.length);
+      $('#weeks').innerHTML=shownWeeks.length?shownWeeks.map(w=>{
+        const done=w.days.filter(complete).length,p=Math.round(done/w.days.length*100),collapsed=state.collapsed[w.n];
+        return`<section class="week ${collapsed?'collapsed':''}" id="week-${w.n}"><button class="week-head" data-collapse="${w.n}"><div class="week-no">${w.n}</div><div class="week-title"><h3>${esc(w.title)}</h3><p>${esc(w.range)}</p></div><div class="week-stat"><b>${done} / ${w.days.length}</b><span>${p}% 完成 <i class="arrow">⌄</i></span></div></button><div class="days">${w.shown.map(dayHTML).join('')}</div></section>`}).join(''):'<div class="empty">没有符合条件的任务。</div>';
+      bind();updateStats();
+    }
+    function dayHTML(d){
+      const done=complete(d),count=checkCount(d),note=state.notes[d.d]||'';
+      return`<article class="day ${done?'done':''}" data-day="${d.d}"><div class="day-summary"><input class="big-check" type="checkbox" ${done?'checked':''} aria-label="完成第${d.d}天"><div class="day-num">${d.d}<small>DAY</small></div><div><div class="tag-row"><span class="tag ${d.kind}">${d.kind==='quick'?'快速复核':d.kind==='test'?'阶段验收':'核心'}</span><span class="section">${esc(d.sec)}</span></div><div class="day-name">${esc(d.name)}</div><div class="day-goal">验收：${esc(d.goal)}</div></div><div class="day-side"><span>${dateFor(d.d-1)||'2 HOURS'}</span><span>${count}/4 ${note?'<i class="note-dot"></i>':''}</span></div></div><div class="day-detail"><div class="time-grid">${d.blocks.filter(x=>!x.startsWith('0m')).map(x=>{const [a,b]=x.split('｜');return`<div class="time-box"><b>${a}</b><span>${esc(b)}</span></div>`}).join('')}</div><div class="checks">${d.checks.map((x,i)=>`<label class="subcheck"><input type="checkbox" data-check="${i}" ${state.checks[key(d.d,i)]?'checked':''}><span>${esc(x)}</span></label>`).join('')}</div><textarea class="note" placeholder="记录卡点、错因或课堂要追问的问题…">${esc(note)}</textarea><div class="detail-actions"><span class="autosave">笔记自动保存</span><button class="secondary mark-day">${done?'撤销今日':'完成今日'}</button></div></div></article>`}
+    function bind(){
+      $$('[data-collapse]').forEach(b=>b.onclick=()=>{const n=b.dataset.collapse;state.collapsed[n]=!state.collapsed[n];save();render()});
+      $$('.day-summary').forEach(s=>s.onclick=e=>{if(e.target.classList.contains('big-check'))return;s.parentElement.classList.toggle('open')});
+      $$('.big-check').forEach(c=>c.onchange=()=>{const d=days.find(x=>x.d===+c.closest('.day').dataset.day);d.checks.forEach((_,i)=>state.checks[key(d.d,i)]=c.checked);save();render();toast(c.checked?'今日完成':'已撤销')});
+      $$('[data-check]').forEach(c=>c.onchange=()=>{const d=+c.closest('.day').dataset.day;state.checks[key(d,+c.dataset.check)]=c.checked;save();render()});
+      $$('.mark-day').forEach(b=>b.onclick=()=>{const d=days.find(x=>x.d===+b.closest('.day').dataset.day),v=!complete(d);d.checks.forEach((_,i)=>state.checks[key(d.d,i)]=v);save();render();toast(v?'今日完成':'已撤销')});
+      $$('.note').forEach(n=>{n.oninput=()=>{const d=+n.closest('.day').dataset.day;state.notes[d]=n.value;save()}});
+    }
+    function updateStats(){
+      const done=days.filter(complete).length,items=days.reduce((n,d)=>n+checkCount(d),0),pct=Math.round(done/days.length*100),next=days.find(d=>!complete(d));
+      $('#ring').style.setProperty('--p',pct);$('#ringText').textContent=pct+'%';$('#doneDays').textContent=done;$('#hours').textContent=(done*2)+'h';$('#mobileProgress').textContent=`${done} / 33`;$('#itemProgress').textContent=`${items} / 132 个检查点`;$('#progressWords').textContent=done===0?'尚未开始':done===33?'预习完成':`已完成 ${pct}%`;
+      const cur=next||days.at(-1);$('#phase').textContent=cur.phase;$('#weekLabel').textContent=`第 ${cur.week} 周`;
+      const card=$('#nextCard');card.querySelector('small').textContent=next?`下一项 · 第 ${next.week} 周 Day ${next.d}`:'全部完成';card.querySelector('h3').textContent=next?next.name:'恭喜，33天计划已完成';card.querySelector('p').textContent=next?next.goal:'现在可以根据终测结果安排正式课程前的补强。';card.querySelector('button').style.display=next?'block':'none';card.querySelector('button').onclick=()=>{document.querySelector(`[data-day="${next.d}"]`)?.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.querySelector(`[data-day="${next.d}"]`)?.classList.add('open'),350)};
+    }
+    $('#search').oninput=e=>{query=e.target.value.trim().toLowerCase();render()};
+    $$('.filter').forEach(b=>b.onclick=()=>{$$('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;render()});
+    $('#startDate').value=state.startDate;$('#startDate').onchange=e=>{state.startDate=e.target.value;save();render()};
+    $('#exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({app:'griffiths-qm-6w3d',exportedAt:new Date().toISOString(),state},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Griffiths量子力学_打卡备份.json';a.click();URL.revokeObjectURL(a.href);toast('备份已导出')};
+    $('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);state={...base,...(x.state||x)};save();$('#startDate').value=state.startDate||'';render();toast('备份已恢复')}catch{toast('备份文件无法读取')}};r.readAsText(f)};
+    $('#printBtn').onclick=()=>window.print();$('#resetBtn').onclick=()=>{if(confirm('确定清空所有打卡和笔记吗？此操作不可撤销。')){state={...base,checks:{},notes:{},collapsed:{}};save();$('#startDate').value='';render();toast('记录已清空')}};
+    render();
+  })();
+  </script>
+</body>
+</html>

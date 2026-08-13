@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#172a34">
+  <meta name="description" content="深度学习与 Griffiths 量子力学打卡中心">
+  <title>Study Hub · Ganlin's field notes</title>
+  <style>
+    :root{--ink:#172a34;--paper:#f7f4ed;--card:#fffdf8;--line:rgba(23,42,52,.14);--muted:#69767c;--blue:#315b73;--coral:#ef8d78;--sage:#789071;--shadow:0 18px 48px rgba(30,48,57,.14)}
+    *{box-sizing:border-box}html,body{height:100%;margin:0}body{display:grid;grid-template-rows:auto 1fr;background:var(--paper);color:var(--ink);font-family:"DM Sans","Noto Sans SC",system-ui,sans-serif;overflow:hidden}
+    button,a,textarea{font:inherit}.hubbar{position:relative;z-index:3;display:grid;grid-template-columns:auto minmax(260px,1fr) auto;align-items:center;gap:18px;padding:11px clamp(14px,3vw,34px);border-bottom:1px solid var(--line);background:rgba(247,244,237,.94);backdrop-filter:blur(20px);box-shadow:0 5px 22px rgba(23,42,52,.06)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:max-content;color:inherit;text-decoration:none}.mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:white;font-family:Georgia,serif;font-size:18px}.brand-copy b{display:block;font-size:13px}.brand-copy span{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+    .switcher{justify-self:center;display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,248,.9)}.course{border:0;border-radius:999px;padding:8px 15px;background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;font-size:12px;font-weight:700}.course.active{background:var(--ink);color:#fff;box-shadow:0 5px 15px rgba(23,42,52,.2)}
+    .actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}.stats{display:flex;gap:9px}.stat{min-width:76px;padding:6px 9px;border:1px solid var(--line);border-radius:11px;background:var(--card);font-size:10px;color:var(--muted)}.stat b{display:block;color:var(--ink);font-size:12px}.sync{border:0;border-radius:999px;padding:9px 14px;background:var(--coral);color:#351c17;font-size:12px;font-weight:800;cursor:pointer}.sync:hover{filter:saturate(1.12);transform:translateY(-1px)}
+    .viewport{position:relative;min-height:0;background:#e9e6df}.frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:white}.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:13px;pointer-events:none}.frame.ready+.loading{display:none}
+    dialog{width:min(620px,calc(100% - 28px));border:1px solid var(--line);border-radius:22px;padding:0;background:var(--card);color:var(--ink);box-shadow:var(--shadow)}dialog::backdrop{background:rgba(12,25,31,.54);backdrop-filter:blur(5px)}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 23px 14px}.modal-head h2{margin:0;font:400 30px/1.05 Georgia,serif}.modal-head p{margin:7px 0 0;color:var(--muted);font-size:12px}.close{border:1px solid var(--line);border-radius:50%;width:34px;height:34px;background:transparent;cursor:pointer}.modal-body{padding:0 23px 23px}.mode-tabs{display:flex;gap:6px;margin-bottom:13px}.mode-tabs button{flex:1;border:1px solid var(--line);border-radius:11px;padding:9px;background:transparent;cursor:pointer;font-weight:700;font-size:12px}.mode-tabs button.active{background:var(--ink);color:white}.panel{display:none}.panel.active{display:block}.panel p{color:var(--muted);font-size:12px;line-height:1.65}.code{display:block;width:100%;min-height:128px;resize:vertical;border:1px solid var(--line);border-radius:13px;padding:12px;background:#f4f1ea;color:var(--ink);font:11px/1.5 ui-monospace,monospace;word-break:break-all}.row{display:flex;gap:8px;margin-top:10px}.primary,.secondary{border:0;border-radius:999px;padding:10px 15px;font-size:12px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{border:1px solid var(--line);background:transparent;color:var(--ink)}.status{min-height:20px;margin-top:8px;color:var(--sage);font-size:11px}
+    @media(max-width:900px){.hubbar{grid-template-columns:1fr auto;gap:8px}.brand-copy span,.stats{display:none}.switcher{grid-row:2;grid-column:1/-1;width:100%}.course{flex:1}.actions{grid-column:2}.hubbar{padding:8px 12px}.brand-copy b{font-size:12px}.sync{padding:8px 12px}.viewport{min-height:0}}
+    @media(max-width:430px){.brand-copy{display:none}.modal-head{padding:18px 18px 12px}.modal-body{padding:0 18px 18px}}
+  </style>
+</head>
+<body>
+  <header class="hubbar">
+    <a class="brand" href="/index.html" aria-label="返回博客首页"><span class="mark">向</span><span class="brand-copy"><b>Study Hub</b><span>Ganlin's field notes</span></span></a>
+    <nav class="switcher" aria-label="切换学习计划">
+      <button class="course active" type="button" data-course="deep-learning">深度学习 · 24 周</button>
+      <button class="course" type="button" data-course="quantum">量子力学 · 6 周＋3 天</button>
+    </nav>
+    <div class="actions"><div class="stats" aria-live="polite"><span class="stat"><b id="dlStat">0 / 120</b>深度学习</span><span class="stat"><b id="qmStat">0 / 33</b>量子力学</span></div><button class="sync" id="syncButton" type="button">跨端同步</button></div>
+  </header>
+  <main class="viewport"><iframe class="frame" id="courseFrame" title="深度学习打卡页面" src="/study/deep-learning.html"></iframe><div class="loading">正在打开学习计划…</div></main>
+
+  <dialog id="syncDialog" aria-labelledby="syncTitle">
+    <div class="modal-head"><div><h2 id="syncTitle">同步学习进度</h2><p>同步码同时包含两门课的打卡、笔记与起始日期。</p></div><button class="close" type="button" aria-label="关闭">×</button></div>
+    <div class="modal-body">
+      <div class="mode-tabs"><button class="active" type="button" data-mode="export">从这台设备导出</button><button type="button" data-mode="import">导入到这台设备</button></div>
+      <section class="panel active" data-panel="export"><p>复制下面的同步码，发送给自己的另一台设备。同步码可能包含你的学习笔记，请只通过可信渠道传递。</p><textarea class="code" id="exportCode" readonly aria-label="导出的同步码"></textarea><div class="row"><button class="primary" id="copyCode" type="button">复制同步码</button><button class="secondary" id="refreshCode" type="button">重新生成</button></div><div class="status" id="exportStatus"></div></section>
+      <section class="panel" data-panel="import"><p>粘贴另一台设备生成的同步码。已完成的项目会合并保留；同步码中的非空笔记将更新到本机。</p><textarea class="code" id="importCode" placeholder="粘贴以 STUDY1. 开头的同步码…" aria-label="要导入的同步码"></textarea><div class="row"><button class="primary" id="applyCode" type="button">合并并刷新</button></div><div class="status" id="importStatus"></div></section>
+    </div>
+  </dialog>
+  <script>
+    (()=>{
+      const courses={
+        'deep-learning':{src:'/study/deep-learning.html',title:'深度学习打卡页面'},
+        quantum:{src:'/study/quantum.html',title:'Griffiths 量子力学打卡页面'}
+      };
+      const KEYS=['nndl-dashboard-v1','griffiths-qm-6w3d-v1'];
+      const frame=document.getElementById('courseFrame');
+      const dialog=document.getElementById('syncDialog');
+      const qs=new URLSearchParams(location.search);
+      function choose(key,push=true){if(!courses[key])key='deep-learning';document.querySelectorAll('[data-course]').forEach(b=>b.classList.toggle('active',b.dataset.course===key));frame.classList.remove('ready');frame.src=courses[key].src;frame.title=courses[key].title;if(push)history.replaceState(null,'','?course='+key)}
+      document.querySelectorAll('[data-course]').forEach(b=>b.onclick=()=>choose(b.dataset.course));frame.onload=()=>{frame.classList.add('ready');updateStats()};choose(qs.get('course'),false);
+      function read(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch{return{}}}
+      function updateStats(){const dl=read(KEYS[0]),qm=read(KEYS[1]);const dlDone=Object.values(dl.completed||{}).filter(Boolean).length;const checks=qm.checks||{};let qmDone=0;for(let d=1;d<=33;d++)if([0,1,2,3].every(i=>checks[`d${d}-${i}`]))qmDone++;document.getElementById('dlStat').textContent=`${dlDone} / 120`;document.getElementById('qmStat').textContent=`${qmDone} / 33`}
+      setInterval(updateStats,1200);updateStats();
+      const utf8To64=value=>{const bytes=new TextEncoder().encode(value);let s='';bytes.forEach(b=>s+=String.fromCharCode(b));return btoa(s).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')};
+      const from64=value=>{let s=value.replaceAll('-','+').replaceAll('_','/');s+='='.repeat((4-s.length%4)%4);const raw=atob(s);return new TextDecoder().decode(Uint8Array.from(raw,c=>c.charCodeAt(0)))};
+      function makeCode(){const payload={version:1,exportedAt:new Date().toISOString(),states:Object.fromEntries(KEYS.map(k=>[k,read(k)]))};document.getElementById('exportCode').value='STUDY1.'+utf8To64(JSON.stringify(payload));document.getElementById('exportStatus').textContent='同步码已生成。'}
+      function merge(local,incoming){if(Array.isArray(incoming))return incoming;if(!incoming||typeof incoming!=='object')return incoming;if(!local||typeof local!=='object'||Array.isArray(local))local={};const out={...local};for(const [k,v] of Object.entries(incoming)){if(v===true)out[k]=true;else if(v&&typeof v==='object'&&!Array.isArray(v))out[k]=merge(local[k],v);else if(v!==''&&v!=null)out[k]=v}return out}
+      document.getElementById('syncButton').onclick=()=>{makeCode();dialog.showModal()};document.querySelector('.close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog)dialog.close()};
+      document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('[data-panel]').forEach(x=>x.classList.toggle('active',x.dataset.panel===b.dataset.mode))});
+      document.getElementById('refreshCode').onclick=makeCode;document.getElementById('copyCode').onclick=async()=>{const code=document.getElementById('exportCode').value;try{await navigator.clipboard.writeText(code);document.getElementById('exportStatus').textContent='已复制，可以到另一台设备导入。'}catch{document.getElementById('exportCode').select();document.execCommand('copy');document.getElementById('exportStatus').textContent='已复制。'}};
+      document.getElementById('applyCode').onclick=()=>{const status=document.getElementById('importStatus');try{const code=document.getElementById('importCode').value.trim();if(!code.startsWith('STUDY1.'))throw new Error('同步码格式不正确');const payload=JSON.parse(from64(code.slice(7)));if(payload.version!==1||!payload.states)throw new Error('同步码版本不受支持');KEYS.forEach(k=>{if(payload.states[k])localStorage.setItem(k,JSON.stringify(merge(read(k),payload.states[k])))});status.textContent='同步完成，学习页面已刷新。';updateStats();frame.contentWindow.location.reload();makeCode()}catch(error){status.textContent=error.message||'无法读取这个同步码。'}};
+    })();
+  </script>
+</body>
+</html>
