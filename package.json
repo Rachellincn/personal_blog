@@ -9,7 +9,9 @@
     "check": "astro check",
     "preview": "astro preview",
     "test": "playwright test",
-    "test:physics": "node --experimental-strip-types --test tests/physics-models.test.ts",
+    "test:physics": "npm run test:physics:mechanics && npm run test:physics:electromagnetism",
+    "test:physics:mechanics": "node --experimental-strip-types --test tests/physics-models.test.ts",
+    "test:physics:electromagnetism": "vitest run tests/physics/",
     "test:update": "playwright test --update-snapshots",
     "check:links": "node scripts/check-links.mjs"
   },
@@ -26,6 +28,7 @@
     "@astrojs/check": "0.9.6",
     "@playwright/test": "1.61.1",
     "@types/katex": "0.16.8",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "^4.1.10"
   }
 }
