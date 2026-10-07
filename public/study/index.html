@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#172a34">
-  <meta name="description" content="深度学习与 Griffiths 量子力学打卡中心">
+  <meta name="description" content="深度学习、Griffiths 量子力学与大学生数学竞赛打卡中心">
   <title>Study Hub · Ganlin's field notes</title>
   <style>
     :root{--ink:#172a34;--paper:#f7f4ed;--card:#fffdf8;--line:rgba(23,42,52,.14);--muted:#69767c;--blue:#315b73;--coral:#ef8d78;--sage:#789071;--shadow:0 18px 48px rgba(30,48,57,.14)}
@@ -25,13 +25,14 @@
     <nav class="switcher" aria-label="切换学习计划">
       <button class="course active" type="button" data-course="deep-learning">深度学习 · 24 周</button>
       <button class="course" type="button" data-course="quantum">量子力学 · 6 周＋3 天</button>
+      <button class="course" type="button" data-course="math">数学竞赛 · 37 天</button>
     </nav>
-    <div class="actions"><div class="stats" aria-live="polite"><span class="stat"><b id="dlStat">0 / 120</b>深度学习</span><span class="stat"><b id="qmStat">0 / 33</b>量子力学</span></div><button class="sync" id="syncButton" type="button">跨端同步</button></div>
+    <div class="actions"><div class="stats" aria-live="polite"><span class="stat"><b id="dlStat">0 / 120</b>深度学习</span><span class="stat"><b id="qmStat">0 / 33</b>量子力学</span><span class="stat"><b id="mathStat">0 / 37</b>数学竞赛</span></div><button class="sync" id="syncButton" type="button">跨端同步</button></div>
   </header>
   <main class="viewport"><iframe class="frame" id="courseFrame" title="深度学习打卡页面" src="/study/deep-learning.html"></iframe><div class="loading">正在打开学习计划…</div></main>
 
   <dialog id="syncDialog" aria-labelledby="syncTitle">
-    <div class="modal-head"><div><h2 id="syncTitle">同步学习进度</h2><p>同步码同时包含两门课的打卡、笔记与起始日期。</p></div><button class="close" type="button" aria-label="关闭">×</button></div>
+    <div class="modal-head"><div><h2 id="syncTitle">同步学习进度</h2><p>同步码同时包含三项学习计划的打卡、笔记与起始日期。</p></div><button class="close" type="button" aria-label="关闭">×</button></div>
     <div class="modal-body">
       <div class="mode-tabs"><button class="active" type="button" data-mode="export">从这台设备导出</button><button type="button" data-mode="import">导入到这台设备</button></div>
       <section class="panel active" data-panel="export"><p>复制下面的同步码，发送给自己的另一台设备。同步码可能包含你的学习笔记，请只通过可信渠道传递。</p><textarea class="code" id="exportCode" readonly aria-label="导出的同步码"></textarea><div class="row"><button class="primary" id="copyCode" type="button">复制同步码</button><button class="secondary" id="refreshCode" type="button">重新生成</button></div><div class="status" id="exportStatus"></div></section>
@@ -42,16 +43,17 @@
     (()=>{
       const courses={
         'deep-learning':{src:'/study/deep-learning.html',title:'深度学习打卡页面'},
-        quantum:{src:'/study/quantum.html',title:'Griffiths 量子力学打卡页面'}
+        quantum:{src:'/study/quantum.html',title:'Griffiths 量子力学打卡页面'},
+        math:{src:'/study/math-competition.html',title:'大学生数学竞赛 37 天打卡页面'}
       };
-      const KEYS=['nndl-dashboard-v1','griffiths-qm-6w3d-v1'];
+      const KEYS=['nndl-dashboard-v1','griffiths-qm-6w3d-v1','math-contest-chen-37d-v1'];
       const frame=document.getElementById('courseFrame');
       const dialog=document.getElementById('syncDialog');
       const qs=new URLSearchParams(location.search);
       function choose(key,push=true){if(!courses[key])key='deep-learning';document.querySelectorAll('[data-course]').forEach(b=>b.classList.toggle('active',b.dataset.course===key));frame.classList.remove('ready');frame.src=courses[key].src;frame.title=courses[key].title;if(push)history.replaceState(null,'','?course='+key)}
       document.querySelectorAll('[data-course]').forEach(b=>b.onclick=()=>choose(b.dataset.course));frame.onload=()=>{frame.classList.add('ready');updateStats()};choose(qs.get('course'),false);
       function read(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch{return{}}}
-      function updateStats(){const dl=read(KEYS[0]),qm=read(KEYS[1]);const dlDone=Object.values(dl.completed||{}).filter(Boolean).length;const checks=qm.checks||{};let qmDone=0;for(let d=1;d<=33;d++)if([0,1,2,3].every(i=>checks[`d${d}-${i}`]))qmDone++;document.getElementById('dlStat').textContent=`${dlDone} / 120`;document.getElementById('qmStat').textContent=`${qmDone} / 33`}
+      function updateStats(){const dl=read(KEYS[0]),qm=read(KEYS[1]),math=read(KEYS[2]);const dlDone=Object.values(dl.completed||{}).filter(Boolean).length;const checks=qm.checks||{};let qmDone=0;for(let d=1;d<=33;d++)if([0,1,2,3].every(i=>checks[`d${d}-${i}`]))qmDone++;const mathDone=Object.values(math.completed||{}).filter(Boolean).length;document.getElementById('dlStat').textContent=`${dlDone} / 120`;document.getElementById('qmStat').textContent=`${qmDone} / 33`;document.getElementById('mathStat').textContent=`${mathDone} / 37`}
       setInterval(updateStats,1200);updateStats();
       const utf8To64=value=>{const bytes=new TextEncoder().encode(value);let s='';bytes.forEach(b=>s+=String.fromCharCode(b));return btoa(s).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'')};
       const from64=value=>{let s=value.replaceAll('-','+').replaceAll('_','/');s+='='.repeat((4-s.length%4)%4);const raw=atob(s);return new TextDecoder().decode(Uint8Array.from(raw,c=>c.charCodeAt(0)))};
