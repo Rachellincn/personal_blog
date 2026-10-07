@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#152a38">
+  <title>大学生数学竞赛 · 陈书 37 天打卡</title>
+  <meta name="description" content="以陈兆斗等《大学生数学竞赛习题精讲（第3版）》知识点与例题为主线的 37 天打卡计划">
+  <style>
+    :root{--ink:#19222d;--muted:#66717e;--paper:#f4f1ea;--card:#fffdf8;--line:#ddd8ce;--navy:#152a38;--orange:#e76f3d;--orange-soft:#fff0e8;--green:#3f7d63;--green-soft:#e7f1eb;--blue:#496f8e;--blue-soft:#e9f1f6;--yellow:#a47720;--yellow-soft:#f8f0d7;--purple:#735e91;--purple-soft:#eee8f6;--shadow:0 18px 45px rgba(27,38,47,.10);--radius:20px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter","PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.55}button,input,textarea{font:inherit}button{color:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:272px minmax(0,1fr)}
+    .sidebar{position:sticky;top:0;height:100vh;padding:28px 20px 20px;background:var(--navy);color:#edf3f2;display:flex;flex-direction:column;overflow:auto;z-index:20}
+    .brand{display:flex;gap:13px;align-items:center;margin:0 7px 28px}.brand-mark{width:42px;height:48px;border:1px solid rgba(255,255,255,.27);border-radius:4px 13px 13px 4px;position:relative;background:linear-gradient(145deg,#f4a261,var(--orange));box-shadow:inset 5px 0 rgba(255,255,255,.18)}.brand-mark:after{content:"∫";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:700 23px Georgia,serif}.brand h1{font-size:15px;line-height:1.35;margin:0}.brand p{font-size:11px;color:#9fb1b9;margin:3px 0 0;letter-spacing:.06em}
+    .side-label{margin:0 8px 8px;color:#8ea3ad;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.phase-nav{display:grid;gap:4px}.phase-link{border:0;background:transparent;color:#aec0c7;width:100%;padding:9px 8px;border-radius:10px;display:grid;grid-template-columns:34px 1fr 32px;gap:7px;align-items:center;text-align:left;cursor:pointer}.phase-link:hover,.phase-link.active{background:rgba(255,255,255,.09);color:#fff}.phase-number{font-size:11px;font-weight:800}.phase-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}.phase-pct{font-size:10px;text-align:right;color:#88a1aa}
+    .side-footer{margin-top:auto;padding:22px 7px 0}.side-footer b{display:block;font-size:11px;color:#d8e3e6}.side-footer p{font-size:10px;color:#8299a3;margin:6px 0 0}
+    main{min-width:0;padding:28px clamp(20px,4vw,56px) 70px;max-width:1540px;width:100%;margin:0 auto}.mobile-head{display:none}
+    .hero{position:relative;overflow:hidden;background:linear-gradient(125deg,var(--navy),#24495c);color:#fff;border-radius:28px;padding:36px 38px 30px;box-shadow:var(--shadow)}.hero:before{content:"";position:absolute;width:340px;height:340px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-88px;top:-190px;box-shadow:0 0 0 55px rgba(255,255,255,.025),0 0 0 110px rgba(255,255,255,.018)}.eyebrow{position:relative;color:#f4b18d;text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:800;margin-bottom:12px}.hero h2{position:relative;margin:0;max-width:800px;font-family:Georgia,"STSong",serif;font-size:clamp(27px,4vw,45px);font-weight:500;line-height:1.16}.hero-copy{position:relative;color:#bfd0d5;max-width:780px;margin:14px 0 26px;font-size:14px}.hero-grid{position:relative;display:grid;grid-template-columns:minmax(200px,1.35fr) repeat(3,minmax(105px,.7fr));gap:12px}.progress-card,.metric{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);backdrop-filter:blur(8px);border-radius:17px;padding:15px}.progress-card{display:flex;align-items:center;gap:15px}.ring{--p:0;flex:0 0 62px;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#f4a261 calc(var(--p)*1%),rgba(255,255,255,.13) 0);position:relative}.ring:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#234556}.ring b{z-index:1;font-size:14px}.progress-copy small,.metric small{display:block;color:#a9bdc4;font-size:10px;text-transform:uppercase;letter-spacing:.11em}.progress-copy strong{display:block;margin-top:2px;font-size:17px}.metric strong{display:block;font-size:23px;line-height:1.2;margin-top:5px;font-variant-numeric:tabular-nums}.metric span{font-size:11px;color:#a9bdc4}
+    .focus-card{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:21px 23px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}.focus-icon{width:44px;height:44px;border-radius:13px;background:var(--orange-soft);color:var(--orange);display:grid;place-items:center;font-weight:900;font-size:18px}.focus-meta{font-size:11px;color:var(--orange);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.focus-title{font-size:16px;font-weight:750;margin:2px 0}.focus-standard{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.primary{border:0;border-radius:11px;cursor:pointer;font-weight:750;background:var(--orange);color:#fff;padding:10px 15px;box-shadow:0 6px 16px rgba(231,111,61,.2)}
+    .toolbar{position:sticky;top:0;z-index:10;margin:20px -6px 0;padding:10px 6px;background:rgba(244,241,234,.9);backdrop-filter:blur(12px);display:flex;gap:10px;align-items:center}.filters{display:flex;gap:6px;overflow:auto}.filter{border:1px solid var(--line);background:var(--card);padding:8px 11px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}.filter.active{background:var(--navy);border-color:var(--navy);color:#fff}.tools{display:flex;gap:5px;margin-left:auto}.tools button{border:1px solid var(--line);background:var(--card);height:38px;padding:0 11px;border-radius:10px;cursor:pointer;font-size:12px}
+    .overview{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin:22px 0 16px}.info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}.info-card h3{margin:0 0 13px;font-family:Georgia,"STSong",serif;font-size:20px}.template{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.template div{border:1px solid var(--line);border-radius:12px;padding:10px}.template b{display:block;font-size:12px}.template span{display:block;margin-top:3px;color:var(--muted);font-size:10px}.principles{margin:0;padding-left:18px;color:var(--muted);font-size:13px}.principles li+li{margin-top:8px}
+    #phases{display:grid;gap:16px}.phase-section{scroll-margin-top:78px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.phase-header{width:100%;border:0;background:transparent;padding:21px 22px;display:grid;grid-template-columns:48px 1fr auto;gap:15px;align-items:center;text-align:left;cursor:pointer}.phase-header:hover{background:#fcfaf5}.phase-index{width:44px;height:44px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Georgia,serif}.phase-index small{font-family:inherit;font-size:8px;opacity:.65;display:block;text-align:center;line-height:1}.phase-index b{font-size:18px;display:block;line-height:1.1}.phase-heading h3{margin:0;font-size:16px}.phase-range{font-size:11px;color:var(--muted);margin-top:4px}.phase-progress{text-align:right}.phase-progress b{font-size:13px}.phase-progress span{display:block;color:var(--muted);font-size:10px;margin-top:2px}.chev{display:inline-block;margin-left:9px;transition:.2s}.phase-section.collapsed .chev{transform:rotate(-90deg)}.phase-section.collapsed .task-list{display:none}
+    .task-list{border-top:1px solid var(--line)}.task{position:relative;border-bottom:1px solid #ebe7df;transition:.15s}.task:last-child{border-bottom:0}.task:hover{background:#faf7f0}.task.done{background:#f8faf8}.task.done .task-title{text-decoration:line-through;color:#7c8580}.task-summary{display:grid;grid-template-columns:38px 64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:15px 22px;cursor:pointer}.check{width:26px;height:26px;border:1.5px solid #b8b5ae;border-radius:9px;background:#fff;display:grid;place-items:center;cursor:pointer}.check:after{content:"✓";font-weight:900;color:#fff;transform:scale(0);transition:.14s}.task.done .check{background:var(--green);border-color:var(--green)}.task.done .check:after{transform:scale(1)}.day-label{text-align:center}.day-label b{font-family:Georgia,serif;font-size:15px}.day-label small{display:block;font-size:8px;color:#9a9388;letter-spacing:.06em}.task-main{min-width:0}.badges{display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;border-radius:99px;padding:2px 7px;font-size:9px;font-weight:800;letter-spacing:.04em}.badge.learn{background:var(--blue-soft);color:var(--blue)}.badge.review{background:var(--purple-soft);color:var(--purple)}.badge.paper{background:var(--yellow-soft);color:var(--yellow)}.badge.core{border:1px solid #d7cbb9;background:transparent;color:#807361}.task-title{font-size:14px;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.task-standard{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.task-side{text-align:right;color:#8c948f;font-size:10px}.task-side span{display:block}.task-chevron{display:inline-block;margin-top:4px;font-size:14px;transition:.2s}.task.open .task-chevron{transform:rotate(180deg)}.note-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;display:inline-block!important;margin-left:5px}.task-detail{display:none;padding:0 22px 20px 136px}.task.open .task-detail{display:block}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}.detail{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px 13px}.detail.source{grid-column:1/-1}.detail.standard{border-left:4px solid var(--green)}.detail-label{display:block;margin-bottom:5px;color:#8f877c;font-size:9px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.detail p{margin:0;font-size:12px}.journal{display:grid;grid-template-columns:1fr 1fr;gap:9px}.journal label span{display:block;margin:0 0 5px 2px;color:#8f877c;font-size:9px;font-weight:850;letter-spacing:.08em}.textarea{width:100%;min-height:78px;resize:vertical;border:1px solid var(--line);background:#fffefb;border-radius:12px;padding:10px;outline:none;font-size:12px}.textarea:focus{border-color:#7793a5;box-shadow:0 0 0 3px rgba(73,111,142,.1)}.detail-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px}.autosave{color:#969086;font-size:10px}.mark-task{border:0;border-radius:10px;padding:9px 13px;background:var(--orange);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.task.done .mark-task{background:var(--green)}
+    .toast{position:fixed;left:50%;bottom:26px;z-index:100;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:10px 15px;border-radius:10px;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:1050px){.template{grid-template-columns:1fr 1fr}.hero-grid{grid-template-columns:1.3fr repeat(3,.7fr)}}
+    @media(max-width:820px){.app{display:block}.sidebar{display:none}.mobile-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.mobile-brand{display:flex;align-items:center;gap:9px;font-weight:800}.mobile-progress{font-size:12px;color:var(--muted)}main{padding:18px 15px 55px}.hero{padding:27px 22px;border-radius:21px}.hero-grid{grid-template-columns:1fr 1fr}.progress-card{grid-column:span 2}.focus-card{grid-template-columns:auto 1fr}.focus-card .primary{grid-column:1/-1;width:100%}.overview{grid-template-columns:1fr}.task-summary{grid-template-columns:32px 54px minmax(0,1fr);padding:14px;gap:8px}.task-side{display:none}.task-detail{padding:0 14px 16px}.detail-grid,.journal{grid-template-columns:1fr}.detail.source{grid-column:auto}.phase-header{padding:17px 14px;grid-template-columns:43px 1fr auto}.phase-range{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58vw}.toolbar{flex-wrap:wrap}.tools{margin-left:0}}
+    @media(max-width:460px){.metric strong{font-size:20px}.hero h2{font-size:28px}.hero-grid{gap:8px}.template{grid-template-columns:1fr}.task-standard{display:none}.phase-progress span{display:none}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark"></div><div><h1>大学生数学竞赛</h1><p>CHEN · 37 DAY FIELD NOTES</p></div></div>
+    <div class="side-label">七阶段路线</div><nav class="phase-nav" id="phaseNav"></nav>
+    <div class="side-footer"><b>主材料</b><p>陈兆斗等《大学生数学竞赛习题精讲（第3版）》；知识点 + 例题为主，不额外刷本书习题。</p></div>
+  </aside>
+  <main>
+    <div class="mobile-head"><div class="mobile-brand">∫ 数学竞赛打卡</div><div class="mobile-progress" id="mobileProgress">0 / 37</div></div>
+    <section class="hero">
+      <div class="eyebrow">2026 · National College Mathematics Competition</div>
+      <h2>看懂知识点，吃透例题，<br>把“会看”变成“会起手”。</h2>
+      <p class="hero-copy">10 月 8 日—11 月 13 日。每天上限约 2h；陈书只刷“内容要点 + 例题选讲”，习题汇编默认跳过。每道例题先遮住解答思考 2–5 分钟，再看作者解法。</p>
+      <div class="hero-grid">
+        <div class="progress-card"><div class="ring" id="progressRing"><b id="ringText">0%</b></div><div class="progress-copy"><small>总体进度</small><strong id="progressCopy">尚未开始</strong></div></div>
+        <div class="metric"><small>已完成</small><strong id="doneMetric">0</strong><span>/ 37 天</span></div>
+        <div class="metric"><small>累计投入</small><strong id="hourMetric">0h</strong><span>目标约 74h</span></div>
+        <div class="metric"><small>当前阶段</small><strong id="phaseMetric">一元基础</strong><span id="dateMetric">10/8 起</span></div>
+      </div>
+    </section>
+
+    <section class="focus-card" id="focusCard"><div class="focus-icon">→</div><div><div class="focus-meta">下一项</div><div class="focus-title">载入中</div><div class="focus-standard"></div></div><button class="primary" type="button">开始今天</button></section>
+
+    <div class="toolbar">
+      <div class="filters"><button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="todo">未完成</button><button class="filter" data-filter="done">已完成</button><button class="filter" data-filter="learn">主线</button><button class="filter" data-filter="review">复盘</button><button class="filter" data-filter="paper">真题</button></div>
+      <div class="tools"><button id="exportBtn">⇩ 备份</button><button id="importBtn">⇧ 恢复</button><input id="importFile" class="sr-only" type="file" accept="application/json"><button id="resetBtn">↺ 重置</button></div>
+    </div>
+
+    <section class="overview">
+      <article class="info-card"><h3>每天固定 2h 模板</h3><div class="template"><div><b>00–15 min</b><span>不看书，回忆昨天的方法与触发条件。</span></div><div><b>15–45 min</b><span>读“内容要点”，恢复定义、定理与适用条件。</span></div><div><b>45–105 min</b><span>例题选讲。先独立想 2–5 分钟，再看解法。</span></div><div><b>105–120 min</b><span>写 3–6 条“触发器”，只记起手信号。</span></div></div></article>
+      <article class="info-card"><h3>执行规则</h3><ul class="principles"><li>本书习题汇编默认不刷；时间只给知识点、例题和后期真题映射。</li><li>错过一天不整体顺延，继续按日历走；优先守住第 1–3 章与第 5 章。</li><li>二刷只看自己标过的例题，目标是“看到题型能说出第一步”。</li><li>最后两天真题不追求完整计时作答，先练题型识别与方法映射。</li></ul></article>
+    </section>
+
+    <div id="phases"></div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script id="planData" type="application/json">
+[
+{"number":1,"title":"极限与一元微分","range":"10/8–10/14 · 第1–2章","tasks":[
+{"id":"d01","day":1,"date":"10/8","title":"1.1 极限：把基础工具重新装回脑子","activity":"读极限内容要点；重点看数列/函数极限、等价无穷小、常用极限与求极限方法；例题先遮答案思考。","standard":"能把常见 0/0、∞/∞、幂指型、递推/数列极限分别对应到至少一种起手方法。","source":"第1章 1.1，书页 3 起；例题选讲至习题汇编前。","type":"learn","core":true},
+{"id":"d02","day":2,"date":"10/9","title":"1.2 连续性：零点、介值与连续性的竞赛用法","activity":"读连续性与间断点、闭区间连续函数性质；看例题如何把连续性用于存在性证明。","standard":"看到“存在一点/至少一个根”能优先想到介值定理、零点定理或构造连续函数。","source":"第1章 1.2，书页 18 起。","type":"learn","core":false},
+{"id":"d03","day":3,"date":"10/10","title":"2.1 导数、微分中值定理","activity":"恢复 Rolle、Lagrange、Cauchy 中值定理的条件与常见构造法；看作者如何选辅助函数。","standard":"面对“存在 ξ”型证明能先判断该用哪个中值定理，并说出辅助函数的设计目标。","source":"第2章 2.1，书页 23 起。","type":"learn","core":true},
+{"id":"d04","day":4,"date":"10/11","title":"2.2 Taylor：极限与局部估计的主武器","activity":"集中看 Taylor 公式、Peano 余项/Lagrange 余项及常用展开；只做例题内的展开判断。","standard":"看到高阶消去或复杂极限，能判断展开到几阶才不会丢主项。","source":"第2章 2.2，书页 34 起。","type":"learn","core":true},
+{"id":"d05","day":5,"date":"10/12","title":"2.2 单调、极值、凹凸与函数不等式","activity":"看函数性态与不等式例题，重点学“构造函数→看导数/凸性”的路径。","standard":"对常见函数不等式能给出至少两种候选起手：导数单调性或 Taylor/凸性。","source":"第2章 2.2，书页 34 起。","type":"learn","core":true},
+{"id":"d06","day":6,"date":"10/13","title":"2.3 一元微分综合题","activity":"不追求刷量，只看综合例题如何组合中值定理、Taylor、单调性与极值。","standard":"每道例题在看解答前先写一句“我认为第一步是……”，并在看完后修正。","source":"第2章 2.3，书页 48 起。","type":"learn","core":true},
+{"id":"d07","day":7,"date":"10/14","title":"第1–2章回顾：只看标星例题","activity":"快速回看本周标出的例题与触发器，不新做题。整理一页“极限/Taylor/中值定理”起手表。","standard":"闭书口述 8–12 个高频触发条件，并能各配一个典型方法。","source":"第1–2章回顾。","type":"review","core":true}
+]},
+{"number":2,"title":"一元积分","range":"10/15–10/20 · 第3章","tasks":[
+{"id":"d08","day":8,"date":"10/15","title":"3.1 不定积分 I：换元、分部与基本套路","activity":"读积分方法与基本公式；看典型换元、分部积分的选元依据。","standard":"面对积/复合结构能快速判断优先换元还是分部，并说出理由。","source":"第3章 3.1，书页 54 起。","type":"learn","core":true},
+{"id":"d09","day":9,"date":"10/16","title":"3.1 不定积分 II：有理、三角、根式结构","activity":"继续看例题，重点观察作者怎样做代数拆分、三角代换或根式有理化。","standard":"为常见有理/三角/根式积分各整理 2–3 个识别信号。","source":"第3章 3.1，书页 54–67。","type":"learn","core":false},
+{"id":"d10","day":10,"date":"10/17","title":"3.2 定积分 I：性质、对称、周期、换元","activity":"恢复定积分性质；集中看对称换元、周期性、区间拆分与分部积分。","standard":"看到 [0,a]、[-a,a]、周期区间时，先主动检查对称性/周期性而不是硬算。","source":"第3章 3.2，书页 68 起。","type":"learn","core":true},
+{"id":"d11","day":11,"date":"10/18","title":"3.2 定积分 II：参数、几何与物理应用","activity":"看参数积分、变上限积分与几何应用例题，注意“把积分当函数”的思路。","standard":"能识别何时应该把积分上限/参数视作变量再求导或比较。","source":"第3章 3.2，书页 68–84。","type":"learn","core":true},
+{"id":"d12","day":12,"date":"10/19","title":"3.3 定积分综合：积分不等式与积分极限","activity":"重点看积分不等式、极限与辅助函数构造，不追求把综合题全部重做。","standard":"遇到积分不等式能先检查平均值、中值定理、Cauchy/凸性与单调性。","source":"第3章 3.3，书页 85 起。","type":"learn","core":true},
+{"id":"d13","day":13,"date":"10/20","title":"第3章回顾：积分触发器压缩","activity":"只回看最有技巧的 8–12 个例题，整理“一眼识别”的积分套路。","standard":"闭书写出至少 10 条积分触发器，且每条能对应一个例题。","source":"第3章回顾。","type":"review","core":true}
+]},
+{"number":3,"title":"多元微分","range":"10/21–10/25 · 第4章","tasks":[
+{"id":"d14","day":14,"date":"10/21","title":"4.1 函数与图形：空间几何与参数化","activity":"快速恢复空间曲线/曲面、参数方程与几何表示；不在繁琐空间解析几何上耗太久。","standard":"看到曲线/曲面题能判断该用显式、隐式还是参数形式表示。","source":"第4章 4.1，书页 91 起。","type":"learn","core":false},
+{"id":"d15","day":15,"date":"10/22","title":"4.2 多元极限、连续、偏导、全微分","activity":"集中看多元极限存在性、偏导与可微关系、全微分。","standard":"能区分“偏导存在、连续、可微”之间的逻辑关系，并会用路径反证多元极限。","source":"第4章 4.2，书页 102 起。","type":"learn","core":true},
+{"id":"d16","day":16,"date":"10/23","title":"4.2 高阶偏导、隐函数、方向导数","activity":"继续看高阶偏导、复合函数、隐函数求导、方向导数/梯度等例题。","standard":"遇到复合/隐式关系能先画依赖链，并正确组织链式法则。","source":"第4章 4.2，书页 102–114。","type":"learn","core":true},
+{"id":"d17","day":17,"date":"10/24","title":"4.3 多元极值与条件极值","activity":"看无约束极值、Hessian 判别与 Lagrange 乘子法。","standard":"能把“约束最值”自动翻译成 Lagrange 乘子系统，并知道还要检查边界/候选点。","source":"第4章 4.3，书页 115 起。","type":"learn","core":true},
+{"id":"d18","day":18,"date":"10/25","title":"4.3 几何应用与综合题","activity":"看切平面、法线、极值应用和综合例题，重点学几何条件如何转成导数条件。","standard":"能把几何语言转成梯度、切向量、法向量或约束方程。","source":"第4章 4.3，书页 115–127。","type":"learn","core":false}
+]},
+{"number":4,"title":"多元积分","range":"10/26–10/30 · 第5章","tasks":[
+{"id":"d19","day":19,"date":"10/26","title":"5.1 重积分 I：二重积分、换序与极坐标","activity":"画区域优先；看直角坐标、换序与极坐标例题。","standard":"二重积分先画区域，再决定换序/极坐标；能写对上下限。","source":"第5章 5.1，书页 128 起。","type":"learn","core":true},
+{"id":"d20","day":20,"date":"10/27","title":"5.1 重积分 II + 5.2 曲线积分入口","activity":"看三重积分、柱/球坐标；再进入第一类/第二类曲线积分的定义与计算。","standard":"能根据区域对称性和被积函数结构选择坐标系；能区分两类曲线积分。","source":"第5章 5.1；5.2 书页 140 起。","type":"learn","core":true},
+{"id":"d21","day":21,"date":"10/28","title":"5.2 Green、曲面积分、Gauss / Stokes","activity":"把积分定理串成一张图：对象、方向/定向、边界、成立条件、把什么积分变成什么积分。","standard":"看到闭曲线/闭曲面先想到 Green/Gauss；看到曲面边界关系想到 Stokes，并检查条件。","source":"第5章 5.2，书页 140–154。","type":"learn","core":true},
+{"id":"d22","day":22,"date":"10/29","title":"5.3 多元积分应用","activity":"看几何量、物理量与综合例题；重点是区域拆分、对称性和定理选择。","standard":"综合题能先写出“区域—定向—定理—坐标系”四步判断。","source":"第5章 5.3，书页 155 起。","type":"learn","core":true},
+{"id":"d23","day":23,"date":"10/30","title":"第4–5章回顾：把多元方法串起来","activity":"回看标星例题；做一张多元微分/积分方法地图，尤其是积分定理的条件。","standard":"闭书说清 Green、Gauss、Stokes 的输入对象、输出对象和定向要求。","source":"第4–5章回顾。","type":"review","core":true}
+]},
+{"number":5,"title":"级数与微分方程","range":"10/31–11/4 · 第6–7章","tasks":[
+{"id":"d24","day":24,"date":"10/31","title":"6.1 数项级数：判敛体系","activity":"看正项、交错、绝对/条件收敛及典型判别法例题。","standard":"拿到级数能先按“正项/变号/一般项结构”分类，再选比较、比值、根值、积分等判别法。","source":"第6章 6.1，书页 166 起。","type":"learn","core":true},
+{"id":"d25","day":25,"date":"11/1","title":"6.2 函数项级数与幂级数","activity":"看一致收敛/幂级数、收敛半径与展开求和例题。","standard":"能求典型幂级数收敛域，并会通过逐项积分/求导得到新展开。","source":"第6章 6.2，书页 179 起。","type":"learn","core":true},
+{"id":"d26","day":26,"date":"11/2","title":"第6章第二遍：级数只看标星例题","activity":"遮住解答重新想一遍最关键的级数例题，尤其是判敛与幂级数变形。","standard":"看到级数题能在 30 秒内给出第一候选判别法或母级数。","source":"第6章回顾。","type":"review","core":true},
+{"id":"d27","day":27,"date":"11/3","title":"7.1 微分方程：一阶与常系数高阶","activity":"恢复可分离、线性、Bernoulli 等一阶方程与二阶常系数线性方程。","standard":"看到方程形式能先分类，再写标准解法框架。","source":"第7章 7.1，书页 192 起。","type":"learn","core":false},
+{"id":"d28","day":28,"date":"11/4","title":"7.2 微分方程应用 + 总回顾","activity":"看应用例题，随后把第6–7章压缩成一页方法表。","standard":"能从简单增长/衰减、振动或几何关系写出对应 ODE，并完成基本求解。","source":"第7章 7.2，书页 202 起。","type":"learn","core":false}
+]},
+{"number":6,"title":"二刷主干","range":"11/5–11/10 · 只看标星例题","tasks":[
+{"id":"d29","day":29,"date":"11/5","title":"二刷：极限 + Taylor","activity":"第1章 + 2.2 标星例题重新遮答案思考，重点练高阶消去、等价无穷小与展开阶数。","standard":"关键例题看题后 1–2 分钟内能说出主思路。","source":"第1章 + 2.2。","type":"review","core":true},
+{"id":"d30","day":30,"date":"11/6","title":"二刷：中值定理 + 函数不等式","activity":"重看 2.1–2.3 中构造辅助函数、存在性与不等式证明的典型例题。","standard":"看到“存在 ξ / 证明不等式”能快速列出候选构造。","source":"第2章。","type":"review","core":true},
+{"id":"d31","day":31,"date":"11/7","title":"二刷：一元积分","activity":"重看第3章高价值例题，尤其是对称换元、参数积分、积分不等式。","standard":"不追求计算细节，优先复现每题关键变换。","source":"第3章。","type":"review","core":true},
+{"id":"d32","day":32,"date":"11/8","title":"二刷：多元微分","activity":"重看多元极限、隐函数/复合求导、条件极值与几何应用例题。","standard":"每类至少能口述一个完整解题模板。","source":"第4章。","type":"review","core":false},
+{"id":"d33","day":33,"date":"11/9","title":"二刷：多元积分","activity":"重看换序/坐标变换、曲线曲面积分、Green/Gauss/Stokes 典型例题。","standard":"积分定理类题目先判对象和定向，再下手计算。","source":"第5章。","type":"review","core":true},
+{"id":"d34","day":34,"date":"11/10","title":"二刷：级数 + ODE","activity":"只看判敛、幂级数与常见 ODE 的代表例题，补最后的知识漏洞。","standard":"把第6–7章压缩成不超过一张 A4 的触发器清单。","source":"第6–7章。","type":"review","core":false}
+]},
+{"number":7,"title":"真题映射与收口","range":"11/11–11/13 · 最后 3 天","tasks":[
+{"id":"d35","day":35,"date":"11/11","title":"真题结构日①：先判题型，再看解答","activity":"找一套近年 A 类真题。每题先只判断考点、候选定理与第一步，不要求整套限时做完；随后对照解答。","standard":"记录所有“题型看出来了但第一步没想到”的题，这些就是最后两天重点。","source":"近年全国大学生数学竞赛 A 类真题。","type":"paper","core":true},
+{"id":"d36","day":36,"date":"11/12","title":"真题结构日②：再做一套方法映射","activity":"再找一套近年真题重复同样流程；比较两套题的重复考法与自己的盲区。","standard":"整理一页“题面信号 → 方法”表，删除低频花活，只留高频主干。","source":"近年全国大学生数学竞赛 A 类真题。","type":"paper","core":true},
+{"id":"d37","day":37,"date":"11/13","title":"总复习：只看自己的标记，不学新东西","activity":"回看触发器、标星例题和两套真题暴露的入口问题；不再扩充资料。","standard":"能从头口述极限、中值/Taylor、积分、多元积分、级数五条主干的常见起手法。","source":"个人标记 + 陈书标星例题 + 两套真题。","type":"review","core":true}
+]}
+]
+</script>
+<script>
+(() => {
+  const phases = JSON.parse(document.getElementById('planData').textContent);
+  const tasks = phases.flatMap(p => p.tasks.map(t => ({...t,phase:p.number,phaseTitle:p.title})));
+  const KEY = 'math-contest-chen-37d-v1';
+  const defaultState = {version:1,completed:{},notes:{},triggers:{},collapsed:{}};
+  let state;
+  try{state={...defaultState,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{state={...defaultState}}
+  let filter='all';
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
+  const done=id=>!!state.completed[id];
+  const typeName={learn:'主线',review:'复盘',paper:'真题'};
+  function visible(t){return filter==='all'||(filter==='todo'&&!done(t.id))||(filter==='done'&&done(t.id))||filter===t.type}
+  function renderNav(){
+    $('#phaseNav').innerHTML=phases.map(p=>{const n=p.tasks.filter(t=>done(t.id)).length;return '<button class="phase-link" data-phase="'+p.number+'"><span class="phase-number">P'+p.number+'</span><span class="phase-name">'+esc(p.title)+'</span><span class="phase-pct">'+n+'/'+p.tasks.length+'</span></button>'}).join('');
+    document.querySelectorAll('.phase-link').forEach(b=>b.onclick=()=>{const s=$('#phase-'+b.dataset.phase);if(s){s.classList.remove('collapsed');s.scrollIntoView({behavior:'smooth',block:'start'})}})
+  }
+  function badge(t){return '<span class="badge '+t.type+'">'+typeName[t.type]+'</span>'+(t.core?'<span class="badge core">核心</span>':'')}
+  function renderPhases(){
+    $('#phases').innerHTML=phases.map(p=>{
+      const shown=p.tasks.filter(visible);if(!shown.length)return '';
+      const n=p.tasks.filter(t=>done(t.id)).length;
+      const rows=shown.map(t=>'<article class="task '+(done(t.id)?'done':'')+'" data-id="'+t.id+'"><div class="task-summary" tabindex="0" role="button" aria-expanded="false"><button class="check" data-check="'+t.id+'" aria-label="'+(done(t.id)?'取消完成':'标记完成')+'"></button><div class="day-label"><b>'+t.date+'</b><small>DAY '+t.day+'</small></div><div class="task-main"><div class="badges">'+badge(t)+'</div><div class="task-title">'+esc(t.title)+'</div><div class="task-standard">完成：'+esc(t.standard)+'</div></div><div class="task-side"><span>约 2h</span><span>'+typeName[t.type]+(state.notes[t.id]||state.triggers[t.id]?'<i class="note-dot"></i>':'')+'</span><i class="task-chevron">⌄</i></div></div><div class="task-detail"><div class="detail-grid"><div class="detail"><span class="detail-label">今天要做什么</span><p>'+esc(t.activity)+'</p></div><div class="detail standard"><span class="detail-label">完成标准</span><p>'+esc(t.standard)+'</p></div><div class="detail source"><span class="detail-label">对应章节 / 材料</span><p>'+esc(t.source)+'</p></div></div><div class="journal"><label><span>学习笔记</span><textarea class="textarea note" placeholder="记下例题里真正值得复用的思路…">'+esc(state.notes[t.id]||'')+'</textarea></label><label><span>今日触发器</span><textarea class="textarea trigger" placeholder="例如：0/0 且高阶消去 → Taylor">'+esc(state.triggers[t.id]||'')+'</textarea></label></div><div class="detail-actions"><span class="autosave">自动保存在当前浏览器</span><button class="mark-task" data-mark="'+t.id+'">'+(done(t.id)?'✓ 已完成（点击取消）':'完成今日任务')+'</button></div></div></article>').join('');
+      return '<section class="phase-section '+(state.collapsed[p.number]?'collapsed':'')+'" id="phase-'+p.number+'"><button class="phase-header" data-collapse="'+p.number+'"><span class="phase-index"><span><small>PHASE</small><b>'+p.number+'</b></span></span><span class="phase-heading"><h3>'+esc(p.title)+'</h3><div class="phase-range">'+esc(p.range)+'</div></span><span class="phase-progress"><b>'+n+' / '+p.tasks.length+' <i class="chev">⌄</i></b><span>'+Math.round(n/p.tasks.length*100)+'% 完成</span></span></button><div class="task-list">'+rows+'</div></section>'
+    }).join('');
+    document.querySelectorAll('[data-collapse]').forEach(b=>b.onclick=()=>{const n=b.dataset.collapse;state.collapsed[n]=!state.collapsed[n];save();$('#phase-'+n).classList.toggle('collapsed')});
+    document.querySelectorAll('.task-summary').forEach(el=>{el.onclick=e=>{if(!e.target.closest('.check'))toggleOpen(el.closest('.task'))};el.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('.check')){e.preventDefault();toggleOpen(el.closest('.task'))}}});
+    document.querySelectorAll('[data-check]').forEach(b=>b.onclick=e=>{e.stopPropagation();toggleDone(b.dataset.check)});
+    document.querySelectorAll('[data-mark]').forEach(b=>b.onclick=()=>toggleDone(b.dataset.mark));
+    document.querySelectorAll('.note').forEach(n=>n.oninput=()=>saveField(n.closest('.task').dataset.id,'notes',n.value));
+    document.querySelectorAll('.trigger').forEach(n=>n.oninput=()=>saveField(n.closest('.task').dataset.id,'triggers',n.value));
+  }
+  function toggleOpen(card){card.classList.toggle('open');card.querySelector('.task-summary').setAttribute('aria-expanded',card.classList.contains('open'))}
+  function renderStats(){
+    const count=tasks.filter(t=>done(t.id)).length,pct=Math.round(count/tasks.length*100),hours=count*2;
+    $('#progressRing').style.setProperty('--p',pct);$('#ringText').textContent=pct+'%';$('#doneMetric').textContent=count;$('#hourMetric').textContent=hours+'h';$('#mobileProgress').textContent=count+' / '+tasks.length;
+    $('#progressCopy').textContent=count===0?'尚未开始':count===tasks.length?'全部完成':pct<25?'正在恢复基础':pct<55?'进入积分与多元':pct<80?'开始二刷':'最后收口';
+    const next=tasks.find(t=>!done(t.id))||tasks[tasks.length-1];$('#phaseMetric').textContent=next.phaseTitle;$('#dateMetric').textContent=next.date+' · Day '+next.day;
+    const card=$('#focusCard');card.querySelector('.focus-meta').textContent=count===tasks.length?'全部完成':'下一项 · '+next.date+' · Day '+next.day;card.querySelector('.focus-title').textContent=next.title;card.querySelector('.focus-standard').textContent='完成标准：'+next.standard;card.querySelector('.primary').textContent=count===tasks.length?'回看最后一天':'开始今天';card.querySelector('.primary').onclick=()=>openTask(next.id)
+  }
+  function render(){renderNav();renderPhases();renderStats();observe()}
+  function toggleDone(id){state.completed[id]=!done(id);if(!state.completed[id])delete state.completed[id];save();render();toast(done(id)?'已完成。':'已取消打卡。')}
+  function saveField(id,field,value){if(value)state[field][id]=value;else delete state[field][id];save()}
+  function openTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;const section=$('#phase-'+t.phase);if(section&&section.classList.contains('collapsed')){state.collapsed[t.phase]=false;save();renderPhases()}setTimeout(()=>{const card=document.querySelector('.task[data-id="'+id+'"]');if(card){card.classList.add('open');card.querySelector('.task-summary').setAttribute('aria-expanded','true');card.scrollIntoView({behavior:'smooth',block:'center'})}},0)}
+  let timer;function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>el.classList.remove('show'),1500)}
+  document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;renderPhases()});
+  $('#exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({...state,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='数学竞赛陈书37天打卡-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);toast('备份已导出。')};
+  $('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||x.version!==1)throw 0;state={...defaultState,...x};save();render();toast('备份已恢复。')}catch{alert('无法读取这个备份文件。')}};r.readAsText(file);e.target.value=''};
+  $('#resetBtn').onclick=()=>{if(confirm('确定清空全部打卡、笔记和触发器吗？建议先导出备份。')){state={...defaultState,completed:{},notes:{},triggers:{},collapsed:{}};save();render();toast('记录已清空。')}};
+  let observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)document.querySelectorAll('.phase-link').forEach(x=>x.classList.toggle('active',x.dataset.phase===e.target.id.replace('phase-','')))})},{rootMargin:'-15% 0px -75%'});
+  function observe(){observer.disconnect();document.querySelectorAll('.phase-section').forEach(s=>observer.observe(s))}
+  render();
+})();
+</script>
+</body>
+</html>
