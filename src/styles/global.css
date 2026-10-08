@@ -458,7 +458,7 @@ h2:hover > .heading-anchor, h3:hover > .heading-anchor, .heading-anchor:focus { 
 .no-script-note { margin: 1rem; padding: 1.5rem; border: 1px solid var(--coral); border-radius: 18px; }
 .playground-notes { padding: 5rem 0 1rem; }
 .playground-notes h2 { margin: .4rem 0 1.5rem; font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; }
-.lab-note-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.lab-note-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .lab-note-grid article { min-height: 12rem; padding: 1.3rem; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,253,248,.55); }
 .lab-note-grid span { color: var(--coral); font-family: var(--mono); font-size: .65rem; }
 .lab-note-grid h3 { margin: 1.8rem 0 .5rem; font-family: var(--display); font-size: 1.6rem; font-weight: 400; }

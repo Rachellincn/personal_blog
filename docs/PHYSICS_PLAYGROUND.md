@@ -1,6 +1,6 @@
 # Physics Playground engineering notes
 
-The expanded 26-experiment mechanics implementation is documented in [CLASSICAL_MECHANICS_ATLAS.md](./CLASSICAL_MECHANICS_ATLAS.md). This file retains the original three-instrument architecture and migration notes.
+The expanded 26-experiment mechanics implementation is documented in [CLASSICAL_MECHANICS_ATLAS.md](./CLASSICAL_MECHANICS_ATLAS.md). The electric-field and potential implementation is documented in [ELECTROMAGNETISM_MODELS.md](./ELECTROMAGNETISM_MODELS.md). This file describes the shared shell used by the original instruments and both atlases.
 
 ## Architecture and lifecycle
 
@@ -16,6 +16,12 @@ Shared modules provide:
 Switching experiments calls `destroy()` before the next dynamic module mounts. No previous loop, observer, or document event listener remains active.
 
 ## Numerical models
+
+### Electromagnetism Atlas: electric field and potential
+
+Movable ideal point charges provide analytic `E` and `V`. A reusable field engine samples arrows, midpoint-integrated streamlines, marching-squares equipotentials, magnitude maps, massless tracers, and arbitrary closed 2-D line-flux curves. All calculations use SI units. Queries within 0.09 m of a point source return an explicit undefined result; the Canvas shows a dashed exclusion disk and never presents a clipped finite field as physical.
+
+See `ELECTROMAGNETISM_MODELS.md`, `NUMERICAL_METHODS.md`, and `UNITS_AND_CONVENTIONS.md` for the complete PR 1 model contract.
 
 ### Projectile Target
 
@@ -73,12 +79,12 @@ The displacement display colors signed `u`. The intensity display uses the squar
 - Reduced-motion mode disables decorative home animation and removes projectile particles/hit bursts. Wave Lab starts paused and can advance with Step.
 - Without JavaScript, the page still exposes experiment descriptions and core formulas.
 
-## Adding a fourth experiment
+## Adding an experiment
 
 1. Create `src/scripts/playground/games/new-experiment.ts` implementing the `Experiment` interface from `core/types.ts`.
 2. Construct one `CanvasSurface` and one `AnimationLoop` in `mount()`; build controls/readouts with `ui.ts`.
 3. Implement `pause`, `resume`, `reset`, and a complete `destroy()` that removes model-specific event listeners.
-4. Add a tab in `PlaygroundShell.astro` and a static import loader entry plus keyboard help in `playground/main.ts`.
+4. Add a catalog entry with a dynamic import, category, display number, and keyboard help in `playground/main.ts`; the shell generates category options and tabs.
 5. Add text formulas to the no-script and lab-note sections.
 6. Add Playwright switching, action, mobile, reduced-motion, and console-error coverage.
 

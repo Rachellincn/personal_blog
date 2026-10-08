@@ -1,35 +1,62 @@
 import type { Experiment, ExperimentElements } from "./core/types";
+import { updateDetails } from "./core/ui";
 
 type ExperimentModule = { default: new () => Experiment };
 type CatalogEntry = {
   id: string;
   shortName: string;
+  number?: string;
   category: string;
   loader: () => Promise<ExperimentModule>;
   help: string;
+  formula?: string;
+  explanation?: string;
 };
 
 const catalog: CatalogEntry[] = [
   {
     id: "projectile",
     shortName: "Projectile target",
+    number: "01",
     category: "Foundations / 基础实验",
     loader: () => import("./games/projectile"),
     help: "Space launch/pause · R reset · N new target · Arrow keys aim",
+    formula: "x = v₀ cos(θ)t    y = y₀ + v₀ sin(θ)t − ½gt²",
+    explanation:
+      "Analytic motion under uniform gravity; air resistance and spin are intentionally excluded.",
   },
   {
     id: "pendulum",
     shortName: "Double pendulum",
+    number: "02",
     category: "Foundations / 基础实验",
     loader: () => import("./games/double-pendulum"),
     help: "Space pause/resume · R restart",
+    formula: "d²θ/dt² = f(θ₁, θ₂, ω₁, ω₂; m₁, m₂, l₁, l₂, g)",
+    explanation:
+      "The coupled nonlinear equations use fixed-step fourth-order Runge–Kutta integration.",
   },
   {
     id: "wave",
     shortName: "Wave lab",
+    number: "03",
     category: "Foundations / 基础实验",
     loader: () => import("./games/wave-lab"),
     help: "Space pause/resume · . single step · R reset",
+    formula: "u = Σ A sin(kr − ωt + φ)e⁻ᵅʳ",
+    explanation:
+      "Analytic superposition visualizes displacement, phase, and interference intensity.",
+  },
+  {
+    id: "electromagnetism",
+    shortName: "Electric fields & potential",
+    number: "EM 01",
+    category: "Electromagnetism / 电磁学",
+    loader: () => import("./games/electromagnetism-atlas"),
+    help: "Drag sources · tap to move probe · Space pause tracers · R reset",
+    formula: "E = (1 / 4πε₀) Σ qᵢ(r−rᵢ)/|r−rᵢ|³    E = −∇V",
+    explanation:
+      "Movable point sources drive the field, potential, contours, streamlines, tracers, and planar flux diagnostic.",
   },
   {
     id: "mechanics-kinematics-1d",
@@ -255,7 +282,8 @@ if (root) {
         button.setAttribute("aria-selected", String(selected));
         button.tabIndex = selected ? 0 : -1;
         const number = document.createElement("span");
-        number.textContent = String(index + 1).padStart(2, "0");
+        number.textContent =
+          entry.number ?? String(index + 1).padStart(2, "0");
         button.append(number, entry.shortName);
         tablist.append(button);
       });
@@ -287,6 +315,9 @@ if (root) {
     });
     elements.stage.setAttribute("aria-labelledby", `tab-${id}`);
     localStorage.setItem("physics-playground:active", id);
+    if (entry.formula && entry.explanation) {
+      updateDetails(elements.details, entry.formula, [], entry.explanation);
+    }
     try {
       const module = await entry.loader();
       if (selection !== request) return;
